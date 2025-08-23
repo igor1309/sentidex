@@ -76,7 +76,7 @@ async function generateMessage(digestType, files) {
     header = `📊 *Sentidex Weekly* - неделя ${weekNum}`;
   }
   
-  let message = `${header}\\nНайдено идей: ${files.length}\\n`;
+  let message = `${header}\nНайдено идей: ${files.length}\n`;
   
   // Process each file
   for (let i = 0; i < files.length; i++) {
@@ -90,7 +90,7 @@ async function generateMessage(digestType, files) {
       console.log('Parsed front matter:', JSON.stringify(frontMatter, null, 2));
       
       // Build entry
-      let entry = `\\n${i + 1}. `;
+      let entry = `\n${i + 1}. `;
       
       // Summary
       if (frontMatter.summary) {
@@ -101,18 +101,18 @@ async function generateMessage(digestType, files) {
       
       // Source
       if (frontMatter.source_info) {
-        entry += `\\n   📤 ${frontMatter.source_info}`;
+        entry += `\n   📤 ${frontMatter.source_info}`;
       }
       
       // URL
       if (frontMatter.source_url && frontMatter.source_url !== '') {
-        entry += `\\n   🔗 ${frontMatter.source_url}`;
+        entry += `\n   🔗 ${frontMatter.source_url}`;
       }
       
       // Tags
       if (frontMatter.tags && Array.isArray(frontMatter.tags) && frontMatter.tags.length > 0) {
         const tags = frontMatter.tags.map(tag => `#${tag}`).join(' ');
-        entry += `\\n   🏷 ${tags}`;
+        entry += `\n   🏷 ${tags}`;
       }
       
       message += entry;
@@ -121,7 +121,7 @@ async function generateMessage(digestType, files) {
       if (message.length > 3500) {
         const remaining = files.length - i - 1;
         if (remaining > 0) {
-          message += `\\n\\n... и ещё ${remaining} идей`;
+          message += `\n\n... и ещё ${remaining} идей`;
         }
         break;
       }
@@ -136,7 +136,7 @@ async function generateMessage(digestType, files) {
 }
 
 function parseFrontMatter(content) {
-  const lines = content.split('\\n');
+  const lines = content.split('\n');
   const frontMatterLines = [];
   const bodyLines = [];
   
@@ -196,7 +196,7 @@ function parseFrontMatter(content) {
   
   return {
     frontMatter,
-    bodyContent: bodyLines.join('\\n').trim()
+    bodyContent: bodyLines.join('\n').trim()
   };
 }
 

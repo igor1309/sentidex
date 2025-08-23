@@ -80,9 +80,13 @@ async function processForwardedMessage(message) {
     sourceInfo = message.forward_sender_name;
   }
   
+  // Get text and entities (handle both regular messages and media with captions)
+  const messageText = message.text || message.caption || '[No text content]';
+  const messageEntities = message.entities || message.caption_entities || [];
+  
   // Extract links from entities
-  const links = extractLinks(message);
-  const textWithLinks = formatTextWithLinks(message.text || '[No text content]', message.entities || []);
+  const links = extractLinks(message, messageText, messageEntities);
+  const textWithLinks = formatTextWithLinks(messageText, messageEntities);
   
   const frontMatter = `---
 raw_message: true
@@ -114,8 +118,12 @@ async function processRegularMessage(message) {
     fs.mkdirSync('_inbox', { recursive: true });
   }
   
-  const links = extractLinks(message);
-  const textWithLinks = formatTextWithLinks(message.text || '[No text content]', message.entities || []);
+  // Get text and entities (handle both regular messages and media with captions)
+  const messageText = message.text || message.caption || '[No text content]';
+  const messageEntities = message.entities || message.caption_entities || [];
+  
+  const links = extractLinks(message, messageText, messageEntities);
+  const textWithLinks = formatTextWithLinks(messageText, messageEntities);
   
   const frontMatter = `---
 raw_message: true
@@ -159,15 +167,14 @@ function formatTimestamp(date) {
          String(date.getSeconds()).padStart(2, '0');
 }
 
-function extractLinks(message) {
+function extractLinks(message, text, entities) {
   const links = [];
-  const entities = message.entities || [];
   
   entities.forEach(entity => {
     if (entity.type === 'url' || entity.type === 'text_link') {
-      const text = message.text.substring(entity.offset, entity.offset + entity.length);
-      const url = entity.type === 'url' ? text : entity.url;
-      links.push({ text, url });
+      const linkText = text.substring(entity.offset, entity.offset + entity.length);
+      const url = entity.type === 'url' ? linkText : entity.url;
+      links.push({ text: linkText, url });
     }
   });
   

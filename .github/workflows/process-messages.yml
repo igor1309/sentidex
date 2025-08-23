@@ -37,7 +37,14 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add inbox/ _inbox/
+
+          if [ -d "inbox" ]; then
+            git add inbox/
+          fi
+          if [ -d "_inbox" ]; then
+            git add _inbox/
+          fi
+
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else

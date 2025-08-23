@@ -12,6 +12,8 @@ on:
 jobs:
   poll-telegram:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
     - name: Checkout repository
@@ -24,167 +26,12 @@ jobs:
       with:
         node-version: '20'
 
-    - name: Create polling script
-      run: |
-        cat > poll.js << 'EOF'
-        const fs = require('fs');
-        const path = require('path');
-
-        async function pollTelegram() {
-          console.log('Starting Telegram polling...');
-          
-          try {
-            const response = await fetch(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/getUpdates`, {
-              method: 'GET'
-            });
-            
-            if (!response.ok) {
-              throw new Error(`Telegram API error: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            
-            if (process.env.DEBUG === 'true') {
-              console.log('Telegram response:', JSON.stringify(data, null, 2));
-            }
-            
-            if (!data.ok) {
-              throw new Error(`Telegram API returned error: ${data.description}`);
-            }
-            
-            const updates = data.result || [];
-            console.log(`Found ${updates.length} updates`);
-            
-            let processedCount = 0;
-            
-            for (const update of updates) {
-              if (update.message && update.message.chat.id.toString() === process.env.CHAT_ID) {
-                
-                const message = update.message;
-                console.log(`Processing message ID: ${message.message_id}`);
-                
-                if (message.forward_from || message.forward_from_chat || message.forward_sender_name) {
-                  await processForwardedMessage(message);
-                  processedCount++;
-                } else if (message.text) {
-                  await processRegularMessage(message);
-                  processedCount++;
-                }
-                
-                await markAsProcessed(update.update_id + 1);
-              }
-            }
-            
-            console.log(`Processed ${processedCount} messages`);
-            
-          } catch (error) {
-            console.error('Error polling Telegram:', error);
-            process.exit(1);
-          }
-        }
-        
-        async function processForwardedMessage(message) {
-          const timestamp = new Date();
-          const filename = formatTimestamp(timestamp) + '.md';
-          const filepath = path.join('_inbox', filename);
-          
-          if (!fs.existsSync('_inbox')) {
-            fs.mkdirSync('_inbox', { recursive: true });
-          }
-          
-          let sourceInfo = 'Unknown';
-          let sourceUrl = '';
-          
-          if (message.forward_from) {
-            sourceInfo = `@${message.forward_from.username || message.forward_from.first_name}`;
-          } else if (message.forward_from_chat) {
-            sourceInfo = message.forward_from_chat.title || message.forward_from_chat.username;
-            if (message.forward_from_chat.username) {
-              sourceUrl = `https://t.me/${message.forward_from_chat.username}`;
-            }
-          } else if (message.forward_sender_name) {
-            sourceInfo = message.forward_sender_name;
-          }
-          
-          const frontMatter = `---
-        raw_message: true
-        message_id: ${message.message_id}
-        timestamp: "${timestamp.toISOString()}"
-        source_info: "${sourceInfo}"
-        source_url: "${sourceUrl}"
-        forward_date: "${message.forward_date ? new Date(message.forward_date * 1000).toISOString() : ''}"
-        has_media: ${!!(message.photo || message.video || message.document || message.audio || message.voice)}
-        ---`;
-          
-          const content = `${frontMatter}\n\n${message.text || '[No text content]'}`;
-          
-          fs.writeFileSync(filepath, content, 'utf8');
-          console.log(`Created file: ${filepath}`);
-          
-          if (process.env.DEBUG === 'true') {
-            console.log('File content:', content);
-          }
-        }
-        
-        async function processRegularMessage(message) {
-          const timestamp = new Date();
-          const filename = 'regular_' + formatTimestamp(timestamp) + '.md';
-          const filepath = path.join('_inbox', filename);
-          
-          if (!fs.existsSync('_inbox')) {
-            fs.mkdirSync('_inbox', { recursive: true });
-          }
-          
-          const frontMatter = `---
-        raw_message: true
-        message_id: ${message.message_id}
-        timestamp: "${timestamp.toISOString()}"
-        source_info: "direct_message"
-        source_url: ""
-        forward_date: ""
-        has_media: ${!!(message.photo || message.video || message.document || message.audio || message.voice)}
-        ---`;
-          
-          const content = `${frontMatter}\n\n${message.text || '[No text content]'}`;
-          
-          fs.writeFileSync(filepath, content, 'utf8');
-          console.log(`Created regular message file: ${filepath}`);
-        }
-        
-        async function markAsProcessed(offset) {
-          try {
-            await fetch(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/getUpdates`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                offset: offset
-              })
-            });
-          } catch (error) {
-            console.log('Warning: Could not update offset:', error.message);
-          }
-        }
-        
-        function formatTimestamp(date) {
-          return date.getFullYear() + '-' +
-                 String(date.getMonth() + 1).padStart(2, '0') + '-' +
-                 String(date.getDate()).padStart(2, '0') + '-' +
-                 String(date.getHours()).padStart(2, '0') + '-' +
-                 String(date.getMinutes()).padStart(2, '0') + '-' +
-                 String(date.getSeconds()).padStart(2, '0');
-        }
-        
-        pollTelegram();
-        EOF
-
-    - name: Run polling script  
+    - name: Run Telegram polling
       env:
         BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         CHAT_ID: ${{ secrets.CHAT_ID }}
         DEBUG: ${{ inputs.debug }}
-      run: node poll.js
+      run: node scripts/poll-telegram.js
 
     - name: Commit new files
       run: |

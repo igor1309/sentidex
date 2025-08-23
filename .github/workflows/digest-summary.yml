@@ -1,0 +1,150 @@
+name: Sentidex Digest
+
+on:
+  # Daily digest - every day at 21:00 UTC (00:00 MSK)
+  schedule:
+    - cron: '0 21 * * *'
+  
+  # Weekly digest - Sunday at 18:00 UTC (21:00 MSK) 
+  schedule:
+    - cron: '0 18 * * 0'
+  
+  # Manual trigger for testing
+  workflow_dispatch:
+    inputs:
+      type:
+        description: 'Digest type'
+        required: true
+        default: 'daily'
+        type: choice
+        options:
+        - daily
+        - weekly
+
+jobs:
+  send-digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate and Send Digest
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: |
+          # Determine digest type
+          if [ "${{ github.event.schedule }}" = "0 21 * * *" ] || [ "${{ inputs.type }}" = "daily" ]; then
+            DIGEST_TYPE="daily"
+          else
+            DIGEST_TYPE="weekly"
+          fi
+          
+          echo "Generating $DIGEST_TYPE digest..."
+          
+          # Check if inbox exists
+          if [ ! -d "inbox" ]; then
+            MESSAGE="📭 Sentidex inbox is empty."
+            curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+              --data-urlencode "chat_id=${CHAT_ID}" \
+              --data-urlencode "parse_mode=Markdown" \
+              --data-urlencode "text=${MESSAGE}"
+            exit 0
+          fi
+          
+          # Get current date for daily digest
+          if [ "$DIGEST_TYPE" = "daily" ]; then
+            TODAY=$(date -u +%Y-%m-%d)
+            FILES=$(find inbox -name "*.md" -newermt "${TODAY}" -type f | sort)
+            HEADER="📅 *Sentidex Daily* - $(date +%d.%m.%Y)"
+            EMPTY_MESSAGE="✅ Нет новых идей за сегодня"
+          else
+            FILES=$(find inbox -name "*.md" -type f | sort)
+            HEADER="📊 *Sentidex Weekly* - неделя $(date +%V)"
+            EMPTY_MESSAGE="✅ Очередь идей пуста"
+          fi
+          
+          # Count files
+          FILE_COUNT=$(echo "$FILES" | grep -c . || echo 0)
+          
+          if [ "$FILE_COUNT" -eq 0 ]; then
+            MESSAGE="$EMPTY_MESSAGE"
+          else
+            # Start building message
+            MESSAGE="$HEADER"
+            MESSAGE="$MESSAGE"$'\n'"Найдено идей: $FILE_COUNT"$'\n'
+            
+            # Process each file
+            COUNTER=1
+            echo "$FILES" | while IFS= read -r file; do
+              if [ -n "$file" ] && [ -f "$file" ]; then
+                echo "Processing file: $file"
+                
+                # Extract front matter
+                SUMMARY=""
+                SOURCE_INFO=""
+                SOURCE_URL=""
+                TAGS=""
+                
+                # Parse front matter (simple approach)
+                while IFS=': ' read -r key value; do
+                  case "$key" in
+                    "summary")
+                      SUMMARY=$(echo "$value" | sed 's/^["'\'']\|["'\'']$//g')
+                      ;;
+                    "source_info") 
+                      SOURCE_INFO=$(echo "$value" | sed 's/^["'\'']\|["'\'']$//g')
+                      ;;
+                    "source_url")
+                      SOURCE_URL=$(echo "$value" | sed 's/^["'\'']\|["'\'']$//g')
+                      ;;
+                    "tags")
+                      TAGS=$(echo "$value" | tr -d '[]"' | sed 's/,/ #/g' | sed 's/^/#/')
+                      ;;
+                  esac
+                done < <(sed -n '/^---$/,/^---$/p' "$file" | head -n -1 | tail -n +2)
+                
+                # Format entry
+                ENTRY=""$'\n'"$COUNTER. "
+                
+                if [ -n "$SUMMARY" ]; then
+                  ENTRY="$ENTRY*$SUMMARY*"
+                else
+                  ENTRY="$ENTRY*Идея $(basename "$file" .md)*"
+                fi
+                
+                if [ -n "$SOURCE_INFO" ]; then
+                  ENTRY="$ENTRY"$'\n'"   📤 $SOURCE_INFO"
+                fi
+                
+                if [ -n "$SOURCE_URL" ] && [ "$SOURCE_URL" != '""' ]; then
+                  ENTRY="$ENTRY"$'\n'"   🔗 $SOURCE_URL"
+                fi
+                
+                if [ -n "$TAGS" ]; then
+                  ENTRY="$ENTRY"$'\n'"   🏷 $TAGS"
+                fi
+                
+                MESSAGE="$MESSAGE$ENTRY"
+                COUNTER=$((COUNTER + 1))
+                
+                # Telegram message limit ~4096 chars, break if getting too long
+                if [ ${#MESSAGE} -gt 3500 ]; then
+                  MESSAGE="$MESSAGE"$'\n\n'"... и ещё $((FILE_COUNT - COUNTER + 1)) идей"
+                  break
+                fi
+              fi
+            done
+          fi
+          
+          # Send message to Telegram
+          echo "Sending digest..."
+          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${CHAT_ID}" \
+            --data-urlencode "parse_mode=Markdown" \
+            --data-urlencode "text=${MESSAGE}" || {
+            echo "Failed to send message, trying without Markdown..."
+            curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+              --data-urlencode "chat_id=${CHAT_ID}" \
+              --data-urlencode "text=${MESSAGE}"
+          }

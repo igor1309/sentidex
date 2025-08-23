@@ -94,9 +94,7 @@ message_id: ${message.message_id}
 timestamp: "${timestamp.toISOString()}"
 source_info: "${sourceInfo}"
 source_url: "${sourceUrl}"
-forward_date: "${message.forward_date ? new Date(message.forward_date * 1000).toISOString() : ''}"
 has_media: ${!!(message.photo || message.video || message.document || message.audio || message.voice)}
-links: ${JSON.stringify(links)}
 ---`;
   
   const content = `${frontMatter}\n\n${textWithLinks}`;
@@ -131,9 +129,7 @@ message_id: ${message.message_id}
 timestamp: "${timestamp.toISOString()}"
 source_info: "direct_message"
 source_url: ""
-forward_date: ""
 has_media: ${!!(message.photo || message.video || message.document || message.audio || message.voice)}
-links: ${JSON.stringify(links)}
 ---`;
   
   const content = `${frontMatter}\n\n${textWithLinks}`;

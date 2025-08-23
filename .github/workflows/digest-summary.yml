@@ -84,23 +84,16 @@ jobs:
                 SOURCE_URL=""
                 TAGS=""
                 
-                # Parse front matter (simple approach)
-                while IFS=': ' read -r key value; do
-                  case "$key" in
-                    "summary")
-                      SUMMARY=$(echo "$value" | sed 's/^["'\'']\|["'\'']$//g')
-                      ;;
-                    "source_info") 
-                      SOURCE_INFO=$(echo "$value" | sed 's/^["'\'']\|["'\'']$//g')
-                      ;;
-                    "source_url")
-                      SOURCE_URL=$(echo "$value" | sed 's/^["'\'']\|["'\'']$//g')
-                      ;;
-                    "tags")
-                      TAGS=$(echo "$value" | tr -d '[]"' | sed 's/,/ #/g' | sed 's/^/#/')
-                      ;;
-                  esac
-                done < <(sed -n '/^---$/,/^---$/p' "$file" | head -n -1 | tail -n +2)
+                # Extract front matter using grep/sed  
+                SUMMARY=$(grep '^summary:' "$file" | sed 's/^summary: *"//' | sed 's/"$//')
+                SOURCE_INFO=$(grep '^source_info:' "$file" | sed 's/^source_info: *"//' | sed 's/"$//')
+                SOURCE_URL=$(grep '^source_url:' "$file" | sed 's/^source_url: *"//' | sed 's/"$//')
+                TAGS_RAW=$(grep '^tags:' "$file" | sed 's/^tags: *//')
+                
+                # Convert tags from JSON array to hashtags
+                if [ -n "$TAGS_RAW" ] && [ "$TAGS_RAW" != '[]' ]; then
+                  TAGS=$(echo "$TAGS_RAW" | sed 's/\[//g' | sed 's/\]//g' | sed 's/"//g' | sed 's/,/ #/g' | sed 's/^/#/')
+                fi
                 
                 # Format entry
                 ENTRY=""$'\n'"$COUNTER. "

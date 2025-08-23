@@ -1,0 +1,9 @@
+{
+    "name": "sentidex",
+    "version": "1.0.0",
+    "description": "Sentidex Processing Scripts",
+    "private": true,
+    "dependencies": {
+      "openai": "^4.0.0"
+    }
+  }

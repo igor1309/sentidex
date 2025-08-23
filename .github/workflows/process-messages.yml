@@ -1,0 +1,38 @@
+name: Process Messages
+
+on:
+  workflow_dispatch:
+
+jobs:
+  process-messages:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+
+    - name: Run message processing
+      env:
+        DEBUG: "true"
+      run: node scripts/process-messages.js
+
+    - name: Commit processed files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add inbox/ _inbox/
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Process messages: _inbox → inbox"
+          git push
+        fi

@@ -20,12 +20,12 @@ async function sendDigest() {
       return;
     }
     
-    // Get files
+    // Get files, skipping duplicates
     const files = fs.readdirSync('inbox')
-      .filter(f => f.endsWith('.md'))
+      .filter(f => f.endsWith('.md') && !f.startsWith('DUPL_'))
       .map(f => path.join('inbox', f));
     
-    console.log(`Found ${files.length} total files`);
+    console.log(`Found ${files.length} unique files`); // <<< Corresponding log message updated
     
     let filteredFiles = files;
     

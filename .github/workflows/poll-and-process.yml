@@ -1,0 +1,50 @@
+name: Sentidex Poll and Process
+
+on:
+  schedule:
+    # Run every 15 minutes
+    - cron: '*/15 * * * *'
+  
+  # Allow manual runs for testing this specific workflow
+  workflow_dispatch:
+
+jobs:
+  poll-and-process:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Poll Telegram for new messages
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: node scripts/poll-telegram.js
+      
+      - name: Process new messages
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: node scripts/process-messages.js
+
+      - name: Commit new and processed files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _inbox/ inbox/
+          if git diff --staged --quiet; then
+            echo "No new messages to commit"
+          else
+            git commit -m "Auto: Poll and process new messages"
+            git push
+          fi

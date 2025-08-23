@@ -77,6 +77,10 @@ async function processForwardedMessage(message) {
     sourceInfo = message.forward_sender_name;
   }
   
+  // Extract links from entities
+  const links = extractLinks(message);
+  const textWithLinks = formatTextWithLinks(message.text || '[No text content]', message.entities || []);
+  
   const frontMatter = `---
 raw_message: true
 message_id: ${message.message_id}
@@ -85,9 +89,10 @@ source_info: "${sourceInfo}"
 source_url: "${sourceUrl}"
 forward_date: "${message.forward_date ? new Date(message.forward_date * 1000).toISOString() : ''}"
 has_media: ${!!(message.photo || message.video || message.document || message.audio || message.voice)}
+links: ${JSON.stringify(links)}
 ---`;
   
-  const content = `${frontMatter}\n\n${message.text || '[No text content]'}`;
+  const content = `${frontMatter}\n\n${textWithLinks}`;
   
   fs.writeFileSync(filepath, content, 'utf8');
   console.log(`Created file: ${filepath}`);
@@ -106,6 +111,9 @@ async function processRegularMessage(message) {
     fs.mkdirSync('_inbox', { recursive: true });
   }
   
+  const links = extractLinks(message);
+  const textWithLinks = formatTextWithLinks(message.text || '[No text content]', message.entities || []);
+  
   const frontMatter = `---
 raw_message: true
 message_id: ${message.message_id}
@@ -114,9 +122,10 @@ source_info: "direct_message"
 source_url: ""
 forward_date: ""
 has_media: ${!!(message.photo || message.video || message.document || message.audio || message.voice)}
+links: ${JSON.stringify(links)}
 ---`;
   
-  const content = `${frontMatter}\n\n${message.text || '[No text content]'}`;
+  const content = `${frontMatter}\n\n${textWithLinks}`;
   
   fs.writeFileSync(filepath, content, 'utf8');
   console.log(`Created regular message file: ${filepath}`);
@@ -145,6 +154,46 @@ function formatTimestamp(date) {
          String(date.getHours()).padStart(2, '0') + '-' +
          String(date.getMinutes()).padStart(2, '0') + '-' +
          String(date.getSeconds()).padStart(2, '0');
+}
+
+function extractLinks(message) {
+  const links = [];
+  const entities = message.entities || [];
+  
+  entities.forEach(entity => {
+    if (entity.type === 'url' || entity.type === 'text_link') {
+      const text = message.text.substring(entity.offset, entity.offset + entity.length);
+      const url = entity.type === 'url' ? text : entity.url;
+      links.push({ text, url });
+    }
+  });
+  
+  return links;
+}
+
+function formatTextWithLinks(text, entities) {
+  if (!entities || entities.length === 0) {
+    return text;
+  }
+  
+  // Sort entities by offset in reverse order to avoid offset shifting
+  const sortedEntities = [...entities].sort((a, b) => b.offset - a.offset);
+  
+  let result = text;
+  
+  sortedEntities.forEach(entity => {
+    if (entity.type === 'url' || entity.type === 'text_link') {
+      const entityText = text.substring(entity.offset, entity.offset + entity.length);
+      const url = entity.type === 'url' ? entityText : entity.url;
+      const markdownLink = `[${entityText}](${url})`;
+      
+      result = result.substring(0, entity.offset) + 
+               markdownLink + 
+               result.substring(entity.offset + entity.length);
+    }
+  });
+  
+  return result;
 }
 
 // Run the polling

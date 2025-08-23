@@ -35,6 +35,9 @@ async function pollTelegram() {
         console.log(`Processing message ID: ${message.message_id}`);
         
         if (message.forward_from || message.forward_from_chat || message.forward_sender_name) {
+          if (process.env.DEBUG === 'true') {
+            console.log('Full forwarded message object:', JSON.stringify(message, null, 2));
+          }
           await processForwardedMessage(message);
           processedCount++;
         } else if (message.text) {

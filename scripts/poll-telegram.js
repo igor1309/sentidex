@@ -73,8 +73,10 @@ async function processForwardedMessage(message) {
     sourceInfo = `@${message.forward_from.username || message.forward_from.first_name}`;
   } else if (message.forward_from_chat) {
     sourceInfo = message.forward_from_chat.title || message.forward_from_chat.username;
-    if (message.forward_from_chat.username) {
-      sourceUrl = `https://t.me/${message.forward_from_chat.username}`;
+    if (message.forward_origin && message.forward_origin.chat.username) {
+      const username = message.forward_origin.chat.username;
+      const messageId = message.forward_origin.message_id;
+      sourceUrl = `https://t.me/${username}/${messageId}`;
     }
   } else if (message.forward_sender_name) {
     sourceInfo = message.forward_sender_name;

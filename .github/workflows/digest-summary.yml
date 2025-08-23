@@ -2,10 +2,8 @@ name: Sentidex Digests
 
 on:
   schedule:
-    # Daily digest
-    - cron: '0 4 * * *'
-    # Weekly digest
-    - cron: '0 5 * * 6'
+    - cron: '0 4 * * *'      # Daily
+    - cron: '0 5 * * 6'      # Weekly
   
   workflow_dispatch:
     inputs:
@@ -24,11 +22,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Generate and Send Digest
         env:

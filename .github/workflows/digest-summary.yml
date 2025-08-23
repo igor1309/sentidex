@@ -1,13 +1,11 @@
 name: Sentidex Digest
 
 on:
-  # Daily digest - every day at 21:00 UTC (00:00 MSK)
+  # Daily digest - every day at 04:00 UTC (07:00 MSK)
+  # Weekly digest - Saturday at 05:00 UTC (08:00 MSK)
   schedule:
-    - cron: '0 21 * * *'
-  
-  # Weekly digest - Sunday at 18:00 UTC (21:00 MSK) 
-  schedule:
-    - cron: '0 18 * * 0'
+    - cron: '0 4 * * *'  # Daily at 07:00 MSK
+    - cron: '0 5 * * 6'  # Saturday at 08:00 MSK
   
   # Manual trigger for testing
   workflow_dispatch:
@@ -34,7 +32,7 @@ jobs:
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: |
           # Determine digest type
-          if [ "${{ github.event.schedule }}" = "0 21 * * *" ] || [ "${{ inputs.type }}" = "daily" ]; then
+          if [ "${{ github.event.schedule }}" = "0 4 * * *" ] || [ "${{ inputs.type }}" = "daily" ]; then
             DIGEST_TYPE="daily"
           else
             DIGEST_TYPE="weekly"

@@ -3,14 +3,14 @@ name: Sentidex Poll and Process
 on:
   schedule:
     # Run every 15 minutes
-    - cron: '*/15 * * * *'
-  
+    - cron: "*/15 * * * *"
+
   workflow_dispatch:
     inputs:
       debug:
-        description: 'Enable debug logging'
+        description: "Enable debug logging"
         required: false
-        default: 'false'
+        default: false
         type: boolean
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    
+
     concurrency:
       group: sentidex-inbox-lock
       cancel-in-progress: true
@@ -43,7 +43,7 @@ jobs:
           CHAT_ID: ${{ secrets.CHAT_ID }}
           DEBUG: ${{ inputs.debug == true && 'true' || 'false' }}
         run: node scripts/poll-telegram.js
-      
+
       - name: Process new messages
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

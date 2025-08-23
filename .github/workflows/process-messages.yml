@@ -8,39 +8,39 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: List files in workspace
-      run: ls -R
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: "20"
+      - name: List files in workspace
+        run: ls -R
 
-    - name: Install dependencies
-      run: npm install
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
-    - name: Run message processing
-      env:
-        DEBUG: "true"
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        OPEN_ROUTER_GPT_OSS_20B_API_KEY: ${{ secrets.OPEN_ROUTER_GPT_OSS_20B_API_KEY }}
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run message processing
+        env:
+          DEBUG: "true"
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPEN_ROUTER_GPT_OSS_20B_API_KEY: ${{ secrets.OPEN_ROUTER_GPT_OSS_20B_API_KEY }}
         run: node scripts/process-messages.js
 
-    - name: Commit processed files
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add inbox/ _inbox/
-        if git diff --staged --quiet; then
-          echo "No changes to commit"
-        else
-          git commit -m "Process messages: _inbox → inbox"
-          git push
-        fi
+      - name: Commit processed files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add inbox/ _inbox/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Process messages: _inbox → inbox"
+            git push
+          fi

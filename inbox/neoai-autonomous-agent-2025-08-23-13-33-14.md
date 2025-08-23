@@ -1,10 +1,13 @@
 ---
-raw_message: true
-message_id: 35
-timestamp: "2025-08-23T13:33:14.681Z"
+id: "meofubvig4dp9f6qn08"
+created_at: "2025-08-23T13:33:14.681Z"
 source_info: "Data Secrets"
 source_url: "https://t.me/data_secrets/7678"
 has_media: true
+language: "mixed"
+summary: "Neo AI выпустили агента NEO — ансамбль из 11 автономных единиц для реальных ML-воркфлоу с оркестратором и памятью шагов. На MLE Bench от OpenAI NEO занял первое место и поддерживает интеграцию с Snowflake, Databricks, BigQuery и деплой в VPC, ориентируясь на прод."
+tags: ["neoai","autonomous","mlagent","benchmark"]
+processed_at: "2025-08-23T15:52:40.350Z"
 ---
 
 Neo AI выпустили агента NEO – ещё одного ML-инженера из коробки

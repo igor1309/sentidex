@@ -76,7 +76,7 @@ async function generateMessage(digestType, files) {
     header = `📊 *Sentidex Weekly* - неделя ${weekNum}`;
   }
   
-  let message = `${header}\nНайдено идей: ${files.length}\n`;
+  let message = `${header}\nНайдено сообщений: ${files.length}`;
   
   // Process each file
   for (let i = 0; i < files.length; i++) {
@@ -90,7 +90,7 @@ async function generateMessage(digestType, files) {
       console.log('Parsed front matter:', JSON.stringify(frontMatter, null, 2));
       
       // Build entry
-      let entry = `\n${i + 1}. `;
+      let entry = `\n\n${i + 1}. `;
       
       // Summary
       if (frontMatter.summary) {

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { getAIEnrichment } = require('./services/ai.js');
 
 async function processMessages() {
   console.log('Starting message processing...');
@@ -50,24 +51,26 @@ async function processMessages() {
 
 async function processFile(inboxPath) {
   const content = fs.readFileSync(inboxPath, 'utf8');
+  
+  // Parse front matter and content
   const { frontMatter, bodyContent } = parseFrontMatter(content);
   
   if (process.env.DEBUG === 'true') {
     console.log('Original front matter:', JSON.stringify(frontMatter, null, 2));
+    console.log('Body content preview:', bodyContent.substring(0, 200) + '...');
   }
-  
-  // --- DEDUPLICATION LOGIC ---
+
   const sourceUrl = frontMatter.source_url;
   if (sourceUrl && sourceUrl !== '') {
     const originalFilePath = findOriginalBySourceUrl(sourceUrl, 'inbox');
-    
+
     if (originalFilePath) {
       console.log(`Duplicate found for ${sourceUrl}. Original: ${originalFilePath}`);
-      
+
       const originalFilename = path.basename(originalFilePath);
       const ticketFilename = `DUPL_${formatTimestamp(new Date())}.md`;
       const ticketPath = path.join('inbox', ticketFilename);
-      
+
       const ticketFrontMatter = createFrontMatterString({
         id: generateId(),
         created_at: new Date().toISOString(),
@@ -75,24 +78,22 @@ async function processFile(inboxPath) {
         is_duplicate: true,
         original_ref: originalFilename
       });
-      
+
       const ticketContent = `${ticketFrontMatter}\n\nДубликат, см. оригинал: ${originalFilename}`;
-      
+
       fs.writeFileSync(ticketPath, ticketContent, 'utf8');
       console.log(`Created duplicate ticket: ${ticketPath}`);
-      
-      // Clean up the original raw file and exit
+
       fs.unlinkSync(inboxPath);
       console.log(`Deleted raw duplicate file: ${inboxPath}`);
-      return; // Stop processing this file
+      return;
     }
   }
   
-  // --- PROCESS AS A NEW, UNIQUE FILE ---
-  console.log(`Processing as a new unique message.`);
+  // AI Enrichment Call
+  const aiResults = await getAIEnrichment(bodyContent);
   
-  const aiResults = emulateAIProcessing(bodyContent, frontMatter);
-  
+  // Create enriched front matter
   const enrichedFrontMatter = {
     id: frontMatter.id || generateId(),
     created_at: frontMatter.timestamp || new Date().toISOString(),
@@ -105,16 +106,25 @@ async function processFile(inboxPath) {
     processed_at: new Date().toISOString()
   };
   
+  // Generate new filename with AI title and timestamp
   const timestamp = new Date(frontMatter.timestamp || Date.now());
-  const newFilename = formatTimestamp(timestamp) + '.md';
+  const newFilename = `${aiResults.title}-${formatTimestamp(timestamp)}.md`;
   const outboxPath = path.join('inbox', newFilename);
   
+  // Create new content
   const newFrontMatter = createFrontMatterString(enrichedFrontMatter);
   const newContent = `${newFrontMatter}\n\n${bodyContent}`;
   
+  // Write to inbox
   fs.writeFileSync(outboxPath, newContent, 'utf8');
   console.log(`Created processed file: ${outboxPath}`);
   
+  if (process.env.DEBUG === 'true') {
+    console.log('AI Results:', aiResults);
+    console.log('New filename:', newFilename);
+  }
+  
+  // Delete original file from _inbox
   fs.unlinkSync(inboxPath);
   console.log(`Deleted original file: ${inboxPath}`);
 }
@@ -129,7 +139,6 @@ function findOriginalBySourceUrl(url, directory) {
     if (file.endsWith('.md') && !file.startsWith('DUPL_')) {
       const filePath = path.join(directory, file);
       const content = fs.readFileSync(filePath, 'utf8');
-      // Simple string search is fast and effective for this use case
       if (content.includes(`source_url: "${url}"`)) {
         return filePath;
       }
@@ -152,10 +161,11 @@ function parseFrontMatter(content) {
     if (line.trim() === '---') {
       if (!inFrontMatter) {
         inFrontMatter = true;
-      } else if (inFrontMatter && !frontMatterEnded) {
+        continue;
+      } else {
         frontMatterEnded = true;
+        continue;
       }
-      continue;
     }
     
     if (inFrontMatter && !frontMatterEnded) {
@@ -165,6 +175,7 @@ function parseFrontMatter(content) {
     }
   }
   
+  // Parse YAML-like front matter
   const frontMatter = {};
   frontMatterLines.forEach(line => {
     const colonIndex = line.indexOf(':');
@@ -172,15 +183,22 @@ function parseFrontMatter(content) {
       const key = line.substring(0, colonIndex).trim();
       let value = line.substring(colonIndex + 1).trim();
       
+      // Remove quotes
       if ((value.startsWith('"') && value.endsWith('"')) || 
           (value.startsWith("'") && value.endsWith("'"))) {
         value = value.substring(1, value.length - 1);
       }
       
+      // Parse JSON arrays/objects
       if (value.startsWith('[') || value.startsWith('{')) {
-        try { value = JSON.parse(value); } catch (e) {}
+        try {
+          value = JSON.parse(value);
+        } catch (e) {
+          // Keep as string if JSON parse fails
+        }
       }
       
+      // Parse booleans
       if (value === 'true') value = true;
       if (value === 'false') value = false;
       
@@ -194,37 +212,8 @@ function parseFrontMatter(content) {
   };
 }
 
-function emulateAIProcessing(content, frontMatter) {
-  let summary = content.replace(/\[No text content\]/, '').trim();
-  if (summary.length > 100) {
-    summary = summary.substring(0, 100);
-    const lastSpace = summary.lastIndexOf(' ');
-    if (lastSpace > 80) {
-      summary = summary.substring(0, lastSpace);
-    }
-    summary = summary + '...';
-  }
-  
-  if (!summary || summary.length < 10) {
-    summary = `Message from ${frontMatter.source_info || 'unknown source'}`;
-  }
-  
-  const tags = [];
-  if (frontMatter.source_info) { tags.push('forwarded'); }
-  if (frontMatter.has_media) { tags.push('media'); }
-  
-  const lowerContent = content.toLowerCase();
-  if (lowerContent.includes('ai') || lowerContent.includes('ии')) { tags.push('ai'); }
-  if (lowerContent.includes('code') || lowerContent.includes('programming') || lowerContent.includes('github')) { tags.push('programming'); }
-  if (lowerContent.includes('business') || lowerContent.includes('startup')) { tags.push('business'); }
-  
-  return {
-    summary: summary,
-    tags: tags.length > 0 ? tags : ['general']
-  };
-}
-
 function detectLanguage(content) {
+  // Simple language detection
   const hasRussian = /[а-яё]/i.test(content);
   const hasEnglish = /[a-z]/i.test(content);
   
@@ -249,15 +238,17 @@ function formatTimestamp(date) {
 
 function createFrontMatterString(frontMatter) {
   let result = '---\n';
+  
   for (const [key, value] of Object.entries(frontMatter)) {
     if (typeof value === 'string') {
-      result += `${key}: "${value.replace(/"/g, '\\"')}"\n`;
+      result += `${key}: "${value}"\n`;
     } else if (Array.isArray(value) || typeof value === 'object') {
       result += `${key}: ${JSON.stringify(value)}\n`;
     } else {
       result += `${key}: ${value}\n`;
     }
   }
+  
   result += '---';
   return result;
 }

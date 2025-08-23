@@ -1,13 +1,16 @@
-name: Sentidex Digest
+name: Sentidex Automation
 
 on:
-  # Daily digest - every day at 04:00 UTC (07:00 MSK)
-  # Weekly digest - Saturday at 05:00 UTC (08:00 MSK)
   schedule:
-    - cron: '0 4 * * *'  # Daily at 07:00 MSK
-    - cron: '0 5 * * 6'  # Saturday at 08:00 MSK
+    # New: Run the poll & process job every 15 minutes
+    - cron: '*/15 * * * *'
+    
+    # Existing: Daily digest - every day at 04:00 UTC (07:00 MSK)
+    - cron: '0 4 * * *'
+    # Existing: Weekly digest - Saturday at 05:00 UTC (08:00 MSK)
+    - cron: '0 5 * * 6'
   
-  # Manual trigger for testing
+  # Manual trigger for testing digests
   workflow_dispatch:
     inputs:
       type:
@@ -20,7 +23,53 @@ on:
         - weekly
 
 jobs:
+  # --- NEW JOB TO AUTOMATE POLLING AND PROCESSING ---
+  poll-and-process:
+    # This condition ensures the job only runs on the 15-minute schedule
+    if: github.event.schedule == '*/15 * * * *'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to commit changes
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Poll Telegram for new messages
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: node scripts/poll-telegram.js
+      
+      - name: Process new messages
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: node scripts/process-messages.js
+
+      - name: Commit new and processed files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _inbox/ inbox/
+          if git diff --staged --quiet; then
+            echo "No new messages to commit"
+          else
+            git commit -m "Auto: Poll and process new messages"
+            git push
+          fi
+
+  # --- EXISTING JOB FOR DIGESTS, NOW WITH A CONDITION ---
   send-digest:
+    # This condition prevents the job from running on the 15-minute schedule
+    if: github.event.schedule != '*/15 * * * *'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

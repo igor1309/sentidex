@@ -1,12 +1,13 @@
 // This file acts as an orchestrator or router for AI services.
 
-// We will create this file in the next step. For now, this require expects it to exist.
+// Import both providers
 const { getOpenAIEnrichment } = require('./openai.js');
+const { getOpenRouterEnrichment } = require('./openrouter.js');
 
 // --- CONFIGURATION ---
 // This constant determines which AI provider to use.
-// Future options could be 'claude', 'gemini', etc.
-const AI_PROVIDER = 'openai';
+// Options: 'openai', 'openrouter', etc.
+const AI_PROVIDER = 'openrouter'; // Changed to use OpenRouter by default
 
 /**
  * Orchestrates AI enrichment by routing to the configured provider.
@@ -21,6 +22,9 @@ async function getAIEnrichment(content) {
     switch (AI_PROVIDER) {
       case 'openai':
         return await getOpenAIEnrichment(content);
+      
+      case 'openrouter':
+        return await getOpenRouterEnrichment(content);
       
       // Future providers could be added here, e.g.:
       // case 'claude':

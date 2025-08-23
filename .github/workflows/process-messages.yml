@@ -30,7 +30,8 @@ jobs:
       env:
         DEBUG: "true"
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      run: node scripts/process-messages.js
+        OPEN_ROUTER_GPT_OSS_20B_API_KEY: ${{ secrets.OPEN_ROUTER_GPT_OSS_20B_API_KEY }}
+        run: node scripts/process-messages.js
 
     - name: Commit processed files
       run: |

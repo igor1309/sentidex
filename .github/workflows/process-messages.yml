@@ -2,6 +2,12 @@ name: Process Messages
 
 on:
   workflow_dispatch:
+  workflow_call:
+    secrets:
+      OPENAI_API_KEY:
+        required: true
+      OPEN_ROUTER_GPT_OSS_20B_API_KEY:
+        required: true
 
 jobs:
   process-messages:
@@ -24,7 +30,7 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run message processing
         env:

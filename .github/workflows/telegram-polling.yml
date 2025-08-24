@@ -8,6 +8,18 @@ on:
         required: false
         default: 'true'
         type: boolean
+  workflow_call:
+    inputs:
+      debug:
+        description: 'Enable debug logging'
+        required: false
+        default: 'false'
+        type: boolean
+    secrets:
+      BOT_TOKEN:
+        required: true
+      CHAT_ID:
+        required: true
 
 jobs:
   poll-telegram:

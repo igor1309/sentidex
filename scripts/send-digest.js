@@ -3,7 +3,7 @@ const path = require('path');
 
 async function sendDigest() {
   try {
-    const digestType = process.env.DIGEST_TYPE || 'daily';
+    const digestType = process.env.DIGEST_TYPE || 'daily'; // 'daily' or 'weekly'
     const botToken = process.env.BOT_TOKEN;
     const chatId = process.env.CHAT_ID;
     
@@ -20,31 +20,32 @@ async function sendDigest() {
       return;
     }
     
-    // Get files, skipping duplicates
-    const files = fs.readdirSync('inbox')
+    // Get all unique files from the inbox
+    const allFiles = fs.readdirSync('inbox')
       .filter(f => f.endsWith('.md') && !f.startsWith('DUPL_'))
       .map(f => path.join('inbox', f));
     
-    console.log(`Found ${files.length} unique files`); // <<< Corresponding log message updated
+    let filesToProcess = allFiles;
     
-    let filteredFiles = files;
-    
-    // Filter for daily digest (files created today)
+    // Filter for daily digest (files modified today)
     if (digestType === 'daily') {
       const today = new Date();
       const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD
       
-      filteredFiles = files.filter(file => {
+      filesToProcess = allFiles.filter(file => {
         const stats = fs.statSync(file);
         const fileDate = stats.mtime.toISOString().split('T')[0];
         return fileDate === todayStr;
       });
       
-      console.log(`Filtered to ${filteredFiles.length} files from today (${todayStr})`);
+      console.log(`Found ${allFiles.length} total files, filtered to ${filesToProcess.length} for today's digest.`);
+
+    } else if (digestType === 'weekly') {
+      console.log(`Found ${filesToProcess.length} total files for the weekly digest.`);
     }
     
-    // Generate message
-    const message = await generateMessage(digestType, filteredFiles);
+    // Generate message from the filtered list of files
+    const message = await generateMessage(digestType, filesToProcess);
     
     // Send to Telegram
     await sendTelegram(botToken, chatId, message);
@@ -72,7 +73,7 @@ async function generateMessage(digestType, files) {
   let header;
   if (digestType === 'daily') {
     header = `📅 *Sentidex Daily* - ${dateStr}`;
-  } else {
+  } else { // 'weekly'
     header = `📊 *Sentidex Weekly* - неделя ${weekNum}`;
   }
   

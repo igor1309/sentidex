@@ -1,4 +1,5 @@
 const OpenAI = require("openai");
+const { DEFAULT_PROMPTS } = require('./prompt-config.js');
 
 // The client automatically reads the OPENAI_API_KEY from the environment.
 const openai = new OpenAI({
@@ -19,26 +20,12 @@ const MODEL = 'gpt-5-nano';
 async function getOpenAIEnrichment(content) {
   console.log(`Sending content to OpenAI model: ${MODEL}`);
 
-  const systemPrompt = `You are a pragmatic assistant for the Sentidex system. Your task is to analyze the given text and return structured data in a specific JSON format. Do not add any extra commentary or explanations. Your entire response must be a single valid JSON object.`;
-
-  const userPrompt = `
-Analyze the following text and provide a response in JSON format with three keys:
-1. "summary": A concise summary of 1-2 sentences, in the original language of the text.
-2. "tags": An array of 3-5 relevant lowercase keywords or tags, without special characters.
-3. "title": A short, 2-4 word, file-safe, kebab-case title for the text (e.g., "telegram-processing-queue").
-
-Text to analyze:
-\`\`\`
-${content}
-\`\`\`
-`;
-
   try {
     const completion = await openai.chat.completions.create({
       model: MODEL,
       messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt },
+        { role: 'system', content: DEFAULT_PROMPTS.systemPrompt },
+        { role: 'user', content: DEFAULT_PROMPTS.userPrompt(content) },
       ],
       // This forces the model to return a guaranteed-valid JSON object.
       response_format: { type: 'json_object' },

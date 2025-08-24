@@ -2,7 +2,24 @@ name: Sentidex Process
 
 on:
   workflow_dispatch:
+    inputs:
+      ai_provider:
+        description: "AI Provider to use"
+        required: true
+        default: "mockai"
+        type: choice
+        options:
+          - mockai
+          - openai
+          - openrouter
+
   workflow_call:
+    inputs:
+      ai_provider:
+        description: "AI Provider to use"
+        required: false
+        default: "mockai"
+        type: string
     secrets:
       OPENAI_API_KEY:
         required: true
@@ -35,7 +52,7 @@ jobs:
       - name: Run message processing
         env:
           DEBUG: "true"
-          AI_PROVIDER: "mockai"
+          AI_PROVIDER: ${{ inputs.ai_provider }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPEN_ROUTER_GPT_OSS_20B_API_KEY: ${{ secrets.OPEN_ROUTER_GPT_OSS_20B_API_KEY }}
         run: node scripts/process-messages.js

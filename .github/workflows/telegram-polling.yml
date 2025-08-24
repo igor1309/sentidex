@@ -9,10 +9,6 @@ on:
       CHAT_ID:
         required: true
 
-concurrency:
-  group: sentidex-inbox-lock
-  cancel-in-progress: false
-
 jobs:
   poll-telegram:
     runs-on: ubuntu-latest

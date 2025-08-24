@@ -1,4 +1,4 @@
-name: Process Messages
+name: Sentidex Process
 
 on:
   workflow_dispatch:

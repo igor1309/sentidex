@@ -1,4 +1,4 @@
-name: Sentidex Digests
+name: Sentidex Digest
 
 on:
   schedule:

@@ -1,4 +1,4 @@
-name: Sentidex Poll and Process
+name: Sentidex Intake
 
 on:
   schedule:

@@ -1,4 +1,4 @@
-name: Telegram Polling
+name: Sentidex Collect
 
 on:
   workflow_dispatch:

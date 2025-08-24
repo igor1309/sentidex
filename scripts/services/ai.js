@@ -28,18 +28,22 @@ function createAIEnrichmentProvider() {
     //   return getClaudeEnrichment;
       
     default:
-      // Return a function that always returns an error for unknown providers
-      return async function(content) {
-        const errorMessage = `Unknown AI provider configured: ${AI_PROVIDER}`;
-        console.error(errorMessage);
-        return {
-          error: `AI processing failed: ${errorMessage}`,
-          summary: 'AI processing failed.',
-          tags: ['error', 'ai-failed'],
-          title: 'processing-error'
-        };
-      };
+      throw new Error(`Unknown AI provider configured: ${AI_PROVIDER}`);
   }
+}
+
+/**
+ * Creates a standardized error response object.
+ * @param {string} errorMessage The error message to include.
+ * @returns {object} Standardized error response with fallback values.
+ */
+function createErrorResponse(errorMessage) {
+  return {
+    error: `AI processing failed: ${errorMessage}`,
+    summary: 'AI processing failed.',
+    tags: ['error', 'ai-failed'],
+    title: 'processing-error'
+  };
 }
 
 /**
@@ -49,19 +53,12 @@ function createAIEnrichmentProvider() {
  * or { error, summary, tags, title } on failure.
  */
 async function getAIEnrichment(content) {
-  const provider = createAIEnrichmentProvider();
-  
   try {
+    const provider = createAIEnrichmentProvider();
     return await provider(content);
   } catch (error) {
-    console.error(`Error during AI enrichment:`, error.message);
-    // Return a standardized error object so the main process can continue safely.
-    return {
-      error: `AI processing failed: ${error.message}`,
-      summary: 'AI processing failed.',
-      tags: ['error', 'ai-failed'],
-      title: 'processing-error'
-    };
+    console.error('Error during AI enrichment:', error.message);
+    return createErrorResponse(error.message);
   }
 }
 

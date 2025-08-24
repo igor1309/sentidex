@@ -64,7 +64,6 @@ async function getOpenRouterEnrichment(content) {
     return parsedResponse;
     
   } catch (error) {
-    console.error('Error calling OpenRouter API:', error.message);
     // Re-throw the error to be caught by the ai.js orchestrator
     throw new Error(`OpenRouter API call failed: ${error.message}`);
   }

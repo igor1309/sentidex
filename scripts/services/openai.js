@@ -53,7 +53,6 @@ async function getOpenAIEnrichment(content) {
     return parsedResponse;
     
   } catch (error) {
-    console.error('Error calling OpenAI API:', error.message);
     // Re-throw the error to be caught by the ai.js orchestrator
     throw new Error(`OpenAI API call failed: ${error.message}`);
   }

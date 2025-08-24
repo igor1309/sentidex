@@ -1,13 +1,14 @@
 // This file acts as an orchestrator or router for AI services.
 
-// Import both providers
+// Import providers
 const { getOpenAIEnrichment } = require('./openai.js');
 const { getOpenRouterEnrichment } = require('./openrouter.js');
+const { getMockEnrichment } = require('./mockai.js');
 
 // --- CONFIGURATION ---
 // This constant determines which AI provider to use.
 // Options: 'openai', 'openrouter', etc.
-const AI_PROVIDER = 'openrouter'; // Changed to use OpenRouter by default
+const AI_PROVIDER = process.env.AI_PROVIDER || 'mockai';
 
 /**
  * Orchestrates AI enrichment by routing to the configured provider.
@@ -20,6 +21,9 @@ async function getAIEnrichment(content) {
   
   try {
     switch (AI_PROVIDER) {
+      case 'mockai':
+        return getMockEnrichment(content);
+
       case 'openai':
         return await getOpenAIEnrichment(content);
       

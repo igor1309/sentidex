@@ -1,10 +1,13 @@
 ---
-raw_message: true
-message_id: 58
-timestamp: "2025-08-24T06:55:28.209Z"
+id: "mepdx2rkyymf763ue2h"
+created_at: "2025-08-24T06:55:28.209Z"
 source_info: "Yandex for Developers"
 source_url: "https://t.me/Yandex4Developers/1195"
 has_media: false
+language: "mixed"
+summary: "Mock summary for 313 words of content"
+tags: ["mock","test","message"]
+processed_at: "2025-08-24T07:46:35.456Z"
 ---
 
 📕 AI-часы с YandexGPT, дебаты в коворкинге и инсайды из лаборатории по созданию роботов. Об этом и не только — в новом дайджесте Yandex for Developers.

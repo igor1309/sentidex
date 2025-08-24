@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 80
-timestamp: "2025-08-24T11:58:22.335Z"
+id: "mepn2oyszws3x2q7md8"
+created_at: "2025-08-24T11:58:22.335Z"
 source_info: "Neural Deep"
 source_url: "https://t.me/neuraldeep/1579"
-forward_date: "2025-08-24T09:52:52.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Автор обобщает преимущества и ограничения SGR и Tool Calling: SGR даёт предсказуемое, легко тестируемое рассуждение, а Tools обеспечивают агентское поведение, но усложняют отладку. В продакшене выбор зависит от требований к контролю и мониторингу."
+tags: ["sgr","toolcalling","llm","monitoring","agent"]
+processed_at: "2025-08-24T12:02:54.052Z"
 ---
 
 **SGR vs Tools: когда использовать Schema-Guided Reasoning, а когда Function Calling в LLM-системах**

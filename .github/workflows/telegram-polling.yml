@@ -44,6 +44,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "No new files to commit"
           else
+            git pull --rebase origin trunk || git pull origin trunk
             git commit -m "Add new messages from Telegram polling"
             git push
           fi

@@ -12,7 +12,7 @@ on:
 concurrency:
   group: sentidex-inbox-lock
   cancel-in-progress: false
-  
+
 jobs:
   process-messages:
     runs-on: ubuntu-latest
@@ -58,6 +58,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
+            git pull --rebase origin trunk || git pull origin trunk
             git commit -m "Process messages: _inbox → inbox"
             git push
           fi

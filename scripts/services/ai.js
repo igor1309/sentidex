@@ -1,9 +1,9 @@
 // This file acts as a factory for AI services.
 
 // Import providers
-const { getOpenAIEnrichment } = require('./openai.js');
-const { getOpenRouterEnrichment } = require('./openrouter.js');
-const { getMockEnrichment } = require('./mockai.js');
+const { getEnrichment: getOpenAIEnrichment } = require('./openai.js');
+const { getEnrichment: getOpenRouterEnrichment } = require('./openrouter.js');
+const { getEnrichment: getMockEnrichment } = require('./mockai.js');
 
 /**
  * Factory function that creates an AI enrichment provider based on environment configuration.

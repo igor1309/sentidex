@@ -3,7 +3,7 @@
  * @param {string} content The text content of the message to be processed.
  * @returns {object} A mock object with { summary, tags, title }.
  */
-function getMockEnrichment(content) {
+function getEnrichment(content) {
   console.log('Using mock AI provider');
   
   // Simple deterministic responses based on content length
@@ -18,5 +18,5 @@ function getMockEnrichment(content) {
 }
 
 module.exports = {
-getMockEnrichment
+getEnrichment
 };

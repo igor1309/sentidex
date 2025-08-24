@@ -1,10 +1,13 @@
 ---
-raw_message: true
-message_id: 61
-timestamp: "2025-08-24T08:30:15.638Z"
+id: "mepivrrwvis7wwsl85"
+created_at: "2025-08-24T08:30:15.638Z"
 source_info: "Yandex for Mobile"
 source_url: "https://t.me/yandexformobile/293"
 has_media: false
+language: "mixed"
+summary: "Трансляция Я.Субботника по мобильной разработке начинается сегодня: участники смогут узнать об адаптации под ТВ и ускорении старта, а также задать вопросы спикерам в чате."
+tags: ["mobile","yandex","event","tv","development"]
+processed_at: "2025-08-24T10:05:32.636Z"
 ---
 
 ♨️ Трансляция вот-вот начнётся!

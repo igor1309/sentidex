@@ -9,6 +9,10 @@ on:
       OPEN_ROUTER_GPT_OSS_20B_API_KEY:
         required: true
 
+concurrency:
+  group: sentidex-inbox-lock
+  cancel-in-progress: false
+  
 jobs:
   process-messages:
     runs-on: ubuntu-latest

@@ -2,8 +2,8 @@ name: Sentidex Digests
 
 on:
   schedule:
-    - cron: '0 4 * * *'      # Daily
-    - cron: '0 5 * * 6'      # Weekly
+    - cron: '0 4 * * 1-5'    # Workdays at 7:00 AM Moscow time
+    - cron: '0 4 * * 0,6'    # Weekends at 7:00 AM Moscow time
   
   workflow_dispatch:
     inputs:
@@ -41,7 +41,7 @@ jobs:
           # Determine digest type based on the trigger
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             export DIGEST_TYPE="${{ inputs.type }}"
-          elif [ "${{ github.event.schedule }}" = "0 4 * * *" ]; then
+          elif [ "${{ github.event.schedule }}" = "0 4 * * 1-5" ]; then
             export DIGEST_TYPE="daily"
           else
             export DIGEST_TYPE="weekly"

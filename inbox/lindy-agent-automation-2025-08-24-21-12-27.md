@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 82
-timestamp: "2025-08-24T21:12:27.399Z"
+id: "meq7jm5dmo4zdx05vg"
+created_at: "2025-08-24T21:12:27.399Z"
 source_info: "Точки над ИИ"
 source_url: "https://t.me/TochkiNadAI/1552"
-forward_date: "2025-08-24T15:34:31.000Z"
 has_media: true
-media_type: "video"
-forward_protected: false
+language: "mixed"
+summary: "Lindy 3.0 вводит Team Accounts, Agent Builder, Autopilot и Human‑in‑the‑loop, позволяя развернуть агента на всю команду и управлять различными интеграциями."
+tags: ["lindy","automation","autopilot","teamaccounts","integration"]
+processed_at: "2025-08-24T21:35:55.873Z"
 ---
 
 **Про агентов. Нечасто слышу, чтобы говорили про Lindy.**

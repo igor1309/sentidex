@@ -22,7 +22,7 @@ jobs:
     needs: poll
     uses: ./.github/workflows/process-messages.yml
     with:
-      ai_provider: 'mockai'
+      ai_provider: 'openrouter'
     secrets:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       OPEN_ROUTER_GPT_OSS_20B_API_KEY: ${{ secrets.OPEN_ROUTER_GPT_OSS_20B_API_KEY }}

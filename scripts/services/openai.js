@@ -3,8 +3,7 @@ const { createOpenAIEnrichment } = require('./openai-enrichment.js');
 
 // The client automatically reads the OPENAI_API_KEY from the environment.
 const openai = new OpenAI({
-  // Disable the default retry behavior.
-  maxRetries: 0,
+  maxRetries: 1,
 });
 
 // --- CONFIGURATION ---

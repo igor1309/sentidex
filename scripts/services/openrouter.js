@@ -6,7 +6,7 @@ const { createOpenAIEnrichment } = require('./openai-enrichment.js');
 const openrouter = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
   apiKey: process.env.OPEN_ROUTER_GPT_OSS_20B_API_KEY,
-  maxRetries: 0,
+  maxRetries: 1,
   defaultHeaders: {
     "X-Title": process.env.YOUR_APP_NAME || "Sentidex AI Enrichment", // Optional: app name for leaderboards
   },

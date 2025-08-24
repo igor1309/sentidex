@@ -1,10 +1,13 @@
 ---
-raw_message: true
-message_id: 59
-timestamp: "2025-08-24T07:46:23.671Z"
+id: "mepebgcz1lpleuluslri"
+created_at: "2025-08-24T07:46:23.671Z"
 source_info: "Константин Доронин"
 source_url: "https://t.me/kdoronin_blog/909"
 has_media: true
+language: "mixed"
+summary: "Mock summary for 76 words of content"
+tags: ["mock","test","message"]
+processed_at: "2025-08-24T07:57:46.260Z"
 ---
 
 Выкатил обновление для [Figma MCP-сервера](https://github.com/kdoronin/figma_mcp).

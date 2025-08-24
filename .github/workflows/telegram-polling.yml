@@ -2,19 +2,7 @@ name: Telegram Polling
 
 on:
   workflow_dispatch:
-    inputs:
-      debug:
-        description: 'Enable debug logging'
-        required: false
-        default: 'true'
-        type: boolean
   workflow_call:
-    inputs:
-      debug:
-        description: 'Enable debug logging'
-        required: false
-        default: 'false'
-        type: boolean
     secrets:
       BOT_TOKEN:
         required: true
@@ -26,33 +14,32 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
-    - name: Run Telegram polling
-      env:
-        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-        CHAT_ID: ${{ secrets.CHAT_ID }}
-        DEBUG: ${{ inputs.debug }}
-      run: node scripts/poll-telegram.js
+      - name: Run Telegram polling
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: node scripts/poll-telegram.js
 
-    - name: Commit new files
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add _inbox/
-        if git diff --staged --quiet; then
-          echo "No new files to commit"
-        else
-          git commit -m "Add new messages from Telegram polling"
-          git push
-        fi
+      - name: Commit new files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _inbox/
+          if git diff --staged --quiet; then
+            echo "No new files to commit"
+          else
+            git commit -m "Add new messages from Telegram polling"
+            git push
+          fi

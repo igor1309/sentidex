@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 85
-timestamp: "2025-08-25T08:21:12.401Z"
+id: "meqvkdk9you484nvgp"
+created_at: "2025-08-25T08:21:12.401Z"
 source_info: "AI и грабли"
 source_url: "https://t.me/oestick/397"
-forward_date: "2025-08-25T07:41:00.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Автор рассматривает проблемы использования эмбеддингов в подходах RAG, перечисляя ключевые недостатки и предлагая стратегии обхода, включая query rewriting, генерацию вопросов, ленивые LLM‑search, прямой запрос к PDF и структурированный поиск через SQL‑таблицы. Также приводятся рекомендации по preprocessing, reranking, structured output и обсуждается экономичность LLM‑retrieval по сравнению с embeddings."
+tags: ["rag","embeddings","llm","retrieval","preprocessing"]
+processed_at: "2025-08-25T08:48:22.185Z"
 ---
 
 **Запись эфира по RAGу без эмбеддингов (ссылка внизу поста)**

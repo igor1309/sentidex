@@ -46,8 +46,11 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install dependencies
-        run: npm install
+      - name: npm install with retries
+        run: |
+          for i in {1..5}; do
+            npm install && break || sleep 10
+          done
 
       - name: Run message processing
         env:

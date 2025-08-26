@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 90
-timestamp: "2025-08-26T17:12:55.494Z"
+id: "mesty8ghu8w86xqpdk9"
+created_at: "2025-08-26T17:12:55.494Z"
 source_info: "The AI Architect | AI Coding"
 source_url: "https://t.me/the_ai_architect/135"
-forward_date: "2025-08-26T14:09:32.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Идеальный процесс создания промптов: AI генерирует черновик, затем проверка и уточнение, после чего применяется обратная связь. Это мета‑навык экономит время и повышает качество."
+tags: ["prompt","ai","workflow","quality","automation"]
+processed_at: "2025-08-26T17:38:41.873Z"
 ---
 
 **Как правильно промптить? Попросите AI написать промпт за вас!**

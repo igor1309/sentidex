@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 89
-timestamp: "2025-08-26T12:31:57.692Z"
+id: "mesl14z9bx33l20yya"
+created_at: "2025-08-26T12:31:57.692Z"
 source_info: "Neural Kovalskii"
 source_url: "https://t.me/neuraldeep/1583"
-forward_date: "2025-08-26T12:05:29.000Z"
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: "mixed"
+summary: "Обсуждается создание простого инструмента Deep Research на основе Tavily API и GPT‑4o‑mini с шагами Clarification, GeneratePlan, AdaptPlan, WebSearch и CreateReport."
+tags: ["deepresearch","tavily","gpt4omini","clarification","websearch"]
+processed_at: "2025-08-26T13:29:00.789Z"
 ---
 
 **SGR Deep Research**

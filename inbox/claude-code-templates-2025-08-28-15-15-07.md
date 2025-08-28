@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 101
-timestamp: "2025-08-28T15:15:07.732Z"
+id: "mevkka4xwl8fk3z2x6"
+created_at: "2025-08-28T15:15:07.732Z"
 source_info: "НейроProfit | Соня Pro Ai"
 source_url: "https://t.me/NeuralProfit/1929"
-forward_date: "2025-08-28T14:41:16.000Z"
 has_media: true
-media_type: "video"
-forward_protected: false
+language: "mixed"
+summary: "Огромная коллекция шаблонов Claude Code – бесплатные и открытые для разработчиков и аналитиков."
+tags: ["templates","claude","opensource","developers","automation"]
+processed_at: "2025-08-28T15:39:12.849Z"
 ---
 
 **Огромная коллекция шаблонов Claude Code — бесплатно и без костылей

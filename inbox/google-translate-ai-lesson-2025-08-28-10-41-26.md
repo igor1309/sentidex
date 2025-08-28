@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 100
-timestamp: "2025-08-28T10:41:26.071Z"
+id: "mevb0us6kkl6iqaxinm"
+created_at: "2025-08-28T10:41:26.071Z"
 source_info: "Сергей Булаев AI 🤖"
 source_url: "https://t.me/sergiobulaev/1438"
-forward_date: "2025-08-28T06:46:01.000Z"
 has_media: true
-media_type: "video"
-forward_protected: false
+language: "mixed"
+summary: "Google Translate теперь предлагает AI‑поддерживаемые занятия: аудирование, произношение, персональные сценарии и ежедневный трекинг, а также два режима перевода, включая Gemini‑модель."
+tags: ["googletranslate","duolingo","ai","gemini","languages"]
+processed_at: "2025-08-28T11:12:09.942Z"
 ---
 
 Google Translate решил бросить вызов Duolingo и Open AI

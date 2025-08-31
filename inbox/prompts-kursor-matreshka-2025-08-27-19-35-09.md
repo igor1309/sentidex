@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 93
-timestamp: "2025-08-27T19:35:09.963Z"
+id: "mezdel2vg5lp4bhvs6k"
+created_at: "2025-08-27T19:35:09.963Z"
 source_info: "Глеб про AI"
 source_url: "https://t.me/gleb_pro_ai/172"
-forward_date: "2025-08-27T06:14:01.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Автор делится обычным промптом к курсору, который даёт хорошие результаты с GPT-5-high. Используется принцип матрешки: описание, архитектура и код, а курсор помогает предварительно обработать длинные контексты гемини перед передачей в GPT-5."
+tags: ["prompts","kursor","matreshka","gpt5","gemini"]
+processed_at: "2025-08-31T07:29:54.487Z"
 ---
 
 **Знаю, вы любите промпты**

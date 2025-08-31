@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 84
-timestamp: "2025-08-25T06:23:48.602Z"
+id: "mezde0n6v3gynbcap3j"
+created_at: "2025-08-25T06:23:48.602Z"
 source_info: "The AI Architect | AI Coding"
 source_url: "https://t.me/the_ai_architect/132"
-forward_date: "2025-08-25T06:11:01.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Статья обсуждает четыре критические ошибки AI-кодинга и как их избежать (часть 1) на примере истории Джона, и предлагает практический чек-лист по безопасности и структурированию проекта."
+tags: ["ai","secrets","security","gitleaks","repository"]
+processed_at: "2025-08-31T07:29:28.003Z"
 ---
 
 **Разбор полетов: 4 критические ошибки AI-кодинга и как их избежать**, часть 1

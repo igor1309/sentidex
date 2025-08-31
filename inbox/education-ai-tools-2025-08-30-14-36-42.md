@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 106
-timestamp: "2025-08-30T14:36:42.230Z"
+id: "mezdf19d4qkqe74fjzu"
+created_at: "2025-08-30T14:36:42.230Z"
 source_info: "Силиконовый Мешок"
 source_url: "https://t.me/prompt_design/1582"
-forward_date: "2025-08-30T12:00:25.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Автор делится списком обучающих ИИ-инструментов для учеников и родителей. Он перечисляет Perplexity, ChatGPT, NotebookLM, MathGPT, Gemini и Gamma и размышляет о быстром росте предложений."
+tags: ["perplexity","chatgpt","notebooklm","mathgpt","gemini"]
+processed_at: "2025-08-31T07:30:15.457Z"
 ---
 
 **Ну что, дорогие постигаторы знаний, скоро в школу!**

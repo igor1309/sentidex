@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 94
-timestamp: "2025-08-28T04:17:15.795Z"
+id: "mezdeq3ezp7n1yt6v6r"
+created_at: "2025-08-28T04:17:15.795Z"
 source_info: "Dimension AI | Dmitry Sirakov"
 source_url: "https://t.me/dimension_ai/190"
-forward_date: "2025-08-27T21:17:14.000Z"
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: "mixed"
+summary: "Обсуждается идея вынести reasoning в отдельный тул, который определяет, что делать далее и что вызывать. Управление через поле tool_choice делает вызов этого тулов принудительным после юзерского сообщения."
+tags: ["reasoning","tool","llm","agents","prompt"]
+processed_at: "2025-08-31T07:30:00.986Z"
 ---
 
 На самом деле, обсуждая в чатике с Валерой (вступайте в чат!), была предложена следующая идея (не нова) - сделать `reasoning` как отдельный тул, который определяет, что делать дальше и что вызывать.

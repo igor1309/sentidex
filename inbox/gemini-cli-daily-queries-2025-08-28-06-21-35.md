@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 99
-timestamp: "2025-08-28T06:21:35.014Z"
+id: "mezdevtcl9unhhsbc0q"
+created_at: "2025-08-28T06:21:35.014Z"
 source_info: "Vibecoder School"
 source_url: "https://t.me/vibecodings/37"
-forward_date: "2025-08-26T16:15:48.000Z"
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: "mixed"
+summary: "Автор тестирует Gemini CLI с 1000 бесплатных запросов в сутки и отмечает большие контекстные окна. Он рассматривает Gemini CLI как запасного агента и рассказывает о планах интеграции с Cursor и VS Code."
+tags: ["gemini","cli","tokens","cursor","vscode"]
+processed_at: "2025-08-31T07:30:08.400Z"
 ---
 
 **На днях протестировал Gemini CLI с 1000 бесплатных запросов в сутки.**

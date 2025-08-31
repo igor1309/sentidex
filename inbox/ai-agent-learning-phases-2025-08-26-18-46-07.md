@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 91
-timestamp: "2025-08-26T18:46:07.558Z"
+id: "mezdeeqwkn2injyya"
+created_at: "2025-08-26T18:46:07.558Z"
 source_info: "Силиконовый Мешок"
 source_url: "https://t.me/prompt_design/1580"
-forward_date: "2025-08-26T12:17:32.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Автор описывает пошаговый путь обучения созданию ИИ-агентов, начиная с простой игрушки-бота и переходя к системе с памятью, оркестратором и ограничителями, развертываемой в реальном мире. Рекомендуется начать с курса Hugging Face."
+tags: ["ai","agents","memory","orchestrator","prompts"]
+processed_at: "2025-08-31T07:29:46.280Z"
 ---
 
 **Как научиться делать ИИ-агентов и не сойти с ума**

@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 109
-timestamp: "2025-09-01T04:02:54.114Z"
+id: "mf0n0u513ofl2fhppob"
+created_at: "2025-09-01T04:02:54.114Z"
 source_info: "Константин Доронин"
 source_url: "https://t.me/kdoronin_blog/916"
-forward_date: "2025-08-29T19:12:27.000Z"
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: "mixed"
+summary: "Dify – это полноценное локальное решение для работы с LLM‑приложениями, которое можно сразу развернуть в Docker и использовать как no‑code редактор, API‑сервер и площадку для публикации систем."
+tags: ["llm","docker","self-hosted","no-code","api"]
+processed_at: "2025-09-01T04:46:55.381Z"
 ---
 
 **Dify**y](https://dify.ai/)** – AI-комбайн для работы с LLM-приложениями.

@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 111
-timestamp: "2025-09-01T06:23:54.240Z"
+id: "mf0rgxoqe1c4bfrss1q"
+created_at: "2025-09-01T06:23:54.240Z"
 source_info: "Константин Доронин"
 source_url: "https://t.me/kdoronin_blog/918"
-forward_date: "2025-08-31T20:55:19.000Z"
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: "mixed"
+summary: "Использование Pydantic позволяет заранее определить типы узлов и связей в Graphiti, делая построение графов более предсказуемым; пример работает через LLM и демонстрационную программу."
+tags: ["pydantic","graphiti","node","relationship","automation"]
+processed_at: "2025-09-01T06:51:24.939Z"
 ---
 
 **Про работу с Pydantic при построении графов в Graphiti.

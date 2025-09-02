@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 122
-timestamp: "2025-09-02T13:45:01.647Z"
+id: "mf2mr39vkmiius42cy"
+created_at: "2025-09-02T13:45:01.647Z"
 source_info: "Neural Kovalskii"
 source_url: "https://t.me/neuraldeep/1590"
-forward_date: "2025-08-29T13:12:32.000Z"
 has_media: true
-media_type: "video"
-forward_protected: false
+language: "mixed"
+summary: "Создаем гибридную систему, объединяющую SGR и инструменты, с 12 навыками и управлением контекстом, ускоряя работу и добавляя доступ к файловой системе и интернету."
+tags: ["sgr","tool","kontext","dataset","ai"]
+processed_at: "2025-09-02T14:14:53.011Z"
 ---
 
 **SGR + Tool, Hybrid Deep Research **

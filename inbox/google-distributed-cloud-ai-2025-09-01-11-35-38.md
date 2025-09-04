@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 112
-timestamp: "2025-09-01T11:35:38.227Z"
+id: "mf5wkgc1owc7osi4csm"
+created_at: "2025-09-01T11:35:38.227Z"
 source_info: "AI Product | Igor Akimov"
 source_url: "https://t.me/ai_product/1509"
-forward_date: "2025-08-29T19:11:55.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Google запустил Gemini и другие AI‑сервисы в Google Distributed Cloud, позволяя развернуть их в дата‑центрах без доступа в интернет для приватности и безопасности данных."
+tags: ["google","gemini","distributedcloud","onprem","ai"]
+processed_at: "2025-09-04T21:12:58.033Z"
 ---
 
 Прикольно, гугл раскатил Gemini и всю остальную AI инфраструктуру в Google Distributed Cloud

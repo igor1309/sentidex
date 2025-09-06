@@ -93,7 +93,7 @@ async function generateMessage(digestType, files) {
   
   let header;
   if (digestType === 'daily') {
-    header = `📅 *Sentidex Daily* - ${dateStr}`;
+    header = `📅 ${dateStr} *Sentidex Daily*`;
   } else { // 'weekly'
     header = `📊 *Sentidex Weekly* - неделя ${weekNum}`;
   }

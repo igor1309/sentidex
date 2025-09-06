@@ -13,6 +13,7 @@ async function sendDigest() {
     }
     
     console.log(`Generating ${digestType} digest...`);
+    console.log('DIGEST_TYPE environment variable:', process.env.DIGEST_TYPE);
     
     // Check if inbox exists
     if (!fs.existsSync('inbox')) {
@@ -27,18 +28,38 @@ async function sendDigest() {
     
     let filesToProcess = allFiles;
     
-    // Filter for daily digest (files modified today)
+    // Filter for daily digest (files created in last 24 hours)
     if (digestType === 'daily') {
-      const today = new Date();
-      const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD
+      const now = new Date();
+      const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+      
+      console.log(`DEBUG: Current time: ${now.toISOString()}`);
+      console.log(`DEBUG: 24 hours ago: ${twentyFourHoursAgo.toISOString()}`);
       
       filesToProcess = allFiles.filter(file => {
-        const stats = fs.statSync(file);
-        const fileDate = stats.mtime.toISOString().split('T')[0];
-        return fileDate === todayStr;
+        try {
+          const content = fs.readFileSync(file, 'utf8');
+          const { frontMatter } = parseFrontMatter(content);
+          
+          if (frontMatter.created_at) {
+            const createdAt = new Date(frontMatter.created_at);
+            const include = createdAt >= twentyFourHoursAgo;
+            console.log(`DEBUG: File ${file} created at: ${createdAt.toISOString()}, include: ${include}`);
+            return include;
+          } else {
+            // Fallback to file modification time if no created_at
+            const stats = fs.statSync(file);
+            const include = stats.mtime >= twentyFourHoursAgo;
+            console.log(`DEBUG: File ${file} (no created_at) modified at: ${stats.mtime.toISOString()}, include: ${include}`);
+            return include;
+          }
+        } catch (error) {
+          console.error(`DEBUG: Error reading file ${file}:`, error.message);
+          return false;
+        }
       });
       
-      console.log(`Found ${allFiles.length} total files, filtered to ${filesToProcess.length} for today's digest.`);
+      console.log(`Found ${allFiles.length} total files, filtered to ${filesToProcess.length} for last 24 hours digest.`);
 
     } else if (digestType === 'weekly') {
       console.log(`Found ${filesToProcess.length} total files for the weekly digest.`);
@@ -59,7 +80,7 @@ async function sendDigest() {
 async function generateMessage(digestType, files) {
   if (files.length === 0) {
     if (digestType === 'daily') {
-      return '✅ Нет новых идей за сегодня';
+      return '✅ Нет новых идей за последние 24 часа';
     } else {
       return '✅ Очередь идей пуста';
     }
@@ -72,12 +93,18 @@ async function generateMessage(digestType, files) {
   
   let header;
   if (digestType === 'daily') {
-    header = `📅 *Sentidex Daily* - ${dateStr}`;
+    header = `📅 ${dateStr} *Sentidex Daily*`;
   } else { // 'weekly'
     header = `📊 *Sentidex Weekly* - неделя ${weekNum}`;
   }
   
-  let message = `${header}\nНайдено сообщений: ${files.length}`;
+  // Add message count to header in badge style
+  let message;
+  if (digestType === 'daily') {
+    message = `📅 ${dateStr} Sentidex Daily [${files.length}]`;
+  } else { // 'weekly'
+    message = `📊 Sentidex Weekly - неделя ${weekNum} [${files.length}]`;
+  }
   
   // Process each file
   for (let i = 0; i < files.length; i++) {
@@ -105,9 +132,10 @@ async function generateMessage(digestType, files) {
         entry += `\n   📤 ${frontMatter.source_info}`;
       }
       
-      // URL
+      // URL (escape underscores for Telegram Markdown)
       if (frontMatter.source_url && frontMatter.source_url !== '') {
-        entry += `\n   🔗 ${frontMatter.source_url}`;
+        const escapedUrl = frontMatter.source_url.replace(/_/g, '\\_');
+        entry += `\n   🔗 ${escapedUrl}`;
       }
       
       // Tags

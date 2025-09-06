@@ -13,6 +13,7 @@ async function sendDigest() {
     }
     
     console.log(`Generating ${digestType} digest...`);
+    console.log('DIGEST_TYPE environment variable:', process.env.DIGEST_TYPE);
     
     // Check if inbox exists
     if (!fs.existsSync('inbox')) {
@@ -27,18 +28,21 @@ async function sendDigest() {
     
     let filesToProcess = allFiles;
     
-    // Filter for daily digest (files modified today)
+    // Filter for daily digest (files modified in last 24 hours)
     if (digestType === 'daily') {
-      const today = new Date();
-      const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD
+      const now = new Date();
+      const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+      
+      console.log(`DEBUG: Current time: ${now.toISOString()}`);
+      console.log(`DEBUG: 24 hours ago: ${twentyFourHoursAgo.toISOString()}`);
       
       filesToProcess = allFiles.filter(file => {
         const stats = fs.statSync(file);
-        const fileDate = stats.mtime.toISOString().split('T')[0];
-        return fileDate === todayStr;
+        console.log(`DEBUG: File ${file} modified at: ${stats.mtime.toISOString()}, include: ${stats.mtime >= twentyFourHoursAgo}`);
+        return stats.mtime >= twentyFourHoursAgo;
       });
       
-      console.log(`Found ${allFiles.length} total files, filtered to ${filesToProcess.length} for today's digest.`);
+      console.log(`Found ${allFiles.length} total files, filtered to ${filesToProcess.length} for last 24 hours digest.`);
 
     } else if (digestType === 'weekly') {
       console.log(`Found ${filesToProcess.length} total files for the weekly digest.`);
@@ -59,7 +63,7 @@ async function sendDigest() {
 async function generateMessage(digestType, files) {
   if (files.length === 0) {
     if (digestType === 'daily') {
-      return '✅ Нет новых идей за сегодня';
+      return '✅ Нет новых идей за последние 24 часа';
     } else {
       return '✅ Очередь идей пуста';
     }

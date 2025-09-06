@@ -98,13 +98,12 @@ async function generateMessage(digestType, files) {
     header = `📊 *Sentidex Weekly* - неделя ${weekNum}`;
   }
   
-  // Add message count to header with proper pluralization
-  const messageWord = files.length === 1 ? 'message' : 'messages';
+  // Add message count to header in badge style
   let message;
   if (digestType === 'daily') {
-    message = `📅 ${dateStr} Sentidex Daily: ${files.length} ${messageWord}`;
+    message = `📅 ${dateStr} Sentidex Daily [${files.length}]`;
   } else { // 'weekly'
-    message = `📊 Sentidex Weekly - неделя ${weekNum}: ${files.length} ${messageWord}`;
+    message = `📊 Sentidex Weekly - неделя ${weekNum} [${files.length}]`;
   }
   
   // Process each file

@@ -86,19 +86,10 @@ async function generateMessage(digestType, files) {
     }
   }
   
-  // Header
+  // Generate header with message count in badge style
   const today = new Date();
   const dateStr = today.toLocaleDateString('ru-RU');
   const weekNum = getWeekNumber(today);
-  
-  let header;
-  if (digestType === 'daily') {
-    header = `📅 ${dateStr} *Sentidex Daily*`;
-  } else { // 'weekly'
-    header = `📊 *Sentidex Weekly* - неделя ${weekNum}`;
-  }
-  
-  // Add message count to header in badge style
   let message;
   if (digestType === 'daily') {
     message = `📅 ${dateStr} Sentidex Daily [${files.length}]`;

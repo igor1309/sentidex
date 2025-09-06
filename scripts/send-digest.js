@@ -28,7 +28,7 @@ async function sendDigest() {
     
     let filesToProcess = allFiles;
     
-    // Filter for daily digest (files modified in last 24 hours)
+    // Filter for daily digest (files created in last 24 hours)
     if (digestType === 'daily') {
       const now = new Date();
       const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
@@ -37,9 +37,26 @@ async function sendDigest() {
       console.log(`DEBUG: 24 hours ago: ${twentyFourHoursAgo.toISOString()}`);
       
       filesToProcess = allFiles.filter(file => {
-        const stats = fs.statSync(file);
-        console.log(`DEBUG: File ${file} modified at: ${stats.mtime.toISOString()}, include: ${stats.mtime >= twentyFourHoursAgo}`);
-        return stats.mtime >= twentyFourHoursAgo;
+        try {
+          const content = fs.readFileSync(file, 'utf8');
+          const { frontMatter } = parseFrontMatter(content);
+          
+          if (frontMatter.created_at) {
+            const createdAt = new Date(frontMatter.created_at);
+            const include = createdAt >= twentyFourHoursAgo;
+            console.log(`DEBUG: File ${file} created at: ${createdAt.toISOString()}, include: ${include}`);
+            return include;
+          } else {
+            // Fallback to file modification time if no created_at
+            const stats = fs.statSync(file);
+            const include = stats.mtime >= twentyFourHoursAgo;
+            console.log(`DEBUG: File ${file} (no created_at) modified at: ${stats.mtime.toISOString()}, include: ${include}`);
+            return include;
+          }
+        } catch (error) {
+          console.error(`DEBUG: Error reading file ${file}:`, error.message);
+          return false;
+        }
       });
       
       console.log(`Found ${allFiles.length} total files, filtered to ${filesToProcess.length} for last 24 hours digest.`);

@@ -1,6 +1,7 @@
 # Log
 
 ## 2025-09-06
+Update prompts based on ChatGPT review.
 Extract prompts from JavaScript constants to separate markdown files in PROMPTS subfolder for easier editing.
 Daily digest now properly filters messages from last 24 hours using `created_at` from front matter.
 

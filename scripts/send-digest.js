@@ -105,9 +105,10 @@ async function generateMessage(digestType, files) {
         entry += `\n   📤 ${frontMatter.source_info}`;
       }
       
-      // URL
+      // URL (escape underscores for Telegram Markdown)
       if (frontMatter.source_url && frontMatter.source_url !== '') {
-        entry += `\n   🔗 ${frontMatter.source_url}`;
+        const escapedUrl = frontMatter.source_url.replace(/_/g, '\\_');
+        entry += `\n   🔗 ${escapedUrl}`;
       }
       
       // Tags

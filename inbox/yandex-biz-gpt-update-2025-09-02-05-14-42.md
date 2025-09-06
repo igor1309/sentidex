@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 118
-timestamp: "2025-09-02T05:14:42.018Z"
+id: "mf82rh65p4ggvd45qk"
+created_at: "2025-09-02T05:14:42.018Z"
 source_info: "Метаверсище и ИИще"
 source_url: "https://t.me/cgevent/13347"
-forward_date: "2025-08-28T13:55:38.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Яндекс выпустил бизнес-ИИ YandexGPT 5.1 Pro с улучшенными ответами и снижением цены."
+tags: ["яндекс","ai","бизнес","gpt"]
+processed_at: "2025-09-06T09:41:55.757Z"
 ---
 
 **Яндекс накатил новую прошивку бизнес-ИИ.**

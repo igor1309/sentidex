@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 125
-timestamp: "2025-09-03T03:23:11.656Z"
+id: "mf82ry9jbs0co7utqv"
+created_at: "2025-09-03T03:23:11.656Z"
 source_info: "Метаверсище и ИИще"
 source_url: "https://t.me/cgevent/13397"
-forward_date: "2025-09-02T21:22:02.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Нашел свежий гайд от Гугла по генерации в Нанабанане, 6 принципов, примеры и код для API."
+tags: ["генерация","гайд","промпты","код","api"]
+processed_at: "2025-09-06T09:42:17.911Z"
 ---
 
 **Нашел свежий гайд от Гугла по генерации в Нанабанане**.

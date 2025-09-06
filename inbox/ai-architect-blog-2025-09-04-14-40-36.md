@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 132
-timestamp: "2025-09-04T14:40:36.184Z"
+id: "mf82ssusmsuk4vdp8t"
+created_at: "2025-09-04T14:40:36.184Z"
 source_info: "The AI Architect | AI Coding"
 source_url: "https://t.me/the_ai_architect/145"
-forward_date: "2025-09-04T14:13:01.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Смерджил эпик: AI-агент мигрировал бэкенд монорепозитории MongoDB→Postgres, реализуя слои от скелета до финала."
+tags: ["ai","migration","backend","monorepo","postgres"]
+processed_at: "2025-09-06T09:42:57.556Z"
 ---
 
 **Сегодня я смерджил эпик, который от А до Я написал AI-агент**

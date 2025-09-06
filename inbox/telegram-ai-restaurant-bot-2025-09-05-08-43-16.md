@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 135
-timestamp: "2025-09-05T08:43:16.886Z"
+id: "mf82syxl9ou8ccfygdi"
+created_at: "2025-09-05T08:43:16.886Z"
 source_info: "@egormk"
 source_url: ""
-forward_date: "2025-09-05T07:57:49.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Ищу Python разработчика для проекта AI агента: Telegram-бот для ресторанов, с RAG и чат-ботами."
+tags: ["python","ai","telegram","restaurant","rag"]
+processed_at: "2025-09-06T09:43:05.433Z"
 ---
 
 Всем привет! В поисках Python разработчика на проект по AI агенту (именно питон, n8n не подходит). 

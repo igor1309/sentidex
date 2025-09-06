@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 108
-timestamp: "2025-08-31T15:12:44.940Z"
+id: "mf82r1hx1umrisofewj"
+created_at: "2025-08-31T15:12:44.940Z"
 source_info: "Data Secrets"
 source_url: "https://t.me/data_secrets/7711"
-forward_date: "2025-08-28T18:01:22.000Z"
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: "mixed"
+summary: "OpenAI релизнули новую speech2speech модель gpt-realtime и Realtime API стал общедоступным."
+tags: ["openai","speech2speech","gptrealtime","realtimeapi"]
+processed_at: "2025-09-06T09:41:35.445Z"
 ---
 
 ⚡️ **OpenAI релизнули новую speech2speech модель gpt-realtime  и наконец сделали Realtime API общедоступным **

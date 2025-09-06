@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 131
-timestamp: "2025-09-04T10:14:22.833Z"
+id: "mf82sku5sxjrrc1nk1d"
+created_at: "2025-09-04T10:14:22.833Z"
 source_info: "НейроProfit | Соня Pro Ai"
 source_url: "https://t.me/NeuralProfit/1935"
-forward_date: "2025-09-04T09:47:05.000Z"
 has_media: true
-media_type: "video"
-forward_protected: false
+language: "mixed"
+summary: "ИИ-агент Opus для монтажа вирусных роликов с автоматическим озвучиванием и доступом по листу ожидания."
+tags: ["ai","montazh","viral","video"]
+processed_at: "2025-09-06T09:42:47.165Z"
 ---
 
 **ИИ-агент для монтажа вирусных роликов  

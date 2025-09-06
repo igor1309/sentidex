@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 119
-timestamp: "2025-09-02T07:37:20.428Z"
+id: "mf82ro4zjtovbnbneeb"
+created_at: "2025-09-02T07:37:20.428Z"
 source_info: "The AI Architect | AI Coding"
 source_url: "https://t.me/the_ai_architect/139"
-forward_date: "2025-09-02T06:13:04.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Смотреть, как разработчик требует исправлять AI через follow-up, похоже на крик на сломанный принтер."
+tags: ["ai","prompts","debugging","prompting","workflow"]
+processed_at: "2025-09-06T09:42:04.787Z"
 ---
 
 Смотреть, как разработчик пытается исправить результат AI через "follow-up" сообщения — это как смотреть, как кто-то кричит на сломанный принтер.

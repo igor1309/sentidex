@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 112
-timestamp: "2025-09-01T11:35:38.227Z"
+id: "mf82ra1iqxywq0cr6kr"
+created_at: "2025-09-01T11:35:38.227Z"
 source_info: "AI Product | Igor Akimov"
 source_url: "https://t.me/ai_product/1509"
-forward_date: "2025-08-29T19:11:55.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Гугл раскатил Gemini и AI-инфраструктуру в Google Distributed Cloud, можно разворачивать на датацентрах оффлайн (air-gapped)."
+tags: ["ai","gemini","google","onprem","airgapped"]
+processed_at: "2025-09-06T09:41:46.518Z"
 ---
 
 Прикольно, гугл раскатил Gemini и всю остальную AI инфраструктуру в Google Distributed Cloud

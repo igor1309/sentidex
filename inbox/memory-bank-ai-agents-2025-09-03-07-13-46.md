@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 129
-timestamp: "2025-09-03T07:13:46.463Z"
+id: "mf82sdx61v398t06xxxh"
+created_at: "2025-09-03T07:13:46.463Z"
 source_info: "The AI Architect | AI Coding"
 source_url: "https://t.me/the_ai_architect/142"
-forward_date: "2025-09-03T06:46:01.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "AI-агенты страдают амнезией; предлагаем внешнюю память Memory Bank для контекста и правил."
+tags: ["память","агенты","контекст","документация"]
+processed_at: "2025-09-06T09:42:38.202Z"
 ---
 
 **Ваш AI-агент — герой фильма «Помни»? Как создать для него память**

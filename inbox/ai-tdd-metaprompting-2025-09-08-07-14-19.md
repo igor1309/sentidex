@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 165
-timestamp: "2025-09-08T07:14:19.783Z"
+id: "mfat6r5pwii33vcm6y"
+created_at: "2025-09-08T07:14:19.783Z"
 source_info: "AI-Driven Development. Родион Мостовой"
 source_url: "https://t.me/ai_driven/143"
-forward_date: "2025-09-08T06:32:46.000Z"
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: "mixed"
+summary: "AI‑TDD с метапромптингом и SGR повышает точность кода, используя цепочку мыслей и отладочные данные."
+tags: ["aitdd","metaprompting","sgr","llm"]
+processed_at: "2025-09-08T07:37:10.910Z"
 ---
 
 **SGR + AI Test-Driven Development + Metaprompting**

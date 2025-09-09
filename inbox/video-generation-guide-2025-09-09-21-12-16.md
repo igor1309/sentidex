@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 170
-timestamp: "2025-09-09T21:12:16.987Z"
+id: "mfd2k5janb2gthgawm"
+created_at: "2025-09-09T21:12:16.987Z"
 source_info: "НейроProfit | Соня Pro Ai"
 source_url: "https://t.me/NeuralProfit/1941"
-forward_date: "2025-09-09T11:55:00.000Z"
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: "mixed"
+summary: "Alibaba выпустил бесплатный учебник по видеогенерации с примерами промптов."
+tags: ["videogen","prompts","alibaba"]
+processed_at: "2025-09-09T21:35:04.966Z"
 ---
 
 **Бесплатный гайд по видеогенерации

@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 174
-timestamp: "2025-09-10T16:43:49.554Z"
+id: "mfe8lxmp6qjlse19rk6"
+created_at: "2025-09-10T16:43:49.554Z"
 source_info: "Силиконовый Мешок"
 source_url: "https://t.me/prompt_design/1599"
-forward_date: "2025-09-10T16:15:46.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Рекомендую использовать Community Nodes в n8n для эффективного скрапинга и анализа сайтов"
+tags: ["n8n","communitynodes","scraping","apify","pagespeed"]
+processed_at: "2025-09-10T17:12:11.905Z"
 ---
 
 **Комьюнити-ноды в n8n**

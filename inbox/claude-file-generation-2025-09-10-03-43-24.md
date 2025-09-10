@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 171
-timestamp: "2025-09-10T03:43:24.859Z"
+id: "mfdgwwrebyyq9m28s1"
+created_at: "2025-09-10T03:43:24.859Z"
 source_info: "Refat Talks: Tech & AI"
 source_url: "https://t.me/nobilix/157"
-forward_date: "2025-09-09T20:48:21.000Z"
 has_media: true
-media_type: "video"
-forward_protected: false
+language: "mixed"
+summary: "Claude теперь создает и редактирует Excel, Word и PowerPoint файлы с помощью Python и JS"
+tags: ["claude","filegen","python","excel","sandbox"]
+processed_at: "2025-09-10T04:16:54.747Z"
 ---
 
 🤩 Claude научился создавать и редактировать реальные файлы: excel, word, powerpoint - мой детальный обзор

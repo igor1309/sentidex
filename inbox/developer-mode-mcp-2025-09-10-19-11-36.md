@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 176
-timestamp: "2025-09-10T19:11:36.169Z"
+id: "mfedqcu6fmr1albpd"
+created_at: "2025-09-10T19:11:36.169Z"
 source_info: "AI Product | Igor Akimov"
 source_url: "https://t.me/ai_product/1531"
-forward_date: "2025-09-10T18:51:04.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "OpenAI выпустил MCP-клиент с режимом разработчика только для платных пользователей."
+tags: ["mcp","developermode","openai"]
+processed_at: "2025-09-10T19:35:36.318Z"
 ---
 
 О, OpenAI наконец выкатили MCP-клиент, но "только для разработчиков", типа это небезопасно. Назвала Developer mode. 

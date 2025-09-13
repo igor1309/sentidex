@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 187
-timestamp: "2025-09-13T21:10:46.785Z"
+id: "mfisbobyqvc2j5871v7"
+created_at: "2025-09-13T21:10:46.785Z"
 source_info: "Константин Доронин"
 source_url: "https://t.me/kdoronin_blog/946"
-forward_date: "2025-09-13T20:30:09.000Z"
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: "mixed"
+summary: "Кейсы применения Graphiti, включающие память проекта с помощью MCP и Cursor."
+tags: ["graphiti","cursor","mcp","memory","project"]
+processed_at: "2025-09-13T21:35:10.318Z"
 ---
 
 **Про кейсы применения Graphiti. 

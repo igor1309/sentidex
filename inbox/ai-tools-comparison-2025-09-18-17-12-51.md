@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 205
-timestamp: "2025-09-18T17:12:51.631Z"
+id: "mfpp1rlvlp7xvdy7d4k"
+created_at: "2025-09-18T17:12:51.631Z"
 source_info: "Силиконовый Мешок"
 source_url: "https://t.me/prompt_design/1623"
-forward_date: "2025-09-18T15:37:02.000Z"
 has_media: false
-media_type: "none"
-forward_protected: false
+language: "mixed"
+summary: "Сравнение популярных ИИ‑моделей по функциям, интеграции и стоимости, с рекомендациями пользователя"
+tags: ["aitools","comparison","features","integration","cost"]
+processed_at: "2025-09-18T17:37:52.387Z"
 ---
 
 Главный вопрос вопрос от тех, кто только начинает погружаться в мир ИИ, звучит так: [кому платить двадцатку?](https://t.me/prompt_design/1538) Ну или какую ИИ-модель выбрать под свои задачи. Я всегда рекомендую начать с Perplexity - она [не дорогая](https://plati.market/itm/5034113?ai=1361021) и там можно протестировать все модели сразу, чтобы определиться. Ну а если кратко:

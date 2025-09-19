@@ -1,13 +1,13 @@
 ---
-raw_message: true
-message_id: 209
-timestamp: "2025-09-19T13:04:00.205Z"
+id: "mfqw3089k6yg93w6cua"
+created_at: "2025-09-19T13:04:00.205Z"
 source_info: "НейроProfit | Соня Pro AI"
 source_url: "https://t.me/NeuralProfit/1965"
-forward_date: "2025-09-19T12:44:22.000Z"
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: "mixed"
+summary: "Теперь в ChatGPT можно подключать сервисы по MCP в режиме Developer Mode"
+tags: ["mcp","chatgpt","developer","connectors","openai"]
+processed_at: "2025-09-19T13:42:33.705Z"
 ---
 
 📱 **В ChatGPT теперь можно подключать разные сервисы по MCP.

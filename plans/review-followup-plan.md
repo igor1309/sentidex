@@ -7,10 +7,12 @@
 ## 2. Harden Front Matter Serialization
 - Update `createFrontMatterString` to escape quotes/newlines or switch to a YAML library.
 - Re-run parsing helpers to confirm summaries and titles with punctuation round-trip correctly.
+- [ ] Guard `createFrontMatterString` against embedded quotes/newlines returned by AI so rendered front matter stays valid YAML.
 
 ## 3. Sanitize AI-Derived Filenames
 - Normalize AI titles before use (kebab-case, strip unsafe characters).
 - Add collision fallback when the target filename already exists in `inbox/`.
+- [ ] Sanitize `aiResults.title` before composing filenames so unexpected characters cannot break writes or create nested paths.
 
 ## 4. Rate-Limit Aware Retries
 - Introduce a decorator-style helper that wraps provider calls to centralize retry/delay handling across OpenRouter, OpenAI, and future providers.

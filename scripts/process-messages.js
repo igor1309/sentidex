@@ -91,7 +91,15 @@ async function processFile(inboxPath) {
   }
   
   // AI Enrichment Call
-  const aiResults = await getAIEnrichment(bodyContent);
+  let aiResults;
+  try {
+    aiResults = await getAIEnrichment(bodyContent);
+    validateAIResults(aiResults);
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : String(error);
+    console.error(`AI enrichment failed for ${inboxPath}: ${reason}`);
+    throw error;
+  }
   
   // Create enriched front matter
   const enrichedFrontMatter = {
@@ -251,6 +259,26 @@ function createFrontMatterString(frontMatter) {
   
   result += '---';
   return result;
+}
+
+function validateAIResults(results) {
+  if (!results || typeof results !== 'object') {
+    throw new Error('Empty AI result');
+  }
+
+  const { title, summary, tags } = results;
+
+  if (!title || typeof title !== 'string') {
+    throw new Error('AI result missing title');
+  }
+
+  if (!summary || typeof summary !== 'string') {
+    throw new Error('AI result missing summary');
+  }
+
+  if (!Array.isArray(tags)) {
+    throw new Error('AI result missing tags array');
+  }
 }
 
 // Run the processing

@@ -2,6 +2,7 @@
 
 ## 2025-09-20
 
+Sort messages in digest.
 Fix weekly header, remove bold summary formatting.
 Refine the user prompt.
 Improve AI processing resilience: keep failed files in `_inbox`, surface provider errors, and validate results explicitly.

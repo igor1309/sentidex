@@ -33,3 +33,7 @@ Telegram-based message processing pipeline for content curation and AI-enhanced 
 ## Usage
 
 Forward messages to SentidexBot @Telegram using it as `inbox` address.
+
+## Roadmap
+
+See `docs/roadmap.md` for the upcoming improvements ordered by complexity.

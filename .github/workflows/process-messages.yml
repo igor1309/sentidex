@@ -66,12 +66,6 @@ jobs:
           set -e
           node scripts/process-messages.js
 
-      - name: Upload process logs
-        uses: actions/upload-artifact@v4
-        with:
-          name: process-logs
-          path: logs/process-messages.log
-
       - name: Commit processed files
         run: |
           set -e

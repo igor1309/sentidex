@@ -1,6 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
+function escapeMarkdown(text = '') {
+  return String(text).replace(/([_*\[\]()])/g, '\\$1');
+}
+
 async function sendDigest() {
   try {
     const digestType = process.env.DIGEST_TYPE || 'daily'; // 'daily' or 'weekly'
@@ -90,11 +94,11 @@ async function generateMessage(digestType, files) {
   const today = new Date();
   const dateStr = today.toLocaleDateString('ru-RU');
   const weekNum = getWeekNumber(today);
+  const countBadge = `\\[${files.length}\\]`;
   let message;
   if (digestType === 'daily') {
-    message = `📅 ${dateStr} *Sentidex Daily* [${files.length}]`;
+    message = `📅 ${dateStr} *Sentidex Daily* ${countBadge}`;
   } else { // 'weekly'
-    const countBadge = `\\[${files.length}]`;
     message = `📊 ${dateStr} *Sentidex Weekly* - неделя ${weekNum} ${countBadge}`;
   }
   
@@ -114,25 +118,25 @@ async function generateMessage(digestType, files) {
       
       // Summary
       if (frontMatter.summary) {
-        entry += `*${frontMatter.summary}*`;
+        entry += `*${escapeMarkdown(frontMatter.summary)}*`;
       } else {
-        entry += `*Идея ${path.basename(file, '.md')}*`;
+        entry += `*Идея ${escapeMarkdown(path.basename(file, '.md'))}*`;
       }
       
       // Source
       if (frontMatter.source_info) {
-        entry += `\n   📤 ${frontMatter.source_info}`;
+        entry += `\n   📤 ${escapeMarkdown(frontMatter.source_info)}`;
       }
       
-      // URL (escape underscores for Telegram Markdown)
+      // URL (escape Telegram Markdown control characters)
       if (frontMatter.source_url && frontMatter.source_url !== '') {
-        const escapedUrl = frontMatter.source_url.replace(/_/g, '\\_');
+        const escapedUrl = escapeMarkdown(frontMatter.source_url);
         entry += `\n   🔗 ${escapedUrl}`;
       }
       
       // Tags
       if (frontMatter.tags && Array.isArray(frontMatter.tags) && frontMatter.tags.length > 0) {
-        const tags = frontMatter.tags.map(tag => `#${tag}`).join(' ');
+        const tags = frontMatter.tags.map(tag => `#${escapeMarkdown(tag)}`).join(' ');
         entry += `\n   🏷 ${tags}`;
       }
       
@@ -251,8 +255,7 @@ async function sendTelegram(botToken, chatId, message) {
       console.log('Retrying without Markdown...');
       const plainMessage = message
         .replace(/\*/g, '')
-        .replace(/\\_/g, '_')
-        .replace(/\\\[/g, '[');
+        .replace(/\\([_\[\]\(\)])/g, '$1');
 
       const paramsNoMarkdown = new URLSearchParams({
         chat_id: chatId,

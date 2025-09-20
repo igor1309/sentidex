@@ -27,21 +27,37 @@ async function processMessages() {
     }
     
     let processedCount = 0;
+    let duplicateCount = 0;
+    let failedCount = 0;
     
     for (const filename of inboxFiles) {
       const inboxPath = path.join('_inbox', filename);
       console.log(`Processing file: ${filename}`);
       
       try {
-        await processFile(inboxPath);
-        processedCount++;
+        const result = await processFile(inboxPath);
+
+        if (result === 'processed') {
+          processedCount++;
+        } else if (result === 'duplicate') {
+          duplicateCount++;
+        } else if (result === 'failed') {
+          failedCount++;
+        }
       } catch (error) {
         console.error(`Error processing ${filename}:`, error.message);
+        failedCount++;
         // Continue with other files
       }
     }
     
     console.log(`Successfully processed ${processedCount} files`);
+    if (duplicateCount > 0) {
+      console.log(`Detected ${duplicateCount} duplicates`);
+    }
+    if (failedCount > 0) {
+      console.log(`Left ${failedCount} files in _inbox after AI failures`);
+    }
     
   } catch (error) {
     console.error('Error in message processing:', error);
@@ -86,7 +102,7 @@ async function processFile(inboxPath) {
 
       fs.unlinkSync(inboxPath);
       console.log(`Deleted raw duplicate file: ${inboxPath}`);
-      return;
+      return 'duplicate';
     }
   }
   
@@ -98,7 +114,7 @@ async function processFile(inboxPath) {
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
     console.error(`AI enrichment failed for ${inboxPath}: ${reason}`);
-    throw error;
+    return 'failed';
   }
   
   // Create enriched front matter
@@ -135,6 +151,7 @@ async function processFile(inboxPath) {
   // Delete original file from _inbox
   fs.unlinkSync(inboxPath);
   console.log(`Deleted original file: ${inboxPath}`);
+  return 'processed';
 }
 
 function findOriginalBySourceUrl(url, directory) {

@@ -4,6 +4,7 @@
 const { getEnrichment: getOpenAIEnrichment } = require('./openai.js');
 const { getEnrichment: getOpenRouterEnrichment } = require('./openrouter.js');
 const { getEnrichment: getMockEnrichment } = require('./mockai.js');
+const { getEnrichment: getFailingMockEnrichment } = require('./failing-mockai.js');
 
 /**
  * Factory function that creates an AI enrichment provider based on environment configuration.
@@ -16,6 +17,9 @@ function createAIEnrichmentProvider() {
   switch (AI_PROVIDER) {
     case 'mockai':
       return getMockEnrichment;
+
+    case 'failing-mockai':
+      return getFailingMockEnrichment;
 
     case 'openai':
       return getOpenAIEnrichment;

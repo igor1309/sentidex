@@ -9,6 +9,7 @@ on:
         default: "mockai"
         type: choice
         options:
+          - failing-mockai
           - mockai
           - openai
           - openrouter

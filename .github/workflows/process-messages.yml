@@ -84,7 +84,7 @@ jobs:
             echo "No changes to commit"
           else
             git fetch origin trunk
-            git rebase origin/trunk
+            git rebase --autostash origin/trunk
             git commit -m "Process messages: _inbox → inbox"
             git push
           fi

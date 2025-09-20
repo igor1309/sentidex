@@ -41,10 +41,11 @@ jobs:
       - name: List files in workspace
         run: ls -R
 
-      - name: Setup Node.js
+      - name: Setup Node.js with npm cache
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
 
       - name: npm install with retries
         run: |

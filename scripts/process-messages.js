@@ -110,10 +110,19 @@ async function processFile(inboxPath) {
   let aiResults;
   try {
     aiResults = await getAIEnrichment(bodyContent);
-    validateAIResults(aiResults);
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
     console.error(`AI enrichment failed for ${inboxPath}: ${reason}`);
+    console.log(`Keeping original file in _inbox for manual retry: ${inboxPath}`);
+    return 'failed';
+  }
+
+  try {
+    validateAIResults(aiResults);
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : String(error);
+    console.error(`AI result validation failed for ${inboxPath}: ${reason}`);
+    console.log(`Keeping original file in _inbox for manual retry: ${inboxPath}`);
     return 'failed';
   }
   

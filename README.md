@@ -36,4 +36,4 @@ Forward messages to SentidexBot @Telegram using it as `inbox` address.
 
 ## Roadmap
 
-See `docs/roadmap.md` for the upcoming improvements ordered by complexity.
+See `plans/roadmap.md` for the upcoming improvements ordered by complexity.

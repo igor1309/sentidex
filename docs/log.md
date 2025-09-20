@@ -1,5 +1,11 @@
 # Log
 
+## 2025-09-20
+Improve AI processing resilience: keep failed files in `_inbox`, surface provider errors, and validate results explicitly.
+Switch default provider to OpenAI, added failing mock provider for testing.
+Fix git workflow to use explicit fetch+rebase instead of problematic pull fallback.
+Add review follow-up plan and roadmap.
+
 ## 2025-09-06
 Update prompts based on ChatGPT review.
 Extract prompts from JavaScript constants to separate markdown files in PROMPTS subfolder for easier editing.

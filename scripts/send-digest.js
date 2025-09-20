@@ -94,11 +94,11 @@ async function generateMessage(digestType, files) {
   const today = new Date();
   const dateStr = today.toLocaleDateString('ru-RU');
   const weekNum = getWeekNumber(today);
-  const countBadge = `\\[${files.length}\\]`;
   let message;
   if (digestType === 'daily') {
-    message = `📅 ${dateStr} *Sentidex Daily* ${countBadge}`;
+    message = `📅 ${dateStr} *Sentidex Daily* [${files.length}]`;
   } else { // 'weekly'
+    const countBadge = `\\[${files.length}]`;
     message = `📊 ${dateStr} *Sentidex Weekly* - неделя ${weekNum} ${countBadge}`;
   }
   

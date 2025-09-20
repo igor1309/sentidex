@@ -94,7 +94,7 @@ async function generateMessage(digestType, files) {
   if (digestType === 'daily') {
     message = `📅 ${dateStr} Sentidex Daily [${files.length}]`;
   } else { // 'weekly'
-    message = `📊 Sentidex Weekly - неделя ${weekNum} [${files.length}]`;
+    message = `📊 ${dateStr} Sentidex Weekly - неделя ${weekNum} [${files.length}]`;
   }
   
   // Process each file

@@ -118,9 +118,9 @@ async function generateMessage(digestType, files) {
       
       // Summary
       if (frontMatter.summary) {
-        entry += `*${escapeMarkdown(frontMatter.summary)}*`;
+        entry += `${escapeMarkdown(frontMatter.summary)}`;
       } else {
-        entry += `*Идея ${escapeMarkdown(path.basename(file, '.md'))}*`;
+        entry += `Идея ${escapeMarkdown(path.basename(file, '.md'))}`;
       }
       
       // Source

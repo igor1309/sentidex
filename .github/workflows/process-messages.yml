@@ -39,7 +39,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: List files in workspace
-        run: ls -R
+        run: |
+          set -e
+          ls -R
 
       - name: Setup Node.js with npm cache
         uses: actions/setup-node@v4
@@ -49,6 +51,7 @@ jobs:
 
       - name: npm install with retries
         run: |
+          set -e
           for i in {1..5}; do
             npm install && break || sleep 10
           done
@@ -59,10 +62,13 @@ jobs:
           AI_PROVIDER: ${{ inputs.ai_provider }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPEN_ROUTER_GPT_OSS_20B_API_KEY: ${{ secrets.OPEN_ROUTER_GPT_OSS_20B_API_KEY }}
-        run: node scripts/process-messages.js
+        run: |
+          set -e
+          node scripts/process-messages.js
 
       - name: Commit processed files
         run: |
+          set -e
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 

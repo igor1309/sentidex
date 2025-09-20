@@ -83,7 +83,8 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git pull --rebase origin trunk || git pull origin trunk
+            git fetch origin trunk
+            git rebase origin/trunk
             git commit -m "Process messages: _inbox → inbox"
             git push
           fi

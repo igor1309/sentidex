@@ -29,7 +29,8 @@ async function sendDigest() {
     const allFiles = fs.readdirSync('inbox')
       .filter(f => f.endsWith('.md') && !f.startsWith('DUPL_'))
       .map(f => path.join('inbox', f));
-    
+
+    const fileMetaCache = new Map();
     let filesToProcess = allFiles;
     
     // Filter for daily digest (files created in last 24 hours)
@@ -42,23 +43,17 @@ async function sendDigest() {
       
       filesToProcess = allFiles.filter(file => {
         try {
-          const content = fs.readFileSync(file, 'utf8');
-          const { frontMatter } = parseFrontMatter(content);
-          
-          if (frontMatter.created_at) {
-            const createdAt = new Date(frontMatter.created_at);
-            const include = createdAt >= twentyFourHoursAgo;
-            console.log(`DEBUG: File ${file} created at: ${createdAt.toISOString()}, include: ${include}`);
-            return include;
-          } else {
-            // Fallback to file modification time if no created_at
-            const stats = fs.statSync(file);
-            const include = stats.mtime >= twentyFourHoursAgo;
-            console.log(`DEBUG: File ${file} (no created_at) modified at: ${stats.mtime.toISOString()}, include: ${include}`);
-            return include;
+          const meta = getFileMetadata(file, fileMetaCache);
+          if (!meta || !meta.createdAt) {
+            console.log(`DEBUG: File ${file} has no created_at metadata.`);
+            return false;
           }
+
+          const include = meta.createdAt >= twentyFourHoursAgo;
+          console.log(`DEBUG: File ${file} created at: ${meta.createdAt.toISOString()}, include: ${include}`);
+          return include;
         } catch (error) {
-          console.error(`DEBUG: Error reading file ${file}:`, error.message);
+          console.error(`DEBUG: Error reading metadata for ${file}:`, error.message);
           return false;
         }
       });
@@ -69,8 +64,17 @@ async function sendDigest() {
       console.log(`Found ${filesToProcess.length} total files for the weekly digest.`);
     }
     
+    // Sort by created_at descending
+    filesToProcess = filesToProcess.slice().sort((a, b) => {
+      const metaA = getFileMetadata(a, fileMetaCache);
+      const metaB = getFileMetadata(b, fileMetaCache);
+      const timeA = metaA && metaA.createdAt ? metaA.createdAt.getTime() : 0;
+      const timeB = metaB && metaB.createdAt ? metaB.createdAt.getTime() : 0;
+      return timeB - timeA;
+    });
+
     // Generate message from the filtered list of files
-    const message = await generateMessage(digestType, filesToProcess);
+    const message = await generateMessage(digestType, filesToProcess, fileMetaCache);
     
     // Send to Telegram
     await sendTelegram(botToken, chatId, message);
@@ -81,7 +85,7 @@ async function sendDigest() {
   }
 }
 
-async function generateMessage(digestType, files) {
+async function generateMessage(digestType, files, fileMetaCache = new Map()) {
   if (files.length === 0) {
     if (digestType === 'daily') {
       return '✅ Нет новых идей за последние 24 часа';
@@ -108,9 +112,15 @@ async function generateMessage(digestType, files) {
     console.log(`Processing file ${i + 1}/${files.length}: ${file}`);
     
     try {
-      const content = fs.readFileSync(file, 'utf8');
-      const { frontMatter, bodyContent } = parseFrontMatter(content);
-      
+      const meta = fileMetaCache.get(file) || getFileMetadata(file, fileMetaCache);
+      if (!meta) {
+        console.log(`DEBUG: Skipping file ${file} due to missing metadata.`);
+        continue;
+      }
+
+      const frontMatter = meta.frontMatter || {};
+      const bodyContent = meta.bodyContent || '';
+
       console.log('Parsed front matter:', JSON.stringify(frontMatter, null, 2));
       
       // Build entry
@@ -223,6 +233,44 @@ function parseFrontMatter(content) {
     frontMatter,
     bodyContent: bodyLines.join('\n').trim()
   };
+}
+
+function getFileMetadata(file, cache) {
+  if (cache.has(file)) {
+    return cache.get(file);
+  }
+
+  try {
+    const content = fs.readFileSync(file, 'utf8');
+    const parsed = parseFrontMatter(content);
+
+    let createdAt;
+    if (parsed.frontMatter && parsed.frontMatter.created_at) {
+      const dt = new Date(parsed.frontMatter.created_at);
+      if (!Number.isNaN(dt.getTime())) {
+        createdAt = dt;
+      }
+    }
+
+    if (!createdAt) {
+      const stats = fs.statSync(file);
+      createdAt = stats.mtime;
+    }
+
+    const meta = {
+      frontMatter: parsed.frontMatter || {},
+      bodyContent: parsed.bodyContent || '',
+      createdAt,
+    };
+
+    cache.set(file, meta);
+    return meta;
+
+  } catch (error) {
+    console.error(`DEBUG: Failed to load metadata for ${file}:`, error.message);
+    cache.set(file, null);
+    return null;
+  }
 }
 
 async function sendTelegram(botToken, chatId, message) {

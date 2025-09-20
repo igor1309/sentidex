@@ -2,6 +2,7 @@
 
 ## 2025-09-20
 
+Fix weekly header, remove bold summary formatting.
 Refine the user prompt.
 Improve AI processing resilience: keep failed files in `_inbox`, surface provider errors, and validate results explicitly.
 Switch default provider to OpenAI, added failing mock provider for testing.

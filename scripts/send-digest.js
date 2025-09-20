@@ -92,9 +92,10 @@ async function generateMessage(digestType, files) {
   const weekNum = getWeekNumber(today);
   let message;
   if (digestType === 'daily') {
-    message = `📅 ${dateStr} Sentidex Daily [${files.length}]`;
+    message = `📅 ${dateStr} *Sentidex Daily* [${files.length}]`;
   } else { // 'weekly'
-    message = `📊 ${dateStr} Sentidex Weekly - неделя ${weekNum} [${files.length}]`;
+    const countBadge = `\\[${files.length}]`;
+    message = `📊 ${dateStr} *Sentidex Weekly* - неделя ${weekNum} ${countBadge}`;
   }
   
   // Process each file
@@ -248,9 +249,14 @@ async function sendTelegram(botToken, chatId, message) {
       
       // Try without Markdown
       console.log('Retrying without Markdown...');
+      const plainMessage = message
+        .replace(/\*/g, '')
+        .replace(/\\_/g, '_')
+        .replace(/\\\[/g, '[');
+
       const paramsNoMarkdown = new URLSearchParams({
         chat_id: chatId,
-        text: message.replace(/\*/g, '').replace(/\\_/g, '_')
+        text: plainMessage
       });
       
       const response2 = await fetch(url, {

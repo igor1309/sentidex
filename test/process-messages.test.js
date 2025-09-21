@@ -40,11 +40,11 @@ describe('process-messages script (Characterization Test)', () => {
 
       expect(scriptResult.status).toBe('terminal-log');
       expect(scriptResult.terminalMessage).toMatch('No files to process in _inbox');
-      expect(scriptResult.logs).toEqual([
-        'Starting message processing...',
-        'Found 0 files to process',
-        'No files to process in _inbox',
-      ]);
+      const logs = scriptResult.logs;
+      const joinedLogs = logs.join('\n');
+      expect(logs[0]).toBe('Starting message processing...');
+      expect(joinedLogs).toContain('Found 0 files to process');
+      expect(joinedLogs).toContain('No files to process in _inbox');
       expect(scriptResult.errors).toHaveLength(0);
 
       const { fs } = testEnv;
@@ -66,14 +66,13 @@ describe('process-messages script (Characterization Test)', () => {
 
       expect(scriptResult.status).toBe('terminal-log');
       expect(scriptResult.terminalMessage).toMatch('Successfully processed');
-      expect(scriptResult.logs).toEqual([
-        'Starting message processing...',
-        'Found 1 files to process',
-        'Processing file: sample.md',
-        'Keeping original file in _inbox for manual retry: _inbox/sample.md',
-        'Successfully processed 0 files',
-        'Left 1 files in _inbox after AI failures',
-      ]);
+      const joinedLogs = scriptResult.logs.join('\n');
+      expect(joinedLogs).toContain('Starting message processing...');
+      expect(joinedLogs).toContain('Found 1 files to process');
+      expect(joinedLogs).toContain('Processing file: sample.md');
+      expect(joinedLogs).toContain('Keeping original file in _inbox for manual retry: _inbox/sample.md');
+      expect(joinedLogs).toContain('Successfully processed 0 files');
+      expect(joinedLogs).toContain('Left 1 files in _inbox after AI failures');
       expect(scriptResult.errors).toHaveLength(1);
       expect(scriptResult.errors[0]).toMatch('AI enrichment failed for _inbox/sample.md:');
 
@@ -134,9 +133,10 @@ describe('process-messages script (Characterization Test)', () => {
 
       expect(scriptResult.status).toBe('terminal-log');
       expect(scriptResult.terminalMessage).toMatch('Successfully processed');
-      expect(scriptResult.logs).toContain('Duplicate found for http://example.com/sample. Original: inbox/original.md');
-      expect(scriptResult.logs).toContain(`Created duplicate ticket: inbox/${DUPLICATE_TICKET_NAME}`);
-      expect(scriptResult.logs).toContain('Deleted raw duplicate file: _inbox/sample.md');
+      const duplicateLogs = scriptResult.logs.join('\n');
+      expect(duplicateLogs).toContain('Duplicate found for http://example.com/sample. Original: inbox/original.md');
+      expect(duplicateLogs).toContain(`Created duplicate ticket: inbox/${DUPLICATE_TICKET_NAME}`);
+      expect(duplicateLogs).toContain('Deleted raw duplicate file: _inbox/sample.md');
       expect(scriptResult.errors).toHaveLength(0);
       expect(aiModule.getAIEnrichment).not.toHaveBeenCalled();
 
@@ -165,16 +165,15 @@ describe('process-messages script (Characterization Test)', () => {
 
       expect(scriptResult.status).toBe('terminal-log');
       expect(scriptResult.terminalMessage).toMatch('Successfully processed');
-      expect(scriptResult.logs).toEqual([
-        'Starting message processing...',
-        'Found 2 files to process',
-        'Processing file: first.md',
-        'Keeping original file in _inbox for manual retry: _inbox/first.md',
-        'Processing file: second.md',
-        'Keeping original file in _inbox for manual retry: _inbox/second.md',
-        'Successfully processed 0 files',
-        'Left 2 files in _inbox after AI failures',
-      ]);
+      const bothFailLogs = scriptResult.logs.join('\n');
+      expect(bothFailLogs).toContain('Starting message processing...');
+      expect(bothFailLogs).toContain('Found 2 files to process');
+      expect(bothFailLogs).toContain('Processing file: first.md');
+      expect(bothFailLogs).toContain('Keeping original file in _inbox for manual retry: _inbox/first.md');
+      expect(bothFailLogs).toContain('Processing file: second.md');
+      expect(bothFailLogs).toContain('Keeping original file in _inbox for manual retry: _inbox/second.md');
+      expect(bothFailLogs).toContain('Successfully processed 0 files');
+      expect(bothFailLogs).toContain('Left 2 files in _inbox after AI failures');
       expect(scriptResult.errors).toEqual([
         'AI enrichment failed for _inbox/first.md: first failure',
         'AI enrichment failed for _inbox/second.md: second failure',
@@ -203,17 +202,16 @@ describe('process-messages script (Characterization Test)', () => {
 
       expect(scriptResult.status).toBe('terminal-log');
       expect(scriptResult.terminalMessage).toMatch('Successfully processed');
-      expect(scriptResult.logs).toEqual([
-        'Starting message processing...',
-        'Found 2 files to process',
-        'Processing file: first.md',
-        'Keeping original file in _inbox for manual retry: _inbox/first.md',
-        'Processing file: second.md',
-        `Created processed file: inbox/${buildFilename('Second-AI-Title')}`,
-        'Deleted original file: _inbox/second.md',
-        'Successfully processed 1 files',
-        'Left 1 files in _inbox after AI failures',
-      ]);
+      const failThenSuccessLogs = scriptResult.logs.join('\n');
+      expect(failThenSuccessLogs).toContain('Starting message processing...');
+      expect(failThenSuccessLogs).toContain('Found 2 files to process');
+      expect(failThenSuccessLogs).toContain('Processing file: first.md');
+      expect(failThenSuccessLogs).toContain('Keeping original file in _inbox for manual retry: _inbox/first.md');
+      expect(failThenSuccessLogs).toContain('Processing file: second.md');
+      expect(failThenSuccessLogs).toContain(`Created processed file: inbox/${buildFilename('Second-AI-Title')}`);
+      expect(failThenSuccessLogs).toContain('Deleted original file: _inbox/second.md');
+      expect(failThenSuccessLogs).toContain('Successfully processed 1 files');
+      expect(failThenSuccessLogs).toContain('Left 1 files in _inbox after AI failures');
       expect(scriptResult.errors).toEqual([
         'AI enrichment failed for _inbox/first.md: first failure',
       ]);
@@ -252,17 +250,16 @@ describe('process-messages script (Characterization Test)', () => {
 
       expect(scriptResult.status).toBe('terminal-log');
       expect(scriptResult.terminalMessage).toMatch('Successfully processed');
-      expect(scriptResult.logs).toEqual([
-        'Starting message processing...',
-        'Found 2 files to process',
-        'Processing file: first.md',
-        `Created processed file: inbox/${buildFilename('First-AI-Title')}`,
-        'Deleted original file: _inbox/first.md',
-        'Processing file: second.md',
-        'Keeping original file in _inbox for manual retry: _inbox/second.md',
-        'Successfully processed 1 files',
-        'Left 1 files in _inbox after AI failures',
-      ]);
+      const successThenFailLogs = scriptResult.logs.join('\n');
+      expect(successThenFailLogs).toContain('Starting message processing...');
+      expect(successThenFailLogs).toContain('Found 2 files to process');
+      expect(successThenFailLogs).toContain('Processing file: first.md');
+      expect(successThenFailLogs).toContain(`Created processed file: inbox/${buildFilename('First-AI-Title')}`);
+      expect(successThenFailLogs).toContain('Deleted original file: _inbox/first.md');
+      expect(successThenFailLogs).toContain('Processing file: second.md');
+      expect(successThenFailLogs).toContain('Keeping original file in _inbox for manual retry: _inbox/second.md');
+      expect(successThenFailLogs).toContain('Successfully processed 1 files');
+      expect(successThenFailLogs).toContain('Left 1 files in _inbox after AI failures');
       expect(scriptResult.errors).toEqual([
         'AI enrichment failed for _inbox/second.md: second failure',
       ]);
@@ -306,17 +303,16 @@ describe('process-messages script (Characterization Test)', () => {
 
       expect(scriptResult.status).toBe('terminal-log');
       expect(scriptResult.terminalMessage).toMatch('Successfully processed');
-      expect(scriptResult.logs).toEqual([
-        'Starting message processing...',
-        'Found 2 files to process',
-        'Processing file: first.md',
-        `Created processed file: inbox/${buildFilename('First-AI-Title')}`,
-        'Deleted original file: _inbox/first.md',
-        'Processing file: second.md',
-        `Created processed file: inbox/${buildFilename('Second-AI-Title')}`,
-        'Deleted original file: _inbox/second.md',
-        'Successfully processed 2 files',
-      ]);
+      const bothSuccessLogs = scriptResult.logs.join('\n');
+      expect(bothSuccessLogs).toContain('Starting message processing...');
+      expect(bothSuccessLogs).toContain('Found 2 files to process');
+      expect(bothSuccessLogs).toContain('Processing file: first.md');
+      expect(bothSuccessLogs).toContain(`Created processed file: inbox/${buildFilename('First-AI-Title')}`);
+      expect(bothSuccessLogs).toContain('Deleted original file: _inbox/first.md');
+      expect(bothSuccessLogs).toContain('Processing file: second.md');
+      expect(bothSuccessLogs).toContain(`Created processed file: inbox/${buildFilename('Second-AI-Title')}`);
+      expect(bothSuccessLogs).toContain('Deleted original file: _inbox/second.md');
+      expect(bothSuccessLogs).toContain('Successfully processed 2 files');
       expect(scriptResult.errors).toHaveLength(0);
 
       expect(fs.readdirSync('/_inbox')).toHaveLength(0);

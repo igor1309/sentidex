@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { getAIEnrichment } = require('./services/ai.js');
+const frontMatterCodec = require('./adapters/frontMatterCodec');
 
 async function processMessages() {
   console.log('Starting message processing...');
@@ -69,7 +70,7 @@ async function processFile(inboxPath) {
   const content = fs.readFileSync(inboxPath, 'utf8');
   
   // Parse front matter and content
-  const { frontMatter, bodyContent } = parseFrontMatter(content);
+  const { frontMatter, bodyContent } = frontMatterCodec.parse(content);
   
   if (process.env.DEBUG === 'true') {
     console.log('Original front matter:', JSON.stringify(frontMatter, null, 2));
@@ -87,15 +88,16 @@ async function processFile(inboxPath) {
       const ticketFilename = `DUPL_${formatTimestamp(new Date())}.md`;
       const ticketPath = path.join('inbox', ticketFilename);
 
-      const ticketFrontMatter = createFrontMatterString({
-        id: generateId(),
-        created_at: new Date().toISOString(),
-        source_url: sourceUrl,
-        is_duplicate: true,
-        original_ref: originalFilename
+      const ticketContent = frontMatterCodec.stringify({
+        frontMatter: {
+          id: generateId(),
+          created_at: new Date().toISOString(),
+          source_url: sourceUrl,
+          is_duplicate: true,
+          original_ref: originalFilename,
+        },
+        bodyContent: `Дубликат, см. оригинал: ${originalFilename}`,
       });
-
-      const ticketContent = `${ticketFrontMatter}\n\nДубликат, см. оригинал: ${originalFilename}`;
 
       fs.writeFileSync(ticketPath, ticketContent, 'utf8');
       console.log(`Created duplicate ticket: ${ticketPath}`);
@@ -145,8 +147,10 @@ async function processFile(inboxPath) {
   const outboxPath = path.join('inbox', newFilename);
   
   // Create new content
-  const newFrontMatter = createFrontMatterString(enrichedFrontMatter);
-  const newContent = `${newFrontMatter}\n\n${bodyContent}`;
+  const newContent = frontMatterCodec.stringify({
+    frontMatter: enrichedFrontMatter,
+    bodyContent,
+  });
   
   // Write to inbox
   fs.writeFileSync(outboxPath, newContent, 'utf8');
@@ -181,71 +185,6 @@ function findOriginalBySourceUrl(url, directory) {
   return null;
 }
 
-function parseFrontMatter(content) {
-  const lines = content.split('\n');
-  const frontMatterLines = [];
-  const bodyLines = [];
-  
-  let inFrontMatter = false;
-  let frontMatterEnded = false;
-  
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    
-    if (line.trim() === '---') {
-      if (!inFrontMatter) {
-        inFrontMatter = true;
-        continue;
-      } else {
-        frontMatterEnded = true;
-        continue;
-      }
-    }
-    
-    if (inFrontMatter && !frontMatterEnded) {
-      frontMatterLines.push(line);
-    } else if (frontMatterEnded) {
-      bodyLines.push(line);
-    }
-  }
-  
-  // Parse YAML-like front matter
-  const frontMatter = {};
-  frontMatterLines.forEach(line => {
-    const colonIndex = line.indexOf(':');
-    if (colonIndex > 0) {
-      const key = line.substring(0, colonIndex).trim();
-      let value = line.substring(colonIndex + 1).trim();
-      
-      // Remove quotes
-      if ((value.startsWith('"') && value.endsWith('"')) || 
-          (value.startsWith("'") && value.endsWith("'"))) {
-        value = value.substring(1, value.length - 1);
-      }
-      
-      // Parse JSON arrays/objects
-      if (value.startsWith('[') || value.startsWith('{')) {
-        try {
-          value = JSON.parse(value);
-        } catch (e) {
-          // Keep as string if JSON parse fails
-        }
-      }
-      
-      // Parse booleans
-      if (value === 'true') value = true;
-      if (value === 'false') value = false;
-      
-      frontMatter[key] = value;
-    }
-  });
-  
-  return {
-    frontMatter,
-    bodyContent: bodyLines.join('\n').trim()
-  };
-}
-
 function detectLanguage(content) {
   // Simple language detection
   const hasRussian = /[а-яё]/i.test(content);
@@ -275,23 +214,6 @@ function formatTimestamp(value) {
     String(date.getUTCMinutes()).padStart(2, '0') + '-' +
     String(date.getUTCSeconds()).padStart(2, '0')
   );
-}
-
-function createFrontMatterString(frontMatter) {
-  let result = '---\n';
-  
-  for (const [key, value] of Object.entries(frontMatter)) {
-    if (typeof value === 'string') {
-      result += `${key}: "${value}"\n`;
-    } else if (Array.isArray(value) || typeof value === 'object') {
-      result += `${key}: ${JSON.stringify(value)}\n`;
-    } else {
-      result += `${key}: ${value}\n`;
-    }
-  }
-  
-  result += '---';
-  return result;
 }
 
 function validateAIResults(results) {

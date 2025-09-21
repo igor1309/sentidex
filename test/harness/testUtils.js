@@ -1,5 +1,6 @@
 const path = require('path');
 const { setupTestEnvironment } = require('./setupTestEnvironment');
+const frontMatterCodec = require('../../scripts/adapters/frontMatterCodec');
 
 const realFs = jest.requireActual('fs');
 
@@ -34,21 +35,20 @@ function buildFilename(title) {
 }
 
 function buildProcessedContent({ id, sourceUrl, summary, tags, body }) {
-  return [
-    '---',
-    `id: "${id}"`,
-    `created_at: "${FROZEN_ISO}"`,
-    'source_info: "unknown"',
-    `source_url: "${sourceUrl}"`,
-    'has_media: false',
-    'language: "en"',
-    `summary: "${summary}"`,
-    `tags: ${JSON.stringify(tags)}`,
-    `processed_at: "${FROZEN_ISO}"`,
-    '---',
-    '',
-    body,
-  ].join('\n');
+  return frontMatterCodec.stringify({
+    frontMatter: {
+      id,
+      created_at: FROZEN_ISO,
+      source_info: 'unknown',
+      source_url: sourceUrl,
+      has_media: false,
+      language: 'en',
+      summary,
+      tags,
+      processed_at: FROZEN_ISO,
+    },
+    bodyContent: body,
+  });
 }
 
 const EXPECTED_PROCESSED_FILENAME = buildFilename('Mocked-AI-Title-For-The-Article');

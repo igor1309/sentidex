@@ -3,6 +3,7 @@ const frontMatterCodec = require('./adapters/frontMatterCodec');
 const logger = require('./adapters/consoleLogger');
 const messageProcessor = require('./core/messageProcessor');
 const fileSystem = require('./adapters/fileSystem');
+const duplicateDetector = require('./adapters/duplicateDetector');
 
 async function processMessages() {
   logger.info('Starting message processing...');
@@ -80,7 +81,10 @@ async function processFile(inboxPath) {
 
   const sourceUrl = frontMatter.source_url;
   if (sourceUrl && sourceUrl !== '') {
-    const originalFilePath = findOriginalBySourceUrl(sourceUrl, 'inbox');
+    const originalFilePath = duplicateDetector.findOriginalBySourceUrl(sourceUrl, {
+      fileSystem,
+      directory: 'inbox',
+    });
 
     if (originalFilePath) {
       logger.info(`Duplicate found for ${sourceUrl}. Original: ${originalFilePath}`);
@@ -160,25 +164,6 @@ async function processFile(inboxPath) {
   logger.info(`Deleted original file: ${inboxPath}`);
   return 'processed';
 }
-
-function findOriginalBySourceUrl(url, directory) {
-  if (!fileSystem.exists(directory)) {
-    return null;
-  }
-  
-  const files = fileSystem.readdir(directory);
-  for (const file of files) {
-    if (file.endsWith('.md') && !file.startsWith('DUPL_')) {
-      const filePath = fileSystem.join(directory, file);
-      const content = fileSystem.readFile(filePath);
-      if (content.includes(`source_url: "${url}"`)) {
-        return filePath;
-      }
-    }
-  }
-  return null;
-}
-
 function formatTimestamp(value) {
   const date = value instanceof Date ? value : new Date(value);
   if (Number.isNaN(date.valueOf())) {

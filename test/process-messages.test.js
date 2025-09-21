@@ -19,6 +19,7 @@ const {
   loadFixture,
   DEFAULT_RANDOM_VALUES,
 } = require('./harness/testUtils');
+const frontMatterCodec = require('../scripts/adapters/frontMatterCodec');
 
 describe('process-messages script (Characterization Test)', () => {
   let testEnv;
@@ -199,12 +200,16 @@ describe('process-messages script (Characterization Test)', () => {
       expect(fs.existsSync('/_inbox/legacy.md')).toBe(false);
 
       const output = fs.readFileSync(path.join('/inbox', expectedFilename), 'utf8');
-      expect(output).toContain('id: "legacy-id"');
-      expect(output).toContain('created_at: "2023-05-01T10:00:00.000Z"');
-      expect(output).toContain(`summary: "${aiResponse.summary}"`);
-      expect(output).toContain(`tags: ${JSON.stringify(aiResponse.tags)}`);
-      expect(output).toContain('processed_at: "2025-09-21T09:34:07.837Z"');
-      expect(output).toContain('Legacy body content.');
+      const { frontMatter, bodyContent } = frontMatterCodec.parse(output);
+
+      expect(frontMatter).toMatchObject({
+        id: 'legacy-id',
+        created_at: '2023-05-01T10:00:00.000Z',
+        summary: aiResponse.summary,
+        processed_at: '2025-09-21T09:34:07.837Z',
+      });
+      expect(frontMatter.tags).toEqual(aiResponse.tags);
+      expect(bodyContent).toContain('Legacy body content.');
     });
 
     test('should create a DUPL ticket for a known source_url', async () => {
@@ -218,7 +223,8 @@ describe('process-messages script (Characterization Test)', () => {
         '',
         'Existing processed message',
       ].join('\n');
-      fs.writeFileSync('/inbox/original.md', originalContent, 'utf8');
+      const originalFilename = 'original.md';
+      fs.writeFileSync(`/inbox/${originalFilename}`, originalContent, 'utf8');
 
       const aiModule = require('../scripts/services/ai.js');
       aiModule.getAIEnrichment = mockAISuccess({ title: 'Unused', summary: 'Unused', tags: [] });
@@ -235,12 +241,18 @@ describe('process-messages script (Characterization Test)', () => {
       expect(aiModule.getAIEnrichment).not.toHaveBeenCalled();
 
       const inboxFiles = fs.readdirSync('/inbox').sort();
-      expect(inboxFiles).toEqual([DUPLICATE_TICKET_NAME, 'original.md']);
+      expect(inboxFiles).toEqual([DUPLICATE_TICKET_NAME, originalFilename]);
       expect(fs.existsSync('/_inbox/sample.md')).toBe(false);
 
       const duplContent = fs.readFileSync(path.join('/inbox', DUPLICATE_TICKET_NAME), 'utf8');
-      expect(duplContent).toContain('is_duplicate: true');
-      expect(duplContent).toContain('original_ref: "original.md"');
+      const duplicateTicket = frontMatterCodec.parse(duplContent);
+
+      expect(duplicateTicket.frontMatter).toMatchObject({
+        is_duplicate: true,
+        original_ref: originalFilename,
+        source_url: 'http://example.com/sample',
+      });
+      expect(duplicateTicket.bodyContent).toContain('Дубликат, см. оригинал');
     });
   });
 

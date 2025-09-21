@@ -1,6 +1,7 @@
 const path = require('path');
 const { setupTestEnvironment } = require('./harness/setupTestEnvironment');
 const { runScript } = require('./harness/runScript');
+const { mockAISuccess } = require('./harness/mockAI');
 
 const realFs = jest.requireActual('fs');
 const sampleMessagePath = path.join(__dirname, 'test-fixtures/sample-message.md');
@@ -30,13 +31,13 @@ describe('process-messages script (Characterization Test)', () => {
   test('should process a file correctly when required as a module', async () => {
     // --- ARRANGE ---
     // Require the AI service here to get the post-reset module
-    const { getAIEnrichment } = require('../scripts/services/ai.js');
+    const aiModule = require('../scripts/services/ai.js');
     const mockAiResponse = {
       title: "Mocked-AI-Title-For-The-Article",
       summary: "This is a mocked summary provided by the test.",
       tags: ["mocked", "ai", "test-harness"],
     };
-    getAIEnrichment.mockResolvedValue(mockAiResponse);
+    aiModule.getAIEnrichment = mockAISuccess(mockAiResponse);
 
     // --- ACT ---
     const scriptResult = await runScript();

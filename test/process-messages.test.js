@@ -11,10 +11,13 @@ const {
   FIRST_SOURCE_URL,
   SECOND_SOURCE_URL,
   createEmptyEnv,
+  createNoInboxEnv,
   createSingleFileEnv,
   createTwoFileEnv,
   buildFilename,
   buildProcessedContent,
+  loadFixture,
+  DEFAULT_RANDOM_VALUES,
 } = require('./harness/testUtils');
 
 describe('process-messages script (Characterization Test)', () => {
@@ -30,6 +33,22 @@ describe('process-messages script (Characterization Test)', () => {
     }
     jest.restoreAllMocks();
     testEnv = null;
+  });
+
+  describe('Setup guards', () => {
+    test('should log and exit when _inbox directory is missing', async () => {
+      testEnv = createNoInboxEnv();
+
+      const scriptResult = await runScript();
+
+      expect(scriptResult.status).toBe('terminal-log');
+      expect(scriptResult.terminalMessage).toMatch('No _inbox directory found');
+      const joinedLogs = scriptResult.logs.join('\n');
+      expect(joinedLogs).toContain('Starting message processing...');
+      expect(joinedLogs).toContain('No _inbox directory found');
+      const { fs } = testEnv;
+      expect(fs.existsSync('/_inbox')).toBe(false);
+    });
   });
 
   describe('Scenario 0: empty inbox', () => {
@@ -111,6 +130,81 @@ describe('process-messages script (Characterization Test)', () => {
 
       expect(outputContent).toBe(EXPECTED_PROCESSED_CONTENT);
       expect(fs.existsSync('/_inbox/sample.md')).toBe(false);
+    });
+
+    test('should create inbox directory when missing', async () => {
+      testEnv = createSingleFileEnv({ skipOutboxDir: true });
+      const { fs } = testEnv;
+      expect(fs.existsSync('/inbox')).toBe(false);
+
+      const aiModule = require('../scripts/services/ai.js');
+      aiModule.getAIEnrichment = mockAISuccess({
+        title: 'Mocked-AI-Title-For-The-Article',
+        summary: 'This is a mocked summary provided by the test.',
+        tags: ['mocked', 'ai', 'test-harness'],
+      });
+
+      const scriptResult = await runScript();
+
+      expect(scriptResult.status).toBe('terminal-log');
+      expect(fs.existsSync('/inbox')).toBe(true);
+      expect(fs.readdirSync('/inbox')).toEqual([EXPECTED_PROCESSED_FILENAME]);
+    });
+
+    test('should leave file in _inbox when AI result validation fails', async () => {
+      testEnv = createSingleFileEnv();
+
+      const aiModule = require('../scripts/services/ai.js');
+      aiModule.getAIEnrichment = mockAISuccess({
+        title: 'Invalid-AI-Title',
+        summary: 'Summary without tags',
+        tags: null,
+      });
+
+      const scriptResult = await runScript();
+
+      expect(scriptResult.status).toBe('terminal-log');
+      const errorLogs = scriptResult.errors.join('\n');
+      expect(errorLogs).toContain('AI result validation failed for _inbox/sample.md: AI result missing tags array');
+      const logs = scriptResult.logs.join('\n');
+      expect(logs).toContain('Keeping original file in _inbox for manual retry: _inbox/sample.md');
+
+      const { fs } = testEnv;
+      expect(fs.readdirSync('/_inbox')).toEqual(['sample.md']);
+      expect(fs.readdirSync('/inbox')).toHaveLength(0);
+    });
+
+    test('should preserve existing id and timestamp metadata', async () => {
+      const legacyFixture = loadFixture('pre-tagged-message.md');
+      testEnv = createSingleFileEnv({
+        inboxFiles: {
+          'legacy.md': legacyFixture,
+        },
+      });
+
+      const aiModule = require('../scripts/services/ai.js');
+      const aiResponse = {
+        title: 'Legacy-AI-Title',
+        summary: 'Legacy summary',
+        tags: ['legacy', 'ai'],
+      };
+      aiModule.getAIEnrichment = mockAISuccess(aiResponse);
+
+      const scriptResult = await runScript();
+      const { fs } = testEnv;
+
+      expect(scriptResult.status).toBe('terminal-log');
+      const expectedFilename = 'Legacy-AI-Title-2023-05-01-10-00-00.md';
+      expect(fs.readdirSync('/inbox')).toEqual([expectedFilename]);
+      expect(fs.existsSync('/_inbox/legacy.md')).toBe(false);
+
+      const output = fs.readFileSync(path.join('/inbox', expectedFilename), 'utf8');
+      expect(output).toContain('id: "legacy-id"');
+      expect(output).toContain('created_at: "2023-05-01T10:00:00.000Z"');
+      expect(output).toContain(`summary: "${aiResponse.summary}"`);
+      expect(output).toContain(`tags: ${JSON.stringify(aiResponse.tags)}`);
+      expect(output).toContain('processed_at: "2025-09-21T09:34:07.837Z"');
+      expect(output).toContain('Legacy body content.');
     });
 
     test('should create a DUPL ticket for a known source_url', async () => {
@@ -342,6 +436,47 @@ describe('process-messages script (Characterization Test)', () => {
 
       expect(firstContent).toBe(expectedFirstContent);
       expect(secondContent).toBe(expectedSecondContent);
+    });
+
+    test('should continue processing other files when reading one fails', async () => {
+      testEnv = createEmptyEnv({
+        inboxFiles: {
+          'problem.md': loadFixture('sample-message.md'),
+          'sample.md': loadFixture('sample-message.md'),
+        },
+        randomValues: DEFAULT_RANDOM_VALUES,
+      });
+
+      const memfs = require('memfs');
+      const originalReadFileSync = memfs.fs.readFileSync;
+      jest.spyOn(memfs.fs, 'readFileSync').mockImplementation((filePath, ...args) => {
+        if (String(filePath).includes('problem.md')) {
+          throw new Error('forced failure');
+        }
+        return originalReadFileSync.call(memfs.fs, filePath, ...args);
+      });
+
+      const aiModule = require('../scripts/services/ai.js');
+      aiModule.getAIEnrichment = mockAISuccess({
+        title: 'Mocked-AI-Title-For-The-Article',
+        summary: 'This is a mocked summary provided by the test.',
+        tags: ['mocked', 'ai', 'test-harness'],
+      });
+
+      const scriptResult = await runScript();
+      const { fs } = testEnv;
+
+      expect(scriptResult.status).toBe('terminal-log');
+      const joinedLogs = scriptResult.logs.join('\n');
+      expect(joinedLogs).toContain('Processing file: problem.md');
+      expect(joinedLogs).toContain('Processing file: sample.md');
+      expect(joinedLogs).toContain('Successfully processed 1 files');
+      expect(joinedLogs).toContain('Left 1 files in _inbox after AI failures');
+      const errorOutput = scriptResult.errors.join('\n');
+      expect(errorOutput).toContain('Error processing problem.md: forced failure');
+
+      expect(fs.readdirSync('/_inbox')).toEqual(['problem.md']);
+      expect(fs.readdirSync('/inbox')).toEqual([EXPECTED_PROCESSED_FILENAME]);
     });
   });
 });

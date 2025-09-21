@@ -52,7 +52,14 @@ function createRandomMock(randomValues) {
  * @returns {{ fs: import('fs'), vol: import('memfs').vol, restore: Function }} The memfs handles and cleanup hook.
  */
 function setupTestEnvironment(options = {}) {
-  const { inboxFiles = {}, cwd = '/', systemTime, randomValues } = options;
+  const {
+    inboxFiles = {},
+    cwd = '/',
+    systemTime,
+    randomValues,
+    skipInboxDir = false,
+    skipOutboxDir = false,
+  } = options;
 
   jest.resetModules();
 
@@ -71,8 +78,12 @@ function setupTestEnvironment(options = {}) {
 
   vol.reset();
 
-  vol.mkdirSync(INBOX_ROOT, { recursive: true });
-  vol.mkdirSync(OUTBOX_ROOT, { recursive: true });
+  if (!skipInboxDir) {
+    vol.mkdirSync(INBOX_ROOT, { recursive: true });
+  }
+  if (!skipOutboxDir) {
+    vol.mkdirSync(OUTBOX_ROOT, { recursive: true });
+  }
 
   for (const [relativePath, contents] of Object.entries(inboxFiles)) {
     const targetPath = path.posix.join(INBOX_ROOT, relativePath);

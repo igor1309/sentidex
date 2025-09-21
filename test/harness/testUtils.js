@@ -67,6 +67,14 @@ function createEmptyEnv(overrides = {}) {
   });
 }
 
+function createNoInboxEnv(overrides = {}) {
+  return setupTestEnvironment({
+    systemTime: FROZEN_ISO,
+    skipInboxDir: true,
+    ...overrides,
+  });
+}
+
 function createSingleFileEnv(overrides = {}) {
   const { inboxFiles, ...rest } = overrides;
   const baseOptions = {
@@ -121,8 +129,10 @@ module.exports = {
   FIRST_SOURCE_URL,
   SECOND_SOURCE_URL,
   createEmptyEnv,
+  createNoInboxEnv,
   createSingleFileEnv,
   createTwoFileEnv,
   buildFilename,
   buildProcessedContent,
+  loadFixture,
 };

@@ -1,24 +1,29 @@
 const path = require('path');
+const { setupTestEnvironment } = require('./harness/setupTestEnvironment');
+
+const realFs = jest.requireActual('fs');
+const sampleMessagePath = path.join(__dirname, 'test-fixtures/sample-message.md');
 
 describe('process-messages script (Characterization Test)', () => {
-  
+  let testEnv;
+
   beforeEach(() => {
-    jest.resetModules(); // Reset module cache before each test
-
-    // Set up memfs volume
-    const { vol } = require('memfs');
-    const realFs = jest.requireActual('fs');
-    const fixtureContent = realFs.readFileSync(path.join(__dirname, 'test-fixtures/sample-message.md'), 'utf8');
-    vol.mkdirSync('/_inbox', { recursive: true });
-    vol.mkdirSync('/inbox', { recursive: true });
-    vol.writeFileSync('/_inbox/sample.md', fixtureContent);
-
-    // Mock CWD
-    jest.spyOn(process, 'cwd').mockReturnValue('/');
+    const fixtureContent = realFs.readFileSync(sampleMessagePath, 'utf8');
+    testEnv = setupTestEnvironment({
+      inboxFiles: {
+        'sample.md': fixtureContent,
+      },
+      systemTime: '2025-09-21T09:34:07.837Z',
+      randomValues: 0.111111111,
+    });
   });
 
   afterEach(() => {
+    if (testEnv && typeof testEnv.restore === 'function') {
+      testEnv.restore();
+    }
     jest.restoreAllMocks();
+    testEnv = null;
   });
 
   test('should process a file correctly when required as a module', async () => {
@@ -56,7 +61,7 @@ describe('process-messages script (Characterization Test)', () => {
     await processingPromise; // Wait for the success log
 
     // --- ASSERT ---
-    const { fs } = require('memfs');
+    const { fs } = testEnv;
 
     const output = consoleSpy.mock.calls.map(args => args.join(' ')).join('\n');
     expect(output).toContain('Starting message processing...');

@@ -70,8 +70,8 @@ jobs:
       - name: Commit processed files
         run: |
           set -e
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "bot@sentidex.local"
+          git config --local user.name "Sentidex Process Bot"
 
           if [ -d "inbox" ]; then
             git add inbox/

@@ -2,6 +2,7 @@
 
 ## 2025-09-20
 
+Refactoring did introduced bugs.
 Sort messages in digest.
 Fix weekly header, remove bold summary formatting.
 Refine the user prompt.

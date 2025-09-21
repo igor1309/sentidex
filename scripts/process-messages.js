@@ -3,6 +3,7 @@ const path = require('path');
 const { getAIEnrichment } = require('./services/ai.js');
 const frontMatterCodec = require('./adapters/frontMatterCodec');
 const logger = require('./adapters/consoleLogger');
+const messageProcessor = require('./core/messageProcessor');
 
 async function processMessages() {
   logger.info('Starting message processing...');
@@ -91,7 +92,7 @@ async function processFile(inboxPath) {
 
       const ticketContent = frontMatterCodec.stringify({
         frontMatter: {
-          id: generateId(),
+          id: messageProcessor.generateId(),
           created_at: new Date().toISOString(),
           source_url: sourceUrl,
           is_duplicate: true,
@@ -129,18 +130,11 @@ async function processFile(inboxPath) {
     return 'failed';
   }
   
-  // Create enriched front matter
-  const enrichedFrontMatter = {
-    id: frontMatter.id || generateId(),
-    created_at: frontMatter.timestamp || new Date().toISOString(),
-    source_info: frontMatter.source_info || 'unknown',
-    source_url: frontMatter.source_url || '',
-    has_media: frontMatter.has_media || false,
-    language: detectLanguage(bodyContent),
-    summary: aiResults.summary,
-    tags: aiResults.tags,
-    processed_at: new Date().toISOString()
-  };
+  // Create enriched front matter using the pure core logic
+  const enrichedFrontMatter = messageProcessor.enrichMessage(
+    { frontMatter, bodyContent },
+    aiResults
+  );
   
   // Generate new filename with AI title and timestamp
   const timestamp = new Date(frontMatter.timestamp || Date.now());
@@ -184,21 +178,6 @@ function findOriginalBySourceUrl(url, directory) {
     }
   }
   return null;
-}
-
-function detectLanguage(content) {
-  // Simple language detection
-  const hasRussian = /[а-яё]/i.test(content);
-  const hasEnglish = /[a-z]/i.test(content);
-  
-  if (hasRussian && hasEnglish) return 'mixed';
-  if (hasRussian) return 'ru';
-  if (hasEnglish) return 'en';
-  return 'unknown';
-}
-
-function generateId() {
-  return Date.now().toString(36) + Math.random().toString(36).substr(2);
 }
 
 function formatTimestamp(value) {

@@ -2,14 +2,15 @@ const fs = require('fs');
 const path = require('path');
 const { getAIEnrichment } = require('./services/ai.js');
 const frontMatterCodec = require('./adapters/frontMatterCodec');
+const logger = require('./adapters/consoleLogger');
 
 async function processMessages() {
-  console.log('Starting message processing...');
+  logger.info('Starting message processing...');
   
   try {
     // Check if _inbox exists
     if (!fs.existsSync('_inbox')) {
-      console.log('No _inbox directory found');
+    logger.info('No _inbox directory found');
       return;
     }
     
@@ -20,10 +21,10 @@ async function processMessages() {
     
     // Get all files from _inbox
     const inboxFiles = fs.readdirSync('_inbox').filter(file => file.endsWith('.md'));
-    console.log(`Found ${inboxFiles.length} files to process`);
+    logger.info(`Found ${inboxFiles.length} files to process`);
     
     if (inboxFiles.length === 0) {
-      console.log('No files to process in _inbox');
+      logger.info('No files to process in _inbox');
       return;
     }
     
@@ -33,7 +34,7 @@ async function processMessages() {
     
     for (const filename of inboxFiles) {
       const inboxPath = path.join('_inbox', filename);
-      console.log(`Processing file: ${filename}`);
+    logger.info(`Processing file: ${filename}`);
       
       try {
         const result = await processFile(inboxPath);
@@ -46,22 +47,22 @@ async function processMessages() {
           failedCount++;
         }
       } catch (error) {
-        console.error(`Error processing ${filename}:`, error.message);
+        logger.error(`Error processing ${filename}: ${error.message}`);
         failedCount++;
         // Continue with other files
       }
     }
     
-    console.log(`Successfully processed ${processedCount} files`);
+    logger.info(`Successfully processed ${processedCount} files`);
     if (duplicateCount > 0) {
-      console.log(`Detected ${duplicateCount} duplicates`);
+      logger.info(`Detected ${duplicateCount} duplicates`);
     }
     if (failedCount > 0) {
-      console.log(`Left ${failedCount} files in _inbox after AI failures`);
+      logger.info(`Left ${failedCount} files in _inbox after AI failures`);
     }
     
   } catch (error) {
-    console.error('Error in message processing:', error);
+    logger.error('Error in message processing:', error);
     process.exit(1);
   }
 }
@@ -73,8 +74,8 @@ async function processFile(inboxPath) {
   const { frontMatter, bodyContent } = frontMatterCodec.parse(content);
   
   if (process.env.DEBUG === 'true') {
-    console.log('Original front matter:', JSON.stringify(frontMatter, null, 2));
-    console.log('Body content preview:', bodyContent.substring(0, 200) + '...');
+    logger.info(`Original front matter: ${JSON.stringify(frontMatter, null, 2)}`);
+    logger.info(`Body content preview: ${bodyContent.substring(0, 200)}...`);
   }
 
   const sourceUrl = frontMatter.source_url;
@@ -82,7 +83,7 @@ async function processFile(inboxPath) {
     const originalFilePath = findOriginalBySourceUrl(sourceUrl, 'inbox');
 
     if (originalFilePath) {
-      console.log(`Duplicate found for ${sourceUrl}. Original: ${originalFilePath}`);
+      logger.info(`Duplicate found for ${sourceUrl}. Original: ${originalFilePath}`);
 
       const originalFilename = path.basename(originalFilePath);
       const ticketFilename = `DUPL_${formatTimestamp(new Date())}.md`;
@@ -100,10 +101,10 @@ async function processFile(inboxPath) {
       });
 
       fs.writeFileSync(ticketPath, ticketContent, 'utf8');
-      console.log(`Created duplicate ticket: ${ticketPath}`);
+      logger.info(`Created duplicate ticket: ${ticketPath}`);
 
       fs.unlinkSync(inboxPath);
-      console.log(`Deleted raw duplicate file: ${inboxPath}`);
+      logger.info(`Deleted raw duplicate file: ${inboxPath}`);
       return 'duplicate';
     }
   }
@@ -114,8 +115,8 @@ async function processFile(inboxPath) {
     aiResults = await getAIEnrichment(bodyContent);
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
-    console.error(`AI enrichment failed for ${inboxPath}: ${reason}`);
-    console.log(`Keeping original file in _inbox for manual retry: ${inboxPath}`);
+    logger.error(`AI enrichment failed for ${inboxPath}: ${reason}`);
+    logger.info(`Keeping original file in _inbox for manual retry: ${inboxPath}`);
     return 'failed';
   }
 
@@ -123,8 +124,8 @@ async function processFile(inboxPath) {
     validateAIResults(aiResults);
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
-    console.error(`AI result validation failed for ${inboxPath}: ${reason}`);
-    console.log(`Keeping original file in _inbox for manual retry: ${inboxPath}`);
+    logger.error(`AI result validation failed for ${inboxPath}: ${reason}`);
+    logger.info(`Keeping original file in _inbox for manual retry: ${inboxPath}`);
     return 'failed';
   }
   
@@ -154,16 +155,16 @@ async function processFile(inboxPath) {
   
   // Write to inbox
   fs.writeFileSync(outboxPath, newContent, 'utf8');
-  console.log(`Created processed file: ${outboxPath}`);
+  logger.info(`Created processed file: ${outboxPath}`);
   
   if (process.env.DEBUG === 'true') {
-    console.log('AI Results:', aiResults);
-    console.log('New filename:', newFilename);
+    logger.info(`AI Results: ${JSON.stringify(aiResults)}`);
+    logger.info(`New filename: ${newFilename}`);
   }
   
   // Delete original file from _inbox
   fs.unlinkSync(inboxPath);
-  console.log(`Deleted original file: ${inboxPath}`);
+  logger.info(`Deleted original file: ${inboxPath}`);
   return 'processed';
 }
 

@@ -4,6 +4,7 @@
     "description": "Sentidex Processing Scripts",
     "private": true,
     "dependencies": {
+        "gray-matter": "^4.0.3",
         "openai": "^4.0.0"
     },
     "scripts": {

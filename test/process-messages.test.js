@@ -29,7 +29,6 @@ describe('process-messages script (Characterization Test)', () => {
   });
 
   test('should process a file correctly when required as a module', async () => {
-    // --- ARRANGE ---
     // Require the AI service here to get the post-reset module
     const aiModule = require('../scripts/services/ai.js');
     const mockAiResponse = {
@@ -39,10 +38,8 @@ describe('process-messages script (Characterization Test)', () => {
     };
     aiModule.getAIEnrichment = mockAISuccess(mockAiResponse);
 
-    // --- ACT ---
     const scriptResult = await runScript();
 
-    // --- ASSERT ---
     const { fs } = testEnv;
 
     expect(scriptResult.status).toBe('terminal-log');

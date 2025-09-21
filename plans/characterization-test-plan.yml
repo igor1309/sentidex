@@ -95,7 +95,6 @@ plan:
               });
 
               test('should process a file and exit, producing a predictable output', async () => {
-                // --- ARRANGE ---
                 const mockAiResponse = {
                   title: "Mocked-AI-Title-For-The-Article",
                   summary: "This is a mocked summary provided by the test.",
@@ -103,7 +102,6 @@ plan:
                 };
                 getAIEnrichment.mockResolvedValue(mockAiResponse);
 
-                // --- ACT ---
                 // We wrap the script execution in a promise that resolves when process.exit is called.
                 await new Promise((resolve) => {
                   exitSpy.mockImplementation(() => resolve());
@@ -115,7 +113,6 @@ plan:
                   });
                 });
 
-                // --- ASSERT ---
                 // Now that the script has 'exited', we can safely inspect the results.
                 
                 // 1. Verify the script intended to exit cleanly.

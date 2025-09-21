@@ -30,6 +30,14 @@ Telegram-based message processing pipeline for content curation and AI-enhanced 
    - Sends formatted summaries back to Telegram
    - Supports message filtering by creation time
 
+## Architectural Decisions
+
+### Unified Repository (Monorepo)
+
+Sentidex intentionally keeps its code and data (`inbox/`, `_inbox/`) in a single repository. This "repo-as-a-database" model simplifies the architecture, treating each git commit as an atomic transaction.
+
+To keep the code history clean, automated commits are made by distinct "Bot" authors, separating them from human development commits. For more details, see the [Architectural Decision Record](./docs/adr-monorepo-decision.md).
+
 ## Usage
 
 Forward messages to SentidexBot @Telegram using it as `inbox` address.

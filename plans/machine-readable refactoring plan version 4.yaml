@@ -1,0 +1,108 @@
+# A machine-readable refactoring plan (Phase 2: Logger).
+plan:
+  source_finding_title: "Logging & observability are ad-hoc"
+  goal: "Safely replace direct console calls in `process-messages.js` with a structured Logger port and adapter, ensuring all characterization tests continue to pass after every atomic change."
+  
+  preconditions:
+    - "The `FrontMatterCodec` refactoring is complete and merged."
+    - "The full characterization test harness is passing on the `trunk` branch."
+
+  steps:
+    - step_id: 1
+      description: "Create the ConsoleLogger adapter file (but do not use it yet)."
+      depends_on: []
+      operation:
+        type: "CREATE_FILE"
+        path: "scripts/adapters/consoleLogger.js"
+        content: |
+          // This adapter implements the Logger port by writing to the global console.
+          // It provides structure (info, error levels) to our logging.
+          
+          function info(message) {
+            console.log(message);
+          }
+
+          function error(message, errorObject) {
+            if (errorObject) {
+              console.error(message, errorObject);
+            } else {
+              console.error(message);
+            }
+          }
+
+          module.exports = {
+            info,
+            error,
+          };
+      verification:
+        - { type: "FILE_EXISTS", path: "scripts/adapters/consoleLogger.js" }
+        - { type: "ALL_TESTS_PASS" } # No behavioral change.
+
+    - step_id: 2
+      description: "In process-messages.js, import the new logger (but do not use it yet)."
+      depends_on: [1]
+      operation:
+        type: "MODIFY_FILE"
+        path: "scripts/process-messages.js"
+        action:
+          type: "ADD_CODE_BLOCK"
+          location_hint: "Near the top-level require statements."
+          content: "const logger = require('./adapters/consoleLogger');"
+      verification:
+        - { type: "CODE_CONTAINS", path: "scripts/process-messages.js", snippet: "const logger =" }
+        - { type: "ALL_TESTS_PASS" } # Still no behavioral change.
+
+    - step_id: 3
+      description: "Replace the first `console.log` call with `logger.info`."
+      depends_on: [2]
+      operation:
+        type: "MODIFY_FILE"
+        path: "scripts/process-messages.js"
+        action:
+          type: "REPLACE_CODE_BLOCK"
+          location_hint: "The first line inside the processMessages function."
+          old_content: "console.log('Starting message processing...');"
+          new_content: "logger.info('Starting message processing...');"
+      verification:
+        - { type: "ALL_TESTS_PASS" } # Harness must pass.
+
+    - step_id: 4
+      description: "Replace the first `console.error` call with `logger.error`."
+      depends_on: [3]
+      operation:
+        type: "MODIFY_FILE"
+        path: "scripts/process-messages.js"
+        action:
+          type: "REPLACE_CODE_BLOCK"
+          location_hint: "The catch block at the end of processMessages."
+          old_content: "console.error('Error in message processing:', error);"
+          new_content: "logger.error('Error in message processing:', error);"
+      verification:
+        - { type: "ALL_TESTS_PASS" } # Harness must pass.
+
+    - step_id: 5
+      description: "Continue replacing all remaining console.log and console.error calls one by one, verifying with the test harness after each replacement."
+      depends_on: [4]
+      operation:
+        # This is a conceptual step representing a series of small, atomic changes.
+        # The agent would proceed to change one `console.log` at a time, running tests after each.
+        # Example for the next one:
+        type: "MODIFY_FILE"
+        path: "scripts/process-messages.js"
+        action:
+          type: "REPLACE_CODE_BLOCK"
+          old_content: "console.log('No _inbox directory found');"
+          new_content: "logger.info('No _inbox directory found');"
+      verification:
+        - { type: "ALL_TESTS_PASS" }
+
+    - step_id: 6
+      description: "Final verification after all console calls have been replaced."
+      depends_on: [5]
+      operation:
+        # No operation, this is a final check.
+        type: "NO_OP"
+      verification:
+        - { type: "CODE_DOES_NOT_CONTAIN", path: "scripts/process-messages.js", snippet: "console.log" }
+        - { type: "CODE_DOES_NOT_CONTAIN", path: "scripts/process-messages.js", snippet: "console.error" }
+        - { type: "ALL_TESTS_PASS" }

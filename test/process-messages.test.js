@@ -1,106 +1,21 @@
 const path = require('path');
-const { setupTestEnvironment } = require('./harness/setupTestEnvironment');
 const { runScript } = require('./harness/runScript');
 const { mockAISuccess, mockAIFailure, mockAISequence } = require('./harness/mockAI');
-
-const realFs = jest.requireActual('fs');
-const FIXTURE_DIR = path.join(__dirname, 'test-fixtures');
-const SAMPLE_FIXTURE = 'sample-message.md';
-const FROZEN_ISO = '2025-09-21T09:34:07.837Z';
-const FROZEN_TIMESTAMP = '2025-09-21-09-34-07';
-const DEFAULT_RANDOM_VALUES = [0.111111111, 0.222222222, 0.333333333];
-const GENERATED_IDS = DEFAULT_RANDOM_VALUES.map((value) => {
-  const base = new Date(FROZEN_ISO).valueOf().toString(36);
-  return base + value.toString(36).substring(2);
-});
-const FIRST_BODY = 'This is the first sample message for testing.';
-const SECOND_BODY = 'This is the second sample message for testing.';
-const FIRST_SOURCE_URL = 'http://example.com/first';
-const SECOND_SOURCE_URL = 'http://example.com/second';
-
-const EXPECTED_PROCESSED_FILENAME = `Mocked-AI-Title-For-The-Article-${FROZEN_TIMESTAMP}.md`;
-const EXPECTED_PROCESSED_CONTENT = [
-  '---',
-  `id: "${GENERATED_IDS[0]}"`,
-  `created_at: "${FROZEN_ISO}"`,
-  'source_info: "unknown"',
-  'source_url: "http://example.com/sample"',
-  'has_media: false',
-  'language: "en"',
-  'summary: "This is a mocked summary provided by the test."',
-  'tags: ["mocked","ai","test-harness"]',
-  `processed_at: "${FROZEN_ISO}"`,
-  '---',
-  '',
-  'This is a sample message for testing.',
-].join('\n');
-
-function buildProcessedContent({ id, sourceUrl, summary, tags, body }) {
-  return [
-    '---',
-    `id: "${id}"`,
-    `created_at: "${FROZEN_ISO}"`,
-    'source_info: "unknown"',
-    `source_url: "${sourceUrl}"`,
-    'has_media: false',
-    'language: "en"',
-    `summary: "${summary}"`,
-    `tags: ${JSON.stringify(tags)}`,
-    `processed_at: "${FROZEN_ISO}"`,
-    '---',
-    '',
-    body,
-  ].join('\n');
-}
-
-function buildFilename(title) {
-  return `${title}-${FROZEN_TIMESTAMP}.md`;
-}
-
-function loadFixture(name) {
-  return realFs.readFileSync(path.join(FIXTURE_DIR, name), 'utf8');
-}
-
-function createSingleFileEnv(overrides = {}) {
-  const { inboxFiles, ...restOverrides } = overrides;
-  const baseOptions = {
-    inboxFiles: {
-      'sample.md': loadFixture(SAMPLE_FIXTURE),
-    },
-    systemTime: FROZEN_ISO,
-    randomValues: DEFAULT_RANDOM_VALUES[0],
-  };
-
-  if (inboxFiles) {
-    baseOptions.inboxFiles = inboxFiles;
-  }
-
-  return setupTestEnvironment({
-    ...baseOptions,
-    ...restOverrides,
-  });
-}
-
-function createTwoFileEnv(overrides = {}) {
-  const { inboxFiles, ...restOverrides } = overrides;
-  const baseOptions = {
-    inboxFiles: {
-      'first.md': loadFixture('first-message.md'),
-      'second.md': loadFixture('second-message.md'),
-    },
-    systemTime: FROZEN_ISO,
-    randomValues: DEFAULT_RANDOM_VALUES,
-  };
-
-  if (inboxFiles) {
-    baseOptions.inboxFiles = inboxFiles;
-  }
-
-  return setupTestEnvironment({
-    ...baseOptions,
-    ...restOverrides,
-  });
-}
+const {
+  DUPLICATE_TICKET_NAME,
+  EXPECTED_PROCESSED_FILENAME,
+  EXPECTED_PROCESSED_CONTENT,
+  GENERATED_IDS,
+  FIRST_BODY,
+  SECOND_BODY,
+  FIRST_SOURCE_URL,
+  SECOND_SOURCE_URL,
+  createEmptyEnv,
+  createSingleFileEnv,
+  createTwoFileEnv,
+  buildFilename,
+  buildProcessedContent,
+} = require('./harness/testUtils');
 
 describe('process-messages script (Characterization Test)', () => {
   let testEnv;
@@ -119,9 +34,7 @@ describe('process-messages script (Characterization Test)', () => {
 
   describe('Scenario 0: empty inbox', () => {
     test('should exit cleanly when _inbox is empty', async () => {
-      testEnv = setupTestEnvironment({
-        systemTime: '2025-09-21T09:34:07.837Z',
-      });
+      testEnv = createEmptyEnv();
 
       const scriptResult = await runScript();
 
@@ -222,16 +135,16 @@ describe('process-messages script (Characterization Test)', () => {
       expect(scriptResult.status).toBe('terminal-log');
       expect(scriptResult.terminalMessage).toMatch('Successfully processed');
       expect(scriptResult.logs).toContain('Duplicate found for http://example.com/sample. Original: inbox/original.md');
-      expect(scriptResult.logs).toContain('Created duplicate ticket: inbox/DUPL_2025-09-21-09-34-07.md');
+      expect(scriptResult.logs).toContain(`Created duplicate ticket: inbox/${DUPLICATE_TICKET_NAME}`);
       expect(scriptResult.logs).toContain('Deleted raw duplicate file: _inbox/sample.md');
       expect(scriptResult.errors).toHaveLength(0);
       expect(aiModule.getAIEnrichment).not.toHaveBeenCalled();
 
       const inboxFiles = fs.readdirSync('/inbox').sort();
-      expect(inboxFiles).toEqual(['DUPL_2025-09-21-09-34-07.md', 'original.md']);
+      expect(inboxFiles).toEqual([DUPLICATE_TICKET_NAME, 'original.md']);
       expect(fs.existsSync('/_inbox/sample.md')).toBe(false);
 
-      const duplContent = fs.readFileSync('/inbox/DUPL_2025-09-21-09-34-07.md', 'utf8');
+      const duplContent = fs.readFileSync(path.join('/inbox', DUPLICATE_TICKET_NAME), 'utf8');
       expect(duplContent).toContain('is_duplicate: true');
       expect(duplContent).toContain('original_ref: "original.md"');
     });
@@ -239,7 +152,7 @@ describe('process-messages script (Characterization Test)', () => {
 
   describe('Scenario 2: two files', () => {
     test('should leave both files in _inbox when both fail', async () => {
-      testEnv = createTwoFileEnv({ randomValues: DEFAULT_RANDOM_VALUES });
+      testEnv = createTwoFileEnv();
 
       const aiModule = require('../scripts/services/ai.js');
       aiModule.getAIEnrichment = mockAISequence([
@@ -272,7 +185,7 @@ describe('process-messages script (Characterization Test)', () => {
     });
 
     test('should process one and leave one when the first fails and second succeeds', async () => {
-      testEnv = createTwoFileEnv({ randomValues: DEFAULT_RANDOM_VALUES });
+      testEnv = createTwoFileEnv();
 
       const aiModule = require('../scripts/services/ai.js');
       const secondSuccess = {
@@ -296,7 +209,7 @@ describe('process-messages script (Characterization Test)', () => {
         'Processing file: first.md',
         'Keeping original file in _inbox for manual retry: _inbox/first.md',
         'Processing file: second.md',
-        'Created processed file: inbox/Second-AI-Title-2025-09-21-09-34-07.md',
+        `Created processed file: inbox/${buildFilename('Second-AI-Title')}`,
         'Deleted original file: _inbox/second.md',
         'Successfully processed 1 files',
         'Left 1 files in _inbox after AI failures',
@@ -321,7 +234,7 @@ describe('process-messages script (Characterization Test)', () => {
     });
 
     test('should process one and leave one when the first succeeds and second fails', async () => {
-      testEnv = createTwoFileEnv({ randomValues: DEFAULT_RANDOM_VALUES });
+      testEnv = createTwoFileEnv();
 
       const aiModule = require('../scripts/services/ai.js');
       const firstSuccess = {
@@ -343,7 +256,7 @@ describe('process-messages script (Characterization Test)', () => {
         'Starting message processing...',
         'Found 2 files to process',
         'Processing file: first.md',
-        'Created processed file: inbox/First-AI-Title-2025-09-21-09-34-07.md',
+        `Created processed file: inbox/${buildFilename('First-AI-Title')}`,
         'Deleted original file: _inbox/first.md',
         'Processing file: second.md',
         'Keeping original file in _inbox for manual retry: _inbox/second.md',
@@ -370,7 +283,7 @@ describe('process-messages script (Characterization Test)', () => {
     });
 
     test('should process both files when both succeed', async () => {
-      testEnv = createTwoFileEnv({ randomValues: DEFAULT_RANDOM_VALUES });
+      testEnv = createTwoFileEnv();
 
       const aiModule = require('../scripts/services/ai.js');
       const firstSuccess = {
@@ -397,10 +310,10 @@ describe('process-messages script (Characterization Test)', () => {
         'Starting message processing...',
         'Found 2 files to process',
         'Processing file: first.md',
-        'Created processed file: inbox/First-AI-Title-2025-09-21-09-34-07.md',
+        `Created processed file: inbox/${buildFilename('First-AI-Title')}`,
         'Deleted original file: _inbox/first.md',
         'Processing file: second.md',
-        'Created processed file: inbox/Second-AI-Title-2025-09-21-09-34-07.md',
+        `Created processed file: inbox/${buildFilename('Second-AI-Title')}`,
         'Deleted original file: _inbox/second.md',
         'Successfully processed 2 files',
       ]);

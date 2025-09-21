@@ -1,0 +1,171 @@
+# A machine-readable plan to create a characterization test harness.
+plan:
+  source_finding_title: "Monolithic flow mixing concerns (I/O, parsing, AI, validation, dedupe, naming)"
+  goal: "Create a high-level characterization test to provide a safety harness for the existing `process-messages.js` script. This test must run the script in a hermetic 'bubble' by mocking the file system and network calls, ensuring no side effects on the production environment."
+  
+  preconditions:
+    - "The codebase is in a clean state (no uncommitted changes)."
+    - "Node.js and npm/yarn are installed."
+    - "The script to be tested, `process-messages.js`, exists."
+    - "The AI service module, `./services/ai.js`, exists."
+
+  steps:
+    - step_id: 1
+      description: "Install Jest and memfs for testing and in-memory file system mocking."
+      depends_on: []
+      operation:
+        type: "RUN_COMMAND"
+        command: "npm install --save-dev jest memfs"
+      verification:
+        - { type: "FILE_EXISTS", path: "node_modules/jest/package.json" }
+        - { type: "FILE_EXISTS", path: "node_modules/memfs/package.json" }
+
+    - step_id: 2
+      description: "Initialize Jest configuration."
+      depends_on: [1]
+      operation:
+        type: "RUN_COMMAND"
+        command: "npx jest --init"
+        # The agent should respond with the following answers to the prompts:
+        # ✔ Choose the test environment that will be used for testing › node
+        # ✔ Do you want Jest to add coverage reports? … yes
+        # ✔ Which provider should be used to instrument code for coverage? › v8
+        # ✔ Automatically clear mock calls, instances, contexts and results before every test? … yes
+      verification:
+        - { type: "FILE_EXISTS", path: "jest.config.js" }
+
+    - step_id: 3
+      description: "Create test fixture directories and a sample input file."
+      depends_on: [2]
+      operation:
+        type: "CREATE_FILE"
+        path: "test-fixtures/sample-message.md"
+        content: |
+          ---
+          id: "test-id-123"
+          source_url: "http://example.com/unique-article-123"
+          timestamp: "2023-10-27T10:00:00.000Z"
+          has_media: false
+          source_info: "test-source"
+          ---
+          
+          This is the body of the test message. It contains Russian words like 'привет' and English words.
+      verification:
+        - { type: "FILE_EXISTS", path: "test-fixtures/sample-message.md" }
+
+    - step_id: 4
+      description: "Create the main characterization test file."
+      depends_on: [3]
+      operation:
+        type: "CREATE_FILE"
+        path: "process-messages.test.js"
+        content: |
+          // This file will be populated in subsequent steps.
+          // Its existence indicates the test setup is ready.
+      verification:
+        - { type: "FILE_EXISTS", path: "process-messages.test.js" }
+        
+    - step_id: 5
+      description: "Implement mocks for the 'fs' and './services/ai.js' modules in the test file."
+      depends_on: [4]
+      operation:
+        type: "MODIFY_FILE"
+        path: "process-messages.test.js"
+        action:
+          type: "ADD_CODE_BLOCK"
+          location_hint: "At the top of the file"
+          content: |
+            const { vol, fs } = require('memfs');
+            const path = require('path');
+            
+            // --- The Bubble Setup ---
+
+            // 1. Mock the entire 'fs' module. All calls to require('fs') will get our in-memory version.
+            jest.mock('fs', () => require('memfs').fs);
+
+            // 2. Mock the AI service to prevent real network calls.
+            jest.mock('./services/ai.js', () => ({
+              getAIEnrichment: jest.fn(),
+            }));
+
+            // 3. Import the mocked service and the script we want to test *after* the mocks are defined.
+            const { getAIEnrichment } = require('./services/ai.js');
+
+            describe('process-messages script (Characterization Test)', () => {
+              // Test will be added in the next step
+            });
+      verification:
+        - { type: "CODE_CONTAINS", path: "process-messages.test.js", snippet: "jest.mock('fs', () => require('memfs').fs);" }
+        - { type: "CODE_CONTAINS", path: "process-messages.test.js", snippet: "jest.mock('./services/ai.js'" }
+        - { type: "COMPILE_SUCCESS" } # Check for syntax errors
+
+    - step_id: 6
+      description: "Implement the test case to run the script and capture its behavior."
+      depends_on: [5]
+      operation:
+        type: "MODIFY_FILE"
+        path: "process-messages.test.js"
+        action:
+          type: "ADD_CODE_BLOCK"
+          location_hint: "Inside the describe block"
+          content: |
+            beforeEach(() => {
+              // Reset the in-memory file system and mock implementations before each test.
+              vol.reset();
+              getAIEnrichment.mockClear();
+            });
+
+            test('should process a single file and produce a predictable output', async () => {
+              // --- ARRANGE ---
+              
+              // 1. Set up the mocked AI response for this specific test case.
+              const mockAiResponse = {
+                title: "Mocked-AI-Title-For-The-Article",
+                summary: "This is a mocked summary provided by the test.",
+                tags: ["mocked", "ai", "test-harness"],
+              };
+              getAIEnrichment.mockResolvedValue(mockAiResponse);
+
+              // 2. Set up the in-memory file system state.
+              const fixtureContent = require('fs').readFileSync(path.join(__dirname, 'test-fixtures/sample-message.md'), 'utf8');
+              const initialFileSystemState = {
+                './_inbox/sample.md': fixtureContent,
+                './inbox': null, // Ensures the directory exists but is empty
+              };
+              vol.fromJSON(initialFileSystemState, '/app');
+              
+              // Change the current working directory for the test process to our virtual one.
+              process.chdir('/app');
+
+              // --- ACT ---
+              
+              // Load and run the main function from the script.
+              // We require it inside the test to ensure it uses the mocked dependencies.
+              const { processMessages } = require('./process-messages.js');
+              await processMessages();
+
+              // --- ASSERT ---
+              
+              // 1. Check the state of the in-memory file system after the run.
+              const inboxFiles = fs.readdirSync('./_inbox');
+              expect(inboxFiles).toHaveLength(0); // Original file should be deleted.
+              
+              const outboxFiles = fs.readdirSync('./inbox');
+              expect(outboxFiles).toHaveLength(1); // One new file should be created.
+
+              // 2. Use a snapshot to capture the exact content and filename of the output.
+              // This is the core of the characterization test. Any change to the script's
+              // output logic (naming, front matter format, etc.) will cause this to fail.
+              const outputFilename = outboxFiles[0];
+              const outputContent = fs.readFileSync(path.join('./inbox', outputFilename), 'utf8');
+
+              expect(outputFilename).toMatchSnapshot("output filename");
+              expect(outputContent).toMatchSnapshot("output file content");
+
+              // 3. Verify the AI service was called correctly.
+              expect(getAIEnrichment).toHaveBeenCalledTimes(1);
+              expect(getAIEnrichment).toHaveBeenCalledWith(expect.stringContaining("This is the body of the test message."));
+            });
+      verification:
+        - { type: "ALL_TESTS_PASS" }
+        - { type: "FILE_EXISTS", path: "__snapshots__/process-messages.test.js.snap" } # Jest creates this automatically

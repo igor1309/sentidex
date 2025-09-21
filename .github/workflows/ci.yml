@@ -49,20 +49,16 @@ jobs:
       - name: Send Telegram notification on failure
         if: failure()
         env:
-          # These secrets must be configured in the repository's Settings > Secrets and variables > Actions.
+          # Map GitHub context variables to shell environment variables.
+          # This is the clean and robust way to pass this data.
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
+          GH_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          # Use a heredoc (<<EOF) to safely create a multiline string for the message.
-          # This prevents the shell from misinterpreting special characters like backticks.
+          # Use a heredoc to safely create the multiline string.
+          # Now, it references the simple shell variables defined in the 'env' block.
           MESSAGE_TEXT=$(cat <<-EOF
-          🚨 *Build Failed*
-
-          *Repository:* `${{ github.repository }}`
-          *Commit:* `${{ github.sha }}`
-          *Triggered by:* `${{ github.actor }}`
-
-          *Details:* [View Workflow Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          🚨 *Build Failed:* [View Workflow Run](${GH_RUN_URL})
           EOF
           )
 

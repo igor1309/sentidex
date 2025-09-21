@@ -67,6 +67,8 @@ function setupTestEnvironment(options = {}) {
   const memfs = require('memfs');
   const { vol, fs } = memfs;
 
+  jest.doMock('memfs', () => memfs);
+
   vol.reset();
 
   vol.mkdirSync(INBOX_ROOT, { recursive: true });
@@ -93,6 +95,7 @@ function setupTestEnvironment(options = {}) {
     fs,
     vol,
     restore: () => {
+      jest.dontMock('memfs');
       if (timersMocked) {
         jest.useRealTimers();
       }

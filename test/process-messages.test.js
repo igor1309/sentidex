@@ -1,5 +1,6 @@
 const path = require('path');
 const { setupTestEnvironment } = require('./harness/setupTestEnvironment');
+const { runScript } = require('./harness/runScript');
 
 const realFs = jest.requireActual('fs');
 const sampleMessagePath = path.join(__dirname, 'test-fixtures/sample-message.md');
@@ -37,37 +38,20 @@ describe('process-messages script (Characterization Test)', () => {
     };
     getAIEnrichment.mockResolvedValue(mockAiResponse);
 
-    let exitCalled;
-    const exitPromise = new Promise(resolve => {
-      exitCalled = resolve;
-    });
-    // The script doesn't exit on success, so we need a different way to wait.
-    // Let's spy on the final console.log instead.
-    let processingFinished;
-    const processingPromise = new Promise(resolve => {
-      processingFinished = resolve;
-    });
-
-    const exitSpy = jest.spyOn(process, 'exit').mockImplementation(() => {});
-    const consoleSpy = jest.spyOn(console, 'log').mockImplementation((message) => {
-      if (message && message.includes('Successfully processed')) {
-        processingFinished();
-      }
-    });
-    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-
     // --- ACT ---
-    require(path.resolve('./scripts/process-messages.js'));
-    await processingPromise; // Wait for the success log
+    const scriptResult = await runScript();
 
     // --- ASSERT ---
     const { fs } = testEnv;
 
-    const output = consoleSpy.mock.calls.map(args => args.join(' ')).join('\n');
+    expect(scriptResult.status).toBe('terminal-log');
+    expect(scriptResult.terminalMessage).toMatch('Successfully processed');
+
+    const output = scriptResult.logs.join('\n');
     expect(output).toContain('Starting message processing...');
     expect(output).toContain('Found 1 files to process');
     expect(output).toContain('Successfully processed 1 files');
-    expect(errorSpy).not.toHaveBeenCalled();
+    expect(scriptResult.errors).toHaveLength(0);
 
     const outboxFiles = fs.readdirSync('/inbox');
     expect(outboxFiles).toHaveLength(1);

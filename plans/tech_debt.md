@@ -1,0 +1,1 @@
+- "The duplicate detection mechanism relies on a brittle string search that is coupled to a specific, non-standard YAML serialization format." This is a perfect candidate for a future refactoring ticket, which we can tackle after the main Ports and Adapters work is done.

@@ -122,7 +122,7 @@ async function processFile(inboxPath) {
   }
 
   try {
-    validateAIResults(aiResults);
+    messageProcessor.validateAiResults(aiResults);
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
     logger.error(`AI result validation failed for ${inboxPath}: ${reason}`);
@@ -194,26 +194,6 @@ function formatTimestamp(value) {
     String(date.getUTCMinutes()).padStart(2, '0') + '-' +
     String(date.getUTCSeconds()).padStart(2, '0')
   );
-}
-
-function validateAIResults(results) {
-  if (!results || typeof results !== 'object') {
-    throw new Error('Empty AI result');
-  }
-
-  const { title, summary, tags } = results;
-
-  if (!title || typeof title !== 'string') {
-    throw new Error('AI result missing title');
-  }
-
-  if (!summary || typeof summary !== 'string') {
-    throw new Error('AI result missing summary');
-  }
-
-  if (!Array.isArray(tags)) {
-    throw new Error('AI result missing tags array');
-  }
 }
 
 // Run the processing

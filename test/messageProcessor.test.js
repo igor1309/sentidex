@@ -23,11 +23,20 @@ describe('messageProcessor.enrichMessage', () => {
     );
   });
 
+  it('throws when aiResults title is empty', () => {
+    expect(() =>
+      enrichMessage(
+        { frontMatter, bodyContent: 'content' },
+        { title: '', summary: 'summary', tags: ['tag'] }
+      )
+    ).toThrow('AI result missing title');
+  });
+
   it('throws when aiResults summary is empty', () => {
     expect(() =>
       enrichMessage(
         { frontMatter, bodyContent: 'content' },
-        { summary: '', tags: ['tag'] }
+        { title: 'title', summary: '', tags: ['tag'] }
       )
     ).toThrow('AI summary must be a non-empty string');
   });
@@ -36,9 +45,9 @@ describe('messageProcessor.enrichMessage', () => {
     expect(() =>
       enrichMessage(
         { frontMatter, bodyContent: 'content' },
-        { summary: 'summary', tags: 'tag' }
+        { title: 'title', summary: 'summary', tags: 'tag' }
       )
-    ).toThrow('AI tags must be an array');
+    ).toThrow('AI result missing tags array');
   });
 
   it('produces deterministic enriched front matter for valid input', () => {
@@ -50,6 +59,7 @@ describe('messageProcessor.enrichMessage', () => {
         bodyContent: 'Hello мир',
       },
       {
+        title: 'ai-title',
         summary: 'processed summary',
         tags: ['news'],
       }
@@ -77,6 +87,7 @@ describe('messageProcessor.enrichMessage', () => {
         bodyContent: '',
       },
       {
+        title: 'ai-title',
         summary: 'processed summary',
         tags: ['news'],
       }

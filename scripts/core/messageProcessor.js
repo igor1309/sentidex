@@ -20,14 +20,18 @@ function validateAiResults(aiResults) {
     throw new TypeError('enrichMessage requires a non-empty aiResults object');
   }
 
-  const { summary, tags } = aiResults;
+  const { title, summary, tags } = aiResults;
+
+  if (typeof title !== 'string' || title.trim() === '') {
+    throw new Error('AI result missing title');
+  }
 
   if (typeof summary !== 'string' || summary.trim() === '') {
     throw new Error('AI summary must be a non-empty string');
   }
 
   if (!Array.isArray(tags)) {
-    throw new Error('AI tags must be an array');
+    throw new Error('AI result missing tags array');
   }
 }
 

@@ -1,0 +1,119 @@
+# A machine-readable refactoring plan (Phase 4: File System Adapter).
+plan:
+  source_finding_title: "Monolithic flow mixing concerns (I/O, parsing, AI, validation, dedupe, naming)"
+  goal: "Replace all direct calls to the `fs` module in `process-messages.js` with a dedicated `FileSystem` adapter. This will fully decouple the orchestration logic from the concrete file system implementation, completing the primary goal of the Ports and Adapters refactoring."
+  
+  preconditions:
+    - "The core logic extraction is complete and merged."
+    - "The full characterization test harness is passing on the `trunk` branch."
+
+  steps:
+    - step_id: 1
+      description: "Create the new FileSystem adapter, wrapping all used `fs` methods."
+      depends_on: []
+      operation:
+        type: "CREATE_FILE"
+        path: "scripts/adapters/fileSystem.js"
+        content: |
+          const fs = require('fs');
+          const path = require('path');
+
+          // This adapter implements the FileSystem port by delegating to the native 'fs' module.
+
+          function exists(filePath) {
+            return fs.existsSync(filePath);
+          }
+
+          function mkdir(dirPath) {
+            return fs.mkdirSync(dirPath, { recursive: true });
+          }
+
+          function readdir(dirPath) {
+            return fs.readdirSync(dirPath);
+          }
+
+          function readFile(filePath) {
+            return fs.readFileSync(filePath, 'utf8');
+          }
+
+          function writeFile(filePath, content) {
+            return fs.writeFileSync(filePath, content, 'utf8');
+          }
+          
+          function unlink(filePath) {
+            return fs.unlinkSync(filePath);
+          }
+
+          module.exports = {
+            exists,
+            mkdir,
+            readdir,
+            readFile,
+            writeFile,
+            unlink,
+            join: path.join, // Also abstracting path for consistency
+          };
+      verification:
+        - { type: "FILE_EXISTS", path: "scripts/adapters/fileSystem.js" }
+        - { type: "ALL_TESTS_PASS" } # No behavioral change yet.
+
+    - step_id: 2
+      description: "In process-messages.js, import the new FileSystem adapter."
+      depends_on: [1]
+      operation:
+        type: "MODIFY_FILE"
+        path: "scripts/process-messages.js"
+        action:
+          type: "ADD_CODE_BLOCK"
+          location_hint: "Near the top-level require statements."
+          content: "const fileSystem = require('./adapters/fileSystem');"
+      verification:
+        - { type: "CODE_CONTAINS", path: "scripts/process-messages.js", snippet: "const fileSystem =" }
+        - { type: "ALL_TESTS_PASS" } # Still no behavioral change.
+
+    - step_id: 3
+      description: "Remove the `fs` and `path` require statements from `process-messages.js`."
+      depends_on: [2]
+      operation:
+        type: "MODIFY_FILE"
+        path: "scripts/process-messages.js"
+        action:
+          type: "REPLACE_CODE_BLOCK"
+          old_content: |
+            const fs = require('fs');
+            const path = require('path');
+          new_content: ""
+      verification:
+        # The tests will now fail because fs and path are not defined. This is expected.
+        - { type: "COMPILE_FAILURE" }
+
+    - step_id: 4
+      description: "Replace all `fs.` and `path.` calls with `fileSystem.` calls, one by one."
+      depends_on: [3]
+      operation:
+        # This is a conceptual step. The agent will methodically go through the file and
+        # replace every instance of `fs.method` with `fileSystem.method` and
+        # `path.join` with `fileSystem.join`.
+        # Example for the first one:
+        type: "MODIFY_FILE"
+        path: "scripts/process-messages.js"
+        action:
+          type: "REPLACE_CODE_BLOCK"
+          old_content: "if (!fs.existsSync('_inbox'))"
+          new_content: "if (!fileSystem.exists('_inbox'))"
+      verification:
+        # After each individual replacement, the agent would check if the code compiles.
+        # After all replacements are done, the full test suite must pass.
+        - { type: "ALL_TESTS_PASS" }
+
+    - step_id: 5
+      description: "Final verification after all `fs` calls have been replaced."
+      depends_on: [4]
+      operation:
+        type: "NO_OP"
+      verification:
+        - { type: "CODE_DOES_NOT_CONTAIN", path: "scripts/process-messages.js", snippet: "require('fs')" }
+        - { type: "CODE_DOES_NOT_CONTAIN", path: "scripts/process-messages.js", snippet: "require('path')" }
+        - { type: "CODE_DOES_NOT_CONTAIN", path: "scripts/process-messages.js", snippet: "fs." }
+        - { type: "CODE_DOES_NOT_CONTAIN", path: "scripts/process-messages.js", snippet: "path." }
+        - { type: "ALL_TESTS_PASS" }

@@ -261,13 +261,20 @@ function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 }
 
-function formatTimestamp(date) {
-  return date.getFullYear() + '-' +
-         String(date.getMonth() + 1).padStart(2, '0') + '-' +
-         String(date.getDate()).padStart(2, '0') + '-' +
-         String(date.getHours()).padStart(2, '0') + '-' +
-         String(date.getMinutes()).padStart(2, '0') + '-' +
-         String(date.getSeconds()).padStart(2, '0');
+function formatTimestamp(value) {
+  const date = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(date.valueOf())) {
+    throw new TypeError(`Cannot format invalid date value: ${value}`);
+  }
+
+  return (
+    date.getUTCFullYear() + '-' +
+    String(date.getUTCMonth() + 1).padStart(2, '0') + '-' +
+    String(date.getUTCDate()).padStart(2, '0') + '-' +
+    String(date.getUTCHours()).padStart(2, '0') + '-' +
+    String(date.getUTCMinutes()).padStart(2, '0') + '-' +
+    String(date.getUTCSeconds()).padStart(2, '0')
+  );
 }
 
 function createFrontMatterString(frontMatter) {

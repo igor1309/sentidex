@@ -1,29 +1,33 @@
-### The Final, Refined Plan for the Harness
+### Critique and Refinement Opportunities
 
-**Phase 1: Refactor the Test Code for Reusability and Clarity**
+While functionally complete, the implementation can be improved, primarily in the main test file.
 
-Before adding any new tests, we will refactor the existing test file. The goal is to create a small, internal "test framework" to make the actual test cases concise, readable, and maintainable.
+1.  **Primary Issue: Test File Bloat and Readability (`process-messages.test.js`)**
 
-1.  **Create a `setupTestEnvironment` helper:** This function will encapsulate all the `beforeEach` logic: resetting modules, creating the `memfs` volume, and spying on `process.cwd`. It will take a configuration object to define the initial state of `_inbox`.
-2.  **Create a `runScript` helper:** This function will encapsulate the entire `ACT` block. It will handle `jest.isolateModules`, set up spies on `console.log` and `console.error`, and return a promise that resolves when processing is complete. Critically, it will resolve when it sees a terminal log message (e.g., "Successfully processed...", "No files to process...", or the final error summary), not just the success case. It will return the captured logs and errors.
-3.  **Create `mockAI` helpers:** Create `mockAISuccess(response)` and `mockAIFailure(error)` to abstract away the `jest.fn()` details.
+    - **Observation:** The test file is over 400 lines long, but the actual `describe` blocks don't start until line 110. The first 100+ lines are a dense collection of constants, expected content strings, and test-specific helper functions (`buildProcessedContent`, `createSingleFileEnv`, etc.).
+    - **Impact:** This makes the file difficult to navigate. A developer opening the file has to scroll past a large wall of setup logic to find the actual tests. It violates the principle of keeping tests concise and focused.
+    - **Recommendation:** These test-specific helpers and constants should be extracted into a separate file, perhaps `test/harness/testUtils.js` or `test/process-messages.helpers.js`. The main test file should only contain the `describe` and `test` blocks, with minimal setup.
 
-**Phase 2: Implement the Complete Characterization Harness (in order)**
+2.  **Secondary Issue: Brittle Assertions**
+    - **Observation:** The tests often assert against the entire log array using `toEqual`. For example: `expect(scriptResult.logs).toEqual([...])`.
+    - **Impact:** This is very brittle. If a developer adds a new, innocuous log statement somewhere in the script, it will break many tests.
+    - **Recommendation:** It would be more robust to assert against key log messages using `toContain`. For example: `expect(scriptResult.logs.join('\n')).toContain('Successfully processed 1 files');`. This validates the important signals without being coupled to the exact number and order of every single log line.
 
-Using the helpers from Phase 1, we will implement the following test cases. Each `test` block will be small and focused only on the specific inputs and expected outputs of its scenario.
+### Missing Coverage Before Refactor
 
-*   **Scenario 0: The Empty State**
-    1.  `test('should exit cleanly when _inbox is empty')`
-
-*   **Scenario 1: A Single File**
-    2.  `test('should leave the file in _inbox on AI failure')`
-    3.  `test('should move the file to inbox on success')`
-    4.  `test('should create a DUPL ticket for a known source_url')`
-
-*   **Scenario 2: Two Files (Combinatorial)**
-    5.  `test('should leave both files in _inbox when both fail')`
-    6.  `test('should process one and leave one when the first fails and second succeeds')`
-    7.  `test('should process one and leave one when the first succeeds and second fails')`
-    8.  `test('should process both files when both succeed')`
-
-This plan directly implements your strategy. It builds the harness methodically, prioritizes failure cases, and ensures the transactional integrity of the script is fully characterized before we dare to refactor a single line of its implementation. This is the correct path forward.
+- scripts/process-messages.js:12 – We never exercise the “no \_inbox directory” branch. A
+  tiny harness test that runs the script against an empty memfs root (no \_inbox) should assert
+  the early return message so we don’t accidentally regress that guard.
+- scripts/process-messages.js:17 – Likewise, we always pre-create /inbox in the helpers,
+  so nothing verifies the automatic fs.mkdirSync('inbox'). Add a scenario where only \_inbox
+  exists and confirm the script creates the target folder before writing.
+- scripts/process-messages.js:114 – The validateAIResults rejection path is untested. We
+  should feed a response that is missing tags (or summary) and assert we get the “validation
+  failed” log, no AI file is produced, and the original stays in \_inbox.
+- scripts/process-messages.js:131 – There’s no characterization around preserving
+  frontMatter.id/frontMatter.timestamp. A fixture with those fields would let us assert
+  the new file keeps the caller-provided metadata (and uses the provided timestamp for the
+  filename) so future refactors don’t accidentally regenerate IDs/dates.
+- scripts/process-messages.js:32 – The outer loop’s catch (error) is never exercised.
+  Triggering a thrown error inside processFile (e.g., by mocking fs.readFileSync to throw for
+  one file) would let us pin the fallback log and failedCount bookkeeping.

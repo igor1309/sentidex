@@ -65,8 +65,10 @@ function runScript(options = {}) {
       settled = true;
       result.status = status;
       Object.assign(result, extra);
-      cleanup();
-      resolve(result);
+      Promise.resolve().then(() => {
+        cleanup();
+        resolve(result);
+      });
     };
 
     const shouldFinishForMessage = (message) => {

@@ -44,18 +44,14 @@ To keep the code history clean, automated commits are made by distinct "Bot" aut
 
 The project uses Jest to run a suite of characterization tests that validate the behavior of the core scripts.
 
-**Important: Running Tests in UTC**
-
-The test harness is designed to be fully deterministic. However, the `process-messages.js` script currently has a known bug where it generates timestamps based on the local timezone of the machine it runs on. To ensure consistent and reproducible test results that match the **UTC** environment of our CI pipeline, all tests **must** be run with the timezone explicitly set to UTC.
-
 To run the full test suite:
 ```bash
-TZ=UTC npm test
+npm test
 ```
 
 To update test snapshots:
 ```bash
-TZ=UTC npm test -- -u
+npm test -- -u
 ```
 
 ### Continuous Integration (CI)

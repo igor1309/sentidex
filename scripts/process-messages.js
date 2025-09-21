@@ -1,27 +1,26 @@
-const fs = require('fs');
-const path = require('path');
 const { getAIEnrichment } = require('./services/ai.js');
 const frontMatterCodec = require('./adapters/frontMatterCodec');
 const logger = require('./adapters/consoleLogger');
 const messageProcessor = require('./core/messageProcessor');
+const fileSystem = require('./adapters/fileSystem');
 
 async function processMessages() {
   logger.info('Starting message processing...');
   
   try {
     // Check if _inbox exists
-    if (!fs.existsSync('_inbox')) {
-    logger.info('No _inbox directory found');
+    if (!fileSystem.exists('_inbox')) {
+      logger.info('No _inbox directory found');
       return;
     }
     
     // Create inbox directory if it doesn't exist
-    if (!fs.existsSync('inbox')) {
-      fs.mkdirSync('inbox', { recursive: true });
+    if (!fileSystem.exists('inbox')) {
+      fileSystem.mkdir('inbox');
     }
-    
+
     // Get all files from _inbox
-    const inboxFiles = fs.readdirSync('_inbox').filter(file => file.endsWith('.md'));
+    const inboxFiles = fileSystem.readdir('_inbox').filter(file => file.endsWith('.md'));
     logger.info(`Found ${inboxFiles.length} files to process`);
     
     if (inboxFiles.length === 0) {
@@ -34,8 +33,8 @@ async function processMessages() {
     let failedCount = 0;
     
     for (const filename of inboxFiles) {
-      const inboxPath = path.join('_inbox', filename);
-    logger.info(`Processing file: ${filename}`);
+      const inboxPath = fileSystem.join('_inbox', filename);
+      logger.info(`Processing file: ${filename}`);
       
       try {
         const result = await processFile(inboxPath);
@@ -69,7 +68,7 @@ async function processMessages() {
 }
 
 async function processFile(inboxPath) {
-  const content = fs.readFileSync(inboxPath, 'utf8');
+  const content = fileSystem.readFile(inboxPath);
   
   // Parse front matter and content
   const { frontMatter, bodyContent } = frontMatterCodec.parse(content);
@@ -86,9 +85,9 @@ async function processFile(inboxPath) {
     if (originalFilePath) {
       logger.info(`Duplicate found for ${sourceUrl}. Original: ${originalFilePath}`);
 
-      const originalFilename = path.basename(originalFilePath);
+      const originalFilename = fileSystem.basename(originalFilePath);
       const ticketFilename = `DUPL_${formatTimestamp(new Date())}.md`;
-      const ticketPath = path.join('inbox', ticketFilename);
+      const ticketPath = fileSystem.join('inbox', ticketFilename);
 
       const ticketContent = frontMatterCodec.stringify({
         frontMatter: {
@@ -101,10 +100,10 @@ async function processFile(inboxPath) {
         bodyContent: `Дубликат, см. оригинал: ${originalFilename}`,
       });
 
-      fs.writeFileSync(ticketPath, ticketContent, 'utf8');
+      fileSystem.writeFile(ticketPath, ticketContent);
       logger.info(`Created duplicate ticket: ${ticketPath}`);
 
-      fs.unlinkSync(inboxPath);
+      fileSystem.unlink(inboxPath);
       logger.info(`Deleted raw duplicate file: ${inboxPath}`);
       return 'duplicate';
     }
@@ -139,7 +138,7 @@ async function processFile(inboxPath) {
   // Generate new filename with AI title and timestamp
   const timestamp = new Date(frontMatter.timestamp || Date.now());
   const newFilename = `${aiResults.title}-${formatTimestamp(timestamp)}.md`;
-  const outboxPath = path.join('inbox', newFilename);
+  const outboxPath = fileSystem.join('inbox', newFilename);
   
   // Create new content
   const newContent = frontMatterCodec.stringify({
@@ -148,7 +147,7 @@ async function processFile(inboxPath) {
   });
   
   // Write to inbox
-  fs.writeFileSync(outboxPath, newContent, 'utf8');
+  fileSystem.writeFile(outboxPath, newContent);
   logger.info(`Created processed file: ${outboxPath}`);
   
   if (process.env.DEBUG === 'true') {
@@ -157,21 +156,21 @@ async function processFile(inboxPath) {
   }
   
   // Delete original file from _inbox
-  fs.unlinkSync(inboxPath);
+  fileSystem.unlink(inboxPath);
   logger.info(`Deleted original file: ${inboxPath}`);
   return 'processed';
 }
 
 function findOriginalBySourceUrl(url, directory) {
-  if (!fs.existsSync(directory)) {
+  if (!fileSystem.exists(directory)) {
     return null;
   }
   
-  const files = fs.readdirSync(directory);
+  const files = fileSystem.readdir(directory);
   for (const file of files) {
     if (file.endsWith('.md') && !file.startsWith('DUPL_')) {
-      const filePath = path.join(directory, file);
-      const content = fs.readFileSync(filePath, 'utf8');
+      const filePath = fileSystem.join(directory, file);
+      const content = fileSystem.readFile(filePath);
       if (content.includes(`source_url: "${url}"`)) {
         return filePath;
       }

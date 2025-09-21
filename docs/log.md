@@ -1,5 +1,15 @@
 # Log
 
+## 2025-09-21
+
+Completed a major architectural refactoring of `process-messages.js` driven by a formal component review created using `Component Improvement Review Guideline.md`. The process followed a strict, test-driven methodology for safely modifying legacy code.
+
+First, a comprehensive characterization harness was built to capture the script's existing behavior without any production code changes. This safety net, along with a new CI workflow, provided a stable foundation for all subsequent work.
+
+The refactoring itself was guided by a series of atomic, machine-readable plans. Each small, incremental change was validated against the complete test harness, ensuring no regressions were introduced. This disciplined process successfully decoupled the core logic from its external dependencies (filesystem, logging, parsing), transforming the monolithic script into a clean, layered application based on the Ports and Adapters pattern.
+
+Finally, the new architecture was leveraged to add a suite of fast unit tests for the core business logic, improving future development velocity.
+
 ## 2025-09-20
 
 Refactoring did introduced bugs.

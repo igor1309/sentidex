@@ -1,0 +1,65 @@
+# .github/workflows/ci.yml
+
+# This workflow defines the Continuous Integration process for the project.
+# It runs a comprehensive test suite to ensure code quality and correctness.
+name: Continuous Integration
+
+# §1. Triggers: This workflow runs automatically on pushes or pull requests to the trunk branch.
+on:
+  push:
+    branches:
+      - trunk
+  pull_request:
+    branches:
+      - trunk
+
+# §2. Job Definition: A single job that builds, tests, and notifies on failure.
+jobs:
+  test-and-notify:
+    name: Test and Notify
+    runs-on: ubuntu-latest
+
+    # §2.1. Permissions: Adheres to the principle of least privilege.
+    permissions:
+      contents: read # Allows checkout of the repository.
+
+    # §3. Steps: The sequence of actions to be executed.
+    steps:
+      # §3.1. Checkout the source code.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # §3.2. Setup Node.js environment with caching for performance.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x' # Specify your project's Node.js version.
+          cache: 'npm'
+
+      # §3.3. Install dependencies using 'npm ci' for reproducible builds.
+      - name: Install dependencies
+        run: npm ci
+
+      # §3.4. Run the full test suite. If this step fails, subsequent steps are skipped,
+      # and the 'if: failure()' condition on the notification step will be met.
+      - name: Run tests
+        run: npm test
+
+      # §3.5. Send a notification to Telegram ONLY if the 'Run tests' step failed.
+      - name: Send Telegram notification on failure
+        if: failure()
+        env:
+          # These secrets must be configured in the repository's Settings > Secrets and variables > Actions.
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: |
+          # Prepare the message content for the Telegram API.
+          # We use URL encoding for special characters and newlines (%0A).
+          MESSAGE_TEXT="🚨 **Build Failed**%0A%0A*Repository:* `${{ github.repository }}`%0A*Commit:* `${{ github.sha }}`%0A*Triggered by:* `${{ github.actor }}`%0A%0A*Details:* [View Workflow Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          
+          # Send the message using curl and the Telegram Bot API.
+          # The '-s' flag makes curl silent (no progress meter).
+          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${CHAT_ID}" \
+            -d "text=${MESSAGE_TEXT}" \
+            -d "parse_mode=Markdown"

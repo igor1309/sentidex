@@ -65,8 +65,8 @@ We have an automated CI pipeline defined in `.github/workflows/ci.yml`. This wor
 -   **Trigger:** Runs automatically on every push and pull request to the `trunk` branch.
 -   **Actions:**
     1.  Installs all dependencies from the lockfile (`npm ci`).
-    2.  Runs the complete test suite in a UTC environment (`TZ=UTC npm test`).
--   **On Failure:** If any test fails, the build is blocked from merging, and a notification is sent to the project's Telegram bot to alert the team.
+    2.  Runs the complete test suite via the `npm test` command. The CI runner environment defaults to the UTC timezone, ensuring consistent results.
+-   **On Failure:** If any test fails, the build is blocked. A notification is sent to the project's Telegram bot with a direct link to the failed workflow run for immediate debugging.
 
 ## Usage
 

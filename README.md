@@ -15,7 +15,7 @@ Telegram-based message processing pipeline for content curation and AI-enhanced 
 
 1. **Message Collection** (`poll-telegram.js`)
    - Polls Telegram bot for new messages
-   - Processes forwarded messages and regular messages  
+   - Processes forwarded messages and regular messages
    - Extracts metadata, links, and media information
    - Saves raw messages to `_inbox/` directory
 
@@ -37,6 +37,36 @@ Telegram-based message processing pipeline for content curation and AI-enhanced 
 Sentidex intentionally keeps its code and data (`inbox/`, `_inbox/`) in a single repository. This "repo-as-a-database" model simplifies the architecture, treating each git commit as an atomic transaction.
 
 To keep the code history clean, automated commits are made by distinct "Bot" authors, separating them from human development commits. For more details, see the [Architectural Decision Record](./docs/adr-monorepo-decision.md).
+
+## Development
+
+### Testing
+
+The project uses Jest to run a suite of characterization tests that validate the behavior of the core scripts.
+
+**Important: Running Tests in UTC**
+
+The test harness is designed to be fully deterministic. However, the `process-messages.js` script currently has a known bug where it generates timestamps based on the local timezone of the machine it runs on. To ensure consistent and reproducible test results that match the **UTC** environment of our CI pipeline, all tests **must** be run with the timezone explicitly set to UTC.
+
+To run the full test suite:
+```bash
+TZ=UTC npm test
+```
+
+To update test snapshots:
+```bash
+TZ=UTC npm test -- -u
+```
+
+### Continuous Integration (CI)
+
+We have an automated CI pipeline defined in `.github/workflows/ci.yml`. This workflow provides a critical quality gate for the project.
+
+-   **Trigger:** Runs automatically on every push and pull request to the `trunk` branch.
+-   **Actions:**
+    1.  Installs all dependencies from the lockfile (`npm ci`).
+    2.  Runs the complete test suite in a UTC environment (`TZ=UTC npm test`).
+-   **On Failure:** If any test fails, the build is blocked from merging, and a notification is sent to the project's Telegram bot to alert the team.
 
 ## Usage
 

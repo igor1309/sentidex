@@ -1,5 +1,9 @@
 # Log
 
+## 2025-09-22
+
+Налетел на лимиты GitHub по Actions (впервые ever), сделал репозиторий публичным.
+
 ## 2025-09-21
 
 **Completed major refactoring of process-messages.js.**  

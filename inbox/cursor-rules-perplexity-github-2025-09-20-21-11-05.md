@@ -1,0 +1,25 @@
+---
+id: mfv3ugj9xryrwyjv2e
+created_at: '2025-09-20T21:11:05.309Z'
+source_info: '@samulowry'
+source_url: ''
+has_media: false
+language: mixed
+summary: >-
+  обсуждение глобальных правил настройки, команды скачивания репозитория и
+  активации памяти для MD
+tags:
+  - github
+  - cursor
+  - rules
+  - perplexity
+  - md
+processed_at: '2025-09-22T12:30:56.565Z'
+---
+[https://github.com/samlowry/samlowrys-cursor-rules](https://github.com/samlowry/samlowrys-cursor-rules) — вот мои промпты, там ток две части важны:
+
+глобальные, которые в настройках вбиты: [https://github.com/samlowry/samlowrys-cursor-rules/blob/main/global-rules.md](https://github.com/samlowry/samlowrys-cursor-rules/blob/main/global-rules.md)
+
+в них же — команда для скачки этого репо и активации MD-памяти.
+
+но MD-память он, падла, юзает несистемно, Perplexity мне запилил новую систему, но мне пока лень её вводить.

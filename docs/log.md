@@ -7,7 +7,7 @@
 ## 2025-09-21
 
 **Completed major refactoring of process-messages.js.**  
-`Gemini 2.5 Pro` applied `Component Improvement Review Guideline` to produce a comprehensive review, then used `Tactical Action Plan Guideline` to generate focused, machine-readable plans. `Codex` executed these plans with Gemini reviewing execution (using `repo2context` script). The first coding step was building a characterization harness — the codebase’s initial tests — providing a TDD safety net alongside a new CI workflow. Each atomic change was validated against this harness, progressively decoupling core logic from filesystem, logging, and parsing into a Ports & Adapters architecture. Outcome: clean layering, fast unit tests, and higher development velocity.
+`Gemini 2.5 Pro` applied `Component Improvement Review Guideline` to produce a comprehensive review, then used `Tactical Action Plan Guideline` to generate focused, machine-readable plans. `Codex` executed these plans with Gemini reviewing execution (using `repo2md.sh` script). The first coding step was building a characterization harness — the codebase’s initial tests — providing a TDD safety net alongside a new CI workflow. Each atomic change was validated against this harness, progressively decoupling core logic from filesystem, logging, and parsing into a Ports & Adapters architecture. Outcome: clean layering, fast unit tests, and higher development velocity.
 
 ## 2025-09-20
 

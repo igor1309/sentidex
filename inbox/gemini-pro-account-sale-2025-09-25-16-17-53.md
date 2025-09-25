@@ -1,0 +1,20 @@
+---
+id: mfzuu35vudlntwi5wt
+created_at: '2025-09-25T16:17:53.788Z'
+source_info: Силиконовый Мешок
+source_url: 'https://t.me/prompt_design/1634'
+has_media: false
+language: mixed
+summary: >-
+  Покупка активированного Pro-аккаунта Google Gemini за 10 долларов и инструкция
+  по входу
+tags:
+  - gemini
+  - google
+  - ggsel
+  - perplexity
+processed_at: '2025-09-25T20:17:33.571Z'
+---
+Что-то у нас уже весь чат @prompt_chat кипит от вопросов, как получить [годовой Pro-аккаунт Gemini ](https://t.me/prompt_design/1632)от Google.
+Если вы не студент и не хотите погружаться во все эти тонкости и проходить сложные квесты, просто купите активированный аккаунт у тех, кто смог зарегистрировать. **Цена вопроса — 10 баксов.** Я [покупал у этого продавца](https://ggsel.net/en/catalog/product/google-ai-gemini-pro-12-mesiacev-veo3-2tb-privatnyi-5219434) несколько месяцев назад на [ggsel ](https://ggsel.net/en/catalog/product/google-ai-gemini-pro-12-mesiacev-veo3-2tb-privatnyi-5219434)— работает.
+После оплаты вам сразу прилетает «портянка»: логин, пароль, 2FA и инструкция, по которой надо всё сделать. Не забудьте поменять пароль, ну и помните, что, в отличие от [Perplexity,](https://plati.market/itm/5034113?ai=1361021) Google не даст вам пользоваться своими продуктами, если увидит, что регион неправильный.

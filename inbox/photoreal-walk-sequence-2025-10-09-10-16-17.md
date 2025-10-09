@@ -1,0 +1,52 @@
+---
+id: mgjmnsof856ea7mjnsm
+created_at: '2025-10-09T10:16:17.664Z'
+source_info: mimagie
+source_url: 'https://t.me/mimagie/101'
+has_media: true
+language: en
+summary: >-
+  live-action photoreal cinema in a single continuous take showing a year of
+  routine from door to trash can.
+tags:
+  - fps
+  - gimbal
+  - neighbors
+  - blue
+processed_at: '2025-10-09T16:24:06.639Z'
+---
+Prompt: ||LIVE‑ACTION PHOTOREAL CINEMA. NOT animation, NOT storyboard, NOT illustration. 
+One continuous shot, single take. DO NOT CUT. 24 fps, natural motion blur (180° shutter look).
+Camera: gimbal dolly backward at constant speed; slight handheld micro‑jitter under 1.5%.
+Framing: MEDIUM SHOT chest‑up; subject stays center‑weighted and same scale for all 12 s.
+Lens & DOF: spherical 28–35 mm equivalent; shallow depth of field; eyes tack‑sharp, background softly defocused with natural round bokeh and mild vignetting.
+Lighting & grade: natural daylight, soft top‑light through tree leaves; filmic highlight roll‑off; neutral‑warm skin tones; subtle film grain; no toon/line art/text overlays.
+
+Concept: show nearly a year of routine in a single unbroken walk from his front door to the trash can. The background evolves as if time advances day by day (seasons, weather, decorations), but feels like real live‑action environmental changes behind him. The man walks toward camera at a steady pace; the camera glides backwards keeping him framed identically.
+
+Subject identity (lock it): one consistent man, late‑20s/early‑30s, short ginger hair, light freckles, small hoop earring, gold chain, denim jacket over neutral tee. Preserve his face and body continuity across the full shot.
+
+Recurring neighbors (keep them consistent whenever they appear in the background): 
+• Attractive female neighbor, 30s, short dark hair, pink T‑shirt with yoga mat; friendly glance.
+• Smug office manager, 40s, cheap suit with lanyard; slightly antagonistic.
+
+Continuity rules for BIG events:
+• Wardrobe special: from 2.6–4.6 s he wears a BLUE Adidas‑style tracksuit (with stripes). Keep this outfit continuous during that window only; then revert to baseline denim afterwards.
+• Hair change: abrupt change at ~4.9 s (either bright blue dye OR close buzz cut). After that moment, hair gradually grows back over time; keep the chosen path consistent.
+• Black eye: appears suddenly at ~7.6 s; then fades out gradually and completely from 7.6–8.6 s.
+
+Background evolution notes (realistic, not cartoon): every few frames the environment behind him shifts as if to new days—trees with and without leaves, sun → overcast → rain → wind → light snow, holiday lights, umbrellas, scattered puddles—while the sidewalk and “route to the trash can” remain semantically the same. Use physically‑plausible parallax and weather FX; do not change his scale or camera move.
+
+Beat plan over 12 s:
+• 0.0–2.4  Establish the walk; subtle leaf shimmer, late‑summer sun; neighbors may appear far back.
+• 2.4–4.8  He continues; from 2.6–4.6 s hold the BLUE tracksuit while backgrounds keep advancing through different days.
+• 4.8–7.2  Abrupt HAIR CHANGE at ~4.9 s; from there hair slowly regrows. Show a quick “hungover morning” read in his eyes without breaking pace.
+• 7.2–9.6  BLACK EYE appears at ~7.6 s and fades 7.6–8.6 s while snow/wind/rain moments pass; smug manager cameo in background walkway.
+• 9.6–12.0 Approach the trash can. At 11.6 s he tosses the bag and MISSES by a few inches. Hold his deadpan reaction to 12.0 s.
+
+Audio (generate with video): one continuous RISING SUSPENSE bed across 0.0–12.0 s (no melody), plus subtle diegetic ambience that matches weather (soft rain patter, wind rustle, footfalls), mixed under the bed. No final sting; let the anticlimax land dry at 11.6–12.0 s.
+
+Hard constraints: NO CUTS. NO timelapse. NO speed ramping. NO freeze‑frames. Preserve subject identity and both neighbor identities. Keep subject scale/position constant; keep camera move perfectly continuous.
+Forbidden styles: animation, 2D/3D toon shading, sketch lines, low‑poly, comic, posterization.||
+
+🎥 **Video** (12s) - 17.2 MB - 1792x1024

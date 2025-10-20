@@ -51,10 +51,24 @@ jobs:
           cache: "npm"
 
       - name: npm install with retries
+        env:
+          NPM_CONFIG_AUDIT: "false"
+          NPM_CONFIG_FUND: "false"
+          NPM_CONFIG_PROGRESS: "false"
         run: |
           set -e
-          for i in {1..5}; do
-            npm install && break || sleep 10
+          for attempt in 1 2 3; do
+            if npm ci; then
+              break
+            fi
+
+            if [ "$attempt" -eq 3 ]; then
+              echo "npm ci failed after ${attempt} attempts"
+              exit 1
+            fi
+
+            echo "npm ci failed (attempt ${attempt}); retrying in 10 seconds..."
+            sleep 10
           done
 
       - name: Run message processing

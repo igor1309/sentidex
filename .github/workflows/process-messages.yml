@@ -83,8 +83,46 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git fetch origin trunk
-            git rebase --autostash origin/trunk
             git commit -m "Process messages: _inbox → inbox"
-            git push
+
+            if git push; then
+              echo "Pushed processed messages without rebasing"
+            else
+              echo "Initial push failed; attempting to rebase onto origin/trunk"
+              git fetch origin trunk
+
+              if git rebase origin/trunk; then
+                git push
+              else
+                echo "Rebase hit conflicts; attempting automated resolution for inbox files"
+                conflict_files=$(git diff --name-only --diff-filter=U)
+
+                if [ -z "$conflict_files" ]; then
+                  echo "No conflicted files detected; aborting rebase"
+                  git rebase --abort
+                  exit 1
+                fi
+
+                unresolved=0
+
+                for file in $conflict_files; do
+                  if [[ "$file" == inbox/* || "$file" == _inbox/* ]]; then
+                    git restore --ours "$file"
+                    git add "$file"
+                  else
+                    echo "Conflict in unexpected file: $file"
+                    unresolved=1
+                  fi
+                done
+
+                if [ "$unresolved" -ne 0 ]; then
+                  echo "Aborting rebase due to unresolved conflicts"
+                  git rebase --abort
+                  exit 1
+                fi
+
+                git rebase --continue
+                git push
+              fi
+            fi
           fi

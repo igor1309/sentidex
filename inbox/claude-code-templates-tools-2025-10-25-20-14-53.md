@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 441
-timestamp: "2025-10-25T20:14:53.573Z"
-source_info: "Константин Доронин"
-source_url: "https://t.me/kdoronin_blog/1022"
-forward_date: "2025-10-25T19:51:29.000Z"
+id: mh6u6jzg0ur5c0a75o5
+created_at: '2025-10-25T20:14:53.573Z'
+source_info: Константин Доронин
+source_url: 'https://t.me/kdoronin_blog/1022'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор репозитория CC Templates и инструментов Claude Code для быстрой
+  разработки агентов и мониторинга
+tags:
+  - cc
+  - templates
+  - claude
+  - code
+  - analytics
+processed_at: '2025-10-25T22:13:21.195Z'
 ---
-
 **Что хранит в себе Claude Code Templates?
 **
 Я уже пару раз упоминал в постах репозиторий [CC Templates](https://github.com/davila7/claude-code-templates) от **AITMPL**. 

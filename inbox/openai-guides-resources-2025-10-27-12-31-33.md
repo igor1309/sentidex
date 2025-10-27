@@ -1,15 +1,19 @@
 ---
-raw_message: true
-message_id: 444
-timestamp: "2025-10-27T12:31:33.455Z"
-source_info: "НейроProfit | Соня Pro AI"
-source_url: "https://t.me/NeuralProfit/2035"
-forward_date: "2025-10-27T10:32:14.000Z"
+id: mh981y9nrrdwcnq8ctb
+created_at: '2025-10-27T12:31:33.455Z'
+source_info: НейроProfit | Соня Pro AI
+source_url: 'https://t.me/NeuralProfit/2035'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: Бесплатные гайды OpenAI для бизнеса и использования GPT-5 в PDF
+tags:
+  - гайды
+  - бизнеса
+  - руководителей
+  - менеджеров
+  - аналитикам
+processed_at: '2025-10-27T14:17:13.403Z'
 ---
-
 **Бесплатные готовые гайды для бизнеса от OpenAI
 **
 Я **уже рассказывала**а](https://t.me/NeuralProfit/1697) про то, что на сайте *OpenAI* есть очень полезный раздел **Business Guides and Resources**. Там собраны полезные материалы, *для руководителей и менеджеров, которым нужно внедрить ИИ в компанию, консультантам и аналитикам, и ИТ-специалистам и разработчикам.*м.**

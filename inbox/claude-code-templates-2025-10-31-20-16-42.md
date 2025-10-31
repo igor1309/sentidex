@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 453
-timestamp: "2025-10-31T20:16:42.618Z"
-source_info: "Константин Доронин"
-source_url: "https://t.me/kdoronin_blog/1032"
-forward_date: "2025-10-31T19:46:46.000Z"
+id: mhfev7n8ncgtkpvh0q
+created_at: '2025-10-31T20:16:42.618Z'
+source_info: Константин Доронин
+source_url: 'https://t.me/kdoronin_blog/1032'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор готовых Skill-репозиториев для Claude Code: Anthropic, Superpowers, CC
+  Templates, их качество и применение
+tags:
+  - anthropic
+  - superpowers
+  - claude
+  - code
+  - templates
+processed_at: '2025-10-31T22:14:33.332Z'
 ---
-
 **Кто уже подготовил Skills для Claude Code**?**
 **
 Фактически, на текущий момент существует только три более-менее проработанных Skills-репозитория:

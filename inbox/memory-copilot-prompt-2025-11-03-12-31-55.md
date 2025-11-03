@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 457
-timestamp: "2025-11-03T12:31:55.307Z"
-source_info: "Pavel Zloi"
-source_url: "https://t.me/evilfreelancer/1453"
-forward_date: "2025-11-03T10:25:36.000Z"
+id: mhjch71kpil94dpccl
+created_at: '2025-11-03T12:31:55.307Z'
+source_info: Pavel Zloi
+source_url: 'https://t.me/evilfreelancer/1453'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Концепт сабагента Memory Copilot, управляющего памятью модели через два
+  инструмента: search и save, с автоматизацией.
+tags:
+  - memory
+  - copilot
+  - search
+  - save
+  - prompts
+processed_at: '2025-11-03T16:18:44.839Z'
 ---
-
 **Memory Copilot - концепт инструмента памяти агента**
 
 В своей практике стараюсь избегать прямых отсылок на то как (мне и многим моим визави *кажется*) работает разум и мышление, поскольку стоит только привести такую аналогию, как дискуссия сразу же уходит куда-то в эзотерические дали.

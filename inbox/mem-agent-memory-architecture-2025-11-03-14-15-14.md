@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 458
-timestamp: "2025-11-03T14:15:14.253Z"
-source_info: "Dealer.AI"
-source_url: "https://t.me/dealerAI/1474"
-forward_date: "2025-09-18T10:18:08.000Z"
+id: mhjchjrlqpnlra6li3
+created_at: '2025-11-03T14:15:14.253Z'
+source_info: Dealer.AI
+source_url: 'https://t.me/dealerAI/1474'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор Mem-Agent: иерархия памяти в Markdown, двунаправленные связи, интеграция
+  MCP и поддержка LLM.
+tags:
+  - markdown
+  - obsidian
+  - mcp
+  - rag
+processed_at: '2025-11-03T16:19:01.329Z'
 ---
-
 **Mem-agent еще одна концепция памяти** 🧠
 
 В [своих постах про память](https://t.me/dealerAI/1189), а также [выступлении на datafest](https://t.me/dealerAI/1321) я обозревал самые популярные подходы к созданию памяти: long context, саммаризация, ner,  function calling и rag. Однако мельком, буквально на слайдике одним пунктиком я упоминал про агентный подход для памяти. И обещал, что, как-нибудь, мы еще об этом поговорим.

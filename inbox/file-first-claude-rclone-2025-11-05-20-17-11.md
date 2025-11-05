@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 465
-timestamp: "2025-11-05T20:17:11.007Z"
-source_info: "Refat Talks: Tech & AI"
-source_url: "https://t.me/nobilix/178"
-forward_date: "2025-11-05T19:43:42.000Z"
+id: mhmk2wuc86uf4ij37cq
+created_at: '2025-11-05T20:17:11.007Z'
+source_info: 'Refat Talks: Tech & AI'
+source_url: 'https://t.me/nobilix/178'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  file-first агент на Claude SDK с rclone вместо RAG, ускоряющий поиск по
+  документам
+tags:
+  - rclone
+  - claude
+  - sdk
+  - docx
+processed_at: '2025-11-05T22:14:53.891Z'
 ---
-
 Великий `rclone` (или иногда агенту нужны просто файлы)
 
 Делаем агента для европейской маркетинговой компании. Год они мучались с RAG - индексировали, чанкали, перебирали эмбединги, то лагает, то галлюцинирует, то не находит нужное.

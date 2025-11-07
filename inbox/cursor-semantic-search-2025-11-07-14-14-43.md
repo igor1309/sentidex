@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 468
-timestamp: "2025-11-07T14:14:43.386Z"
-source_info: "Data Secrets"
-source_url: "https://t.me/data_secrets/8198"
-forward_date: "2025-11-07T13:47:44.000Z"
+id: mhp25mpi17plbeja2pj
+created_at: '2025-11-07T14:14:43.386Z'
+source_info: Data Secrets
+source_url: 'https://t.me/data_secrets/8198'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Cursor внедрил семантический поиск на базе RAG и обученной embedding-модели
+  под код
+tags:
+  - cursor
+  - rag
+  - embedding
+  - grep
+processed_at: '2025-11-07T16:16:26.166Z'
 ---
-
 **В Cursor обновили модель поиска: благодаря RAG многое теперь работает лучше**
 
 В Cursor уже давно используется retrieval-механика: агент ищет по кодовой базе и добавляет нужные куски в контекст LLM. Но раньше был реализован просто grep вариант – поиск по строковому совпадению. Это быстро, но не всегда в достаточной степени релевантно. 

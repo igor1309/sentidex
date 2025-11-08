@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 470
-timestamp: "2025-11-08T08:17:44.962Z"
-source_info: "Neural Kovalskii"
-source_url: "https://t.me/neuraldeep/1718"
-forward_date: "2025-11-08T07:17:59.000Z"
+id: mhq9fbi2m8cryjf97cl
+created_at: '2025-11-08T08:17:44.962Z'
+source_info: Neural Kovalskii
+source_url: 'https://t.me/neuraldeep/1718'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Стримовая модерация Qwen3Guard-Stream: токен-уровневая классификация и
+  мгновенная блокировка небезопасного контента.
+tags:
+  - qwen3guard
+  - stream
+  - token
+  - jailbreak
+processed_at: '2025-11-08T12:27:41.689Z'
 ---
-
 **Qwen3Guard-Stream: real-time модерация которая реально работает**
 
 *Новый день новый Qwen*!

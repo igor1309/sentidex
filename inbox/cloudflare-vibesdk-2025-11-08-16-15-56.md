@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 472
-timestamp: "2025-11-08T16:15:56.260Z"
-source_info: "Глеб про AI"
-source_url: "https://t.me/gleb_pro_ai/287"
-forward_date: "2025-11-08T14:12:49.000Z"
+id: mhqm167i5ty68n6xn6h
+created_at: '2025-11-08T16:15:56.260Z'
+source_info: Глеб про AI
+source_url: 'https://t.me/gleb_pro_ai/287'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Cloudflare выпустили в оупенсорс конструктор вайбкод приложений под MIT,
+  позволяющий запускать и разрабатывать приложения
+tags:
+  - оупенсорс
+  - вайбкод
+  - приложений
+  - хостинг
+processed_at: '2025-11-08T18:20:36.654Z'
 ---
-
 А вот это вот интересно
 
 Cloudflare, оказывается, выпустили в оупенсорс конструктор вайбкод-приложений. 

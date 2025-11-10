@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 477
-timestamp: "2025-11-10T16:19:43.198Z"
-source_info: "The AI Architect | AI Coding"
-source_url: "https://t.me/the_ai_architect/166"
-forward_date: "2025-11-10T14:01:36.000Z"
+id: mhth0e32pxjuoce2kdo
+created_at: '2025-11-10T16:19:43.198Z'
+source_info: The AI Architect | AI Coding
+source_url: 'https://t.me/the_ai_architect/166'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Делегирование рисерча кодовой базы через headless режим CLI-агентов для
+  экономии контекста.
+tags:
+  - headless
+  - cli
+  - coding
+  - subagents
+processed_at: '2025-11-10T18:23:20.654Z'
 ---
-
 **Делегирование — важный навык в AI Coding**
 
 Представьте, вы общаетесь в чатике с Cursor, обсуждаете фичу и вам необходимо, чтобы агент сделал предварительный рисерч по кодовой базе: узнал, как устроен у вас тот или иной функционал. Обычно, рисерч неплохо так отнимает контекстное окно, и процесс рисерча (поэтапное изучение кодовой базы) нам в контексте не нужен, потому что полезной нагрузки никакой не несёт. Нам нужен только результат такого рисерча. 

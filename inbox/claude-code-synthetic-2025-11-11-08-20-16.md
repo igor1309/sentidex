@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 481
-timestamp: "2025-11-11T08:20:16.961Z"
-source_info: "AI-Driven Development. Родион Мостовой"
-source_url: "https://t.me/ai_driven/165"
-forward_date: "2025-11-11T07:01:19.000Z"
+id: mhuf4a3j8e5v794peen
+created_at: '2025-11-11T08:20:16.961Z'
+source_info: AI-Driven Development. Родион Мостовой
+source_url: 'https://t.me/ai_driven/165'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор подписок на локальные LLM: Claude Code, Synthetic, API, развертывание
+  моделей и реферальная программа.
+tags:
+  - claude
+  - code
+  - synthetic
+  - minimax
+  - glm
+processed_at: '2025-11-11T10:18:09.055Z'
 ---
-
 **Claude Code всё?**
 
 Ну что, друзья, Open Source LLMs для кодинга стремительно догоняют своих закрытых ~~братьев~~ сестер. Недавно вышли аж 3 значимых модели от китайцев - это Minimax M2, GLM 4.6 и Kimi K2 Thinking, очень мощные модели, догоняющие Sonnet 4.5 и GPT-5.

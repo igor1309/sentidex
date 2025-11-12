@@ -1,15 +1,19 @@
 ---
-raw_message: true
-message_id: 485
-timestamp: "2025-11-12T16:20:27.399Z"
-source_info: "The AI Architect | AI Coding"
-source_url: "https://t.me/the_ai_architect/167"
-forward_date: "2025-11-12T15:22:42.000Z"
+id: mhwbvnv4sww6fifw6ho
+created_at: '2025-11-12T16:20:27.399Z'
+source_info: The AI Architect | AI Coding
+source_url: 'https://t.me/the_ai_architect/167'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Руководство по работе с субагентами в Claude Code через делегирование задач и
+  /agents
+tags:
+  - delegate
+  - agents
+  - claude
+processed_at: '2025-11-12T18:23:00.496Z'
 ---
-
 **Как начать работать с субагентами в Claude Code?**
 
 *Простая аналогия субагента*

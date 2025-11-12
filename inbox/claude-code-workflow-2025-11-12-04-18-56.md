@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 482
-timestamp: "2025-11-12T04:18:56.672Z"
-source_info: "Константин Доронин"
-source_url: "https://t.me/kdoronin_blog/1045"
-forward_date: "2025-11-11T19:29:58.000Z"
+id: mhvm6zzopk9k3zgmkv
+created_at: '2025-11-12T04:18:56.672Z'
+source_info: Константин Доронин
+source_url: 'https://t.me/kdoronin_blog/1045'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Еще один отличный сборник workflow и плагинов для Claude Code с агентами и
+  исследовательской архитектурой.
+tags:
+  - workflow
+  - плагинов
+  - агентов
+  - скиллов
+processed_at: '2025-11-12T06:23:59.412Z'
 ---
-
 **Ещё один отличный сборник workflow и плагинов для Claude Code.
 **
 [Речь про репозиторий с агентами](https://github.com/wshobson/agents) от wshobson. 

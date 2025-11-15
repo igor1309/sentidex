@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 489
-timestamp: "2025-11-15T08:17:35.061Z"
-source_info: "Научи меня ИИ"
-source_url: "https://t.me/uGPTai/330"
-forward_date: "2025-11-15T06:33:51.000Z"
+id: mi04rfgkc2qb3ptpfh
+created_at: '2025-11-15T08:17:35.061Z'
+source_info: Научи меня ИИ
+source_url: 'https://t.me/uGPTai/330'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Официальный гид по промптингу GPT-5.1 с инсайтами, рекомендациями и примерами
+  удачных запросов
+tags:
+  - openai
+  - chatgpt
+  - prompting
+  - guide
+processed_at: '2025-11-15T10:14:50.371Z'
 ---
-
 OpenAI выпустили официальный **гайд**д](https://cookbook.openai.com/examples/gpt-5/gpt-5-1_prompting_guide) по промптингу GPT-5.1, где собраны лайфхаки, рекомендации и примеры удачных запросов.
 
 **Вот главные инсайты:**

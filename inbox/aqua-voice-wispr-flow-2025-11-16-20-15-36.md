@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 491
-timestamp: "2025-11-16T20:15:36.722Z"
-source_info: "Записки C3PO"
-source_url: "https://t.me/c3po_notes/442"
-forward_date: "2025-11-15T09:57:47.000Z"
+id: mi29w3wwjma5oka4ud
+created_at: '2025-11-16T20:15:36.722Z'
+source_info: Записки C3PO
+source_url: 'https://t.me/c3po_notes/442'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Переходы между сервисами: Superwhisper, Wispr Flow и Aqua Voice; мгновенная
+  транскрибация и точное понимание текста.
+tags:
+  - superwhisper
+  - wispr
+  - flow
+  - aqua
+  - voice
+processed_at: '2025-11-16T22:13:59.120Z'
 ---
-
 Я уже писал, что перешёл с Superwhisper на Wispr Flow, а в этот раз пишу, как перешёл с [Wispr Flow](https://wisprflow.ai/) на [Aqua Voice](https://aquavoice.com/). 
 
 Ключевые преимущества — это абсолютно мгновенная транскрибация того, что я говорю. Ты просто зажимаешь Fn, говоришь, отпускаешь и текст как будто мгновенно появляется в поле ввода. При чем понимание самого текста, tone of voice, стиля, терминов, англицизмов очень точное. Я очень редко правлю текст. И в отличие от Superwhisper, в Aqua Voice, как и Wispr Flow, иконка, которая слушает текст, очень маленькая и внизу, её можно показывать только когда происходит зажатие клавиш, а не огромное окно на пол экрана.

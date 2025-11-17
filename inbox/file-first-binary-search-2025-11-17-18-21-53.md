@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 493
-timestamp: "2025-11-17T18:21:53.597Z"
-source_info: "Refat Talks: Tech & AI"
-source_url: "https://t.me/nobilix/182"
-forward_date: "2025-11-17T16:41:37.000Z"
+id: mi3l6rggmlj0jc3r1gq
+created_at: '2025-11-17T18:21:53.597Z'
+source_info: 'Refat Talks: Tech & AI'
+source_url: 'https://t.me/nobilix/182'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Обсуждается file-first подход для агентов работы с базами знаний и поиск по не
+  текстовым файлам через ugrep
+tags:
+  - ugrep
+  - pdfgrep
+  - pdftotext
+  - pandoc
+  - docling
+processed_at: '2025-11-17T20:17:58.144Z'
 ---
-
 Продолжаю про file-first подход к агентам для работы с базами знаний. В прошлом посте [рассказал](https://t.me/nobilix/178) про общий концепт и rclone. В этом посте как и обещал расскажу про поиск по бинарным (не-текстовым) файлам.
 
 Напомню что общая идея - использовать всю мощь передовых кодинг-агентов (в данном случае Claude Code) для задачи работы с базами знаний.

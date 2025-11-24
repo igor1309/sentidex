@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 502
-timestamp: "2025-11-24T10:18:05.326Z"
-source_info: "Data Secrets"
-source_url: "https://t.me/data_secrets/8333"
-forward_date: "2025-11-24T09:10:15.000Z"
+id: mid4nnthnm93xc2ogui
+created_at: '2025-11-24T10:18:05.326Z'
+source_info: Data Secrets
+source_url: 'https://t.me/data_secrets/8333'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Новый проект Андрея Карпаты: консилиум нескольких LLM с ранжированием и
+  финальным ответом председателя
+tags:
+  - консилиум
+  - llm
+  - openrouter
+  - grok
+  - карпаты
+processed_at: '2025-11-24T12:32:54.869Z'
 ---
-
 **Новый проект от Андрея Карпаты: консилиум LLM **
 
 Интерфейс – как у ChatGPT, за тем лишь исключением, что ваш запрос обрабатывают сразу несколько моделей. Выглядит это так: 

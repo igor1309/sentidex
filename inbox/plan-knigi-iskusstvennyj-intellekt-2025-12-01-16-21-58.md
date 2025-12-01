@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 524
-timestamp: "2025-12-01T16:21:58.542Z"
-source_info: "ChatGPT/ Промты/ Claude prompt"
-source_url: "https://t.me/chat_gptgpt/588"
-forward_date: "2025-12-01T13:44:04.000Z"
+id: minhd5mee6mxut8on95
+created_at: '2025-12-01T16:21:58.542Z'
+source_info: ChatGPT/ Промты/ Claude prompt
+source_url: 'https://t.me/chat_gptgpt/588'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Пошаговый план написания книги с использованием ИИ, включая тему, персонажей и
+  структуру.
+tags:
+  - ии
+  - план
+  - персонажей
+  - структура
+processed_at: '2025-12-01T18:26:21.494Z'
 ---
-
 📚Написать свою книгу с помощью ИИ.
 
 Сегодня мы поговорим о:

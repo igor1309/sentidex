@@ -1,15 +1,18 @@
 ---
-raw_message: true
-message_id: 521
-timestamp: "2025-12-01T03:46:21.673Z"
-source_info: "Neural Kovalskii"
-source_url: "https://t.me/neuraldeep/1758"
-forward_date: "2025-11-30T19:19:09.000Z"
+id: mimrojvlj40eo468kls
+created_at: '2025-12-01T03:46:21.673Z'
+source_info: Neural Kovalskii
+source_url: 'https://t.me/neuraldeep/1758'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: 'Сборник лучших подходов, практик и материалов по RAG с примерами и ссылками.'
+tags:
+  - langchain
+  - chroma
+  - qdrant
+  - bogdanisssimo
+processed_at: '2025-12-01T06:27:23.168Z'
 ---
-
 **Лучшие практики и подходы для RAG** 
 (буду наполнять)
 

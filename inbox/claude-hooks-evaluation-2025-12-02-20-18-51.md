@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 526
-timestamp: "2025-12-02T20:18:51.941Z"
-source_info: "Константин Доронин"
-source_url: "https://t.me/kdoronin_blog/1088"
-forward_date: "2025-12-02T19:29:31.000Z"
+id: mip4yh8g7nmqnh0b0lf
+created_at: '2025-12-02T20:18:51.941Z'
+source_info: Константин Доронин
+source_url: 'https://t.me/kdoronin_blog/1088'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Не скиллами едиными — детерминированность через mandatory evaluation хуков
+  Claude Code и активацию навыков.
+tags:
+  - hooks
+  - userpromptsubmit
+  - claude
+  - skills
+  - evaluation
+processed_at: '2025-12-02T22:14:33.664Z'
 ---
-
 **Не скиллами едиными. 
 **
 Увлёкшись скиллами, я почти забыл про один из **моих любимых инструментов в Claude Code**. 

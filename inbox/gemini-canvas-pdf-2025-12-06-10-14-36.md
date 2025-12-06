@@ -1,15 +1,18 @@
 ---
-raw_message: true
-message_id: 533
-timestamp: "2025-12-06T10:14:36.600Z"
-source_info: "Точки над ИИ"
-source_url: "https://t.me/TochkiNadAI/1960"
-forward_date: "2025-12-05T17:35:02.000Z"
+id: miu9tkuuitsg3aag0yn
+created_at: '2025-12-06T10:14:36.600Z'
+source_info: Точки над ИИ
+source_url: 'https://t.me/TochkiNadAI/1960'
 has_media: true
-media_type: "video"
-forward_protected: false
+language: mixed
+summary: 'Инструкция по созданию PDF в Gemini Canvas: выбрать режим Thinking и скачать'
+tags:
+  - gemini
+  - canvas
+  - pdf
+  - thinking
+processed_at: '2025-12-06T12:29:34.038Z'
 ---
-
 Хозяйке на заметку.
 
 **В Gemini в режиме Canvas можно создавать не только веб-приложения на основе ваших вводных, но и сразу генерить PDF.**

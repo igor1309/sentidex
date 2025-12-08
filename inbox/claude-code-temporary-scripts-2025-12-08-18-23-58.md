@@ -1,15 +1,19 @@
 ---
-raw_message: true
-message_id: 543
-timestamp: "2025-12-08T18:23:58.903Z"
-source_info: "Мысли Рвачева"
-source_url: "https://t.me/rvnikita_blog/1468"
-forward_date: "2025-12-08T16:43:35.000Z"
+id: mixpnozr7khwirkgvca
+created_at: '2025-12-08T18:23:58.903Z'
+source_info: Мысли Рвачева
+source_url: 'https://t.me/rvnikita_blog/1468'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Описание добавления инструкций Claude и папки временных скриптов с
+  игнорированием в git
+tags:
+  - ai
+  - coding
+  - claude
+processed_at: '2025-12-08T22:16:11.847Z'
 ---
-
 Известно, что Claude Code любит сгенерить скрипт и запустить его когда требуется более сложная задача. С одной стороны очень классное решение - с другой стороны забивает мусором основной проект.
 
 Для себя эту проблему я решил так: 

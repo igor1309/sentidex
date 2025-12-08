@@ -1,15 +1,18 @@
 ---
-raw_message: true
-message_id: 542
-timestamp: "2025-12-08T16:20:58.173Z"
-source_info: "ForgetMe | Нейросети"
-source_url: "https://t.me/forgetmeai/5692"
-forward_date: "2025-12-08T13:34:11.000Z"
+id: mixpnbwe7re7gqveysw
+created_at: '2025-12-08T16:20:58.173Z'
+source_info: ForgetMe | Нейросети
+source_url: 'https://t.me/forgetmeai/5692'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: 'Skills из Claude Code в OpenSkills для Cursor, TRAE и IDE'
+tags:
+  - openskills
+  - anthropics
+  - cursor
+  - trae
+processed_at: '2025-12-08T22:15:54.878Z'
 ---
-
 ✴️ **Skills из Claude Code — теперь в любой AI-IDE**
 
 Систему **Skills** вынесли в универсальный **open-source** инструмент **OpenSkills**. Теперь **не нужен Claude Code** — **те же Skills** можно подключать **напрямую** в **Cursor**, **TRAE** и других IDE, включая **установку официального репозитория Skills от Anthropic в один клик**. **OpenSkills (GitHub**b](https://github.com/numman-ali/openskills)**)**

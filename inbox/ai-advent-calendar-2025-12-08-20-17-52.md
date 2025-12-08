@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 544
-timestamp: "2025-12-08T20:17:52.429Z"
-source_info: "AI Product | Igor Akimov"
-source_url: "https://t.me/ai_product/1764"
-forward_date: "2025-12-08T18:36:56.000Z"
+id: mixpof7opdnzoajhekg
+created_at: '2025-12-08T20:17:52.429Z'
+source_info: AI Product | Igor Akimov
+source_url: 'https://t.me/ai_product/1764'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Анонс AI Advent Calendar: 25 реальных юзкейсов, топ-инструменты, бесплатные
+  тарифы и подарки.
+tags:
+  - ai
+  - advent
+  - calendar
+  - юзкейсов
+processed_at: '2025-12-08T22:16:45.828Z'
 ---
-
 Ребята, смотрите какую офигенную штуку для вас запилил!
 AI Advent Calendar! 🎄
 [https://advent.abasis.ai/](https://advent.abasis.ai/) 

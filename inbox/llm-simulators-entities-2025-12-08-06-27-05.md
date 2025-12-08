@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 538
-timestamp: "2025-12-08T06:27:05.080Z"
-source_info: "Data Secrets"
-source_url: "https://t.me/data_secrets/8448"
-forward_date: "2025-12-08T05:46:12.000Z"
+id: miwvzblks655jmcs25r
+created_at: '2025-12-08T06:27:05.080Z'
+source_info: Data Secrets
+source_url: 'https://t.me/data_secrets/8448'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Карпаты: LLM симуляторы, не самостоятельные сущности; обсуждайте темы через
+  группы, избегайте обращения 'ты'
+tags:
+  - llm
+  - симуляторы
+  - сущности
+  - промптингу
+processed_at: '2025-12-08T08:25:25.880Z'
 ---
-
 Андрей Карпаты снова выдал красивую базу 
 
 Он [говорит,](https://x.com/karpathy/status/1997731268969304070?s=46&t=pKf_FxsPGBd_YMIWTA8xgg) что нельзя забывать, что **LLM – симуляторы, а не самостоятельные сущности**, и что это нужно учитывать при взаимодействии с ними. 

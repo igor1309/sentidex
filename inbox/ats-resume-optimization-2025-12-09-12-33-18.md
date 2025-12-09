@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 547
-timestamp: "2025-12-09T12:33:18.820Z"
-source_info: "Научи меня ИИ"
-source_url: "https://t.me/uGPTai/406"
-forward_date: "2025-12-09T12:03:06.000Z"
+id: miyo0z5l5t3bs3htt8u
+created_at: '2025-12-09T12:33:18.820Z'
+source_info: Научи меня ИИ
+source_url: 'https://t.me/uGPTai/406'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Промпт для адаптации резюме под ATS и вакансии, избегать выдумок, сохранять
+  фактические данные
+tags:
+  - резюме
+  - промпт
+  - контент
+  - шаблон
+  - applicant
+processed_at: '2025-12-09T14:18:18.489Z'
 ---
-
 **Промт, который может найти вам работу.** 
 
 Секрет — в адаптации резюме под системы ATS, через которые проходят 99% заявок.

@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 545
-timestamp: "2025-12-09T04:24:26.696Z"
-source_info: "Константин Доронин"
-source_url: "https://t.me/kdoronin_blog/1094"
-forward_date: "2025-12-08T20:26:43.000Z"
+id: miy762dt9x682vm5f3p
+created_at: '2025-12-09T04:24:26.696Z'
+source_info: Константин Доронин
+source_url: 'https://t.me/kdoronin_blog/1094'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  обсуждает Scratchpad как структурированную часть контекста ai-агента и примеры
+  заполнения
+tags:
+  - scratchpad
+  - llm
+  - react
+  - prolego
+processed_at: '2025-12-09T06:26:22.480Z'
 ---
-
 **Думаю, стоит немного раскрыть концепции по работе с контекстом со схемы ****из вчерашнего поста**а](https://t.me/kdoronin_blog/1093)**.**
 
 Начну с Scratchpad. 

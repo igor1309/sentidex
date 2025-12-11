@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 550
-timestamp: "2025-12-11T06:26:28.818Z"
-source_info: "Mike"
-source_url: ""
-forward_date: "2025-12-11T02:21:01.000Z"
+id: mj169c70vraedssogci
+created_at: '2025-12-11T06:26:28.818Z'
+source_info: Mike
+source_url: ''
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  руководство по конструктивной беседе: безопасная среда, активное слушание,
+  вопросы, выявление противоречий, честное вовлечение
+tags:
+  - exploration
+  - emotions
+  - distortions
+  - perspectives
+  - options
+processed_at: '2025-12-11T08:24:14.076Z'
 ---
-
 в качестве примера приведу свой вариант, желающие могут сравнить
 
 **CONVERSATION GUIDELINES**

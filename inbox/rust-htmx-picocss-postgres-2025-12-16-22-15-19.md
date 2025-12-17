@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 564
-timestamp: "2025-12-16T22:15:19.149Z"
-source_info: "partially unsupervised"
-source_url: "https://t.me/partially_unsupervised/278"
-forward_date: "2025-12-16T20:25:12.000Z"
+id: mj9bgskz6k1i3hpu6ti
+created_at: '2025-12-16T22:15:19.149Z'
+source_info: partially unsupervised
+source_url: 'https://t.me/partially_unsupervised/278'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Опыт освоения фронтенда, переход к Rust+HTMX+PicoCSS+Postgres для простых
+  веб-приложений
+tags:
+  - wordpress
+  - rust
+  - htmx
+  - picocss
+  - postgres
+processed_at: '2025-12-17T01:12:09.395Z'
 ---
-
 Примерно двадцать лет назад я "сделал" первый сайт (осилил развернуть wordpress по инструкции и пошатать базовый шаблон). Много воды утекло, но я так и не научился во фронтенд. Тем более, что сложность фронтенда росла экспоненциально, и угнаться за всеми этими фреймворками было сложно, не будучи собственно фронтендером.
 
 Игнорировать существование фронтенда было легко, пока [мы не начали делать агента для создания веб-приложений](https://t.me/partially_unsupervised/259), и тогда-то у меня начала периодически отваливаться жопа. Кажется, что тянуть React и 100500 зависимостей для простой CRUD админки - это как-то слишком, но индустрия в среднем со мной не согласна.

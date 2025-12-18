@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 568
-timestamp: "2025-12-18T16:22:05.301Z"
-source_info: "Силиконовый Мешок"
-source_url: "https://t.me/prompt_design/1816"
-forward_date: "2025-12-18T15:43:37.000Z"
+id: mjbrt1pwodi7m4eiq1
+created_at: '2025-12-18T16:22:05.301Z'
+source_info: Силиконовый Мешок
+source_url: 'https://t.me/prompt_design/1816'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Подключение блокнотов NotebookLM в Gemini до десяти на сессии, объединение
+  данных и доступ к вебу
+tags:
+  - gemini
+  - notebooklm
+  - блокноты
+  - сессии
+processed_at: '2025-12-18T18:25:07.316Z'
 ---
-
 В Gemini дали возможность подключать блокноты из [NotebookLM](https://t.me/prompt_design/1764). Добавить можно не более десяти в каждой сессии с чатом и использовать их как дополнительный контекст в общении с моделью. 
 
 Естественный вопрос: разве NotebookLM не умеет делать это сам по себе? Это было первое, о чем я подумал. Однако у данной интеграции есть интересные преимущества:

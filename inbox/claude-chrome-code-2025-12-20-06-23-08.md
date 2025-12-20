@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 571
-timestamp: "2025-12-20T06:23:08.088Z"
-source_info: "ForgetMe | Нейросети"
-source_url: "https://t.me/forgetmeai/5723"
-forward_date: "2025-12-19T11:04:16.000Z"
+id: mje12hncx5bbysjg62
+created_at: '2025-12-20T06:23:08.088Z'
+source_info: ForgetMe | Нейросети
+source_url: 'https://t.me/forgetmeai/5723'
 has_media: true
-media_type: "video"
-forward_protected: false
+language: mixed
+summary: >-
+  Claude для Chrome доступен всем платным пользователям и интеграция с Claude
+  Code
+tags:
+  - claude
+  - chrome
+  - code
+  - вкладки
+processed_at: '2025-12-20T08:19:56.760Z'
 ---
-
 ✴️ **Claude для Chrome доступен всем платным пользователям + интеграция с Claude Code**
 
 Теперь **Claude работает в боковой панели Chrome** и понимает ваш текущий контекст: вкладки, логины, закладки. Раньше было только на Max тарифах

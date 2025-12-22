@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 574
-timestamp: "2025-12-22T06:27:32.502Z"
-source_info: "Константин Доронин"
-source_url: "https://t.me/kdoronin_blog/1114"
-forward_date: "2025-12-21T20:15:07.000Z"
+id: mjgw40rmvpdb51mbzeq
+created_at: '2025-12-22T06:27:32.502Z'
+source_info: Константин Доронин
+source_url: 'https://t.me/kdoronin_blog/1114'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Обширное распространение Agent Skills как OpenSource, унификация форматов и
+  рост поддержки интеграций
+tags:
+  - agentskills
+  - opensource
+  - mcp
+  - cursor
+processed_at: '2025-12-22T08:24:28.642Z'
 ---
-
 **Прошло всего 3 дня с момента, как появился ****репозиторий Agent Skills**s](https://github.com/agentskills/agentskills)**, ознаменовавший переход Skills от Anthropic в OpenSource. **
 
 Сейчас многие компании добавляют поддержку опубликованного Open Source формата. Это хорошо, так как после выхода Skills от Claude Code многие начали в спешке делать у себя "что-то своё". Теперь появилась унификация.

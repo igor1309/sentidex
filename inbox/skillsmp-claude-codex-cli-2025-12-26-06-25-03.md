@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 579
-timestamp: "2025-12-26T06:25:03.576Z"
-source_info: "Tips AI | IT & AI"
-source_url: "https://t.me/tips_ai/4530"
-forward_date: "2025-12-25T14:27:34.000Z"
+id: mjmlsmg6oriaishlua7
+created_at: '2025-12-26T06:25:03.576Z'
+source_info: Tips AI | IT & AI
+source_url: 'https://t.me/tips_ai/4530'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Краткое описание платформы skillsmp для Claude Code и Codex CLI с загрузкой
+  архивов и фильтрацией по звёздам.
+tags:
+  - skillsmp
+  - claude
+  - codex
+  - github
+processed_at: '2025-12-26T08:22:17.766Z'
 ---
-
 Ух ты, нашел платформу [Skillsmp](https://skillsmp.com/) — агрегатор скиллов для Claude Code и Codex CLI. 
 
 33к навыков с GitHub. 

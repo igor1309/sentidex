@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 580
-timestamp: "2025-12-26T12:32:08.514Z"
-source_info: "Кружок Пономаря"
-source_url: "https://t.me/ponomaround/348"
-forward_date: "2025-12-26T09:12:01.000Z"
+id: mjmyfxdhufaqqmq4c8g
+created_at: '2025-12-26T12:32:08.514Z'
+source_info: Кружок Пономаря
+source_url: 'https://t.me/ponomaround/348'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Держать CLAUDE.md коротким и универсальным, избегать перегрузки инструкциями,
+  применять прогрессивное погружение через разделённые документы
+tags:
+  - разбор
+  - инструкция
+  - код
+  - папку
+processed_at: '2025-12-26T14:16:20.405Z'
 ---
-
 Прочитал интересный [разбор](https://www.humanlayer.dev/blog/writing-a-good-claude-md) того, почему большинство [CLAUDE.md](CLAUDE.md) файлов не эфективны. Проблема не в том, что Claude их не читает — проблема в том, что мы их неправильно пишем.
 
 Для контекста. CLAUDE.md — это файл-инструкция для Claude Code, который автоматически добавляется в начало каждой сессии. Многие воспринимают его как место, куда можно свалить все команды, стайл-гайды и архитектурные решения проекта. Результат — Claude начинает игнорировать инструкции.ь инструкции.

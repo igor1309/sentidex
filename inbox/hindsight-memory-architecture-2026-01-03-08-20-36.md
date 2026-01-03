@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 592
-timestamp: "2026-01-03T08:20:36.662Z"
-source_info: "Константин Доронин"
-source_url: "https://t.me/kdoronin_blog/1128"
-forward_date: "2026-01-02T22:22:40.000Z"
+id: mjya6pmo2zv5pcuqycx
+created_at: '2026-01-03T08:20:36.662Z'
+source_info: Константин Доронин
+source_url: 'https://t.me/kdoronin_blog/1128'
 has_media: true
-media_type: "video"
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор открытого проекта Hindsight: организация памяти AI-агента с фактов,
+  опыта, мнений и наблюдений.
+tags:
+  - hindsight
+  - docker
+  - openai
+  - arxiv
+processed_at: '2026-01-03T12:30:33.792Z'
 ---
-
 **Hindsight**t](https://hindsight.vectorize.io/)** – интересный проект, показывающий, как можно организовать память для AI-агента.**
 
 Проект Open Source. Ставится [из официального репозитория](https://github.com/vectorize-io/hindsight) в docker. 

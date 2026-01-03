@@ -1,15 +1,18 @@
 ---
-raw_message: true
-message_id: 593
-timestamp: "2026-01-03T10:15:42.917Z"
-source_info: "Глеб Кудрявцев про AI кодинг"
-source_url: "https://t.me/gleb_pro_ai/352"
-forward_date: "2026-01-03T09:56:36.000Z"
+id: mjya7xx69721b6pudo8
+created_at: '2026-01-03T10:15:42.917Z'
+source_info: Глеб Кудрявцев про AI кодинг
+source_url: 'https://t.me/gleb_pro_ai/352'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: 'Сайт на стадии разработки, Lovable против gemini, план деплоя и сбор фактуры'
+tags:
+  - gemini
+  - задеплоить
+  - кодексу
+  - фактуру
+processed_at: '2026-01-03T12:31:31.194Z'
 ---
-
 Психанул, что у меня нет своего сайта и пошел делать. 
 
 Вот что нафигачил Lovable [https://glebkudrproto.lovable.app/](https://glebkudrproto.lovable.app/)

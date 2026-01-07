@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 605
-timestamp: "2026-01-07T08:23:26.616Z"
-source_info: "НейроProfit | Соня Pro AI"
-source_url: "https://t.me/NeuralProfit/2143"
-forward_date: "2026-01-06T12:50:49.000Z"
+id: mk3va39jft86abpanv
+created_at: '2026-01-07T08:23:26.616Z'
+source_info: НейроProfit | Соня Pro AI
+source_url: 'https://t.me/NeuralProfit/2143'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор ресурсов Claude Code: курсы, гайды, видео, инструменты и практики
+  агентского кодирования
+tags:
+  - claude
+  - code
+  - anthropic
+  - codex
+  - github
+processed_at: '2026-01-07T10:19:54.247Z'
 ---
-
 Я как-то писала про **Claude Code**e](https://t.me/NeuralProfit/1708),  сейчас вайбкодеры отдают предпочтение именно ему, говоря что **Claude Code** на уровень выше **Codex** или **Gemini**. Поэтому я собрала всю полезную информацию про **Claude Code**. 
 
 🪼 **Обучалки:**

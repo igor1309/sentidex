@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 619
-timestamp: "2026-01-10T10:15:59.736Z"
-source_info: "Refat Talks: Tech & AI"
-source_url: "https://t.me/nobilix/201"
-forward_date: "2026-01-06T21:02:22.000Z"
+id: mk8e0y394rgjjwuwg9y
+created_at: '2026-01-10T10:15:59.736Z'
+source_info: 'Refat Talks: Tech & AI'
+source_url: 'https://t.me/nobilix/201'
 has_media: true
-media_type: "document"
-forward_protected: false
+language: mixed
+summary: >-
+  локальный API-эндпоинт для подписок Claude Code, ChatGPT, Gemini через
+  VibeProxy
+tags:
+  - vibeproxy
+  - claude
+  - chatgpt
+  - gemini
+  - opus
+processed_at: '2026-01-10T14:15:45.045Z'
 ---
-
 VibeProxy - как выжать максимум из AI-подписки
 
 Платишь $20 за Claude Code, еще $20 за Cursor, потом докупаешь API-токены, потому что лимиты закончились на третий день месяца. Знакомо?

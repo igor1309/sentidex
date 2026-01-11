@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 627
-timestamp: "2026-01-11T08:20:19.845Z"
-source_info: "Поляков считает: AI, код и кейсы"
-source_url: "https://t.me/countwithsasha/392"
-forward_date: "2026-01-08T06:40:19.000Z"
+id: mk9kxiu14gq0lnd3mb3
+created_at: '2026-01-11T08:20:19.845Z'
+source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/392'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Обсуждение промпта Claude Code, автора Thariq Shihipar и AskUserQuestionTool,
+  детали спецификаций проекта.
+tags:
+  - claude
+  - code
+  - askuserquestiontool
+  - thariq
+  - shihipar
+processed_at: '2026-01-11T10:16:48.793Z'
 ---
-
 **Промпт от разработчика Claude Code, который заставляет AI задавать правильные вопросы**
 
 Со всех утюгов вижу пост про то, как заставить Claude Code детально разбирать спецификацию проекта. Нигде нет ссылки на автора, так что исправляю: это Thariq Shihipar ([его твиттер](https://x.com/trq212)), разработчик из Anthropic, который работает над Claude Code.

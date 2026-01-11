@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 629
-timestamp: "2026-01-11T14:14:28.149Z"
-source_info: "LLM под капотом"
-source_url: "https://t.me/llm_under_hood/727"
-forward_date: "2026-01-09T11:16:27.000Z"
+id: mk9xv9nxpy40yamvmhs
+created_at: '2026-01-11T14:14:28.149Z'
+source_info: LLM под капотом
+source_url: 'https://t.me/llm_under_hood/727'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Автоматический перевод YouTube на башкирский с озвучкой и экспериментальным
+  подбором моделей
+tags:
+  - youtube
+  - asr
+  - диаризация
+  - ai
+processed_at: '2026-01-11T16:18:58.605Z'
 ---
-
 **Новый кейс - автоматический перевод YouTube с озвучкой и** **AI Researcher**
 
 Мой давний друг и коллега Айгиз Кунафин как раз закончил проект по автоматическому переводу YouTube видео с русского на башкирский язык. Под капотом - ASR и диаризация, перевод, подбор голосов и синтез речи, которая синхронизирована с оригинальной дорожкой.

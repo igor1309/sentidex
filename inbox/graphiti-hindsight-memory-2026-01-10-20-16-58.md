@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 621
-timestamp: "2026-01-10T20:16:58.614Z"
-source_info: "Константин Доронин"
-source_url: "https://t.me/kdoronin_blog/1141"
-forward_date: "2026-01-10T19:41:48.000Z"
+id: mk91xwfo94abusj480u
+created_at: '2026-01-10T20:16:58.614Z'
+source_info: Константин Доронин
+source_url: 'https://t.me/kdoronin_blog/1141'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Сравнение двух темпоральных графов памяти AI-агентов Graphiti гибок, Hindsight
+  прост в настройке
+tags:
+  - graphiti
+  - hindsight
+  - pydantic
+  - батчами
+processed_at: '2026-01-11T01:25:13.716Z'
 ---
-
 **Graphiti**i](https://github.com/getzep/graphiti)** VS ****Hindsight**t](https://hindsight.vectorize.io/)**. Почему я использую оба эти инструмента?**
 
 По большому счёту, есть два сценария использования темпоральных графов в качестве памяти AI-агентов:

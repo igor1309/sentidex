@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 637
-timestamp: "2026-01-13T08:24:04.911Z"
-source_info: "iOS Dev"
-source_url: "https://t.me/iosdev/1837"
-forward_date: "2026-01-13T07:11:29.000Z"
+id: mkcfwsd5ox2vdlw7alg
+created_at: '2026-01-13T08:24:04.911Z'
+source_info: iOS Dev
+source_url: 'https://t.me/iosdev/1837'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Секретный способ найти .md файлы по Swift Concurrency/SwiftUI/MapKit и другим
+  инструкциям в Xcode
+tags:
+  - swift
+  - concurrency
+  - swiftui
+  - mapkit
+processed_at: '2026-01-13T10:19:34.937Z'
 ---
-
 **Секретный способ найти файлы .md для Swift Concurrency/SwiftUI/MapKit и так далее**
 
 Вижу волну хайпа вокруг создания инструкций для Claude (и не только), [некоторые даже собирают тысячи звёзд на GitHub](https://github.com/Dimillian/Skills).

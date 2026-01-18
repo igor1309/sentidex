@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 658
-timestamp: "2026-01-18T12:30:15.798Z"
-source_info: "Dmitry Bogoslovtsev"
-source_url: ""
-forward_date: "2026-01-18T10:31:43.000Z"
+id: mkjtjbfv9lv0awe29ya
+created_at: '2026-01-18T12:30:15.798Z'
+source_info: Dmitry Bogoslovtsev
+source_url: ''
 has_media: false
-media_type: "none"
-forward_protected: true
+language: mixed
+summary: >-
+  Система агентов для книги: book-master, cw-import, cw-scene, cw-dialogue,
+  cw-character, cw-worldbuilding, cw-story-critique, cw-voice,
+  narrative-dimensions-analysis.
+tags:
+  - worldbuilding
+  - pacing
+  - subtext
+  - protocol
+processed_at: '2026-01-18T14:15:24.331Z'
 ---
-
 Приятель пишет книгу и собрал такую систему из агентов:
 
 1) book-master - Мастер-роутер для всех задач по книге. Содержит Anti-Hallucination Protocol.

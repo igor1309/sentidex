@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 657
-timestamp: "2026-01-18T10:16:10.499Z"
-source_info: "Поляков считает: AI, код и кейсы"
-source_url: "https://t.me/countwithsasha/416"
-forward_date: "2026-01-18T08:12:27.000Z"
+id: mkjti3x0calj67llh2r
+created_at: '2026-01-18T10:16:10.499Z'
+source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/416'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Опыт применения Agent Deck: упорядочение хаоса, управление сессиями и контроль
+  расходов
+tags:
+  - agent
+  - deck
+  - github
+  - codex
+  - claude
+processed_at: '2026-01-18T14:14:27.924Z'
 ---
-
 **Agent Deck: две недели спустя**
 
 Как и обещал — делюсь опытом [после реального использования](https://t.me/countwithsasha/380).

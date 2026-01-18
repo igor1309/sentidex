@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 656
-timestamp: "2026-01-18T06:24:25.499Z"
-source_info: "Мысли Рвачева"
-source_url: "https://t.me/rvnikita_blog/1534"
-forward_date: "2026-01-18T01:33:55.000Z"
+id: mkjgvqtyl4uzt4eqxo
+created_at: '2026-01-18T06:24:25.499Z'
+source_info: Мысли Рвачева
+source_url: 'https://t.me/rvnikita_blog/1534'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Недооцененная функция ChatGPT: режим Study Mode, задающий вопросы и обучающий
+  через наводящие шаги.
+tags:
+  - chatgpt
+  - openai
+  - education
+  - pdf
+processed_at: '2026-01-18T08:21:09.142Z'
 ---
-
 📚 Недооцененная фича ChatGPT - Study Mode
 
 Есть режим "Study and learn", который не дает готовый ответ, а ведет тебя к нему через наводящие вопросы. Сократовский метод в действии.

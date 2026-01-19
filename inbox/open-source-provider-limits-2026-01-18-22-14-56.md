@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 659
-timestamp: "2026-01-18T22:14:56.253Z"
-source_info: "Константин Доронин"
-source_url: "https://t.me/kdoronin_blog/1149"
-forward_date: "2026-01-18T20:56:40.000Z"
+id: mkkhdbge9iwwtc0dlcu
+created_at: '2026-01-18T22:14:56.253Z'
+source_info: Константин Доронин
+source_url: 'https://t.me/kdoronin_blog/1149'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор бесплатных лимитов на использование open source моделей у разных
+  провайдеров и тенденции
+tags:
+  - groq
+  - ollama
+  - cerebras
+  - cloudflare
+  - openrouter
+processed_at: '2026-01-19T01:22:35.197Z'
 ---
-
 **Проекты с бесплатными лимитами на использование open source моделей.**
 
 Сегодня внезапно для себя обнаружил, что ollama при регистрации в системе ollama cloud предоставляет возможность использования open source моделей в облаке бесплатно.

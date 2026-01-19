@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 661
-timestamp: "2026-01-19T10:22:41.627Z"
-source_info: "Метаверсище и ИИще"
-source_url: "https://t.me/cgevent/14636"
-forward_date: "2026-01-19T09:30:13.000Z"
+id: mkl5k39r4pdnr3rslvj
+created_at: '2026-01-19T10:22:41.627Z'
+source_info: Метаверсище и ИИще
+source_url: 'https://t.me/cgevent/14636'
 has_media: true
-media_type: "video"
-forward_protected: false
+language: mixed
+summary: >-
+  PineDrama от TikTok — сомнения в качестве микродрамы и минимальной
+  длительности контента.
+tags:
+  - pinedrama
+  - tiktok
+  - dramabox
+  - микродрам
+processed_at: '2026-01-19T12:39:41.967Z'
 ---
-
 **Разомнемся новостями от ТикТока.**
 
 Они выпустили новое приложение **PineDrama** - это суперкороткие минисериалы. Я полез разбираться с цифрами и немного потерял веру в человечество. Это феноменальный кожаный слоп. Игра актеров настолько плоха, а сценарии настолько примитивны, что трудно представить, что кто-то это будет смотреть. Эпизоды, кстати, длиной в минуту.

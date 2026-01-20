@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 662
-timestamp: "2026-01-20T04:40:18.504Z"
-source_info: "Константин Доронин"
-source_url: "https://t.me/kdoronin_blog/1150"
-forward_date: "2026-01-19T23:08:05.000Z"
+id: mkm7rnl19crg2xcx4wd
+created_at: '2026-01-20T04:40:18.504Z'
+source_info: Константин Доронин
+source_url: 'https://t.me/kdoronin_blog/1150'
 has_media: true
-media_type: "video"
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор идей Auto Claude: автономная разработка, функциональные фичи, память,
+  Roadmap проекта.
+tags:
+  - kanban
+  - graphiti
+  - worktrees
+  - anthropic
+processed_at: '2026-01-20T06:29:20.293Z'
 ---
-
 **Про интересные идеи и их реализацию.
 **
 Наткнулся на [репозиторий Auto Claude](https://github.com/AndyMik90/Auto-Claude).

@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 665
-timestamp: "2026-01-20T12:38:36.071Z"
-source_info: "Тимур Хахалев про AI Coding"
-source_url: "https://t.me/the_ai_architect/218"
-forward_date: "2026-01-20T10:11:16.000Z"
+id: mkmoth5z2k2vlpdod49
+created_at: '2026-01-20T12:38:36.071Z'
+source_info: Тимур Хахалев про AI Coding
+source_url: 'https://t.me/the_ai_architect/218'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  рекламирует Frontend Design Skill от Anthropic и демонстрирует минималистичный
+  дизайн с анимациями
+tags:
+  - frontend
+  - design
+  - skill
+  - rss
+processed_at: '2026-01-20T14:26:38.759Z'
 ---
-
 **Если вы ещё не используете Frontend Design Skill от Anthropic, то многое теряете!**
 
 Этот скилл пощебетает с моделькой на фронтендерском языке и объяснить, что нужно сделать красиво.

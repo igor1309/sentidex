@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 673
-timestamp: "2026-01-21T16:37:11.733Z"
-source_info: "AI Product | Igor Akimov"
-source_url: "https://t.me/ai_product/1877"
-forward_date: "2026-01-21T15:47:55.000Z"
+id: mkod70eri6bq6utyoc
+created_at: '2026-01-21T16:37:11.733Z'
+source_info: AI Product | Igor Akimov
+source_url: 'https://t.me/ai_product/1877'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Публикация в App Store и Google Play одним кликом, ускоряющая запуск и деплой
+  приложений.
+tags:
+  - manus
+  - appstore
+  - googleplay
+  - devops
+processed_at: '2026-01-21T18:36:47.187Z'
 ---
-
 Manus тоже делает публикацию в App Store и Google Play в один клик. Скоро можно сейчас целую корзинку приложений наделать за вечер.
 
 Вы описываете идею, а Manus расписывает, рисует дизайн, пишет код, рисует и сразу деплоит его в сторы, в том числе для быстрой отдачи бета-тестерам (естественно аккаунт надо регистрировать). Учитывая, как заведение новых приложений - та еще боль даже для разработчиков, это прям отличный шаг вперед.

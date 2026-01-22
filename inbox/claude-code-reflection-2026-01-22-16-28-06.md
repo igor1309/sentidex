@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 677
-timestamp: "2026-01-22T16:28:06.054Z"
-source_info: "AI-Driven Development. Родион Мостовой"
-source_url: "https://t.me/ai_driven/174"
-forward_date: "2026-01-18T07:34:42.000Z"
+id: mkpwd8oagwrv33qjm9
+created_at: '2026-01-22T16:28:06.054Z'
+source_info: AI-Driven Development. Родион Мостовой
+source_url: 'https://t.me/ai_driven/174'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Представлен плагин Claude Code Reflection для настройки CC через текстовые
+  команды и управление скиллами
+tags:
+  - claude
+  - code
+  - reflection
+  - плагин
+  - маркетплейс
+processed_at: '2026-01-22T20:21:16.714Z'
 ---
-
 Рефлексия** для Claude Code или пусть он настроит себя сам**
 
 А вы знали, что можно настраивать Claude Code, прямо через Claude Code?

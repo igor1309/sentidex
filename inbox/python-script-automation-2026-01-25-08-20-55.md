@@ -1,15 +1,18 @@
 ---
-raw_message: true
-message_id: 687
-timestamp: "2026-01-25T08:20:55.846Z"
-source_info: "Научи меня ИИ"
-source_url: "https://t.me/uGPTai/531"
-forward_date: "2026-01-25T06:32:06.000Z"
+id: mkttm3y72o1lfvxr0f5
+created_at: '2026-01-25T08:20:55.846Z'
+source_info: Научи меня ИИ
+source_url: 'https://t.me/uGPTai/531'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: Готовый промпт перевод описания задачи в Python скрипт с комментариями
+tags:
+  - python
+  - script
+  - pandas
+  - os
+processed_at: '2026-01-25T14:15:16.351Z'
 ---
-
 **🐍 Готовый промпт для любого скрипта: преврати рутину в код на Python**
 
 Хотите автоматизировать сортировку файлов, обработку таблиц или переименование фото, но не знаете, с чего начать кодить? Этот промпт — ваш переводчик с человеческого языка на Python.

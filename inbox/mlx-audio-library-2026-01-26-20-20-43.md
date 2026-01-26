@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 701
-timestamp: "2026-01-26T20:20:43.058Z"
-source_info: "AI Product | Igor Akimov"
-source_url: "https://t.me/ai_product/1886"
-forward_date: "2026-01-26T18:57:53.000Z"
+id: mkvqbdxap9avkjar1
+created_at: '2026-01-26T20:20:43.058Z'
+source_info: AI Product | Igor Akimov
+source_url: 'https://t.me/ai_product/1886'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Полезная офлайн-библиотека для голоса под Mac/iOS через mlx с поддержкой UI и
+  клонирования.
+tags:
+  - mac
+  - ios
+  - mlx
+  - audio
+processed_at: '2026-01-26T22:18:29.566Z'
 ---
-
 Нашел полезную библиотеку для оптимизированной офлайн работы с голосом под Mac/iOS (через mlx) [https://github.com/Blaizzy/mlx-audio](https://github.com/Blaizzy/mlx-audio)
 Поддерживает кучу моделей из коробки.
 

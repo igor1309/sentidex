@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 700
-timestamp: "2026-01-26T18:27:49.204Z"
-source_info: "Бизнес-архитектор: Финансы, Путешествия и Роботы"
-source_url: "https://t.me/archfinance/499"
-forward_date: "2026-01-26T16:14:01.000Z"
+id: mkvqaku1l6mihb6wwjb
+created_at: '2026-01-26T18:27:49.204Z'
+source_info: 'Бизнес-архитектор: Финансы, Путешествия и Роботы'
+source_url: 'https://t.me/archfinance/499'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Приватность как шлюз к обезличенным данным, локальный чек и деидентификация
+  для безопасного LLM в корппроцессах
+tags:
+  - llm
+  - ner
+  - rag
+  - safe
+  - unknown
+processed_at: '2026-01-26T22:17:51.864Z'
 ---
-
 **LLM в корппроцессах: сначала шлюз приватности, потом «умный ответ»**
 
 Когда начинаешь реально внедрять большие языковые модели, быстро понимаешь неприятное. Самая сложная часть - не «как получить умный ответ», а **«как не утопить компанию в утечках».**

@@ -1,15 +1,18 @@
 ---
-raw_message: true
-message_id: 699
-timestamp: "2026-01-26T12:36:55.784Z"
-source_info: "AI Product | Igor Akimov"
-source_url: "https://t.me/ai_product/1885"
-forward_date: "2026-01-26T11:02:45.000Z"
+id: mkv9dgqx2gfe0cv1ifx
+created_at: '2026-01-26T12:36:55.784Z'
+source_info: AI Product | Igor Akimov
+source_url: 'https://t.me/ai_product/1885'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: 'Обнаруживает признаки ИИ в тексте, удаляет их, делая тексты более человечными'
+tags:
+  - humanizer
+  - okrs
+  - kpis
+  - bmc
+processed_at: '2026-01-26T14:24:13.064Z'
 ---
-
 Забавно. Чувак взял все признаки AI сгенерированного текста из википедии и сделал скилл, чтобы AI переделывал текст и избавлялся от этих признаков, то есть делал более "человечным". Назвал Humanizer - [https://github.com/blader/humanizer](https://github.com/blader/humanizer)
 
 Например, 

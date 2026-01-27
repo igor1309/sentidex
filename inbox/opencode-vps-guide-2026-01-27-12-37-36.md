@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 703
-timestamp: "2026-01-27T12:37:36.233Z"
-source_info: "AI и грабли"
-source_url: "https://t.me/oestick/455"
-forward_date: "2026-01-27T11:23:26.000Z"
+id: mkwov08w92kgy63pwh
+created_at: '2026-01-27T12:37:36.233Z'
+source_info: AI и грабли
+source_url: 'https://t.me/oestick/455'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор идеи: агент OpenCode на клиент-серверной архитектуре с веб-версией на
+  VPS и пошаговым гайдом.
+tags:
+  - opencode
+  - vps
+  - tmux
+  - docker
+  - systemd
+processed_at: '2026-01-27T14:25:31.904Z'
 ---
-
 **Кодинг-агент в телефоне** **(ч.2)**
 
 В [прошлом посте](https://t.me/oestick/454) расписал дефолтный подход с termius. Но консольный UX на тачскрине – достаточно сомнительный. Так что у меня давно чесались руки затестить еще одну идею, которую еще нигде не видел. И вот вчера руки наконец дошли

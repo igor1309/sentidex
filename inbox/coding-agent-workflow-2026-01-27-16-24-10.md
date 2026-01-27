@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 706
-timestamp: "2026-01-27T16:24:10.660Z"
-source_info: "Maxim E."
-source_url: ""
-forward_date: "2026-01-27T14:07:26.000Z"
+id: mkwxndc7jeknlwmfrz
+created_at: '2026-01-27T16:24:10.660Z'
+source_info: Maxim E.
+source_url: ''
 has_media: false
-media_type: "none"
-forward_protected: true
+language: mixed
+summary: >-
+  Встроенный скилл coding-agent для интерактивных CLI-агентов: запуск через
+  exec/pty, мониторинг и безопасность.
+tags:
+  - exec
+  - workdir
+  - pty
+  - git
+  - repo
+processed_at: '2026-01-27T18:31:32.167Z'
 ---
-
 Там есть вот такой встроенный скилл. Вот объяснение от агента: 
 
 `coding-agent` — да, он у меня есть (встроенный скилл в /usr/lib/node_modules/clawdbot/skills/coding-agent/).

@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 713
-timestamp: "2026-01-29T20:24:00.138Z"
-source_info: "Yuriy Burykin"
-source_url: ""
-forward_date: "2026-01-29T19:33:03.000Z"
+id: ml00sirbck18px986j7
+created_at: '2026-01-29T20:24:00.138Z'
+source_info: Yuriy Burykin
+source_url: ''
 has_media: false
-media_type: "none"
-forward_protected: true
+language: mixed
+summary: >-
+  Прототип Moltworker для Moltbot на платформе Cloudflare, минимальная стоимость
+  5 долларов.
+tags:
+  - cloudflare
+  - moltbot
+  - moltworker
+  - r2
+processed_at: '2026-01-29T22:22:49.847Z'
 ---
-
 [https://jpcaparas.medium.com/the-moltbot-saga-continues-cloudflare-enters-the-chat-5650b39af31f](https://jpcaparas.medium.com/the-moltbot-saga-continues-cloudflare-enters-the-chat-5650b39af31f)
 Cloudflare выпустила прототип, позволяющий запускать Moltbot в своей сети на периферии сети вместо покупки Mac mini.
 

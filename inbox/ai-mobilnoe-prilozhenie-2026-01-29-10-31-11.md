@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 712
-timestamp: "2026-01-29T10:31:11.816Z"
-source_info: "@Neurosonya"
-source_url: ""
-forward_date: "2026-01-29T07:41:54.000Z"
+id: mkzg4xq04hniginks4k
+created_at: '2026-01-29T10:31:11.816Z'
+source_info: '@Neurosonya'
+source_url: ''
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Перевод подхода Айзенберга по быстрому созданию AI-мобильного приложения через
+  короткие видео и демо
+tags:
+  - claude
+  - code
+  - ideabrowser
+  - vibecode
+processed_at: '2026-01-29T12:44:37.175Z'
 ---
-
 Я перевела этот подход *Грег Айзенберг* Как быстро собрать AI-мобильное приложение и раскрутить его через короткие видео:
 
 1) Возьми **Claude Code** / Rork / Vibecode и сделай первый мобильный MVP в тот же день, как появилась идея. (Нужна идея - можно взять из Ideabrowser.)

@@ -1,15 +1,18 @@
 ---
-raw_message: true
-message_id: 715
-timestamp: "2026-01-30T12:41:40.603Z"
-source_info: "Глеб Кудрявцев про AI кодинг"
-source_url: "https://t.me/gleb_pro_ai/383"
-forward_date: "2026-01-30T10:34:44.000Z"
+id: ml0zf03koe7g72s9g
+created_at: '2026-01-30T12:41:40.603Z'
+source_info: Глеб Кудрявцев про AI кодинг
+source_url: 'https://t.me/gleb_pro_ai/383'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: 'Ура, запустил первую аппку Maku для сканирования состава пищи по упаковке с ИИ'
+tags:
+  - maku
+  - food
+  - allergy
+  - scanner
+processed_at: '2026-01-30T14:32:05.696Z'
 ---
-
 Ура, я зарелизил свою первую аппку. 
 
 [Maku: Food & Allergy Scanner](https://apps.apple.com/app/maku-food-allergy-scanner/id6757541293)

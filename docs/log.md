@@ -2,6 +2,7 @@
 
 ## 2026-01-31
 
+Fix empty summaries by skipping media group followers without caption.
 Add browser page with multi-select tag filtering.
 Change prompt to include preferred tag taxonomy.
 Clean up inbox tags: 622 → 55 unique tags (91% reduction).

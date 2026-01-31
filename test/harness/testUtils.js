@@ -24,14 +24,14 @@ const GENERATED_IDS = DEFAULT_RANDOM_VALUES.map(
   (value) => FROZEN_BASE36 + value.toString(36).substring(2)
 );
 
-const DUPLICATE_TICKET_NAME = `DUPL_${FROZEN_TIMESTAMP}.md`;
+const DUPLICATE_TICKET_NAME = `${FROZEN_TIMESTAMP}_DUPL.md`;
 
 function loadFixture(name) {
   return realFs.readFileSync(path.join(FIXTURE_DIR, name), 'utf8');
 }
 
 function buildFilename(title) {
-  return `${title}-${FROZEN_TIMESTAMP}.md`;
+  return `${FROZEN_TIMESTAMP}-${title}.md`;
 }
 
 function buildProcessedContent({ id, sourceUrl, summary, tags, body }) {

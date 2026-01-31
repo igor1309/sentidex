@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const formatTimestamp = require("./adapters/formatTimestamp");
 
 async function pollTelegram() {
   console.log("Starting Telegram polling...");
@@ -209,7 +210,7 @@ forward_protected: ${isForwardProtected}
 
 async function processRegularMessage(message) {
   const timestamp = new Date();
-  const filename = "regular_" + formatTimestamp(timestamp) + ".md";
+  const filename = formatTimestamp(timestamp) + "_regular.md";
   const filepath = path.join("_inbox", filename);
 
   if (!fs.existsSync("_inbox")) {
@@ -442,22 +443,6 @@ async function markAsProcessed(offset) {
   } catch (error) {
     console.log("Warning: Could not update offset:", error.message);
   }
-}
-
-function formatTimestamp(date) {
-  return (
-    date.getFullYear() +
-    "-" +
-    String(date.getMonth() + 1).padStart(2, "0") +
-    "-" +
-    String(date.getDate()).padStart(2, "0") +
-    "-" +
-    String(date.getHours()).padStart(2, "0") +
-    "-" +
-    String(date.getMinutes()).padStart(2, "0") +
-    "-" +
-    String(date.getSeconds()).padStart(2, "0")
-  );
 }
 
 function extractLinks(message, text, entities) {

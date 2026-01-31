@@ -1,9 +1,10 @@
 const { getAIEnrichment } = require('./services/ai.js');
+const duplicateDetector = require('./adapters/duplicateDetector');
+const fileSystem = require('./adapters/fileSystem');
+const formatTimestamp = require('./adapters/formatTimestamp');
 const frontMatterCodec = require('./adapters/frontMatterCodec');
 const logger = require('./adapters/consoleLogger');
 const messageProcessor = require('./core/messageProcessor');
-const fileSystem = require('./adapters/fileSystem');
-const duplicateDetector = require('./adapters/duplicateDetector');
 
 async function processMessages() {
   logger.info('Starting message processing...');
@@ -90,7 +91,7 @@ async function processFile(inboxPath) {
       logger.info(`Duplicate found for ${sourceUrl}. Original: ${originalFilePath}`);
 
       const originalFilename = fileSystem.basename(originalFilePath);
-      const ticketFilename = `DUPL_${formatTimestamp(new Date())}.md`;
+      const ticketFilename = `${formatTimestamp(new Date())}_DUPL.md`;
       const ticketPath = fileSystem.join('inbox', ticketFilename);
 
       const ticketContent = frontMatterCodec.stringify({
@@ -141,7 +142,7 @@ async function processFile(inboxPath) {
   
   // Generate new filename with AI title and timestamp
   const timestamp = new Date(frontMatter.timestamp || Date.now());
-  const newFilename = `${aiResults.title}-${formatTimestamp(timestamp)}.md`;
+  const newFilename = `${formatTimestamp(timestamp)}-${aiResults.title}.md`;
   const outboxPath = fileSystem.join('inbox', newFilename);
   
   // Create new content
@@ -163,21 +164,6 @@ async function processFile(inboxPath) {
   fileSystem.unlink(inboxPath);
   logger.info(`Deleted original file: ${inboxPath}`);
   return 'processed';
-}
-function formatTimestamp(value) {
-  const date = value instanceof Date ? value : new Date(value);
-  if (Number.isNaN(date.valueOf())) {
-    throw new TypeError(`Cannot format invalid date value: ${value}`);
-  }
-
-  return (
-    date.getUTCFullYear() + '-' +
-    String(date.getUTCMonth() + 1).padStart(2, '0') + '-' +
-    String(date.getUTCDate()).padStart(2, '0') + '-' +
-    String(date.getUTCHours()).padStart(2, '0') + '-' +
-    String(date.getUTCMinutes()).padStart(2, '0') + '-' +
-    String(date.getUTCSeconds()).padStart(2, '0')
-  );
 }
 
 // Run the processing

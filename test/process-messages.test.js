@@ -195,7 +195,7 @@ describe('process-messages script (Characterization Test)', () => {
       const { fs } = testEnv;
 
       expect(scriptResult.status).toBe('terminal-log');
-      const expectedFilename = 'Legacy-AI-Title-2023-05-01-10-00-00.md';
+      const expectedFilename = '2023-05-01-10-00-00-Legacy-AI-Title.md';
       expect(fs.readdirSync('/inbox')).toEqual([expectedFilename]);
       expect(fs.existsSync('/_inbox/legacy.md')).toBe(false);
 

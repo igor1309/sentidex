@@ -54,6 +54,13 @@ async function pollTelegram() {
 
       console.log(`Processing message ID: ${message.message_id}`);
 
+      // Skip non-first items in media groups (they have no caption)
+      if (isMediaGroupFollower(message)) {
+        console.log(`Skipping message ${message.message_id} - media group follower (no caption)`);
+        skippedCount++;
+        continue;
+      }
+
       if (isForwardedMessage(message)) {
         if (process.env.DEBUG === "true") {
           console.log(
@@ -86,6 +93,11 @@ async function pollTelegram() {
     console.error("Error polling Telegram:", error);
     process.exit(1);
   }
+}
+
+// Skip non-first items in media groups (only the first has caption)
+function isMediaGroupFollower(message) {
+  return message.media_group_id && !message.caption && !message.text;
 }
 
 // Enhanced forward detection - catches all forward types including new API structures

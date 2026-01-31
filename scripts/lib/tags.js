@@ -3,12 +3,12 @@ const path = require("path");
 
 // Canonical tags (these are valid and should be kept)
 const CANONICAL_TAGS = new Set([
-  "ai", "ai-coding", "agents", "api", "audio", "backend", "business",
+  "ai", "ai-coding", "agents", "api", "app", "audio", "backend", "business",
   "cerebras", "chatbot", "claude", "cli", "cloudflare", "cursor", "deepseek",
   "design", "devops", "docker", "education", "eval", "frontend",
   "gemini", "git", "github", "gitleaks", "glm", "google", "graphiti", "grok", "hr",
   "image-gen", "langfuse", "langgraph", "llm", "mcp", "memory",
-  "news", "no-code", "open-source", "openai", "openrouter", "opinion",
+  "news", "no-code", "open-source", "openai", "openclaw", "openrouter", "opinion",
   "perplexity", "postgres", "productivity", "prompting", "proxy",
   "rag", "repo", "research", "resource", "skills", "swift", "swiftui",
   "tdd", "telegram", "tutorial", "video-gen", "vps", "workflow", "writing",
@@ -79,6 +79,10 @@ const TAG_MAPPING = {
   "gpt-5": "openai",
   "gpt4omini": "openai",
 
+  // Openclaw
+  "clawdbot": "openclaw",
+  "moltbot": "openclaw",
+
   // Open-source
   "oss": "open-source",
   "opensource": "open-source",
@@ -115,6 +119,7 @@ const TAG_MAPPING = {
   "skillsmp": "skills",
   "superpowers": "skills",
   "openskills": "skills",
+  "скилл": "skills",
   "скиллов": "skills",
 
   // Telegram
@@ -182,7 +187,7 @@ const DROP_TAGS = new Set([
   "kit", "kpis", "kursor", "languages", "leet", "livebench", "lmarena",
   "local-llm", "lovable", "ltx", "ollama", "mac", "maku", "manus", "mapkit",
   "markdown", "marketplace", "matreshka", "mdc", "mdx",
-  "migration", "minimax", "mitmproxy", "mlx", "moltbot", "moltworker",
+  "migration", "minimax", "mitmproxy", "mlx", "moltworker",
   "monity", "montazh", "mvp", "nano", "napkin", "nas", "neighbors",
   "ner", "neuralprofit", "node", "oauth", "observability", "obsidian",
   "obstacle", "ocr", "okrs", "operator", "options",

@@ -15,6 +15,7 @@ description: "Tag taxonomy for inbox content categorization"
 - `local-llm` — Ollama, LM Studio, self-hosted
 - `llm` — Generic LLM content, model comparisons
 - `openai` — ChatGPT, OpenAI APIs
+- `openclaw` — Moltbot, Clawdbot
 
 ## Development
 - `ai-coding` — Cursor, Claude Code, Copilot, vibe-coding
@@ -31,6 +32,7 @@ description: "Tag taxonomy for inbox content categorization"
 - `writing` — Content, copywriting, rewriting
 
 ## Use Cases
+- `app` — Mobile/desktop applications
 - `productivity` — Personal tools, assistants
 - `research` — Deep research, analysis
 - `education` — Learning, courses

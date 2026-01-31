@@ -88,25 +88,25 @@
 </head>
 <body>
   <h1>Inbox Browser</h1>
-  <p class="stats">55 tags, 236 files</p>
+  <p class="stats">57 tags, 232 files</p>
   <p class="note">Static page. Run <code>node scripts/build-browser-page.js</code> to update.</p>
   <input type="text" id="search" placeholder="Filter tags..." autofocus>
   <div class="tags" id="tags">
     <span class="tag" data-tag="claude">claude<span class="count">28</span></span>
     <span class="tag" data-tag="ai">ai<span class="count">25</span></span>
     <span class="tag" data-tag="prompting">prompting<span class="count">24</span></span>
+    <span class="tag" data-tag="agents">agents<span class="count">21</span></span>
     <span class="tag" data-tag="openai">openai<span class="count">20</span></span>
     <span class="tag" data-tag="ai-coding">ai-coding<span class="count">19</span></span>
     <span class="tag" data-tag="gemini">gemini<span class="count">19</span></span>
-    <span class="tag" data-tag="agents">agents<span class="count">18</span></span>
     <span class="tag" data-tag="llm">llm<span class="count">12</span></span>
     <span class="tag" data-tag="github">github<span class="count">12</span></span>
     <span class="tag" data-tag="workflow">workflow<span class="count">10</span></span>
-    <span class="tag" data-tag="skills">skills<span class="count">9</span></span>
-    <span class="tag" data-tag="video-gen">video-gen<span class="count">8</span></span>
+    <span class="tag" data-tag="skills">skills<span class="count">10</span></span>
     <span class="tag" data-tag="rag">rag<span class="count">7</span></span>
     <span class="tag" data-tag="cursor">cursor<span class="count">7</span></span>
     <span class="tag" data-tag="perplexity">perplexity<span class="count">7</span></span>
+    <span class="tag" data-tag="video-gen">video-gen<span class="count">6</span></span>
     <span class="tag" data-tag="mcp">mcp<span class="count">6</span></span>
     <span class="tag" data-tag="repo">repo<span class="count">5</span></span>
     <span class="tag" data-tag="docker">docker<span class="count">5</span></span>
@@ -147,6 +147,8 @@
     <span class="tag" data-tag="frontend">frontend<span class="count">1</span></span>
     <span class="tag" data-tag="deepseek">deepseek<span class="count">1</span></span>
     <span class="tag" data-tag="audio">audio<span class="count">1</span></span>
+    <span class="tag" data-tag="app">app<span class="count">1</span></span>
+    <span class="tag" data-tag="openclaw">openclaw<span class="count">1</span></span>
   </div>
   <button class="clear-btn" id="clear">Clear selection</button>
   <table>
@@ -159,16 +161,10 @@
       </tr>
     </thead>
     <tbody id="files">
-      <tr data-tags="video-gen">
-        <td></td>
-        <td>2026-01-31-08-05-05-video-metadata-3022x1560.md</td>
-        <td><div class="file-tags"><span class="file-tag">video-gen</span></div></td>
-        <td class="summary">Video metadata: 25s, 2.0 MB, 3022x1560 resolution.</td>
-      </tr>
-      <tr data-tags="ai,skills">
+      <tr data-tags="ai,agents,skills">
         <td></td>
         <td>2026-01-30-18-34-29-vercel-ai-agents.md</td>
-        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">skills</span></div></td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">agents</span><span class="file-tag">skills</span></div></td>
         <td class="summary">&gt;-</td>
       </tr>
       <tr data-tags="">
@@ -177,34 +173,28 @@
         <td><div class="file-tags"></div></td>
         <td class="summary">Ура, запустил первую аппку Maku для сканирования состава пищи по упаковке с ИИ</td>
       </tr>
-      <tr data-tags="cloudflare">
+      <tr data-tags="cloudflare,openclaw">
         <td></td>
         <td>2026-01-29-20-24-00-cloudflare-moltbot-moltworker.md</td>
-        <td><div class="file-tags"><span class="file-tag">cloudflare</span></div></td>
+        <td><div class="file-tags"><span class="file-tag">cloudflare</span><span class="file-tag">openclaw</span></div></td>
         <td class="summary">&gt;-</td>
       </tr>
-      <tr data-tags="ai-coding,claude">
+      <tr data-tags="ai-coding,app,claude">
         <td></td>
         <td>2026-01-29-10-31-11-ai-mobilnoe-prilozhenie.md</td>
-        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">claude</span></div></td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">app</span><span class="file-tag">claude</span></div></td>
         <td class="summary">&gt;-</td>
       </tr>
-      <tr data-tags="video-gen">
-        <td></td>
-        <td>2026-01-29-08-32-40-video-metadata-4s.md</td>
-        <td><div class="file-tags"><span class="file-tag">video-gen</span></div></td>
-        <td class="summary">Video: 4s, 635.1 KB, 2678x1780</td>
-      </tr>
-      <tr data-tags="git,repo">
+      <tr data-tags="agents,git,repo,skills">
         <td></td>
         <td>2026-01-27-16-24-10-coding-agent-workflow.md</td>
-        <td><div class="file-tags"><span class="file-tag">git</span><span class="file-tag">repo</span></div></td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">git</span><span class="file-tag">repo</span><span class="file-tag">skills</span></div></td>
         <td class="summary">&gt;-</td>
       </tr>
-      <tr data-tags="docker,vps">
+      <tr data-tags="agents,docker,vps">
         <td></td>
         <td>2026-01-27-12-37-36-opencode-vps-guide.md</td>
-        <td><div class="file-tags"><span class="file-tag">docker</span><span class="file-tag">vps</span></div></td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">docker</span><span class="file-tag">vps</span></div></td>
         <td class="summary">&gt;-</td>
       </tr>
       <tr data-tags="audio">
@@ -225,12 +215,6 @@
         <td><div class="file-tags"></div></td>
         <td class="summary">Обнаруживает признаки ИИ в тексте, удаляет их, делая тексты более человечными</td>
       </tr>
-      <tr data-tags="">
-        <td></td>
-        <td>2026-01-26-10-21-08-photo-sizes-kb.md</td>
-        <td><div class="file-tags"></div></td>
-        <td class="summary">photo with four sizes available and 45.3 KB file size</td>
-      </tr>
       <tr data-tags="devops,llm">
         <td></td>
         <td>2026-01-25-12-32-18-local-development-docker-llm.md</td>
@@ -248,12 +232,6 @@
         <td>2026-01-25-08-20-55-python-script-automation.md</td>
         <td><div class="file-tags"></div></td>
         <td class="summary">Готовый промпт перевод описания задачи в Python скрипт с комментариями</td>
-      </tr>
-      <tr data-tags="">
-        <td></td>
-        <td>2026-01-24-14-15-02-photo-sizes-kb.md</td>
-        <td><div class="file-tags"></div></td>
-        <td class="summary">Photo with four sizes available and file size noted</td>
       </tr>
       <tr data-tags="docker,vps">
         <td></td>

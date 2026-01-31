@@ -6,7 +6,8 @@ source_url: "https://t.me/nobilix/157"
 has_media: true
 language: "mixed"
 summary: "Claude теперь создает и редактирует Excel, Word и PowerPoint файлы с помощью Python и JS"
-tags: ["claude","filegen","python","excel","sandbox"]
+tags:
+  - claude
 processed_at: "2025-09-10T04:16:54.747Z"
 ---
 

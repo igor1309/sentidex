@@ -10,10 +10,9 @@ summary: >-
   расходов
 tags:
   - agent
-  - deck
-  - github
-  - codex
   - claude
+  - codex
+  - github
 processed_at: '2026-01-18T14:14:27.924Z'
 ---
 **Agent Deck: две недели спустя**

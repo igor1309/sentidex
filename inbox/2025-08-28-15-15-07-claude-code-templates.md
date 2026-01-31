@@ -6,7 +6,10 @@ source_url: "https://t.me/NeuralProfit/1929"
 has_media: true
 language: "mixed"
 summary: "Огромная коллекция шаблонов Claude Code – бесплатные и открытые для разработчиков и аналитиков."
-tags: ["templates","claude","opensource","developers","automation"]
+tags:
+  - automation
+  - claude
+  - open-source
 processed_at: "2025-08-28T15:39:12.849Z"
 ---
 

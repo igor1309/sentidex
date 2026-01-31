@@ -7,10 +7,7 @@ has_media: true
 language: mixed
 summary: Готовый промпт перевод описания задачи в Python скрипт с комментариями
 tags:
-  - python
-  - script
-  - pandas
-  - os
+
 processed_at: '2026-01-25T14:15:16.351Z'
 ---
 **🐍 Готовый промпт для любого скрипта: преврати рутину в код на Python**

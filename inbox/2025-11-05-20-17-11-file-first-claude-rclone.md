@@ -9,10 +9,9 @@ summary: >-
   file-first агент на Claude SDK с rclone вместо RAG, ускоряющий поиск по
   документам
 tags:
-  - rclone
   - claude
-  - sdk
   - docx
+  - sdk
 processed_at: '2025-11-05T22:14:53.891Z'
 ---
 Великий `rclone` (или иногда агенту нужны просто файлы)

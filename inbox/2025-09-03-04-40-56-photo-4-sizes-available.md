@@ -6,7 +6,8 @@ source_url: "https://t.me/sergiobulaev/1441"
 has_media: true
 language: "en"
 summary: "Photo with four sizes available and file size 42.2 KB."
-tags: ["photo","sizes","kb","file"]
+tags:
+
 processed_at: "2025-09-06T09:42:26.581Z"
 ---
 

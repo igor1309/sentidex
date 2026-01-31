@@ -10,10 +10,9 @@ summary: >-
   Templates, их качество и применение
 tags:
   - anthropic
-  - superpowers
   - claude
   - code
-  - templates
+  - skills
 processed_at: '2025-10-31T22:14:33.332Z'
 ---
 **Кто уже подготовил Skills для Claude Code**?**

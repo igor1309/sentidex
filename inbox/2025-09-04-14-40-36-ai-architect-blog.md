@@ -6,7 +6,11 @@ source_url: "https://t.me/the_ai_architect/145"
 has_media: false
 language: "mixed"
 summary: "Смерджил эпик: AI-агент мигрировал бэкенд монорепозитории MongoDB→Postgres, реализуя слои от скелета до финала."
-tags: ["ai","migration","backend","monorepo","postgres"]
+tags:
+  - ai
+  - backend
+  - monorepo
+  - postgres
 processed_at: "2025-09-06T09:42:57.556Z"
 ---
 

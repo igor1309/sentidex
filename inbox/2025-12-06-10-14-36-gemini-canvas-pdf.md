@@ -8,9 +8,6 @@ language: mixed
 summary: 'Инструкция по созданию PDF в Gemini Canvas: выбрать режим Thinking и скачать'
 tags:
   - gemini
-  - canvas
-  - pdf
-  - thinking
 processed_at: '2025-12-06T12:29:34.038Z'
 ---
 Хозяйке на заметку.

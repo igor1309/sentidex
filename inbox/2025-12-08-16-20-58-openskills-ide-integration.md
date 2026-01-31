@@ -7,10 +7,9 @@ has_media: true
 language: mixed
 summary: 'Skills из Claude Code в OpenSkills для Cursor, TRAE и IDE'
 tags:
-  - openskills
   - anthropics
   - cursor
-  - trae
+  - skills
 processed_at: '2025-12-08T22:15:54.878Z'
 ---
 ✴️ **Skills из Claude Code — теперь в любой AI-IDE**

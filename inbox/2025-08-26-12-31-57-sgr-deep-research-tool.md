@@ -6,7 +6,11 @@ source_url: "https://t.me/neuraldeep/1583"
 has_media: true
 language: "mixed"
 summary: "Обсуждается создание простого инструмента Deep Research на основе Tavily API и GPT‑4o‑mini с шагами Clarification, GeneratePlan, AdaptPlan, WebSearch и CreateReport."
-tags: ["deepresearch","tavily","gpt4omini","clarification","websearch"]
+tags:
+  - clarification
+  - deepresearch
+  - gpt4omini
+  - websearch
 processed_at: "2025-08-26T13:29:00.789Z"
 ---
 

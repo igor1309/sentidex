@@ -7,10 +7,7 @@ has_media: true
 language: en
 summary: 'Photo with four sizes available, 86.3 KB file size.'
 tags:
-  - photo
-  - sizes
-  - available
-  - kb
+
 processed_at: '2025-12-31T16:20:28.910Z'
 ---
 📸 **Photo** (4 sizes available) - 86.3 KB

@@ -6,7 +6,9 @@ source_url: "https://t.me/cgevent/13347"
 has_media: false
 language: "mixed"
 summary: "Яндекс выпустил бизнес-ИИ YandexGPT 5.1 Pro с улучшенными ответами и снижением цены."
-tags: ["яндекс","ai","бизнес","gpt"]
+tags:
+  - ai
+  - gpt
 processed_at: "2025-09-06T09:41:55.757Z"
 ---
 

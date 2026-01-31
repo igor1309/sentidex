@@ -9,10 +9,10 @@ summary: >-
   Google выпустила расширения для Gemini CLI с интеграциями инструментов и
   плейбуками
 tags:
-  - gemini
   - cli
-  - figma
+  - design
   - dynatrace
+  - gemini
 processed_at: '2025-10-08T22:18:16.768Z'
 ---
 Google выпустила расширения для Gemini CLI.

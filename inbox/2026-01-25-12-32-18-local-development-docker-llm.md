@@ -9,9 +9,8 @@ summary: >-
   Перевод статьи о локальной разработке с OpenCode и Docker Model Runner для
   контроля данных и стоимости
 tags:
-  - runner
-  - llm
   - devops
+  - llm
 processed_at: '2026-01-25T14:16:20.078Z'
 ---
 [[Перевод] OpenCode + Docker Model Runner для локальной разработки с ИИ](https://habr.com/ru/articles/987118/?utm_campaign=987118&utm_source=habrahabr&utm_medium=rss)

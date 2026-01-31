@@ -6,7 +6,9 @@ source_url: "https://t.me/NeuralProfit/1965"
 has_media: true
 language: "mixed"
 summary: "Теперь в ChatGPT можно подключать сервисы по MCP в режиме Developer Mode"
-tags: ["mcp","chatgpt","developer","connectors","openai"]
+tags:
+  - mcp
+  - openai
 processed_at: "2025-09-19T13:42:33.705Z"
 ---
 

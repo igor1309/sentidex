@@ -10,10 +10,6 @@ summary: >-
   GPTs ботов.
 tags:
   - github
-  - spec
-  - kit
-  - ingest
-  - quickstart
 processed_at: '2025-10-16T08:26:42.714Z'
 ---
 ⚡️ **Создаем "второго пилота" при разработке с GitHub Spec Kit** или быстрый вход в GPTs ботов

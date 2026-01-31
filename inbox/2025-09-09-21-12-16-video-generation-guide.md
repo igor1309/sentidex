@@ -6,7 +6,10 @@ source_url: "https://t.me/NeuralProfit/1941"
 has_media: true
 language: "mixed"
 summary: "Alibaba выпустил бесплатный учебник по видеогенерации с примерами промптов."
-tags: ["videogen","prompts","alibaba"]
+tags:
+  - alibaba
+  - prompting
+  - videogen
 processed_at: "2025-09-09T21:35:04.966Z"
 ---
 

@@ -9,11 +9,10 @@ summary: >-
   Не скиллами едиными — детерминированность через mandatory evaluation хуков
   Claude Code и активацию навыков.
 tags:
-  - hooks
-  - userpromptsubmit
   - claude
+  - eval
   - skills
-  - evaluation
+  - userpromptsubmit
 processed_at: '2025-12-02T22:14:33.664Z'
 ---
 **Не скиллами едиными. 

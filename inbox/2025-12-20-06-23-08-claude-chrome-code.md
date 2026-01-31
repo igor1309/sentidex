@@ -10,9 +10,7 @@ summary: >-
   Code
 tags:
   - claude
-  - chrome
   - code
-  - вкладки
 processed_at: '2025-12-20T08:19:56.760Z'
 ---
 ✴️ **Claude для Chrome доступен всем платным пользователям + интеграция с Claude Code**

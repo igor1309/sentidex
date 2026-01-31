@@ -6,7 +6,9 @@ source_url: "https://t.me/neuraldeep/1590"
 has_media: true
 language: "mixed"
 summary: "Создаем гибридную систему, объединяющую SGR и инструменты, с 12 навыками и управлением контекстом, ускоряя работу и добавляя доступ к файловой системе и интернету."
-tags: ["sgr","tool","kontext","dataset","ai"]
+tags:
+  - ai
+  - kontext
 processed_at: "2025-09-02T14:14:53.011Z"
 ---
 

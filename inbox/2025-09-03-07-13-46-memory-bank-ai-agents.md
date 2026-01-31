@@ -6,7 +6,8 @@ source_url: "https://t.me/the_ai_architect/142"
 has_media: false
 language: "mixed"
 summary: "AI-агенты страдают амнезией; предлагаем внешнюю память Memory Bank для контекста и правил."
-tags: ["память","агенты","контекст","документация"]
+tags:
+  - агенты
 processed_at: "2025-09-06T09:42:38.202Z"
 ---
 

@@ -9,10 +9,9 @@ summary: >-
   Обзор идей Auto Claude: автономная разработка, функциональные фичи, память,
   Roadmap проекта.
 tags:
-  - kanban
-  - graphiti
-  - worktrees
   - anthropic
+  - git
+  - graphiti
 processed_at: '2026-01-20T06:29:20.293Z'
 ---
 **Про интересные идеи и их реализацию.

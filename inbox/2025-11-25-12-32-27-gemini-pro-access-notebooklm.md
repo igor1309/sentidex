@@ -10,8 +10,6 @@ summary: >-
   продавцов и блокировки Google
 tags:
   - gemini
-  - '3'
-  - pro
   - notebooklm
 processed_at: '2025-11-25T14:16:40.028Z'
 ---

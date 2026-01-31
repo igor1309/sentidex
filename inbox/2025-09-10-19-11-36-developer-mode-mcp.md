@@ -6,7 +6,9 @@ source_url: "https://t.me/ai_product/1531"
 has_media: false
 language: "mixed"
 summary: "OpenAI выпустил MCP-клиент с режимом разработчика только для платных пользователей."
-tags: ["mcp","developermode","openai"]
+tags:
+  - mcp
+  - openai
 processed_at: "2025-09-10T19:35:36.318Z"
 ---
 

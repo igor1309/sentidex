@@ -9,10 +9,8 @@ summary: >-
   Публикация в App Store и Google Play одним кликом, ускоряющая запуск и деплой
   приложений.
 tags:
-  - manus
-  - appstore
-  - googleplay
   - devops
+  - googleplay
 processed_at: '2026-01-21T18:36:47.187Z'
 ---
 Manus тоже делает публикацию в App Store и Google Play в один клик. Скоро можно сейчас целую корзинку приложений наделать за вечер.

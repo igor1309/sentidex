@@ -8,9 +8,7 @@ language: mixed
 summary: 'Сборник лучших подходов, практик и материалов по RAG с примерами и ссылками.'
 tags:
   - langchain
-  - chroma
-  - qdrant
-  - bogdanisssimo
+  - rag
 processed_at: '2025-12-01T06:27:23.168Z'
 ---
 **Лучшие практики и подходы для RAG** 

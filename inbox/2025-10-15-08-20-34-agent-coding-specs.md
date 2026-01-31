@@ -9,10 +9,7 @@ summary: >-
   Разработка десктопной прокси-апп с использованием opensource CLIProxyAPI и
   архитектурной спецификацией
 tags:
-  - shotgunpro
-  - cliproxyapi
-  - json
-  - lovable
+  - proxy
 processed_at: '2025-10-15T10:23:13.121Z'
 ---
 **Задротский пост, я предупредил** 🌚

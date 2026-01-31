@@ -11,7 +11,6 @@ summary: >-
 tags:
   - claude
   - code
-  - marketplace
   - github
 processed_at: '2025-10-11T18:22:33.556Z'
 ---

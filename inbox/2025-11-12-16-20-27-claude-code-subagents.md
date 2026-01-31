@@ -9,7 +9,6 @@ summary: >-
   Руководство по работе с субагентами в Claude Code через делегирование задач и
   /agents
 tags:
-  - delegate
   - agents
   - claude
 processed_at: '2025-11-12T18:23:00.496Z'

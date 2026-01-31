@@ -10,9 +10,7 @@ summary: >-
   инструкциям в Xcode
 tags:
   - swift
-  - concurrency
   - swiftui
-  - mapkit
 processed_at: '2026-01-13T10:19:34.937Z'
 ---
 **Секретный способ найти файлы .md для Swift Concurrency/SwiftUI/MapKit и так далее**

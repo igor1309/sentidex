@@ -9,10 +9,6 @@ summary: >-
   Опыт освоения фронтенда, переход к Rust+HTMX+PicoCSS+Postgres для простых
   веб-приложений
 tags:
-  - wordpress
-  - rust
-  - htmx
-  - picocss
   - postgres
 processed_at: '2025-12-17T01:12:09.395Z'
 ---

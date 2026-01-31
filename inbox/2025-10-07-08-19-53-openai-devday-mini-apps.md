@@ -9,11 +9,8 @@ summary: >-
   OpenAI DevDay: мини-приложения в ChatGPT, AgentKit/ChatKit, Sora2-модели,
   апстор планы и цены.
 tags:
-  - openai
-  - devday
-  - chatgpt
   - agentkit
-  - chatkit
+  - openai
 processed_at: '2025-10-07T10:19:04.544Z'
 ---
 **Что показали на OpenAI DevDay**

@@ -6,7 +6,9 @@ source_url: "https://t.me/NeuralProfit/1935"
 has_media: true
 language: "mixed"
 summary: "ИИ-агент Opus для монтажа вирусных роликов с автоматическим озвучиванием и доступом по листу ожидания."
-tags: ["ai","montazh","viral","video"]
+tags:
+  - ai
+  - video
 processed_at: "2025-09-06T09:42:47.165Z"
 ---
 

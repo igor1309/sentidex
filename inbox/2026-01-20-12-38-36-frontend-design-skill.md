@@ -9,10 +9,9 @@ summary: >-
   рекламирует Frontend Design Skill от Anthropic и демонстрирует минималистичный
   дизайн с анимациями
 tags:
-  - frontend
   - design
-  - skill
-  - rss
+  - frontend
+  - skills
 processed_at: '2026-01-20T14:26:38.759Z'
 ---
 **Если вы ещё не используете Frontend Design Skill от Anthropic, то многое теряете!**

@@ -6,7 +6,11 @@ source_url: "https://t.me/prompt_design/1580"
 has_media: false
 language: "mixed"
 summary: "Автор описывает пошаговый путь обучения созданию ИИ-агентов, начиная с простой игрушки-бота и переходя к системе с памятью, оркестратором и ограничителями, развертываемой в реальном мире. Рекомендуется начать с курса Hugging Face."
-tags: ["ai","agents","memory","orchestrator","prompts"]
+tags:
+  - agents
+  - ai
+  - memory
+  - prompting
 processed_at: "2025-08-31T07:29:46.280Z"
 ---
 

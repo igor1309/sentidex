@@ -7,9 +7,7 @@ has_media: false
 language: en
 summary: Telegram post link for twitt_ota
 tags:
-  - twitt
-  - ota
-  - '25790'
+
 processed_at: '2025-12-11T14:20:10.062Z'
 ---
 [https://t.me/twitt_ota/25790](https://t.me/twitt_ota/25790)

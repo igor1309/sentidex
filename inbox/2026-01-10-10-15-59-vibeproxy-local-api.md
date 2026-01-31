@@ -9,11 +9,10 @@ summary: >-
   локальный API-эндпоинт для подписок Claude Code, ChatGPT, Gemini через
   VibeProxy
 tags:
-  - vibeproxy
   - claude
-  - chatgpt
   - gemini
-  - opus
+  - openai
+  - vibeproxy
 processed_at: '2026-01-10T14:15:45.045Z'
 ---
 VibeProxy - как выжать максимум из AI-подписки

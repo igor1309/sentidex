@@ -6,7 +6,10 @@ source_url: "https://t.me/dimension_ai/190"
 has_media: true
 language: "mixed"
 summary: "Обсуждается идея вынести reasoning в отдельный тул, который определяет, что делать далее и что вызывать. Управление через поле tool_choice делает вызов этого тулов принудительным после юзерского сообщения."
-tags: ["reasoning","tool","llm","agents","prompt"]
+tags:
+  - agents
+  - llm
+  - prompting
 processed_at: "2025-08-31T07:30:00.986Z"
 ---
 

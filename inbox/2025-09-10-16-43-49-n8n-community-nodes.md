@@ -6,7 +6,9 @@ source_url: "https://t.me/prompt_design/1599"
 has_media: false
 language: "mixed"
 summary: "Рекомендую использовать Community Nodes в n8n для эффективного скрапинга и анализа сайтов"
-tags: ["n8n","communitynodes","scraping","apify","pagespeed"]
+tags:
+  - api
+  - n8n
 processed_at: "2025-09-10T17:12:11.905Z"
 ---
 

@@ -6,7 +6,10 @@ source_url: "https://t.me/sergiobulaev/1463"
 has_media: true
 language: "mixed"
 summary: "Запилил телеграм-паблишера через телетон для увеличения публикаций, источник вдохновения агентов."
-tags: ["телеграм","паблишера","агентов","github"]
+tags:
+  - agents
+  - github
+  - telegram
 processed_at: "2025-09-20T09:38:18.414Z"
 ---
 

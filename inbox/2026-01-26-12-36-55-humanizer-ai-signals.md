@@ -7,10 +7,7 @@ has_media: false
 language: mixed
 summary: 'Обнаруживает признаки ИИ в тексте, удаляет их, делая тексты более человечными'
 tags:
-  - humanizer
-  - okrs
-  - kpis
-  - bmc
+
 processed_at: '2026-01-26T14:24:13.064Z'
 ---
 Забавно. Чувак взял все признаки AI сгенерированного текста из википедии и сделал скилл, чтобы AI переделывал текст и избавлялся от этих признаков, то есть делал более "человечным". Назвал Humanizer - [https://github.com/blader/humanizer](https://github.com/blader/humanizer)

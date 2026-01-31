@@ -11,7 +11,6 @@ summary: >-
 tags:
   - gemini
   - notebooklm
-  - блокноты
   - сессии
 processed_at: '2025-12-18T18:25:07.316Z'
 ---

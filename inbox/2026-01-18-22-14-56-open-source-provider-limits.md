@@ -9,8 +9,6 @@ summary: >-
   Обзор бесплатных лимитов на использование open source моделей у разных
   провайдеров и тенденции
 tags:
-  - groq
-  - ollama
   - cerebras
   - cloudflare
   - openrouter

@@ -7,8 +7,7 @@ has_media: true
 language: mixed
 summary: Использование Happenstance для быстрого знакомства по открытым источникам
 tags:
-  - happenstance
-  - ии
+  - ai
   - video
 processed_at: '2025-09-24T08:21:28.523Z'
 ---

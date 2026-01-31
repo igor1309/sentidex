@@ -11,9 +11,6 @@ summary: >-
 tags:
   - claude
   - code
-  - reflection
-  - плагин
-  - маркетплейс
 processed_at: '2026-01-22T20:21:16.714Z'
 ---
 Рефлексия** для Claude Code или пусть он настроит себя сам**

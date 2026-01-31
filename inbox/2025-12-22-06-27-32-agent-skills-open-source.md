@@ -10,9 +10,9 @@ summary: >-
   рост поддержки интеграций
 tags:
   - agentskills
-  - opensource
-  - mcp
   - cursor
+  - mcp
+  - open-source
 processed_at: '2025-12-22T08:24:28.642Z'
 ---
 **Прошло всего 3 дня с момента, как появился ****репозиторий Agent Skills**s](https://github.com/agentskills/agentskills)**, ознаменовавший переход Skills от Anthropic в OpenSource. **

@@ -11,8 +11,6 @@ summary: >-
 tags:
   - cursor
   - rag
-  - embedding
-  - grep
 processed_at: '2025-11-07T16:16:26.166Z'
 ---
 **В Cursor обновили модель поиска: благодаря RAG многое теперь работает лучше**

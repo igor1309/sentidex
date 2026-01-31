@@ -9,10 +9,8 @@ summary: >-
   Недооцененная функция ChatGPT: режим Study Mode, задающий вопросы и обучающий
   через наводящие шаги.
 tags:
-  - chatgpt
-  - openai
   - education
-  - pdf
+  - openai
 processed_at: '2026-01-18T08:21:09.142Z'
 ---
 📚 Недооцененная фича ChatGPT - Study Mode

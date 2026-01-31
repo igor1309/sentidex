@@ -6,7 +6,8 @@ source_url: "https://t.me/vikulin_ai/90"
 has_media: false
 language: "mixed"
 summary: "Кейс Uber: автоматизация обработки счетов с использованием OCR, LLM и VLM, архитектура и результаты"
-tags: ["uber","ocr","llm","vlm","pdf"]
+tags:
+  - llm
 processed_at: "2025-09-20T09:30:48.365Z"
 ---
 

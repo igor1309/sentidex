@@ -6,7 +6,10 @@ source_url: "https://t.me/prompt_design/1623"
 has_media: false
 language: "mixed"
 summary: "Сравнение популярных ИИ‑моделей по функциям, интеграции и стоимости, с рекомендациями пользователя"
-tags: ["aitools","comparison","features","integration","cost"]
+tags:
+  - aitools
+  - comparison
+  - integration
 processed_at: "2025-09-18T17:37:52.387Z"
 ---
 

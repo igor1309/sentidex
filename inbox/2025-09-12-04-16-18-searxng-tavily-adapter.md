@@ -6,7 +6,8 @@ source_url: "https://t.me/neuraldeep/1611"
 has_media: false
 language: "mixed"
 summary: "Замена Tavily на SearXNG с адаптером обеспечивает бесплатный приватный поиск без лимитов"
-tags: ["searxng","tavily","adapter","github"]
+tags:
+  - github
 processed_at: "2025-09-20T09:31:29.149Z"
 ---
 

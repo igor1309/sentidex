@@ -6,7 +6,8 @@ source_url: "https://t.me/prompt_design/1608"
 has_media: true
 language: "en"
 summary: "Photo with five sizes available and file size indicated"
-tags: ["photo","sizes","available","kb"]
+tags:
+
 processed_at: "2025-09-20T09:31:44.407Z"
 ---
 

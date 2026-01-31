@@ -11,9 +11,6 @@ summary: >-
 tags:
   - gemini
   - image
-  - understanding
-  - 2d
-  - bounding
 processed_at: '2025-10-02T20:18:08.388Z'
 ---
 🔥 **Image Understanding **(`box_2d`)** в Gemini - недооцененная суперсила для OCR и не только**

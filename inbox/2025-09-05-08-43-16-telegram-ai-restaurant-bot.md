@@ -6,7 +6,11 @@ source_url: ""
 has_media: false
 language: "mixed"
 summary: "Ищу Python разработчика для проекта AI агента: Telegram-бот для ресторанов, с RAG и чат-ботами."
-tags: ["python","ai","telegram","restaurant","rag"]
+tags:
+  - ai
+  - rag
+  - restaurant
+  - telegram
 processed_at: "2025-09-06T09:43:05.433Z"
 ---
 

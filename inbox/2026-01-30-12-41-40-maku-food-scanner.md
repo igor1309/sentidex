@@ -7,10 +7,7 @@ has_media: true
 language: mixed
 summary: 'Ура, запустил первую аппку Maku для сканирования состава пищи по упаковке с ИИ'
 tags:
-  - maku
-  - food
-  - allergy
-  - scanner
+
 processed_at: '2026-01-30T14:32:05.696Z'
 ---
 Ура, я зарелизил свою первую аппку. 

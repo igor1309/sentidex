@@ -7,11 +7,8 @@ has_media: false
 language: mixed
 summary: обучение агентов чтению трейсов для исправления промптов AI через Langfuse MCP
 tags:
-  - trace
   - langfuse
   - mcp
-  - ape
-  - observability
 processed_at: '2025-09-23T16:19:50.413Z'
 ---
 **Как я научил кодинг-агентов дебажить AI-приложения через трейсы**

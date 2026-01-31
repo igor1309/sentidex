@@ -9,9 +9,6 @@ summary: >-
   Встроенный скилл coding-agent для интерактивных CLI-агентов: запуск через
   exec/pty, мониторинг и безопасность.
 tags:
-  - exec
-  - workdir
-  - pty
   - git
   - repo
 processed_at: '2026-01-27T18:31:32.167Z'

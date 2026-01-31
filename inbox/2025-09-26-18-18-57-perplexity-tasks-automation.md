@@ -7,10 +7,7 @@ has_media: true
 language: mixed
 summary: использование функции Tasks в Perplexity для автоматизации ежедневных отчетов
 tags:
-  - reddit
   - perplexity
-  - tasks
-  - rss
 processed_at: '2025-09-26T20:17:28.924Z'
 ---
 **Как я использую новую функцию «Tasks» в Perplexity**

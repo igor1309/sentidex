@@ -11,8 +11,6 @@ summary: >-
 tags:
   - claude
   - code
-  - synthetic
-  - minimax
   - glm
 processed_at: '2025-11-11T10:18:09.055Z'
 ---

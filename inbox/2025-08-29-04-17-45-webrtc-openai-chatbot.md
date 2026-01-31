@@ -6,7 +6,9 @@ source_url: ""
 has_media: false
 language: "en"
 summary: "The text describes creating a WebRTC chatbot that uses OpenAI in real time."
-tags: ["webrtc","chatbot","openai","realtime"]
+tags:
+  - chatbot
+  - openai
 processed_at: "2025-08-31T07:30:20.757Z"
 ---
 

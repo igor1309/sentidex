@@ -6,7 +6,10 @@ source_url: "https://t.me/tips_ai/4340"
 has_media: true
 language: "mixed"
 summary: "Обширная коллекция идей проектов с AI-агентами и гайды по популярным фреймворкам с примерами запуска"
-tags: ["github","grewai","autogen","langgraph"]
+tags:
+  - github
+  - grewai
+  - langgraph
 processed_at: "2025-09-20T09:30:17.494Z"
 ---
 

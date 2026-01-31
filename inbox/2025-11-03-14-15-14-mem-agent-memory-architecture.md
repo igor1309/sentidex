@@ -9,8 +9,6 @@ summary: >-
   Обзор Mem-Agent: иерархия памяти в Markdown, двунаправленные связи, интеграция
   MCP и поддержка LLM.
 tags:
-  - markdown
-  - obsidian
   - mcp
   - rag
 processed_at: '2025-11-03T16:19:01.329Z'

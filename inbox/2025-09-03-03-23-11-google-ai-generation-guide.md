@@ -6,7 +6,10 @@ source_url: "https://t.me/cgevent/13397"
 has_media: false
 language: "mixed"
 summary: "Нашел свежий гайд от Гугла по генерации в Нанабанане, 6 принципов, примеры и код для API."
-tags: ["генерация","гайд","промпты","код","api"]
+tags:
+  - api
+  - prompting
+  - tutorial
 processed_at: "2025-09-06T09:42:17.911Z"
 ---
 

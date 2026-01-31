@@ -9,10 +9,7 @@ summary: >-
   Таблица с 500 инструкциями для Nano Banana Pro и базой авторов из парсинга
   твитов
 tags:
-  - инструкций
-  - nano
   - banana
-  - парсинга
 processed_at: '2025-12-11T16:23:50.395Z'
 ---
 В этой таблице [500 инструкций для Nano Banana Pro](https://docs.google.com/spreadsheets/d/1hXjpatDJmzIU0HKSd1udpE71YapyusY9lqoscNeaLSc/edit?usp=sharing), но, так как сделана она путем парсинга «залетевших» твитов с промптами, выходит, что это еще и неплохая база авторов

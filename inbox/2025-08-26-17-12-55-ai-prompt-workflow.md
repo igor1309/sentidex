@@ -6,7 +6,11 @@ source_url: "https://t.me/the_ai_architect/135"
 has_media: false
 language: "mixed"
 summary: "Идеальный процесс создания промптов: AI генерирует черновик, затем проверка и уточнение, после чего применяется обратная связь. Это мета‑навык экономит время и повышает качество."
-tags: ["prompt","ai","workflow","quality","automation"]
+tags:
+  - ai
+  - automation
+  - prompting
+  - workflow
 processed_at: "2025-08-26T17:38:41.873Z"
 ---
 

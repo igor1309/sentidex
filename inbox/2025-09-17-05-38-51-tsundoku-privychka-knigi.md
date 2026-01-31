@@ -6,7 +6,8 @@ source_url: "https://t.me/viveconesto/9486"
 has_media: false
 language: "ru"
 summary: "Японская привычка покупать книги и откладывать их в стопку непрочитанных - цундоку."
-tags: ["японском","привычки","покупать","книги"]
+tags:
+
 processed_at: "2025-09-20T09:33:39.326Z"
 ---
 

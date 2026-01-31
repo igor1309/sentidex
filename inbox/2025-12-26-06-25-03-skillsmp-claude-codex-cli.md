@@ -9,10 +9,10 @@ summary: >-
   Краткое описание платформы skillsmp для Claude Code и Codex CLI с загрузкой
   архивов и фильтрацией по звёздам.
 tags:
-  - skillsmp
   - claude
   - codex
   - github
+  - skills
 processed_at: '2025-12-26T08:22:17.766Z'
 ---
 Ух ты, нашел платформу [Skillsmp](https://skillsmp.com/) — агрегатор скиллов для Claude Code и Codex CLI. 

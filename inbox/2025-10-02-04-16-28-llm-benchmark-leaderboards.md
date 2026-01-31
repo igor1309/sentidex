@@ -7,9 +7,7 @@ has_media: true
 language: mixed
 summary: 'Обширный обзор бенчмарков для LLM, сравнения по кодингу, математике и эмпатии'
 tags:
-  - lmarena
   - openrouter
-  - livebench
 processed_at: '2025-10-02T06:24:15.104Z'
 ---
 Бенчмарков для LLM сейчас очень много. От математики и кодинга до эмпатии модели. 

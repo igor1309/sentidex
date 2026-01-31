@@ -11,9 +11,6 @@ summary: >-
 tags:
   - claude
   - code
-  - askuserquestiontool
-  - thariq
-  - shihipar
 processed_at: '2026-01-11T10:16:48.793Z'
 ---
 **Промпт от разработчика Claude Code, который заставляет AI задавать правильные вопросы**

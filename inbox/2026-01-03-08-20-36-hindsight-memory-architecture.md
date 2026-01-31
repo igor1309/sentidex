@@ -9,10 +9,9 @@ summary: >-
   Обзор открытого проекта Hindsight: организация памяти AI-агента с фактов,
   опыта, мнений и наблюдений.
 tags:
-  - hindsight
   - docker
+  - hindsight
   - openai
-  - arxiv
 processed_at: '2026-01-03T12:30:33.792Z'
 ---
 **Hindsight**t](https://hindsight.vectorize.io/)** – интересный проект, показывающий, как можно организовать память для AI-агента.**

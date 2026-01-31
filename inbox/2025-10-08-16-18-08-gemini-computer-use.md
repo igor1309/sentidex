@@ -10,9 +10,7 @@ summary: >-
   браузером.
 tags:
   - gemini
-  - operator
   - google
-  - browserbase
 processed_at: '2025-10-08T18:27:04.092Z'
 ---
 **Google выкатил конкурента Open AI Operator для управления компьютером**.

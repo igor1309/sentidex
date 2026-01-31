@@ -9,10 +9,9 @@ summary: >-
   Официальный гид по промптингу GPT-5.1 с инсайтами, рекомендациями и примерами
   удачных запросов
 tags:
-  - openai
-  - chatgpt
-  - prompting
   - guide
+  - openai
+  - prompting
 processed_at: '2025-11-15T10:14:50.371Z'
 ---
 OpenAI выпустили официальный **гайд**д](https://cookbook.openai.com/examples/gpt-5/gpt-5-1_prompting_guide) по промптингу GPT-5.1, где собраны лайфхаки, рекомендации и примеры удачных запросов.

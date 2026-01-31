@@ -11,9 +11,8 @@ summary: >-
 tags:
   - agentic
   - ai
+  - eval
   - workflow
-  - evaluations
-  - collaboration
 processed_at: '2025-10-07T10:18:44.782Z'
 ---
 Год работы с agentic AI: главные уроки от тех, кто внедряет агентов

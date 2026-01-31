@@ -6,7 +6,10 @@ source_url: "https://t.me/prompt_design/1614"
 has_media: true
 language: "mixed"
 summary: "Nano Banana и Seedream 4.0 доступны в Perplexity для генерации изображений."
-tags: ["nanobanana","seedream","perplexity","imagegeneration","f5"]
+tags:
+  - imagegeneration
+  - nanobanana
+  - perplexity
 processed_at: "2025-09-17T10:14:47.973Z"
 ---
 

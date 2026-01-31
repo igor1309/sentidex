@@ -6,7 +6,10 @@ source_url: "https://t.me/gleb_pro_ai/172"
 has_media: false
 language: "mixed"
 summary: "Автор делится обычным промптом к курсору, который даёт хорошие результаты с GPT-5-high. Используется принцип матрешки: описание, архитектура и код, а курсор помогает предварительно обработать длинные контексты гемини перед передачей в GPT-5."
-tags: ["prompts","kursor","matreshka","gpt5","gemini"]
+tags:
+  - gemini
+  - openai
+  - prompting
 processed_at: "2025-08-31T07:29:54.487Z"
 ---
 

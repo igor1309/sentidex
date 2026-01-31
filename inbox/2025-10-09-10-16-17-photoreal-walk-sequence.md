@@ -9,10 +9,7 @@ summary: >-
   live-action photoreal cinema in a single continuous take showing a year of
   routine from door to trash can.
 tags:
-  - fps
-  - gimbal
-  - neighbors
-  - blue
+
 processed_at: '2025-10-09T16:24:06.639Z'
 ---
 Prompt: ||LIVE‑ACTION PHOTOREAL CINEMA. NOT animation, NOT storyboard, NOT illustration. 

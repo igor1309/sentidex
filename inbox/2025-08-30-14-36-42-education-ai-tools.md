@@ -6,7 +6,12 @@ source_url: "https://t.me/prompt_design/1582"
 has_media: false
 language: "mixed"
 summary: "Автор делится списком обучающих ИИ-инструментов для учеников и родителей. Он перечисляет Perplexity, ChatGPT, NotebookLM, MathGPT, Gemini и Gamma и размышляет о быстром росте предложений."
-tags: ["perplexity","chatgpt","notebooklm","mathgpt","gemini"]
+tags:
+  - gemini
+  - mathgpt
+  - notebooklm
+  - openai
+  - perplexity
 processed_at: "2025-08-31T07:30:15.457Z"
 ---
 

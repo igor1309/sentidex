@@ -9,7 +9,6 @@ summary: >-
   Делегирование рисерча кодовой базы через headless режим CLI-агентов для
   экономии контекста.
 tags:
-  - headless
   - cli
   - coding
   - subagents

@@ -11,7 +11,6 @@ summary: >-
 tags:
   - gemini
   - google
-  - ggsel
   - perplexity
 processed_at: '2025-09-25T20:17:33.571Z'
 ---

@@ -6,7 +6,10 @@ source_url: "https://t.me/the_ai_architect/139"
 has_media: false
 language: "mixed"
 summary: "Смотреть, как разработчик требует исправлять AI через follow-up, похоже на крик на сломанный принтер."
-tags: ["ai","prompts","debugging","prompting","workflow"]
+tags:
+  - ai
+  - prompting
+  - workflow
 processed_at: "2025-09-06T09:42:04.787Z"
 ---
 

@@ -6,7 +6,9 @@ source_url: "https://t.me/sergiobulaev/1456"
 has_media: true
 language: "mixed"
 summary: "Краткий конспект практических советов по созданию понятных и быстрых MCP‑инструментов для агентов"
-tags: ["инструментов","агентов","прототипируем","eval","tool"]
+tags:
+  - agents
+  - eval
 processed_at: "2025-09-20T09:32:36.703Z"
 ---
 

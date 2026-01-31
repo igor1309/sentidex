@@ -6,7 +6,11 @@ source_url: "https://t.me/kdoronin_blog/946"
 has_media: true
 language: "mixed"
 summary: "Кейсы применения Graphiti, включающие память проекта с помощью MCP и Cursor."
-tags: ["graphiti","cursor","mcp","memory","project"]
+tags:
+  - cursor
+  - graphiti
+  - mcp
+  - memory
 processed_at: "2025-09-13T21:35:10.318Z"
 ---
 

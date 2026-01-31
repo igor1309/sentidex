@@ -10,9 +10,6 @@ summary: >-
   транскрибация и точное понимание текста.
 tags:
   - superwhisper
-  - wispr
-  - flow
-  - aqua
   - voice
 processed_at: '2025-11-16T22:13:59.120Z'
 ---

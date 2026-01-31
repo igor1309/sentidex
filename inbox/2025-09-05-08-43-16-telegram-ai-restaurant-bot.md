@@ -9,7 +9,6 @@ summary: "Ищу Python разработчика для проекта AI аге
 tags:
   - ai
   - rag
-  - restaurant
   - telegram
 processed_at: "2025-09-06T09:43:05.433Z"
 ---

@@ -7,8 +7,8 @@ has_media: true
 language: "mixed"
 summary: "Личный ИИ‑ассистент с многоуровневой памятью, дневниками и проактивностью, интегрированный через n8n и Qdrant, цель движок счастливых случайностей"
 tags:
-  - n8n
   - perplexity
+  - workflow
 processed_at: "2025-09-20T09:29:44.678Z"
 ---
 

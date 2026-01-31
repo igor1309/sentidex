@@ -7,9 +7,7 @@ has_media: true
 language: "mixed"
 summary: "Бесплатный курс Nano Banana по нейрофотошопу Google с обучающими видео и промптами."
 tags:
-  - freeai
   - google
-  - nanobananaguide
 processed_at: "2025-09-20T09:32:58.209Z"
 ---
 

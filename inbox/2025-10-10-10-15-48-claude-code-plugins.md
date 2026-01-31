@@ -9,8 +9,8 @@ summary: >-
   Антропики запустили плагины для Claude Code, позволяющие обмениваться
   коллекциями слэш-команд, агентов и MCP-серверов
 tags:
+  - ai-coding
   - claude
-  - code
 processed_at: '2025-10-10T14:20:03.298Z'
 ---
 **Антропики запустили ****плагины**ы](https://www.anthropic.com/news/claude-code-plugins)** для Claude Code**

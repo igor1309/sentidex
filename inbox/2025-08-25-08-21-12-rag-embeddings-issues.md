@@ -7,10 +7,8 @@ has_media: false
 language: "mixed"
 summary: "Автор рассматривает проблемы использования эмбеддингов в подходах RAG, перечисляя ключевые недостатки и предлагая стратегии обхода, включая query rewriting, генерацию вопросов, ленивые LLM‑search, прямой запрос к PDF и структурированный поиск через SQL‑таблицы. Также приводятся рекомендации по preprocessing, reranking, structured output и обсуждается экономичность LLM‑retrieval по сравнению с embeddings."
 tags:
-  - embeddings
   - llm
   - rag
-  - retrieval
 processed_at: "2025-08-25T08:48:22.185Z"
 ---
 

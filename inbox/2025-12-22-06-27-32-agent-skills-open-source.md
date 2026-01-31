@@ -9,7 +9,7 @@ summary: >-
   Обширное распространение Agent Skills как OpenSource, унификация форматов и
   рост поддержки интеграций
 tags:
-  - agentskills
+  - agents
   - cursor
   - mcp
   - open-source

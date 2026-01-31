@@ -6,7 +6,10 @@ source_url: "https://t.me/ai_product/1509"
 has_media: false
 language: "mixed"
 summary: "Гугл раскатил Gemini и AI-инфраструктуру в Google Distributed Cloud, можно разворачивать на датацентрах оффлайн (air-gapped)."
-tags: ["ai","gemini","google","onprem","airgapped"]
+tags:
+  - ai
+  - gemini
+  - google
 processed_at: "2025-09-06T09:41:46.518Z"
 ---
 

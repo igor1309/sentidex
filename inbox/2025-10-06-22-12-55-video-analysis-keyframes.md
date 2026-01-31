@@ -10,7 +10,6 @@ summary: >-
   вывод Markdown и менеджмент XML
 tags:
   - gemini
-  - анализа
 processed_at: '2025-10-07T01:10:06.760Z'
 ---
 **Обновил ****скрипт для анализа видео**о](https://github.com/kdoronin/video_analyzer_example)** через Google Gemini.**

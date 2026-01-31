@@ -7,10 +7,9 @@ has_media: false
 language: mixed
 summary: 'Запись митапа по Claude Code с темами, ссылками и участниками'
 tags:
+  - agents
   - claude
-  - codealive
   - codex
-  - agent
 processed_at: '2025-09-28T20:15:58.567Z'
 ---
 **Запись митапа по Claude Code**

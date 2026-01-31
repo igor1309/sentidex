@@ -7,9 +7,8 @@ has_media: true
 language: "mixed"
 summary: "Alibaba выпустил бесплатный учебник по видеогенерации с примерами промптов."
 tags:
-  - alibaba
   - prompting
-  - videogen
+  - video-gen
 processed_at: "2025-09-09T21:35:04.966Z"
 ---
 

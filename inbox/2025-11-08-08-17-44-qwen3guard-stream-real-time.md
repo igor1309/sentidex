@@ -9,8 +9,7 @@ summary: >-
   Стримовая модерация Qwen3Guard-Stream: токен-уровневая классификация и
   мгновенная блокировка небезопасного контента.
 tags:
-  - jailbreak
-  - qwen3guard
+
 processed_at: '2025-11-08T12:27:41.689Z'
 ---
 **Qwen3Guard-Stream: real-time модерация которая реально работает**

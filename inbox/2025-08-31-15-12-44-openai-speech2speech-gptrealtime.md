@@ -7,9 +7,7 @@ has_media: true
 language: "mixed"
 summary: "OpenAI релизнули новую speech2speech модель gpt-realtime и Realtime API стал общедоступным."
 tags:
-  - gptrealtime
   - openai
-  - speech2speech
 processed_at: "2025-09-06T09:41:35.445Z"
 ---
 

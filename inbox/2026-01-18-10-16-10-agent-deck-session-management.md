@@ -9,7 +9,7 @@ summary: >-
   Опыт применения Agent Deck: упорядочение хаоса, управление сессиями и контроль
   расходов
 tags:
-  - agent
+  - agents
   - claude
   - codex
   - github

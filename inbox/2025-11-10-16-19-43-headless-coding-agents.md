@@ -9,9 +9,8 @@ summary: >-
   Делегирование рисерча кодовой базы через headless режим CLI-агентов для
   экономии контекста.
 tags:
+  - ai-coding
   - cli
-  - coding
-  - subagents
 processed_at: '2025-11-10T18:23:20.654Z'
 ---
 **Делегирование — важный навык в AI Coding**

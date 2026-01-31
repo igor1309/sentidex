@@ -9,7 +9,7 @@ summary: >-
   Отличная схема по работе с контекстом AI-агентов в репозитории langchain,
   компактно и понятно.
 tags:
-  - langchain
+
 processed_at: '2025-12-07T22:14:35.636Z'
 ---
 Наткнулся в [одном из небольших репозиториев от langchain](https://github.com/langchain-ai/context_engineering) на отличную схему по работе с контекстом AI-агентов. 

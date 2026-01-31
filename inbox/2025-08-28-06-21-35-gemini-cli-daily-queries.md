@@ -7,10 +7,10 @@ has_media: true
 language: "mixed"
 summary: "Автор тестирует Gemini CLI с 1000 бесплатных запросов в сутки и отмечает большие контекстные окна. Он рассматривает Gemini CLI как запасного агента и рассказывает о планах интеграции с Cursor и VS Code."
 tags:
+  - ai-coding
   - cli
   - cursor
   - gemini
-  - vscode
 processed_at: "2025-08-31T07:30:08.400Z"
 ---
 

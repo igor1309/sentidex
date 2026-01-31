@@ -10,7 +10,6 @@ summary: >-
   прост в настройке
 tags:
   - graphiti
-  - hindsight
 processed_at: '2026-01-11T01:25:13.716Z'
 ---
 **Graphiti**i](https://github.com/getzep/graphiti)** VS ****Hindsight**t](https://hindsight.vectorize.io/)**. Почему я использую оба эти инструмента?**

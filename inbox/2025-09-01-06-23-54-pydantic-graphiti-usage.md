@@ -7,8 +7,8 @@ has_media: true
 language: "mixed"
 summary: "Использование Pydantic позволяет заранее определить типы узлов и связей в Graphiti, делая построение графов более предсказуемым; пример работает через LLM и демонстрационную программу."
 tags:
-  - automation
   - graphiti
+  - workflow
 processed_at: "2025-09-01T06:51:24.939Z"
 ---
 

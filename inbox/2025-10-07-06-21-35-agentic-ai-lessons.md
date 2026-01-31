@@ -9,7 +9,7 @@ summary: >-
   Год внедрения агентного ИИ: системный подход, фокус на workflow, evaluations,
   мониторинг и роль людей.
 tags:
-  - agentic
+  - agents
   - ai
   - eval
   - workflow

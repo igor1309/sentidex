@@ -9,8 +9,8 @@ summary: >-
   Обсуждение промпта Claude Code, автора Thariq Shihipar и AskUserQuestionTool,
   детали спецификаций проекта.
 tags:
+  - ai-coding
   - claude
-  - code
 processed_at: '2026-01-11T10:16:48.793Z'
 ---
 **Промпт от разработчика Claude Code, который заставляет AI задавать правильные вопросы**

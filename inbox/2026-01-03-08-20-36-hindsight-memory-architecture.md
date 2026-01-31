@@ -10,7 +10,6 @@ summary: >-
   опыта, мнений и наблюдений.
 tags:
   - docker
-  - hindsight
   - openai
 processed_at: '2026-01-03T12:30:33.792Z'
 ---

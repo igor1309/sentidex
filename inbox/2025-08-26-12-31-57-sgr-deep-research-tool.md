@@ -7,10 +7,7 @@ has_media: true
 language: "mixed"
 summary: "Обсуждается создание простого инструмента Deep Research на основе Tavily API и GPT‑4o‑mini с шагами Clarification, GeneratePlan, AdaptPlan, WebSearch и CreateReport."
 tags:
-  - clarification
-  - deepresearch
-  - gpt4omini
-  - websearch
+  - openai
 processed_at: "2025-08-26T13:29:00.789Z"
 ---
 

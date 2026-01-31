@@ -7,7 +7,6 @@ has_media: false
 language: mixed
 summary: CliproxyAPI не поддерживает все клиенты Droid проблемы с моделями
 tags:
-  - droid
   - proxy
 processed_at: '2026-01-10T14:16:50.050Z'
 ---

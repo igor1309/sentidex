@@ -3,47 +3,55 @@ const path = require("path");
 
 // Canonical tags (these are valid and should be kept)
 const CANONICAL_TAGS = new Set([
-  "api", "backend", "cerebras", "chatbot", "cli", "design", "eval",
-  "frontend", "gemini", "git", "github", "glm", "grok", "hr",
-  "langfuse", "langgraph", "openai", "openrouter", "perplexity", "postgres",
-  "proxy", "rag", "repo", "skills", "swift", "swiftui", "tdd", "telegram", "vps",
-  // From original taxonomy
-  "ai", "agents", "audio", "claude", "devops", "docker", "education",
-  "image-gen", "llm", "mcp", "memory", "news", "open-source",
-  "opinion", "productivity", "prompting", "research", "resource",
-  "tutorial", "video-gen", "workflow", "writing", "business",
+  "ai", "ai-coding", "agents", "api", "audio", "backend", "business",
+  "cerebras", "chatbot", "claude", "cli", "cloudflare", "cursor", "deepseek",
+  "design", "devops", "docker", "education", "eval", "frontend",
+  "gemini", "git", "github", "gitleaks", "glm", "google", "graphiti", "grok", "hr",
+  "image-gen", "langfuse", "langgraph", "llm", "mcp", "memory",
+  "news", "no-code", "open-source", "openai", "openrouter", "opinion",
+  "perplexity", "postgres", "productivity", "prompting", "proxy",
+  "rag", "repo", "research", "resource", "skills", "swift", "swiftui",
+  "tdd", "telegram", "tutorial", "video-gen", "vps", "workflow", "writing",
 ]);
 
 // Map to canonical tags
 const TAG_MAPPING = {
+  // Agents
+  "agent": "agents",
+  "agentic": "agents",
+  "agentkit": "agents",
+  "agentskills": "agents",
+  "агент": "agents",
+  "агентов": "agents",
+  "агента": "agents",
+  "агенты": "agents",
+
+  // AI
+  "ии": "ai",
+
+  // AI Coding
+  "ai-developer": "ai-coding",
+  "aicoding": "ai-coding",
+  "code": "ai-coding",
+  "coding": "ai-coding",
+  "vibecode": "ai-coding",
+  "vscode": "ai-coding",
+
   // API
   "apify": "api",
+  "integration": "api",
 
-  // OpenAI
-  "chatgpt": "openai",
-  "chatkit": "openai",
-  "gpt4": "openai",
-  "gpt-4": "openai",
-  "gpt5": "openai",
-  "gpt-5": "openai",
-
-  // RAG
-  "chroma": "rag",
-  "embedding": "rag",
-
-  // Eval
-  "evaluation": "eval",
-  "evaluations": "eval",
+  // Claude
+  "opus": "claude",
+  "anthropic": "claude",
+  "anthropics": "claude",
 
   // Design
   "figma": "design",
 
-  // Skills
-  "skill": "skills",
-  "skillsmp": "skills",
-  "superpowers": "skills",
-  "openskills": "skills",
-  "скиллов": "skills",
+  // Eval
+  "evaluation": "eval",
+  "evaluations": "eval",
 
   // Git
   "workdir": "git",
@@ -54,46 +62,108 @@ const TAG_MAPPING = {
   "рекрутер": "hr",
   "собесах": "hr",
 
-  // Repo
-  "репозиторий": "repo",
-  "репозитория": "repo",
+  // Image-gen
+  "image": "image-gen",
+  "imagegeneration": "image-gen",
 
-  // Telegram
-  "телеграм": "telegram",
+  // No-code
+  "nocode": "no-code",
 
-  // Proxy
-  "cliproxyapi": "proxy",
+  // OpenAI
+  "chatgpt": "openai",
+  "chatkit": "openai",
+  "gpt": "openai",
+  "gpt4": "openai",
+  "gpt-4": "openai",
+  "gpt5": "openai",
+  "gpt-5": "openai",
+  "gpt4omini": "openai",
 
-  // Claude
-  "opus": "claude",
+  // Open-source
+  "oss": "open-source",
+  "opensource": "open-source",
 
   // Postgres
   "postgresql": "postgres",
 
-  // Russian translations
-  "ии": "ai",
-  "агент": "agents",
-  "агентов": "agents",
+  // Prompting
+  "prompt": "prompting",
+  "prompts": "prompting",
   "промпт": "prompting",
   "промпты": "prompting",
-  "гайд": "tutorial",
-  "обзор": "opinion",
-  "новости": "news",
+  "промпта": "prompting",
+  "промптингу": "prompting",
+  "промптов": "prompting",
+  "промптом": "prompting",
 
-  // English synonyms
-  "prompts": "prompting",
-  "prompt": "prompting",
-  "oss": "open-source",
-  "opensource": "open-source",
+  // Proxy
+  "cliproxyapi": "proxy",
+
+  // RAG
+  "chroma": "rag",
+  "embedding": "rag",
+  "embeddings": "rag",
+  "retrieval": "rag",
+
+  // Repo
+  "repository": "repo",
+  "репозиторий": "repo",
+  "репозитория": "repo",
+
+  // Skills
+  "skill": "skills",
+  "skillsmp": "skills",
+  "superpowers": "skills",
+  "openskills": "skills",
+  "скиллов": "skills",
+
+  // Telegram
+  "телеграм": "telegram",
+
+  // Tutorial
+  "guide": "tutorial",
+  "гайд": "tutorial",
   "how-to": "tutorial",
   "howto": "tutorial",
+  "гайды": "tutorial",
+
+  // Video-gen
+  "video": "video-gen",
+  "videogen": "video-gen",
+
+  // Opinion
+  "обзор": "opinion",
+
+  // News
+  "новости": "news",
+
+  // Workflow
+  "automation": "workflow",
+  "n8n": "workflow",
 };
 
 // Noise tags to remove
 const DROP_TAGS = new Set([
   // Dimensions/durations/numbers
   "108kb", "1660x1080", "1920x1172", "1file", "20b", "20s", "25790",
-  "2678x1780", "2d", "3", "36s", "4s",
+  "2678x1780", "2d", "3", "36s", "4s", "25s", "3022x1560", "mb",
+  // Misc noise from current list
+  "agi", "airgapped", "aitdd", "aitools", "alibaba", "bestpractices",
+  "clarification", "codealive", "codemod", "comparison", "copilot",
+  "deepresearch", "docling", "docstrange", "docx", "dramabox", "droid",
+  "duolingo", "dynatrace", "email", "errors", "freeai", "googleplay",
+  "googletranslate", "gptrealtime", "grewai", "hindsight", "ideabrowser",
+  "jailbreak", "kontext", "langchain", "learning", "llama", "lumalabs",
+  "marketing", "mathgpt", "metaprompting", "monorepo", "nanobanana",
+  "nanobananaguide", "notebooklm", "onprem", "opencode", "pdftotext",
+  "product-requirements", "promptcode", "qwen3guard", "restaurant",
+  "runway", "sdk", "search", "secrets", "security", "self-hosted",
+  "speech2speech", "subagents", "subtext", "superwhisper", "trust",
+  "userpromptsubmit", "veo", "vibeproxy", "voice", "websearch", "whisper",
+  // Russian leftovers
+  "анализа", "анализе", "анализируй", "анализом", "истории",
+  "конфигурации", "мимикрии", "оптимизации", "персонализации",
+  "презентации", "сессии", "эмоции",
   // English noise
   "act", "adapter", "advent", "aeo", "allergy", "analytics", "ape",
   "app-build", "arena", "arxiv", "askuserquestiontool", "applicant",
@@ -216,11 +286,30 @@ function extractAllTags(inboxDir) {
   return allTags;
 }
 
+// Patterns for dynamic noise detection
+const NOISE_PATTERNS = [
+  /^\d+x\d+$/,        // dimensions: 1920x1080, 3022x1560
+  /^\d+s$/,           // durations: 25s, 4s
+  /^\d+kb$/i,         // file sizes: 108kb
+  /^\d+mb$/i,         // file sizes: 5mb
+  /^\d+b$/,           // bytes: 20b
+  /^\d+$/,            // pure numbers: 3, 25790
+];
+
+function isNoisePattern(tag) {
+  return NOISE_PATTERNS.some((pattern) => pattern.test(tag));
+}
+
 function mapTag(tag) {
   const lower = tag.toLowerCase();
 
-  // Drop noise
+  // Drop explicit noise
   if (DROP_TAGS.has(lower)) {
+    return null;
+  }
+
+  // Drop pattern-based noise
+  if (isNoisePattern(lower)) {
     return null;
   }
 

@@ -7,9 +7,7 @@ has_media: false
 language: "mixed"
 summary: "Сравнение популярных ИИ‑моделей по функциям, интеграции и стоимости, с рекомендациями пользователя"
 tags:
-  - aitools
-  - comparison
-  - integration
+  - api
 processed_at: "2025-09-18T17:37:52.387Z"
 ---
 

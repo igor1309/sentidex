@@ -9,8 +9,8 @@ summary: >-
   Представлен плагин Claude Code Reflection для настройки CC через текстовые
   команды и управление скиллами
 tags:
+  - ai-coding
   - claude
-  - code
 processed_at: '2026-01-22T20:21:16.714Z'
 ---
 Рефлексия** для Claude Code или пусть он настроит себя сам**

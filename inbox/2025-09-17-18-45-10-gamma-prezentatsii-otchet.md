@@ -7,7 +7,7 @@ has_media: false
 language: "mixed"
 summary: "Gamma может не только презентации."
 tags:
-  - презентации
+
 processed_at: "2025-09-20T09:34:49.000Z"
 ---
 

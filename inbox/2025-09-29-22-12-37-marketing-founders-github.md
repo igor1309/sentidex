@@ -10,7 +10,6 @@ summary: >-
   Perplexity и Connectors.
 tags:
   - github
-  - marketing
   - perplexity
 processed_at: '2025-09-30T01:08:44.556Z'
 ---

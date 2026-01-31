@@ -9,8 +9,8 @@ summary: >-
   Запуск marketplace плагинов Claude Code для синхронизации субагентов и
   унификации инструментов в команде
 tags:
+  - ai-coding
   - claude
-  - code
   - github
 processed_at: '2025-10-11T18:22:33.556Z'
 ---

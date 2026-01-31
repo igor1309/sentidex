@@ -10,7 +10,7 @@ summary: >-
   cw-character, cw-worldbuilding, cw-story-critique, cw-voice,
   narrative-dimensions-analysis.
 tags:
-  - subtext
+
 processed_at: '2026-01-18T14:15:24.331Z'
 ---
 Приятель пишет книгу и собрал такую систему из агентов:

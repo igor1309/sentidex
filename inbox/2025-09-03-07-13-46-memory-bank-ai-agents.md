@@ -7,7 +7,7 @@ has_media: false
 language: "mixed"
 summary: "AI-агенты страдают амнезией; предлагаем внешнюю память Memory Bank для контекста и правил."
 tags:
-  - агенты
+  - agents
 processed_at: "2025-09-06T09:42:38.202Z"
 ---
 

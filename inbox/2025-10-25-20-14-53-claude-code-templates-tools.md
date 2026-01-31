@@ -9,8 +9,8 @@ summary: >-
   Обзор репозитория CC Templates и инструментов Claude Code для быстрой
   разработки агентов и мониторинга
 tags:
+  - ai-coding
   - claude
-  - code
 processed_at: '2025-10-25T22:13:21.195Z'
 ---
 **Что хранит в себе Claude Code Templates?

@@ -10,7 +10,7 @@ summary: >-
   extraction с визуальной верификацией
 tags:
   - gemini
-  - image
+  - image-gen
 processed_at: '2025-10-02T20:18:08.388Z'
 ---
 🔥 **Image Understanding **(`box_2d`)** в Gemini - недооцененная суперсила для OCR и не только**

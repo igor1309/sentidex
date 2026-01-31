@@ -9,8 +9,8 @@ summary: >-
   Обзор подписок на локальные LLM: Claude Code, Synthetic, API, развертывание
   моделей и реферальная программа.
 tags:
+  - ai-coding
   - claude
-  - code
   - glm
 processed_at: '2025-11-11T10:18:09.055Z'
 ---

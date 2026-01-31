@@ -12,7 +12,6 @@ tags:
   - claude
   - eval
   - skills
-  - userpromptsubmit
 processed_at: '2025-12-02T22:14:33.664Z'
 ---
 **Не скиллами едиными. 

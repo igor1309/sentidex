@@ -6,7 +6,11 @@ source_url: "https://t.me/kdoronin_blog/916"
 has_media: true
 language: "mixed"
 summary: "Dify – это полноценное локальное решение для работы с LLM‑приложениями, которое можно сразу развернуть в Docker и использовать как no‑code редактор, API‑сервер и площадку для публикации систем."
-tags: ["llm","docker","self-hosted","no-code","api"]
+tags:
+  - api
+  - docker
+  - llm
+  - no-code
 processed_at: "2025-09-01T04:46:55.381Z"
 ---
 

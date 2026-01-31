@@ -7,7 +7,7 @@ has_media: true
 language: mixed
 summary: Бесплатные гайды OpenAI для бизнеса и использования GPT-5 в PDF
 tags:
-  - гайды
+  - tutorial
 processed_at: '2025-10-27T14:17:13.403Z'
 ---
 **Бесплатные готовые гайды для бизнеса от OpenAI

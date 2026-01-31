@@ -7,8 +7,7 @@ has_media: true
 language: "mixed"
 summary: "Nano Banana и Seedream 4.0 доступны в Perplexity для генерации изображений."
 tags:
-  - imagegeneration
-  - nanobanana
+  - image-gen
   - perplexity
 processed_at: "2025-09-17T10:14:47.973Z"
 ---

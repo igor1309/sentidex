@@ -9,7 +9,7 @@ summary: >-
   критика Agent Builder и ChatKit от OpenAI, акцент на интерфейс для
   разработчиков, а не революция ИИ
 tags:
-  - agent
+  - agents
   - openai
 processed_at: '2025-10-07T20:20:00.020Z'
 ---

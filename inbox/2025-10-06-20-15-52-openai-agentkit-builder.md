@@ -7,10 +7,8 @@ has_media: false
 language: mixed
 summary: AgentKit и Agents SDK для сборки ИИ агентов без кода через конструктор OpenAI
 tags:
-  - openai
-  - agentkit
   - agents
-  - sdk
+  - openai
 processed_at: '2025-10-07T01:09:45.979Z'
 ---
 *Информация подтвердилась - Можно тестить*ть ****Agent Builder ** ](https://platform.openai.com/agent-builder)** 

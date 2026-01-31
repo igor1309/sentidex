@@ -9,8 +9,7 @@ summary: >-
   Переходы между сервисами: Superwhisper, Wispr Flow и Aqua Voice; мгновенная
   транскрибация и точное понимание текста.
 tags:
-  - superwhisper
-  - voice
+
 processed_at: '2025-11-16T22:13:59.120Z'
 ---
 Я уже писал, что перешёл с Superwhisper на Wispr Flow, а в этот раз пишу, как перешёл с [Wispr Flow](https://wisprflow.ai/) на [Aqua Voice](https://aquavoice.com/). 

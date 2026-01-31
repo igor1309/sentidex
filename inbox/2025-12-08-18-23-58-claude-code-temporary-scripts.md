@@ -10,7 +10,7 @@ summary: >-
   игнорированием в git
 tags:
   - ai
-  - coding
+  - ai-coding
   - claude
 processed_at: '2025-12-08T22:16:11.847Z'
 ---

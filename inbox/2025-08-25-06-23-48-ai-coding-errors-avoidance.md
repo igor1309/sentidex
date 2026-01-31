@@ -6,7 +6,10 @@ source_url: "https://t.me/the_ai_architect/132"
 has_media: false
 language: "mixed"
 summary: "Статья обсуждает четыре критические ошибки AI-кодинга и как их избежать (часть 1) на примере истории Джона, и предлагает практический чек-лист по безопасности и структурированию проекта."
-tags: ["ai","secrets","security","gitleaks","repository"]
+tags:
+  - ai
+  - gitleaks
+  - repo
 processed_at: "2025-08-31T07:29:28.003Z"
 ---
 

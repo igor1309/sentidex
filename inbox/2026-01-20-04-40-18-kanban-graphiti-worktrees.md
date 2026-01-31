@@ -9,7 +9,7 @@ summary: >-
   Обзор идей Auto Claude: автономная разработка, функциональные фичи, память,
   Roadmap проекта.
 tags:
-  - anthropic
+  - claude
   - git
   - graphiti
 processed_at: '2026-01-20T06:29:20.293Z'

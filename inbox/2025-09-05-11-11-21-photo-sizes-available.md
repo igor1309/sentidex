@@ -7,7 +7,7 @@ has_media: true
 language: "en"
 summary: "Photo available in 4 sizes; file size 39.9 KB."
 tags:
-  - image
+  - image-gen
 processed_at: "2025-09-06T09:43:11.881Z"
 ---
 

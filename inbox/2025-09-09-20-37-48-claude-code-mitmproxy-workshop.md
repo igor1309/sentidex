@@ -7,8 +7,8 @@ has_media: false
 language: "mixed"
 summary: "Изучение работы Claude Code, локальных сессий, прокси и идеи воркшопа по контексту"
 tags:
+  - ai-coding
   - claude
-  - code
 processed_at: "2025-09-20T09:30:33.312Z"
 ---
 

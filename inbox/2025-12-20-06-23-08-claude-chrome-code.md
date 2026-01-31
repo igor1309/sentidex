@@ -9,8 +9,8 @@ summary: >-
   Claude для Chrome доступен всем платным пользователям и интеграция с Claude
   Code
 tags:
+  - ai-coding
   - claude
-  - code
 processed_at: '2025-12-20T08:19:56.760Z'
 ---
 ✴️ **Claude для Chrome доступен всем платным пользователям + интеграция с Claude Code**

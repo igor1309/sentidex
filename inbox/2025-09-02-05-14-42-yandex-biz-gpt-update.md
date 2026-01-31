@@ -8,7 +8,7 @@ language: "mixed"
 summary: "Яндекс выпустил бизнес-ИИ YandexGPT 5.1 Pro с улучшенными ответами и снижением цены."
 tags:
   - ai
-  - gpt
+  - openai
 processed_at: "2025-09-06T09:41:55.757Z"
 ---
 

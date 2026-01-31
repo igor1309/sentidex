@@ -9,9 +9,8 @@ summary: >-
   Обзор ресурсов Claude Code: курсы, гайды, видео, инструменты и практики
   агентского кодирования
 tags:
+  - ai-coding
   - claude
-  - code
-  - anthropic
   - codex
   - github
 processed_at: '2026-01-07T10:19:54.247Z'

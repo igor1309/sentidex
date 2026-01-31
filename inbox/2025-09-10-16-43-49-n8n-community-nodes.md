@@ -8,7 +8,7 @@ language: "mixed"
 summary: "Рекомендую использовать Community Nodes в n8n для эффективного скрапинга и анализа сайтов"
 tags:
   - api
-  - n8n
+  - workflow
 processed_at: "2025-09-10T17:12:11.905Z"
 ---
 

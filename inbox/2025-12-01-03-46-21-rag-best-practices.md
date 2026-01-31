@@ -7,7 +7,6 @@ has_media: false
 language: mixed
 summary: 'Сборник лучших подходов, практик и материалов по RAG с примерами и ссылками.'
 tags:
-  - langchain
   - rag
 processed_at: '2025-12-01T06:27:23.168Z'
 ---

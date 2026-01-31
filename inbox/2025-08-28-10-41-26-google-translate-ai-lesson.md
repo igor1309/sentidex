@@ -8,9 +8,7 @@ language: "mixed"
 summary: "Google Translate теперь предлагает AI‑поддерживаемые занятия: аудирование, произношение, персональные сценарии и ежедневный трекинг, а также два режима перевода, включая Gemini‑модель."
 tags:
   - ai
-  - duolingo
   - gemini
-  - googletranslate
 processed_at: "2025-08-28T11:12:09.942Z"
 ---
 

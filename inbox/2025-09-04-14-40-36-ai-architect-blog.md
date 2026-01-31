@@ -9,7 +9,6 @@ summary: "Смерджил эпик: AI-агент мигрировал бэке
 tags:
   - ai
   - backend
-  - monorepo
   - postgres
 processed_at: "2025-09-06T09:42:57.556Z"
 ---

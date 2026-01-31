@@ -11,7 +11,6 @@ summary: >-
 tags:
   - cli
   - design
-  - dynatrace
   - gemini
 processed_at: '2025-10-08T22:18:16.768Z'
 ---

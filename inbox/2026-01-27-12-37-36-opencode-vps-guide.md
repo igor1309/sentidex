@@ -10,7 +10,6 @@ summary: >-
   VPS и пошаговым гайдом.
 tags:
   - docker
-  - opencode
   - vps
 processed_at: '2026-01-27T14:25:31.904Z'
 ---

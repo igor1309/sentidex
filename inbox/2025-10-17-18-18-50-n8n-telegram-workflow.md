@@ -9,10 +9,9 @@ summary: >-
   Ультра‑краткая подборка workflow для n8n: новый бот с памятью в telegram и
   голосовые конвертации.
 tags:
-  - n8n
+  - openai
   - telegram
   - workflow
-  - openai
 processed_at: '2025-10-17T20:22:19.634Z'
 ---
 **Простые и полезные Workflow для n8n, которые могут быть полезны.**

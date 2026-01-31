@@ -7,9 +7,7 @@ has_media: true
 language: "mixed"
 summary: "AI‑TDD с метапромптингом и SGR повышает точность кода, используя цепочку мыслей и отладочные данные."
 tags:
-  - aitdd
   - llm
-  - metaprompting
 processed_at: "2025-09-08T07:37:10.910Z"
 ---
 

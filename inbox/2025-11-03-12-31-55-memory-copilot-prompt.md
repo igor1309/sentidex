@@ -9,10 +9,8 @@ summary: >-
   Концепт сабагента Memory Copilot, управляющего памятью модели через два
   инструмента: search и save, с автоматизацией.
 tags:
-  - copilot
   - memory
   - prompting
-  - search
 processed_at: '2025-11-03T16:18:44.839Z'
 ---
 **Memory Copilot - концепт инструмента памяти агента**

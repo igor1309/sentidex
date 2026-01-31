@@ -9,9 +9,8 @@ summary: >-
   Обзор готовых Skill-репозиториев для Claude Code: Anthropic, Superpowers, CC
   Templates, их качество и применение
 tags:
-  - anthropic
+  - ai-coding
   - claude
-  - code
   - skills
 processed_at: '2025-10-31T22:14:33.332Z'
 ---

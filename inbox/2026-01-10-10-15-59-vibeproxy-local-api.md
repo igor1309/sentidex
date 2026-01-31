@@ -12,7 +12,6 @@ tags:
   - claude
   - gemini
   - openai
-  - vibeproxy
 processed_at: '2026-01-10T14:15:45.045Z'
 ---
 VibeProxy - как выжать максимум из AI-подписки

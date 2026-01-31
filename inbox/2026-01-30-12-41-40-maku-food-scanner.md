@@ -6,8 +6,7 @@ source_url: 'https://t.me/gleb_pro_ai/383'
 has_media: true
 language: mixed
 summary: 'Ура, запустил первую аппку Maku для сканирования состава пищи по упаковке с ИИ'
-tags:
-
+tags: app
 processed_at: '2026-01-30T14:32:05.696Z'
 ---
 Ура, я зарелизил свою первую аппку. 

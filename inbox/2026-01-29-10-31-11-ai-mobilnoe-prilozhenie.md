@@ -10,6 +10,7 @@ summary: >-
   короткие видео и демо
 tags:
   - ai-coding
+  - app
   - claude
 processed_at: '2026-01-29T12:44:37.175Z'
 ---

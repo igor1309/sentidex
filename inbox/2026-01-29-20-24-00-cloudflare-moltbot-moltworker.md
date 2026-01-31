@@ -10,6 +10,7 @@ summary: >-
   5 долларов.
 tags:
   - cloudflare
+  - openclaw
 processed_at: '2026-01-29T22:22:49.847Z'
 ---
 [https://jpcaparas.medium.com/the-moltbot-saga-continues-cloudflare-enters-the-chat-5650b39af31f](https://jpcaparas.medium.com/the-moltbot-saga-continues-cloudflare-enters-the-chat-5650b39af31f)

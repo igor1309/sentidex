@@ -14,7 +14,9 @@
       background: #f5f5f5;
     }
     h1 { margin-bottom: 0.5rem; }
-    .stats { color: #666; margin-bottom: 2rem; }
+    .stats { color: #666; margin-bottom: 0.5rem; }
+    .note { color: #999; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .note code { background: #e8e8e8; padding: 0.2rem 0.4rem; border-radius: 3px; }
     .tags {
       display: flex;
       flex-wrap: wrap;
@@ -48,6 +50,7 @@
 <body>
   <h1>Inbox Tags</h1>
   <p class="stats">55 unique tags from 236 files</p>
+  <p class="note">Static page. Run <code>node scripts/build-tags-page.js</code> to update.</p>
   <input type="text" id="search" placeholder="Filter tags..." autofocus>
   <div class="tags" id="tags">
     <span class="tag" data-tag="claude">claude<span class="count">28</span></span>

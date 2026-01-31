@@ -52,7 +52,9 @@ const html = `<!DOCTYPE html>
       background: #f5f5f5;
     }
     h1 { margin-bottom: 0.5rem; }
-    .stats { color: #666; margin-bottom: 2rem; }
+    .stats { color: #666; margin-bottom: 0.5rem; }
+    .note { color: #999; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .note code { background: #e8e8e8; padding: 0.2rem 0.4rem; border-radius: 3px; }
     .tags {
       display: flex;
       flex-wrap: wrap;
@@ -86,6 +88,7 @@ const html = `<!DOCTYPE html>
 <body>
   <h1>Inbox Tags</h1>
   <p class="stats">${sortedTags.length} unique tags from ${files.length} files</p>
+  <p class="note">Static page. Run <code>node scripts/build-tags-page.js</code> to update.</p>
   <input type="text" id="search" placeholder="Filter tags..." autofocus>
   <div class="tags" id="tags">
 ${sortedTags.map(([tag, count]) => `    <span class="tag" data-tag="${tag}">${tag}<span class="count">${count}</span></span>`).join("\n")}

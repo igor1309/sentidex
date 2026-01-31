@@ -54,6 +54,13 @@ To update test snapshots:
 npm test -- -u
 ```
 
+### Tags Page
+
+To regenerate the static tags page at `web/tags.html`:
+```bash
+node scripts/build-tags-page.js
+```
+
 ### Continuous Integration (CI)
 
 We have an automated CI pipeline defined in `.github/workflows/ci.yml`. This workflow provides a critical quality gate for the project.

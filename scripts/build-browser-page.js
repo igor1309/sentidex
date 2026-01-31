@@ -48,7 +48,7 @@ for (const file of files) {
 }
 
 const sortedTags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
-const sortedFiles = fileData.sort((a, b) => b.date.localeCompare(a.date));
+const sortedFiles = fileData.sort((a, b) => b.file.localeCompare(a.file));
 
 const escapeHtml = (str) => str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 

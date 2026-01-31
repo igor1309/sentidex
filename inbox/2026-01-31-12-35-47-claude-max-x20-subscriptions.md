@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 739
-timestamp: "2026-01-31T12:35:47.060Z"
-source_info: "Поляков считает: AI, код и кейсы"
-source_url: "https://t.me/countwithsasha/432"
-forward_date: "2026-01-24T10:41:46.000Z"
+id: ml2efyeqxwj30reocbo
+created_at: '2026-01-31T12:35:47.060Z'
+source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/432'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Покупка подарочных подписок Claude Max x20 по льготной цене и экономия 120000
+  ₽, риски и инструкции.
+tags:
+  - claude
+  - ai
+  - tutorial
+  - business
+processed_at: '2026-01-31T14:20:30.578Z'
 ---
-
 **Claude Max x20 и 25 рублей за доллар: как я сэкономил 120 000₽ на подписке**
 
 Суббота, щепотка нервов и подписка за $2400 в год по цене бюджетного iPhone.

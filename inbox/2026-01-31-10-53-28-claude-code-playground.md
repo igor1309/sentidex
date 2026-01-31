@@ -1,15 +1,18 @@
 ---
-raw_message: true
-message_id: 726
-timestamp: "2026-01-31T10:53:28.127Z"
-source_info: "Поляков считает: AI, код и кейсы"
-source_url: "https://t.me/countwithsasha/446"
-forward_date: "2026-01-30T10:05:05.000Z"
+id: ml2efgcwit3zocp4aaa
+created_at: '2026-01-31T10:53:28.127Z'
+source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/446'
 has_media: true
-media_type: "video"
-forward_protected: false
+language: mixed
+summary: Claude Code Playground интерактивные HTML-демки для правок и ревью интерфейсов
+tags:
+  - claude
+  - ai-coding
+  - workflow
+  - video-gen
+processed_at: '2026-01-31T14:20:07.183Z'
 ---
-
 **От текста к интерфейсу: новый скилл Claude Code**
 
 Anthropic добавили скилл Playground — теперь вместо угрюмых markdown-файлов Claude Code генерирует интерактивные HTML-демки. Ну и да, использовать скилл можно хоть в [Cursor,](https://cursor.com/ru/docs/context/skills) хоть со [сторонними](https://t.me/countwithsasha/387) моделями.

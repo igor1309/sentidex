@@ -4,8 +4,14 @@ Analyze the following text and provide a response in JSON format. The JSON objec
    - **MUST BE 18 WORDS OR FEWER.** Do not exceed this limit.
    - It should be a single sentence fragment, not a complete sentence.
 
-2. "tags": An array of 3–5 unique, lowercase, strictly alphanumeric keywords directly from the text.
+2. "tags": An array of 3–5 unique, lowercase tags.
+   - Prefer tags from the taxonomy list below (kebab-case allowed).
+   - If no taxonomy tags apply, fall back to 3–5 lowercase alphanumeric keywords directly from the text.
    - Do not use stopwords (e.g., 'the', 'is', 'a') or generic terms.
+   - Do not invent new tags if a reasonable taxonomy tag fits.
+
+Preferred tag taxonomy (choose from these if applicable):
+{{tag_taxonomy}}
 
 3. "title": A short, 2–4 word title in kebab-case.
    - Compose it only of essential nouns or keywords.

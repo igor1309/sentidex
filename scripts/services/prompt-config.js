@@ -9,7 +9,15 @@ const DEFAULT_PROMPTS = {
     
     userPrompt: (content) => {
         const template = fs.readFileSync(path.join(PROMPTS_DIR, 'user-prompt.md'), 'utf8').trim();
-        return template.replace('{{content}}', content);
+        const taxonomyPath = path.join(__dirname, '..', '..', 'docs', 'tag-taxonomy.md');
+        const taxonomyRaw = fs.readFileSync(taxonomyPath, 'utf8');
+        const tagMatches = [...taxonomyRaw.matchAll(/`([a-z0-9-]+)`/g)];
+        const tagList = [...new Set(tagMatches.map((match) => match[1]))];
+        const taxonomyList =
+            tagList.length === 0 ? '- (no taxonomy tags found)' : tagList.map((tag) => `- ${tag}`).join('\n');
+        return template
+            .replace('{{tag_taxonomy}}', taxonomyList)
+            .replace('{{content}}', content);
     }
 };
   

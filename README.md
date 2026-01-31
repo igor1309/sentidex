@@ -54,11 +54,12 @@ To update test snapshots:
 npm test -- -u
 ```
 
-### Tags Page
+### Web Pages
 
-To regenerate the static tags page at `web/tags.html`:
+To regenerate static web pages:
 ```bash
-node scripts/build-tags-page.js
+node scripts/build-tags-page.js    # web/tags.html - tag cloud
+node scripts/build-browser-page.js # web/browser.html - file browser with tag filtering
 ```
 
 ### Continuous Integration (CI)

@@ -2,6 +2,8 @@
 
 ## 2026-01-31
 
+Add browser page with multi-select tag filtering.
+Change prompt to include preferred tag taxonomy.
 Clean up inbox tags: 622 → 55 unique tags (91% reduction).
 Add tag taxonomy and scrips with web-page to review and clean-up tags.
 Change file naming (timestamp as prefix) template.

@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inbox Browser</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+    h1 { margin-bottom: 0.5rem; }
+    .stats { color: #666; margin-bottom: 0.5rem; }
+    .note { color: #999; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .note code { background: #e8e8e8; padding: 0.2rem 0.4rem; border-radius: 3px; }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .tag {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .tag:hover { background: #e8f4fc; }
+    .tag.selected { background: #0066cc; color: #fff; border-color: #0066cc; }
+    .tag .count {
+      color: #888;
+      font-size: 0.8rem;
+      margin-left: 0.3rem;
+    }
+    .tag.selected .count { color: #cce0ff; }
+    #search {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+    .clear-btn {
+      background: #666;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .clear-btn:hover { background: #444; }
+    .clear-btn.visible { display: inline-block; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    th { background: #f9f9f9; font-weight: 600; }
+    tr:hover { background: #f5f9fc; }
+    .file-tags { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+    .file-tag {
+      background: #e8e8e8;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.75rem;
+    }
+    .summary { color: #666; font-size: 0.9rem; max-width: 400px; }
+    .no-results { padding: 2rem; text-align: center; color: #666; }
+  </style>
+</head>
+<body>
+  <h1>Inbox Browser</h1>
+  <p class="stats">55 tags, 236 files</p>
+  <p class="note">Static page. Run <code>node scripts/build-browser-page.js</code> to update.</p>
+  <input type="text" id="search" placeholder="Filter tags..." autofocus>
+  <div class="tags" id="tags">
+    <span class="tag" data-tag="claude">claude<span class="count">28</span></span>
+    <span class="tag" data-tag="ai">ai<span class="count">25</span></span>
+    <span class="tag" data-tag="prompting">prompting<span class="count">24</span></span>
+    <span class="tag" data-tag="openai">openai<span class="count">20</span></span>
+    <span class="tag" data-tag="ai-coding">ai-coding<span class="count">19</span></span>
+    <span class="tag" data-tag="gemini">gemini<span class="count">19</span></span>
+    <span class="tag" data-tag="agents">agents<span class="count">18</span></span>
+    <span class="tag" data-tag="llm">llm<span class="count">12</span></span>
+    <span class="tag" data-tag="github">github<span class="count">12</span></span>
+    <span class="tag" data-tag="workflow">workflow<span class="count">10</span></span>
+    <span class="tag" data-tag="skills">skills<span class="count">9</span></span>
+    <span class="tag" data-tag="video-gen">video-gen<span class="count">8</span></span>
+    <span class="tag" data-tag="rag">rag<span class="count">7</span></span>
+    <span class="tag" data-tag="cursor">cursor<span class="count">7</span></span>
+    <span class="tag" data-tag="perplexity">perplexity<span class="count">7</span></span>
+    <span class="tag" data-tag="mcp">mcp<span class="count">6</span></span>
+    <span class="tag" data-tag="repo">repo<span class="count">5</span></span>
+    <span class="tag" data-tag="docker">docker<span class="count">5</span></span>
+    <span class="tag" data-tag="graphiti">graphiti<span class="count">5</span></span>
+    <span class="tag" data-tag="google">google<span class="count">5</span></span>
+    <span class="tag" data-tag="codex">codex<span class="count">5</span></span>
+    <span class="tag" data-tag="cli">cli<span class="count">4</span></span>
+    <span class="tag" data-tag="api">api<span class="count">4</span></span>
+    <span class="tag" data-tag="image-gen">image-gen<span class="count">4</span></span>
+    <span class="tag" data-tag="telegram">telegram<span class="count">4</span></span>
+    <span class="tag" data-tag="openrouter">openrouter<span class="count">4</span></span>
+    <span class="tag" data-tag="design">design<span class="count">3</span></span>
+    <span class="tag" data-tag="memory">memory<span class="count">3</span></span>
+    <span class="tag" data-tag="tutorial">tutorial<span class="count">3</span></span>
+    <span class="tag" data-tag="postgres">postgres<span class="count">3</span></span>
+    <span class="tag" data-tag="eval">eval<span class="count">3</span></span>
+    <span class="tag" data-tag="hr">hr<span class="count">3</span></span>
+    <span class="tag" data-tag="no-code">no-code<span class="count">2</span></span>
+    <span class="tag" data-tag="open-source">open-source<span class="count">2</span></span>
+    <span class="tag" data-tag="banana">banana<span class="count">2</span></span>
+    <span class="tag" data-tag="proxy">proxy<span class="count">2</span></span>
+    <span class="tag" data-tag="grok">grok<span class="count">2</span></span>
+    <span class="tag" data-tag="cloudflare">cloudflare<span class="count">2</span></span>
+    <span class="tag" data-tag="git">git<span class="count">2</span></span>
+    <span class="tag" data-tag="devops">devops<span class="count">2</span></span>
+    <span class="tag" data-tag="vps">vps<span class="count">2</span></span>
+    <span class="tag" data-tag="gitleaks">gitleaks<span class="count">1</span></span>
+    <span class="tag" data-tag="tdd">tdd<span class="count">1</span></span>
+    <span class="tag" data-tag="chatbot">chatbot<span class="count">1</span></span>
+    <span class="tag" data-tag="backend">backend<span class="count">1</span></span>
+    <span class="tag" data-tag="langgraph">langgraph<span class="count">1</span></span>
+    <span class="tag" data-tag="langfuse">langfuse<span class="count">1</span></span>
+    <span class="tag" data-tag="glm">glm<span class="count">1</span></span>
+    <span class="tag" data-tag="swift">swift<span class="count">1</span></span>
+    <span class="tag" data-tag="swiftui">swiftui<span class="count">1</span></span>
+    <span class="tag" data-tag="education">education<span class="count">1</span></span>
+    <span class="tag" data-tag="cerebras">cerebras<span class="count">1</span></span>
+    <span class="tag" data-tag="frontend">frontend<span class="count">1</span></span>
+    <span class="tag" data-tag="deepseek">deepseek<span class="count">1</span></span>
+    <span class="tag" data-tag="audio">audio<span class="count">1</span></span>
+  </div>
+  <button class="clear-btn" id="clear">Clear selection</button>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Title</th>
+        <th>Tags</th>
+        <th>Summary</th>
+      </tr>
+    </thead>
+    <tbody id="files">
+      <tr data-tags="ai-coding,no-code">
+        <td></td>
+        <td>2025-08-24-15-13-01-ai-app-build.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">no-code</span></div></td>
+        <td class="summary">Челлендж: быстрое создание приложения с помощью ChatGPT и no‑code сервисов, чтобы получить подписку Apple Developer. Использовал Replit, Cursor, Stitch, Mobbin и промпты, генерированные AI.</td>
+      </tr>
+      <tr data-tags="ai,gitleaks,repo">
+        <td></td>
+        <td>2025-08-25-06-23-48-ai-coding-errors-avoidance.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">gitleaks</span><span class="file-tag">repo</span></div></td>
+        <td class="summary">Статья обсуждает четыре критические ошибки AI-кодинга и как их избежать (часть 1) на примере истории Джона, и предлагает практический чек-лист по безопасности и структурированию проекта.</td>
+      </tr>
+      <tr data-tags="llm,rag">
+        <td></td>
+        <td>2025-08-25-08-21-12-rag-embeddings-issues.md</td>
+        <td><div class="file-tags"><span class="file-tag">llm</span><span class="file-tag">rag</span></div></td>
+        <td class="summary">Автор рассматривает проблемы использования эмбеддингов в подходах RAG, перечисляя ключевые недостатки и предлагая стратегии обхода, включая query rewriting, генерацию вопросов, ленивые LLM‑search, прямой запрос к PDF и структурированный поиск через SQL‑таблицы. Также приводятся рекомендации по preprocessing, reranking, structured output и обсуждается экономичность LLM‑retrieval по сравнению с embeddings.</td>
+      </tr>
+      <tr data-tags="ai,design,tdd">
+        <td></td>
+        <td>2025-08-25-15-15-22-ai-code-at-faang.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">design</span><span class="file-tag">tdd</span></div></td>
+        <td class="summary">В тексте описано, как в крупной компании применяют ИИ для продакшн-кода: от дизайн-дока и архитектуры до тестирования, ревью и развёртывания. Также подчёркнуто, что ИИ выступает как мультипликатор и что сначала пишутся тесты (TDD), что даёт примерно 30% ускорения.</td>
+      </tr>
+      <tr data-tags="ai-coding">
+        <td></td>
+        <td>2025-08-25-18-21-15-ai-coding-issues.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span></div></td>
+        <td class="summary">Текст разъясняет критические ошибки AI‑кодинга: слепое доверие к агенту и «вайб‑кодинг» без экспертизы, предлагая проверку результатов и обучение через AI.</td>
+      </tr>
+      <tr data-tags="openai">
+        <td></td>
+        <td>2025-08-26-12-31-57-sgr-deep-research-tool.md</td>
+        <td><div class="file-tags"><span class="file-tag">openai</span></div></td>
+        <td class="summary">Обсуждается создание простого инструмента Deep Research на основе Tavily API и GPT‑4o‑mini с шагами Clarification, GeneratePlan, AdaptPlan, WebSearch и CreateReport.</td>
+      </tr>
+      <tr data-tags="ai,prompting,workflow">
+        <td></td>
+        <td>2025-08-26-17-12-55-ai-prompt-workflow.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">prompting</span><span class="file-tag">workflow</span></div></td>
+        <td class="summary">Идеальный процесс создания промптов: AI генерирует черновик, затем проверка и уточнение, после чего применяется обратная связь. Это мета‑навык экономит время и повышает качество.</td>
+      </tr>
+      <tr data-tags="agents,ai,memory,prompting">
+        <td></td>
+        <td>2025-08-26-18-46-07-ai-agent-learning-phases.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">ai</span><span class="file-tag">memory</span><span class="file-tag">prompting</span></div></td>
+        <td class="summary">Автор описывает пошаговый путь обучения созданию ИИ-агентов, начиная с простой игрушки-бота и переходя к системе с памятью, оркестратором и ограничителями, развертываемой в реальном мире. Рекомендуется начать с курса Hugging Face.</td>
+      </tr>
+      <tr data-tags="gemini,openai,prompting">
+        <td></td>
+        <td>2025-08-27-19-35-09-prompts-kursor-matreshka.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span><span class="file-tag">openai</span><span class="file-tag">prompting</span></div></td>
+        <td class="summary">Автор делится обычным промптом к курсору, который даёт хорошие результаты с GPT-5-high. Используется принцип матрешки: описание, архитектура и код, а курсор помогает предварительно обработать длинные контексты гемини перед передачей в GPT-5.</td>
+      </tr>
+      <tr data-tags="agents,llm,prompting">
+        <td></td>
+        <td>2025-08-28-04-17-15-reasoning-as-tool.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">llm</span><span class="file-tag">prompting</span></div></td>
+        <td class="summary">Обсуждается идея вынести reasoning в отдельный тул, который определяет, что делать далее и что вызывать. Управление через поле tool_choice делает вызов этого тулов принудительным после юзерского сообщения.</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-08-28-04-17-15_regular.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary"></td>
+      </tr>
+      <tr data-tags="ai-coding,cli,cursor,gemini">
+        <td></td>
+        <td>2025-08-28-06-21-35-gemini-cli-daily-queries.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">cli</span><span class="file-tag">cursor</span><span class="file-tag">gemini</span></div></td>
+        <td class="summary">Автор тестирует Gemini CLI с 1000 бесплатных запросов в сутки и отмечает большие контекстные окна. Он рассматривает Gemini CLI как запасного агента и рассказывает о планах интеграции с Cursor и VS Code.</td>
+      </tr>
+      <tr data-tags="ai,gemini">
+        <td></td>
+        <td>2025-08-28-10-41-26-google-translate-ai-lesson.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">gemini</span></div></td>
+        <td class="summary">Google Translate теперь предлагает AI‑поддерживаемые занятия: аудирование, произношение, персональные сценарии и ежедневный трекинг, а также два режима перевода, включая Gemini‑модель.</td>
+      </tr>
+      <tr data-tags="claude,open-source,workflow">
+        <td></td>
+        <td>2025-08-28-15-15-07-claude-code-templates.md</td>
+        <td><div class="file-tags"><span class="file-tag">claude</span><span class="file-tag">open-source</span><span class="file-tag">workflow</span></div></td>
+        <td class="summary">Огромная коллекция шаблонов Claude Code – бесплатные и открытые для разработчиков и аналитиков.</td>
+      </tr>
+      <tr data-tags="chatbot,openai">
+        <td></td>
+        <td>2025-08-29-04-17-45-webrtc-openai-chatbot.md</td>
+        <td><div class="file-tags"><span class="file-tag">chatbot</span><span class="file-tag">openai</span></div></td>
+        <td class="summary">The text describes creating a WebRTC chatbot that uses OpenAI in real time.</td>
+      </tr>
+      <tr data-tags="gemini,openai,perplexity">
+        <td></td>
+        <td>2025-08-30-14-36-42-education-ai-tools.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span><span class="file-tag">openai</span><span class="file-tag">perplexity</span></div></td>
+        <td class="summary">Автор делится списком обучающих ИИ-инструментов для учеников и родителей. Он перечисляет Perplexity, ChatGPT, NotebookLM, MathGPT, Gemini и Gamma и размышляет о быстром росте предложений.</td>
+      </tr>
+      <tr data-tags="openai">
+        <td></td>
+        <td>2025-08-31-15-12-44-openai-speech2speech-gptrealtime.md</td>
+        <td><div class="file-tags"><span class="file-tag">openai</span></div></td>
+        <td class="summary">OpenAI релизнули новую speech2speech модель gpt-realtime и Realtime API стал общедоступным.</td>
+      </tr>
+      <tr data-tags="api,docker,llm,no-code">
+        <td></td>
+        <td>2025-09-01-04-02-54-dify-locally-deploy-lm.md</td>
+        <td><div class="file-tags"><span class="file-tag">api</span><span class="file-tag">docker</span><span class="file-tag">llm</span><span class="file-tag">no-code</span></div></td>
+        <td class="summary">Dify – это полноценное локальное решение для работы с LLM‑приложениями, которое можно сразу развернуть в Docker и использовать как no‑code редактор, API‑сервер и площадку для публикации систем.</td>
+      </tr>
+      <tr data-tags="graphiti,workflow">
+        <td></td>
+        <td>2025-09-01-06-23-54-pydantic-graphiti-usage.md</td>
+        <td><div class="file-tags"><span class="file-tag">graphiti</span><span class="file-tag">workflow</span></div></td>
+        <td class="summary">Использование Pydantic позволяет заранее определить типы узлов и связей в Graphiti, делая построение графов более предсказуемым; пример работает через LLM и демонстрационную программу.</td>
+      </tr>
+      <tr data-tags="ai,gemini,google">
+        <td></td>
+        <td>2025-09-01-11-35-38-gemini-onprem-cloud.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">gemini</span><span class="file-tag">google</span></div></td>
+        <td class="summary">Гугл раскатил Gemini и AI-инфраструктуру в Google Distributed Cloud, можно разворачивать на датацентрах оффлайн (air-gapped).</td>
+      </tr>
+      <tr data-tags="image-gen">
+        <td></td>
+        <td>2025-09-01-13-06-43-photo-103kb.md</td>
+        <td><div class="file-tags"><span class="file-tag">image-gen</span></div></td>
+        <td class="summary">📸 **Photo** (4 sizes available) - 103.2 KB</td>
+      </tr>
+      <tr data-tags="ai,openai">
+        <td></td>
+        <td>2025-09-02-05-14-42-yandex-biz-gpt-update.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">openai</span></div></td>
+        <td class="summary">Яндекс выпустил бизнес-ИИ YandexGPT 5.1 Pro с улучшенными ответами и снижением цены.</td>
+      </tr>
+      <tr data-tags="ai,prompting,workflow">
+        <td></td>
+        <td>2025-09-02-07-37-20-ai-followup-frustration.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">prompting</span><span class="file-tag">workflow</span></div></td>
+        <td class="summary">Смотреть, как разработчик требует исправлять AI через follow-up, похоже на крик на сломанный принтер.</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-02-13-06-57-photo-info.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Foto 61,2 KB, 4 tamaños disponibles.</td>
+      </tr>
+      <tr data-tags="ai">
+        <td></td>
+        <td>2025-09-02-13-45-01-sgr-tool-hybrid-research.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span></div></td>
+        <td class="summary">Создаем гибридную систему, объединяющую SGR и инструменты, с 12 навыками и управлением контекстом, ускоряя работу и добавляя доступ к файловой системе и интернету.</td>
+      </tr>
+      <tr data-tags="api,prompting,tutorial">
+        <td></td>
+        <td>2025-09-03-03-23-11-google-ai-generation-guide.md</td>
+        <td><div class="file-tags"><span class="file-tag">api</span><span class="file-tag">prompting</span><span class="file-tag">tutorial</span></div></td>
+        <td class="summary">Нашел свежий гайд от Гугла по генерации в Нанабанане, 6 принципов, примеры и код для API.</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-03-04-40-56-photo-4-sizes-available.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Photo with four sizes available and file size 42.2 KB.</td>
+      </tr>
+      <tr data-tags="agents">
+        <td></td>
+        <td>2025-09-03-07-13-46-memory-bank-ai-agents.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span></div></td>
+        <td class="summary">AI-агенты страдают амнезией; предлагаем внешнюю память Memory Bank для контекста и правил.</td>
+      </tr>
+      <tr data-tags="ai,video-gen">
+        <td></td>
+        <td>2025-09-04-10-14-22-ai-agent-montazh-viral.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">video-gen</span></div></td>
+        <td class="summary">ИИ-агент Opus для монтажа вирусных роликов с автоматическим озвучиванием и доступом по листу ожидания.</td>
+      </tr>
+      <tr data-tags="ai,backend,postgres">
+        <td></td>
+        <td>2025-09-04-14-40-36-ai-architect-blog.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">backend</span><span class="file-tag">postgres</span></div></td>
+        <td class="summary">Смерджил эпик: AI-агент мигрировал бэкенд монорепозитории MongoDB→Postgres, реализуя слои от скелета до финала.</td>
+      </tr>
+      <tr data-tags="ai,rag,telegram">
+        <td></td>
+        <td>2025-09-05-08-43-16-telegram-ai-restaurant-bot.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">rag</span><span class="file-tag">telegram</span></div></td>
+        <td class="summary">Ищу Python разработчика для проекта AI агента: Telegram-бот для ресторанов, с RAG и чат-ботами.</td>
+      </tr>
+      <tr data-tags="image-gen">
+        <td></td>
+        <td>2025-09-05-11-11-21-photo-sizes-available.md</td>
+        <td><div class="file-tags"><span class="file-tag">image-gen</span></div></td>
+        <td class="summary">Photo available in 4 sizes; file size 39.9 KB.</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-07-14-11-10-photo-sizes.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Photo with four sizes available, 81.7 KB.</td>
+      </tr>
+      <tr data-tags="llm">
+        <td></td>
+        <td>2025-09-08-07-14-19-ai-tdd-metaprompting.md</td>
+        <td><div class="file-tags"><span class="file-tag">llm</span></div></td>
+        <td class="summary">AI‑TDD с метапромптингом и SGR повышает точность кода, используя цепочку мыслей и отладочные данные.</td>
+      </tr>
+      <tr data-tags="perplexity,workflow">
+        <td></td>
+        <td>2025-09-08-13-45-18-serendipity-engine-personal-ai.md</td>
+        <td><div class="file-tags"><span class="file-tag">perplexity</span><span class="file-tag">workflow</span></div></td>
+        <td class="summary">Личный ИИ‑ассистент с многоуровневой памятью, дневниками и проактивностью, интегрированный через n8n и Qdrant, цель движок счастливых случайностей</td>
+      </tr>
+      <tr data-tags="github,langgraph">
+        <td></td>
+        <td>2025-09-08-17-38-15-github-ai-frameworks.md</td>
+        <td><div class="file-tags"><span class="file-tag">github</span><span class="file-tag">langgraph</span></div></td>
+        <td class="summary">Обширная коллекция идей проектов с AI-агентами и гайды по популярным фреймворкам с примерами запуска</td>
+      </tr>
+      <tr data-tags="ai-coding,claude">
+        <td></td>
+        <td>2025-09-09-20-37-48-claude-code-mitmproxy-workshop.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">claude</span></div></td>
+        <td class="summary">Изучение работы Claude Code, локальных сессий, прокси и идеи воркшопа по контексту</td>
+      </tr>
+      <tr data-tags="prompting,video-gen">
+        <td></td>
+        <td>2025-09-09-21-12-16-video-generation-guide.md</td>
+        <td><div class="file-tags"><span class="file-tag">prompting</span><span class="file-tag">video-gen</span></div></td>
+        <td class="summary">Alibaba выпустил бесплатный учебник по видеогенерации с примерами промптов.</td>
+      </tr>
+      <tr data-tags="claude">
+        <td></td>
+        <td>2025-09-10-03-43-24-claude-file-generation.md</td>
+        <td><div class="file-tags"><span class="file-tag">claude</span></div></td>
+        <td class="summary">Claude теперь создает и редактирует Excel, Word и PowerPoint файлы с помощью Python и JS</td>
+      </tr>
+      <tr data-tags="llm">
+        <td></td>
+        <td>2025-09-10-04-38-54-uber-invoice-automation-llm.md</td>
+        <td><div class="file-tags"><span class="file-tag">llm</span></div></td>
+        <td class="summary">Кейс Uber: автоматизация обработки счетов с использованием OCR, LLM и VLM, архитектура и результаты</td>
+      </tr>
+      <tr data-tags="api,workflow">
+        <td></td>
+        <td>2025-09-10-16-43-49-n8n-community-nodes.md</td>
+        <td><div class="file-tags"><span class="file-tag">api</span><span class="file-tag">workflow</span></div></td>
+        <td class="summary">Рекомендую использовать Community Nodes в n8n для эффективного скрапинга и анализа сайтов</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-10-18-19-49-уроки-rag-техники.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">35 подробных уроков по различным техникам RAG с пояснениями, диаграммами и кодом; обновления обещаны.</td>
+      </tr>
+      <tr data-tags="mcp,openai">
+        <td></td>
+        <td>2025-09-10-19-11-36-developer-mode-mcp.md</td>
+        <td><div class="file-tags"><span class="file-tag">mcp</span><span class="file-tag">openai</span></div></td>
+        <td class="summary">OpenAI выпустил MCP-клиент с режимом разработчика только для платных пользователей.</td>
+      </tr>
+      <tr data-tags="github">
+        <td></td>
+        <td>2025-09-12-04-16-18-searxng-tavily-adapter.md</td>
+        <td><div class="file-tags"><span class="file-tag">github</span></div></td>
+        <td class="summary">Замена Tavily на SearXNG с адаптером обеспечивает бесплатный приватный поиск без лимитов</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-12-15-13-20-photo-sizes-available.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Photo with five sizes available and file size indicated</td>
+      </tr>
+      <tr data-tags="prompting">
+        <td></td>
+        <td>2025-09-13-08-16-34-конфигурации-промптом-обфускация.md</td>
+        <td><div class="file-tags"><span class="file-tag">prompting</span></div></td>
+        <td class="summary">Универсальный взлом LLM через конфигурационные файлы и обход промптов</td>
+      </tr>
+      <tr data-tags="cursor,graphiti,mcp,memory">
+        <td></td>
+        <td>2025-09-13-21-10-46-graphiti-application-cases.md</td>
+        <td><div class="file-tags"><span class="file-tag">cursor</span><span class="file-tag">graphiti</span><span class="file-tag">mcp</span><span class="file-tag">memory</span></div></td>
+        <td class="summary">Кейсы применения Graphiti, включающие память проекта с помощью MCP и Cursor.</td>
+      </tr>
+      <tr data-tags="agents,eval">
+        <td></td>
+        <td>2025-09-14-11-34-52-mcp-instrument-optimization.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">eval</span></div></td>
+        <td class="summary">Краткий конспект практических советов по созданию понятных и быстрых MCP‑инструментов для агентов</td>
+      </tr>
+      <tr data-tags="google">
+        <td></td>
+        <td>2025-09-14-20-13-48-nano-banana-neurophotoshop-course.md</td>
+        <td><div class="file-tags"><span class="file-tag">google</span></div></td>
+        <td class="summary">Бесплатный курс Nano Banana по нейрофотошопу Google с обучающими видео и промптами.</td>
+      </tr>
+      <tr data-tags="perplexity">
+        <td></td>
+        <td>2025-09-15-16-17-49-monity-ai-tools.md</td>
+        <td><div class="file-tags"><span class="file-tag">perplexity</span></div></td>
+        <td class="summary">Открытие года Monity AI, сервис для отслеживания изменений на сайтах и блогах, топ-10 ИИ-инструментов, которыми пользуюсь ежедневно</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-15-18-45-34-photo-sizes.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Photo available in four sizes, 108.3 KB</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-17-05-38-51-tsundoku-privychka-knigi.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Японская привычка покупать книги и откладывать их в стопку непрочитанных - цундоку.</td>
+      </tr>
+      <tr data-tags="image-gen,perplexity">
+        <td></td>
+        <td>2025-09-17-09-38-17-nano-banana-seedream.md</td>
+        <td><div class="file-tags"><span class="file-tag">image-gen</span><span class="file-tag">perplexity</span></div></td>
+        <td class="summary">Nano Banana и Seedream 4.0 доступны в Perplexity для генерации изображений.</td>
+      </tr>
+      <tr data-tags="cursor">
+        <td></td>
+        <td>2025-09-17-11-35-29-cursor-rules-mdc.md</td>
+        <td><div class="file-tags"><span class="file-tag">cursor</span></div></td>
+        <td class="summary">Автоматизация Cursor Rules: организация правил в .cursor/rules и MDC/MDX</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-17-16-18-22-инструменты-искусственного-интеллекта.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Расширяю список ИИ-инструментов: Saner.ai, Poe.com, EzRemove.ai, Recraft.ai, Otter.ai, Fathom.ai, v0.dev, Lovable</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-17-18-45-10-gamma-prezentatsii-otchet.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Gamma может не только презентации.</td>
+      </tr>
+      <tr data-tags="api">
+        <td></td>
+        <td>2025-09-18-17-12-51-ai-tools-comparison.md</td>
+        <td><div class="file-tags"><span class="file-tag">api</span></div></td>
+        <td class="summary">Сравнение популярных ИИ‑моделей по функциям, интеграции и стоимости, с рекомендациями пользователя</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-18-19-11-35-ray-lumalabs.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Подробности завтра.</td>
+      </tr>
+      <tr data-tags="mcp,openai">
+        <td></td>
+        <td>2025-09-19-13-04-00-chatgpt-mcp-connectors.md</td>
+        <td><div class="file-tags"><span class="file-tag">mcp</span><span class="file-tag">openai</span></div></td>
+        <td class="summary">Теперь в ChatGPT можно подключать сервисы по MCP в режиме Developer Mode</td>
+      </tr>
+      <tr data-tags="agents,github,telegram">
+        <td></td>
+        <td>2025-09-20-09-34-53-telegram-publisher.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">github</span><span class="file-tag">telegram</span></div></td>
+        <td class="summary">Запилил телеграм-паблишера через телетон для увеличения публикаций, источник вдохновения агентов.</td>
+      </tr>
+      <tr data-tags="repo">
+        <td></td>
+        <td>2025-09-20-21-11-05-репозиторий-глобальные-правила.md</td>
+        <td><div class="file-tags"><span class="file-tag">repo</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-22-20-15-28-photo-sizes-available-kb.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">photo with four sizes available and 131.9 KB</td>
+      </tr>
+      <tr data-tags="langfuse,mcp">
+        <td></td>
+        <td>2025-09-23-14-14-44-langfuse-mcp-traces.md</td>
+        <td><div class="file-tags"><span class="file-tag">langfuse</span><span class="file-tag">mcp</span></div></td>
+        <td class="summary">обучение агентов чтению трейсов для исправления промптов AI через Langfuse MCP</td>
+      </tr>
+      <tr data-tags="openrouter">
+        <td></td>
+        <td>2025-09-23-18-21-13-local-gpt-oss-20b.md</td>
+        <td><div class="file-tags"><span class="file-tag">openrouter</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-23-20-15-26-photo-sizes.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">photo with four sizes available, 86.8 kilobytes</td>
+      </tr>
+      <tr data-tags="ai,video-gen">
+        <td></td>
+        <td>2025-09-24-06-21-28-happenstance-open-sources.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">video-gen</span></div></td>
+        <td class="summary">Использование Happenstance для быстрого знакомства по открытым источникам</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-24-12-29-27-photo-sizes-available.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">photo with 4 sizes available and 92.1 KB</td>
+      </tr>
+      <tr data-tags="gemini,google,video-gen">
+        <td></td>
+        <td>2025-09-25-04-17-10-расшифровка-video-gemini.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span><span class="file-tag">google</span><span class="file-tag">video-gen</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="prompting">
+        <td></td>
+        <td>2025-09-25-10-15-17-банана-prompts-картинки-watermark.md</td>
+        <td><div class="file-tags"><span class="file-tag">prompting</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-25-12-30-02-chrome-devtools-mcp.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="gemini,google,perplexity">
+        <td></td>
+        <td>2025-09-25-16-17-53-gemini-pro-account-sale.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span><span class="file-tag">google</span><span class="file-tag">perplexity</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai">
+        <td></td>
+        <td>2025-09-26-16-17-56-runway-ai-gamedev.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="perplexity">
+        <td></td>
+        <td>2025-09-26-18-18-57-perplexity-tasks-automation.md</td>
+        <td><div class="file-tags"><span class="file-tag">perplexity</span></div></td>
+        <td class="summary">использование функции Tasks в Perplexity для автоматизации ежедневных отчетов</td>
+      </tr>
+      <tr data-tags="prompting">
+        <td></td>
+        <td>2025-09-27-12-25-18-угодничество-нейросети-обход-подхалимства.md</td>
+        <td><div class="file-tags"><span class="file-tag">prompting</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-27-14-12-09-lokalnaya-obrabotka-pdf.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="agents,claude,codex">
+        <td></td>
+        <td>2025-09-28-18-17-43-claude-code-meetup.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">claude</span><span class="file-tag">codex</span></div></td>
+        <td class="summary">Запись митапа по Claude Code с темами, ссылками и участниками</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-29-04-18-05-сайты-обзор-скорость-качество.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Обзор сайтов с акцентом на красоту, скорость и качество</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-29-16-15-04-telegram-kanal-post-stil.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai,prompting">
+        <td></td>
+        <td>2025-09-29-18-21-15-промпт-ии-рерайтов.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">prompting</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="github,perplexity">
+        <td></td>
+        <td>2025-09-29-22-12-37-marketing-founders-github.md</td>
+        <td><div class="file-tags"><span class="file-tag">github</span><span class="file-tag">perplexity</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-30-06-22-07-photo-sizes-kb.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">photo with four sizes available and 72.0 kb</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-30-08-20-46-презентаций-генератор-kimi-ai.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Бесплатный генератор презентаций от Kimi AI для создания 20+ слайдов</td>
+      </tr>
+      <tr data-tags="banana">
+        <td></td>
+        <td>2025-09-30-12-30-31-veo-3-nano-banana.md</td>
+        <td><div class="file-tags"><span class="file-tag">banana</span></div></td>
+        <td class="summary">Анонс доступа к Veo 3 и Nano Banana за 990 ₽ с генерацией до 590 видео в месяц</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-09-30-12-30-32-photo-sizes-kb.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">image file with 4 sizes available and a size of 58.2 kb</td>
+      </tr>
+      <tr data-tags="openai">
+        <td></td>
+        <td>2025-09-30-18-19-03-chatgpt-openai-saas.md</td>
+        <td><div class="file-tags"><span class="file-tag">openai</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-01-08-19-37-пользователи-ии-поколения.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="openrouter">
+        <td></td>
+        <td>2025-10-02-04-16-28-llm-benchmark-leaderboards.md</td>
+        <td><div class="file-tags"><span class="file-tag">openrouter</span></div></td>
+        <td class="summary">Обширный обзор бенчмарков для LLM, сравнения по кодингу, математике и эмпатии</td>
+      </tr>
+      <tr data-tags="gemini,image-gen">
+        <td></td>
+        <td>2025-10-02-18-20-10-gemini-image-understanding.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span><span class="file-tag">image-gen</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="repo">
+        <td></td>
+        <td>2025-10-03-08-18-19-репозитория-парсинг-1file.md</td>
+        <td><div class="file-tags"><span class="file-tag">repo</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="agents,prompting,workflow">
+        <td></td>
+        <td>2025-10-03-16-16-50-ai-agents-prompts.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">prompting</span><span class="file-tag">workflow</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="github,repo">
+        <td></td>
+        <td>2025-10-04-14-11-50-репозиторий-spec-kit-github.md</td>
+        <td><div class="file-tags"><span class="file-tag">github</span><span class="file-tag">repo</span></div></td>
+        <td class="summary">по поводу создания плана наткнулся на репозиторий spec-kit на GitHub</td>
+      </tr>
+      <tr data-tags="graphiti">
+        <td></td>
+        <td>2025-10-05-04-15-59-кейс-марии-аналитика-отзывов.md</td>
+        <td><div class="file-tags"><span class="file-tag">graphiti</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="openai">
+        <td></td>
+        <td>2025-10-05-12-25-31-lecture-notes-structure.md</td>
+        <td><div class="file-tags"><span class="file-tag">openai</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="github,llm">
+        <td></td>
+        <td>2025-10-06-10-15-57-эпопея-альфы-рефакторинг.md</td>
+        <td><div class="file-tags"><span class="file-tag">github</span><span class="file-tag">llm</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="claude">
+        <td></td>
+        <td>2025-10-06-14-14-39-plan-act-automation.md</td>
+        <td><div class="file-tags"><span class="file-tag">claude</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="agents,openai">
+        <td></td>
+        <td>2025-10-06-20-15-52-openai-agentkit-builder.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">openai</span></div></td>
+        <td class="summary">AgentKit и Agents SDK для сборки ИИ агентов без кода через конструктор OpenAI</td>
+      </tr>
+      <tr data-tags="gemini">
+        <td></td>
+        <td>2025-10-06-22-12-55-video-analysis-keyframes.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="agents,ai,eval,workflow">
+        <td></td>
+        <td>2025-10-07-06-21-35-agentic-ai-lessons.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">ai</span><span class="file-tag">eval</span><span class="file-tag">workflow</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="agents,openai">
+        <td></td>
+        <td>2025-10-07-08-19-53-openai-devday-mini-apps.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">openai</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="agents,openai">
+        <td></td>
+        <td>2025-10-07-18-20-58-agent-builder-chatkit-openai.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">openai</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="gemini,google">
+        <td></td>
+        <td>2025-10-08-16-18-08-gemini-computer-use.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span><span class="file-tag">google</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="cli,design,gemini">
+        <td></td>
+        <td>2025-10-08-20-16-00-gemini-cli-extensions.md</td>
+        <td><div class="file-tags"><span class="file-tag">cli</span><span class="file-tag">design</span><span class="file-tag">gemini</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-09-10-16-17-photoreal-walk-sequence.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="openai,prompting">
+        <td></td>
+        <td>2025-10-09-12-29-48-психолог-промпты.md</td>
+        <td><div class="file-tags"><span class="file-tag">openai</span><span class="file-tag">prompting</span></div></td>
+        <td class="summary">пост о промптах психолога и их применении в сессии для трансформации</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-09-14-14-55-психологический-промпт-сравнение.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-09-19-49-03-структура-навигация-восстановления.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">часть системы TOBEOR, подход к структуре восстановления, навигации и защите</td>
+      </tr>
+      <tr data-tags="ai-coding,claude">
+        <td></td>
+        <td>2025-10-10-10-15-48-claude-code-plugins.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">claude</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-10-12-29-45-ponyat-uporyadochit-deystvovat.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="prompting">
+        <td></td>
+        <td>2025-10-10-12-29-45-магия-промпт-порядок-смысл.md</td>
+        <td><div class="file-tags"><span class="file-tag">prompting</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-10-12-29-45-понимание-упорядочивание-действие.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Три шага: понять упорядочить действовать; формулировка желания превращает.</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-10-12-29-45-порядок-намерение-смысл.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Порядок: понять — упорядочить — действовать.</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-10-12-29-45-система-процесс-порядок.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai-coding,claude,github">
+        <td></td>
+        <td>2025-10-11-16-15-00-claude-code-plugins.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">claude</span><span class="file-tag">github</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="llm">
+        <td></td>
+        <td>2025-10-11-20-13-44-introspection-thought-promptcode.md</td>
+        <td><div class="file-tags"><span class="file-tag">llm</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="gemini,prompting">
+        <td></td>
+        <td>2025-10-14-08-18-14-зощенко-gemini-промпт.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span><span class="file-tag">prompting</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="proxy">
+        <td></td>
+        <td>2025-10-15-08-20-34-agent-coding-specs.md</td>
+        <td><div class="file-tags"><span class="file-tag">proxy</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-15-12-31-13-контент-завод-нейросети.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="github">
+        <td></td>
+        <td>2025-10-16-04-16-47-github-spec-kit-ingest.md</td>
+        <td><div class="file-tags"><span class="file-tag">github</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="prompting">
+        <td></td>
+        <td>2025-10-16-06-22-05-исторические-личности-современные-ситуации.md</td>
+        <td><div class="file-tags"><span class="file-tag">prompting</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="hr">
+        <td></td>
+        <td>2025-10-17-12-29-43-паттерны-собесах-ии.md</td>
+        <td><div class="file-tags"><span class="file-tag">hr</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="openai,telegram,workflow">
+        <td></td>
+        <td>2025-10-17-18-18-50-n8n-telegram-workflow.md</td>
+        <td><div class="file-tags"><span class="file-tag">openai</span><span class="file-tag">telegram</span><span class="file-tag">workflow</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-19-06-20-37-персонализированная-детская-книга.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-20-14-14-07-аудит-личного-бренда.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="prompting">
+        <td></td>
+        <td>2025-10-21-08-20-54-оптимизация-промптов.md</td>
+        <td><div class="file-tags"><span class="file-tag">prompting</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-22-12-31-17-голос-контент-нетворкинг.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-24-22-13-55-hater-emotions-dialogue.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai-coding,claude">
+        <td></td>
+        <td>2025-10-25-20-14-53-claude-code-templates-tools.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">claude</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="tutorial">
+        <td></td>
+        <td>2025-10-27-12-31-33-openai-guides-resources.md</td>
+        <td><div class="file-tags"><span class="file-tag">tutorial</span></div></td>
+        <td class="summary">Бесплатные гайды OpenAI для бизнеса и использования GPT-5 в PDF</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-10-30-20-16-25-домен-подбор.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Всё как тут делал, только свой домен подобрал</td>
+      </tr>
+      <tr data-tags="ai,ai-coding">
+        <td></td>
+        <td>2025-10-31-14-14-52-ai-coding-agent.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">ai-coding</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai-coding,claude,skills">
+        <td></td>
+        <td>2025-10-31-20-16-42-claude-code-templates.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">claude</span><span class="file-tag">skills</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="memory,prompting">
+        <td></td>
+        <td>2025-11-03-12-31-55-memory-copilot-prompt.md</td>
+        <td><div class="file-tags"><span class="file-tag">memory</span><span class="file-tag">prompting</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="mcp,rag">
+        <td></td>
+        <td>2025-11-03-14-15-14-mem-agent-memory-architecture.md</td>
+        <td><div class="file-tags"><span class="file-tag">mcp</span><span class="file-tag">rag</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-11-03-20-16-57-гранты-ии-проектов.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Краткий обзор грантовых программ крупных компаний для ИИ-проектов и MVP</td>
+      </tr>
+      <tr data-tags="docker">
+        <td></td>
+        <td>2025-11-05-12-31-19-llama-docker-oss-120b.md</td>
+        <td><div class="file-tags"><span class="file-tag">docker</span></div></td>
+        <td class="summary">Обзор запуска GPT-OSS-120B на 6 ГБ GPU с MoE, Docker и OpenAI-совместимым API</td>
+      </tr>
+      <tr data-tags="claude">
+        <td></td>
+        <td>2025-11-05-20-17-11-file-first-claude-rclone.md</td>
+        <td><div class="file-tags"><span class="file-tag">claude</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="cursor,rag">
+        <td></td>
+        <td>2025-11-07-14-14-43-cursor-semantic-search.md</td>
+        <td><div class="file-tags"><span class="file-tag">cursor</span><span class="file-tag">rag</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-11-08-08-17-44-qwen3guard-stream-real-time.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="hr">
+        <td></td>
+        <td>2025-11-08-10-13-45-resume-template-check.md</td>
+        <td><div class="file-tags"><span class="file-tag">hr</span></div></td>
+        <td class="summary">Советы по составлению резюме: оформление, содержание, шаблоны и проверка</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-11-08-16-15-56-cloudflare-vibesdk.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="gemini,grok,openai">
+        <td></td>
+        <td>2025-11-09-12-26-57-перезапуск-долгого-чата.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span><span class="file-tag">grok</span><span class="file-tag">openai</span></div></td>
+        <td class="summary">Перезапуск долгого чата с ИИ через чтение переписки и создание резюме</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-11-10-14-15-17-локальный-интеллект-без-облака.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai-coding,cli">
+        <td></td>
+        <td>2025-11-10-16-19-43-headless-coding-agents.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">cli</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai-coding,claude,glm">
+        <td></td>
+        <td>2025-11-11-08-20-16-claude-code-synthetic.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">claude</span><span class="file-tag">glm</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="agents,skills,workflow">
+        <td></td>
+        <td>2025-11-12-04-18-56-claude-code-workflow.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">skills</span><span class="file-tag">workflow</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="agents,claude">
+        <td></td>
+        <td>2025-11-12-16-20-27-claude-code-subagents.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">claude</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="openai,prompting,tutorial">
+        <td></td>
+        <td>2025-11-15-08-17-35-gpt-5-prompting-guide.md</td>
+        <td><div class="file-tags"><span class="file-tag">openai</span><span class="file-tag">prompting</span><span class="file-tag">tutorial</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-11-16-20-15-36-aqua-voice-wispr-flow.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-11-17-18-21-53-file-first-binary-search.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="gemini">
+        <td></td>
+        <td>2025-11-18-18-22-33-gemini-3-pro-update.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span></div></td>
+        <td class="summary">Обновления Gemini 3 Pro и связанные улучшения во множестве продуктов Google AI</td>
+      </tr>
+      <tr data-tags="grok,llm,openrouter">
+        <td></td>
+        <td>2025-11-24-10-18-05-llm-council-ensemble.md</td>
+        <td><div class="file-tags"><span class="file-tag">grok</span><span class="file-tag">llm</span><span class="file-tag">openrouter</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="gemini">
+        <td></td>
+        <td>2025-11-25-12-32-27-gemini-pro-access-notebooklm.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-11-30-10-14-50-moodboard-storyboards-stickers.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Новый код мудборда для сторибордов, смесь трёх кодов</td>
+      </tr>
+      <tr data-tags="rag">
+        <td></td>
+        <td>2025-12-01-03-46-21-rag-best-practices.md</td>
+        <td><div class="file-tags"><span class="file-tag">rag</span></div></td>
+        <td class="summary">Сборник лучших подходов, практик и материалов по RAG с примерами и ссылками.</td>
+      </tr>
+      <tr data-tags="ai">
+        <td></td>
+        <td>2025-12-01-16-21-58-plan-knigi-iskusstvennyj-intellekt.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="claude,eval,skills">
+        <td></td>
+        <td>2025-12-02-20-18-51-claude-hooks-evaluation.md</td>
+        <td><div class="file-tags"><span class="file-tag">claude</span><span class="file-tag">eval</span><span class="file-tag">skills</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-12-03-20-18-39-режимы-анализа-видео.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Новые режимы анализа видео: оценка кандидата и урока с транскрипцией</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-12-05-12-32-35-ежедневный-постинг-алгоритм.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="gemini">
+        <td></td>
+        <td>2025-12-06-10-14-36-gemini-canvas-pdf.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span></div></td>
+        <td class="summary">Инструкция по созданию PDF в Gemini Canvas: выбрать режим Thinking и скачать</td>
+      </tr>
+      <tr data-tags="agents,rag">
+        <td></td>
+        <td>2025-12-07-16-16-59-rag-agent-core.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">rag</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-12-07-20-15-53-langchain-context-ai.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="llm,prompting">
+        <td></td>
+        <td>2025-12-08-06-27-05-llm-simulators-entities.md</td>
+        <td><div class="file-tags"><span class="file-tag">llm</span><span class="file-tag">prompting</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-12-08-10-18-15-анализ-pdf-сканов.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="claude,cursor,skills">
+        <td></td>
+        <td>2025-12-08-16-20-58-openskills-ide-integration.md</td>
+        <td><div class="file-tags"><span class="file-tag">claude</span><span class="file-tag">cursor</span><span class="file-tag">skills</span></div></td>
+        <td class="summary">Skills из Claude Code в OpenSkills для Cursor, TRAE и IDE</td>
+      </tr>
+      <tr data-tags="ai,ai-coding,claude">
+        <td></td>
+        <td>2025-12-08-18-23-58-claude-code-temporary-scripts.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">ai-coding</span><span class="file-tag">claude</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai">
+        <td></td>
+        <td>2025-12-08-20-17-52-ai-advent-calendar.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="llm">
+        <td></td>
+        <td>2025-12-09-04-24-26-react-scratchpad-architecture.md</td>
+        <td><div class="file-tags"><span class="file-tag">llm</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="hr,prompting">
+        <td></td>
+        <td>2025-12-09-12-33-18-ats-resume-optimization.md</td>
+        <td><div class="file-tags"><span class="file-tag">hr</span><span class="file-tag">prompting</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-12-10-14-18-00-векторный-поиск-бенчмарк.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-12-11-06-26-28-conversation-guidelines.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-12-11-12-34-44-photo-sizes-kb.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Photo with 4 available sizes and a 226.9 KB file size.</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-12-11-12-34-44-telegram-post-twitt-ota.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Telegram post link for twitt_ota</td>
+      </tr>
+      <tr data-tags="banana">
+        <td></td>
+        <td>2025-12-11-14-18-57-nano-banana-pro-instructions.md</td>
+        <td><div class="file-tags"><span class="file-tag">banana</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai">
+        <td></td>
+        <td>2025-12-13-08-19-11-вайбкодинг-утилиты.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="prompting">
+        <td></td>
+        <td>2025-12-14-08-19-28-диалог-промпт-формат-использование.md</td>
+        <td><div class="file-tags"><span class="file-tag">prompting</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="telegram">
+        <td></td>
+        <td>2025-12-16-20-18-41-не-российские-карты-оплаты.md</td>
+        <td><div class="file-tags"><span class="file-tag">telegram</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="postgres">
+        <td></td>
+        <td>2025-12-16-22-15-19-rust-htmx-picocss-postgres.md</td>
+        <td><div class="file-tags"><span class="file-tag">postgres</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-12-18-12-33-04-spiry-ai-startup.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="gemini">
+        <td></td>
+        <td>2025-12-18-16-22-05-gemini-notebooklm-integration.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai-coding,claude">
+        <td></td>
+        <td>2025-12-20-06-23-08-claude-chrome-code.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">claude</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="agents,cursor,mcp,open-source">
+        <td></td>
+        <td>2025-12-22-06-27-32-agent-skills-open-source.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">cursor</span><span class="file-tag">mcp</span><span class="file-tag">open-source</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="claude,codex,github,skills">
+        <td></td>
+        <td>2025-12-26-06-25-03-skillsmp-claude-codex-cli.md</td>
+        <td><div class="file-tags"><span class="file-tag">claude</span><span class="file-tag">codex</span><span class="file-tag">github</span><span class="file-tag">skills</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-12-26-12-32-08-claude-code-guidelines.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2025-12-31-14-15-24-photo-sizes-available.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Photo with four sizes available, 86.3 KB file size.</td>
+      </tr>
+      <tr data-tags="claude,cli,codex,cursor,postgres">
+        <td></td>
+        <td>2026-01-02-06-25-59-ai-ide-trends.md</td>
+        <td><div class="file-tags"><span class="file-tag">claude</span><span class="file-tag">cli</span><span class="file-tag">codex</span><span class="file-tag">cursor</span><span class="file-tag">postgres</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="docker,openai">
+        <td></td>
+        <td>2026-01-03-08-20-36-hindsight-memory-architecture.md</td>
+        <td><div class="file-tags"><span class="file-tag">docker</span><span class="file-tag">openai</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="gemini">
+        <td></td>
+        <td>2026-01-03-10-15-42-lovable-gemini-deploy.md</td>
+        <td><div class="file-tags"><span class="file-tag">gemini</span></div></td>
+        <td class="summary">Сайт на стадии разработки, Lovable против gemini, план деплоя и сбор фактуры</td>
+      </tr>
+      <tr data-tags="ai-coding,claude,codex,github">
+        <td></td>
+        <td>2026-01-07-08-23-26-claude-code-resources.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">claude</span><span class="file-tag">codex</span><span class="file-tag">github</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2026-01-07-14-19-24-генерациях-лайфхаки-спойлер.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2026-01-07-22-16-01-xbox-dns-phone.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Вот этот xbox-dns.ru на телефоне</td>
+      </tr>
+      <tr data-tags="ai,ai-coding,claude">
+        <td></td>
+        <td>2026-01-10-08-20-19-ai-claude-code.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">ai-coding</span><span class="file-tag">claude</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="claude,gemini,openai">
+        <td></td>
+        <td>2026-01-10-10-15-59-vibeproxy-local-api.md</td>
+        <td><div class="file-tags"><span class="file-tag">claude</span><span class="file-tag">gemini</span><span class="file-tag">openai</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="proxy">
+        <td></td>
+        <td>2026-01-10-12-30-25-cliproxyapi-droid-проксей.md</td>
+        <td><div class="file-tags"><span class="file-tag">proxy</span></div></td>
+        <td class="summary">CliproxyAPI не поддерживает все клиенты Droid проблемы с моделями</td>
+      </tr>
+      <tr data-tags="graphiti">
+        <td></td>
+        <td>2026-01-10-20-16-58-graphiti-hindsight-memory.md</td>
+        <td><div class="file-tags"><span class="file-tag">graphiti</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="agents">
+        <td></td>
+        <td>2026-01-10-22-15-04-план-агента-флоу.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="video-gen">
+        <td></td>
+        <td>2026-01-11-06-24-47-video-duration-resolution.md</td>
+        <td><div class="file-tags"><span class="file-tag">video-gen</span></div></td>
+        <td class="summary">video asset details: 36s duration, 5.7 MB, 1920x1172 resolution.</td>
+      </tr>
+      <tr data-tags="ai-coding,claude">
+        <td></td>
+        <td>2026-01-11-08-20-19-claude-code-prompt.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">claude</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai">
+        <td></td>
+        <td>2026-01-11-14-14-28-ai-researcher-youtube.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2026-01-12-18-25-57-photo-sizes-available.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">photo with four sizes available and file size 230.3 KB</td>
+      </tr>
+      <tr data-tags="swift,swiftui">
+        <td></td>
+        <td>2026-01-13-08-24-04-md-files-swift-concurrency-mapkit.md</td>
+        <td><div class="file-tags"><span class="file-tag">swift</span><span class="file-tag">swiftui</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2026-01-16-10-18-04-photo-sizes.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">photo with 4 sizes available and file size of 191.2 kb</td>
+      </tr>
+      <tr data-tags="agents">
+        <td></td>
+        <td>2026-01-16-12-33-42-память-агентов-персонализация.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="education,openai">
+        <td></td>
+        <td>2026-01-18-06-24-25-chatgpt-study-mode.md</td>
+        <td><div class="file-tags"><span class="file-tag">education</span><span class="file-tag">openai</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="agents,claude,codex,github">
+        <td></td>
+        <td>2026-01-18-10-16-10-agent-deck-session-management.md</td>
+        <td><div class="file-tags"><span class="file-tag">agents</span><span class="file-tag">claude</span><span class="file-tag">codex</span><span class="file-tag">github</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2026-01-18-12-30-15-sistema-agentov-knigi.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="cerebras,cloudflare,openrouter">
+        <td></td>
+        <td>2026-01-18-22-14-56-open-source-provider-limits.md</td>
+        <td><div class="file-tags"><span class="file-tag">cerebras</span><span class="file-tag">cloudflare</span><span class="file-tag">openrouter</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2026-01-19-10-22-41-pinedrama-tiktok-microdrama.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="claude,git,graphiti">
+        <td></td>
+        <td>2026-01-20-04-40-18-kanban-graphiti-worktrees.md</td>
+        <td><div class="file-tags"><span class="file-tag">claude</span><span class="file-tag">git</span><span class="file-tag">graphiti</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="prompting">
+        <td></td>
+        <td>2026-01-20-08-25-12-промпт-диалог-улучшение.md</td>
+        <td><div class="file-tags"><span class="file-tag">prompting</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="design,frontend,skills">
+        <td></td>
+        <td>2026-01-20-12-38-36-frontend-design-skill.md</td>
+        <td><div class="file-tags"><span class="file-tag">design</span><span class="file-tag">frontend</span><span class="file-tag">skills</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai-coding,claude,skills">
+        <td></td>
+        <td>2026-01-20-16-28-10-ogromnaya-biblioteka-skillov.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">claude</span><span class="file-tag">skills</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="prompting">
+        <td></td>
+        <td>2026-01-20-20-39-57-ltx-klondayk.md</td>
+        <td><div class="file-tags"><span class="file-tag">prompting</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="claude,github">
+        <td></td>
+        <td>2026-01-21-06-29-03-нейросети-человечность-текст.md</td>
+        <td><div class="file-tags"><span class="file-tag">claude</span><span class="file-tag">github</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="video-gen">
+        <td></td>
+        <td>2026-01-21-08-25-01-video-duration-20s.md</td>
+        <td><div class="file-tags"><span class="file-tag">video-gen</span></div></td>
+        <td class="summary">Video metadata: 20s, 11.2 MB, 1660x1080</td>
+      </tr>
+      <tr data-tags="devops">
+        <td></td>
+        <td>2026-01-21-16-37-11-manus-publishing-platform.md</td>
+        <td><div class="file-tags"><span class="file-tag">devops</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="deepseek">
+        <td></td>
+        <td>2026-01-22-04-42-59-deepseek-правила-мир-история.md</td>
+        <td><div class="file-tags"><span class="file-tag">deepseek</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai-coding,claude">
+        <td></td>
+        <td>2026-01-22-16-28-06-claude-code-reflection.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">claude</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="ai">
+        <td></td>
+        <td>2026-01-22-18-25-14-ai-poisk-lovi-aeo.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span></div></td>
+        <td class="summary">SEO навыки: AEO и поиск под ИИ</td>
+      </tr>
+      <tr data-tags="skills">
+        <td></td>
+        <td>2026-01-23-06-27-07-роутинг-скиллов-видео.md</td>
+        <td><div class="file-tags"><span class="file-tag">skills</span></div></td>
+        <td class="summary">Подсмотрена идея роутинга скиллов у визионера с указанием документации и видео</td>
+      </tr>
+      <tr data-tags="docker,vps">
+        <td></td>
+        <td>2026-01-23-10-19-28-vps-claude-code.md</td>
+        <td><div class="file-tags"><span class="file-tag">docker</span><span class="file-tag">vps</span></div></td>
+        <td class="summary">инструкция по настройке Claude Code на VPS через Termius для телефона</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2026-01-24-14-15-02-photo-sizes-kb.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Photo with four sizes available and file size noted</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2026-01-25-08-20-55-python-script-automation.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Готовый промпт перевод описания задачи в Python скрипт с комментариями</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2026-01-25-10-17-00-структуры-анализа-данных.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="devops,llm">
+        <td></td>
+        <td>2026-01-25-12-32-18-local-development-docker-llm.md</td>
+        <td><div class="file-tags"><span class="file-tag">devops</span><span class="file-tag">llm</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2026-01-26-10-21-08-photo-sizes-kb.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">photo with four sizes available and 45.3 KB file size</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2026-01-26-12-36-55-humanizer-ai-signals.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Обнаруживает признаки ИИ в тексте, удаляет их, делая тексты более человечными</td>
+      </tr>
+      <tr data-tags="llm,rag">
+        <td></td>
+        <td>2026-01-26-18-27-49-privacy-gateway-llm.md</td>
+        <td><div class="file-tags"><span class="file-tag">llm</span><span class="file-tag">rag</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="audio">
+        <td></td>
+        <td>2026-01-26-20-20-43-mlx-audio-library.md</td>
+        <td><div class="file-tags"><span class="file-tag">audio</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="docker,vps">
+        <td></td>
+        <td>2026-01-27-12-37-36-opencode-vps-guide.md</td>
+        <td><div class="file-tags"><span class="file-tag">docker</span><span class="file-tag">vps</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="git,repo">
+        <td></td>
+        <td>2026-01-27-16-24-10-coding-agent-workflow.md</td>
+        <td><div class="file-tags"><span class="file-tag">git</span><span class="file-tag">repo</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="video-gen">
+        <td></td>
+        <td>2026-01-29-08-32-40-video-metadata-4s.md</td>
+        <td><div class="file-tags"><span class="file-tag">video-gen</span></div></td>
+        <td class="summary">Video: 4s, 635.1 KB, 2678x1780</td>
+      </tr>
+      <tr data-tags="ai-coding,claude">
+        <td></td>
+        <td>2026-01-29-10-31-11-ai-mobilnoe-prilozhenie.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai-coding</span><span class="file-tag">claude</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="cloudflare">
+        <td></td>
+        <td>2026-01-29-20-24-00-cloudflare-moltbot-moltworker.md</td>
+        <td><div class="file-tags"><span class="file-tag">cloudflare</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="">
+        <td></td>
+        <td>2026-01-30-12-41-40-maku-food-scanner.md</td>
+        <td><div class="file-tags"></div></td>
+        <td class="summary">Ура, запустил первую аппку Maku для сканирования состава пищи по упаковке с ИИ</td>
+      </tr>
+      <tr data-tags="ai,skills">
+        <td></td>
+        <td>2026-01-30-18-34-29-vercel-ai-agents.md</td>
+        <td><div class="file-tags"><span class="file-tag">ai</span><span class="file-tag">skills</span></div></td>
+        <td class="summary">&gt;-</td>
+      </tr>
+      <tr data-tags="video-gen">
+        <td></td>
+        <td>2026-01-31-08-05-05-video-metadata-3022x1560.md</td>
+        <td><div class="file-tags"><span class="file-tag">video-gen</span></div></td>
+        <td class="summary">Video metadata: 25s, 2.0 MB, 3022x1560 resolution.</td>
+      </tr>
+    </tbody>
+  </table>
+  <script>
+    const search = document.getElementById("search");
+    const tagsContainer = document.getElementById("tags");
+    const clearBtn = document.getElementById("clear");
+    const rows = document.querySelectorAll("#files tr");
+    const tagElements = document.querySelectorAll(".tag");
+    const selectedTags = new Set();
+
+    function updateDisplay() {
+      const q = search.value.toLowerCase();
+      tagElements.forEach(tag => {
+        tag.style.display = tag.dataset.tag.includes(q) ? "" : "none";
+      });
+      clearBtn.classList.toggle("visible", selectedTags.size > 0);
+      rows.forEach(row => {
+        const rowTags = row.dataset.tags.split(",").filter(Boolean);
+        const matches = selectedTags.size === 0 || [...selectedTags].every(t => rowTags.includes(t));
+        row.style.display = matches ? "" : "none";
+      });
+    }
+
+    search.addEventListener("input", updateDisplay);
+
+    tagsContainer.addEventListener("click", (e) => {
+      const tag = e.target.closest(".tag");
+      if (!tag) return;
+      const tagName = tag.dataset.tag;
+      if (selectedTags.has(tagName)) {
+        selectedTags.delete(tagName);
+        tag.classList.remove("selected");
+      } else {
+        selectedTags.add(tagName);
+        tag.classList.add("selected");
+      }
+      updateDisplay();
+    });
+
+    clearBtn.addEventListener("click", () => {
+      selectedTags.clear();
+      tagElements.forEach(t => t.classList.remove("selected"));
+      updateDisplay();
+    });
+  </script>
+</body>
+</html>

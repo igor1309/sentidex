@@ -120,7 +120,10 @@ jobs:
                 unresolved=0
 
                 for file in $conflict_files; do
-                  if [[ "$file" == inbox/* || "$file" == _inbox/* ]]; then
+                  if [[ "$file" == inbox/* ]]; then
+                    git restore --theirs "$file"
+                    git add "$file"
+                  elif [[ "$file" == _inbox/* ]]; then
                     git restore --ours "$file"
                     git add "$file"
                   else
@@ -135,7 +138,12 @@ jobs:
                   exit 1
                 fi
 
-                git rebase --continue
+                if git diff --staged --quiet; then
+                  echo "No staged changes after conflict resolution; skipping empty commit"
+                  git rebase --skip
+                else
+                  GIT_EDITOR=true git rebase --continue
+                fi
                 git push
               fi
             fi

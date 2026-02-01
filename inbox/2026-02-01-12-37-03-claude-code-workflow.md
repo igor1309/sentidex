@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 742
-timestamp: "2026-02-01T12:37:03.740Z"
-source_info: "Тимур Хахалев про AI Coding"
-source_url: "https://t.me/the_ai_architect/232"
-forward_date: "2026-02-01T08:21:42.000Z"
+id: ml3v58cutejremuj75h
+created_at: '2026-02-01T12:37:03.740Z'
+source_info: Тимур Хахалев про AI Coding
+source_url: 'https://t.me/the_ai_architect/232'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Свод практических советов по работе с Claude Code и улучшению продуктивности
+  разработки
+tags:
+  - claude
+  - ai
+  - ai-coding
+  - workflow
+  - productivity
+processed_at: '2026-02-01T14:55:49.901Z'
 ---
-
 **Кулинарные советы от создателя Claude Code, Бориса Черного**
 
 *Он *[рассказывает](https://x.com/bcherny/status/2017742741636321619?s=20)*, как его разрабы используют Claude Code*

@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 745
-timestamp: "2026-02-02T12:46:31.370Z"
-source_info: "AI в кубе |AI³ | Сергей Долгов"
-source_url: "https://t.me/aivkube/663"
-forward_date: "2026-01-31T10:20:40.000Z"
+id: ml59yeyq4v5b1nb343i
+created_at: '2026-02-02T12:46:31.370Z'
+source_info: AI в кубе |AI³ | Сергей Долгов
+source_url: 'https://t.me/aivkube/663'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Обновленный гайд по навыкам Claude: детали паттернов, обзор ошибок и вопросы
+  обновления
+tags:
+  - ai
+  - llm
+  - mcp
+  - workflow
+processed_at: '2026-02-02T14:38:12.290Z'
 ---
-
 Антропики выпустили **обновленный ****гайд ** ](https://websitemain.claude.com/blog/complete-guide-to-building-skills-for-claude)**по работе с навыками Клода**. 
 
 С одной стороны я доволен: появилась детализация по паттернам типа Sequential Workflow и Multi-MCP Coordination, дан относительно детальный разбор конкретных ошибок и решений, метрики успеха и спасибокэповские рекомендации типа "iterate on single task first"🤪. Явны выделено централизованное управление для организаций, стандарты, партнерские интеграции (и там масса интересного!).

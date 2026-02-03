@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 749
-timestamp: "2026-02-03T01:45:27.384Z"
-source_info: "Refat Talks: Tech & AI"
-source_url: "https://t.me/nobilix/215"
-forward_date: "2026-02-02T19:21:36.000Z"
+id: ml62zmtlklow2vwnm1b
+created_at: '2026-02-03T01:45:27.384Z'
+source_info: 'Refat Talks: Tech & AI'
+source_url: 'https://t.me/nobilix/215'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Различие vibe coding и AI-assisted development через примеры Uber, Spotify и
+  Block
+tags:
+  - ai
+  - ai-coding
+  - workflow
+  - agents
+processed_at: '2026-02-03T04:10:57.992Z'
 ---
-
 **Vibecoding ≠ AI-assisted engineering**
 
 Год назад Андрей Карпатый [ввел](https://x.com/karpathy/status/1886192184808149383?lang=en) термин "vibe coding" и то что задумывалось как мем "просто промпти и не думай" часто стало ассоциироваться со всей AI разработкой. Поэтому, те кто меня знает, знают что я этот термин не очень люблю) Между тем серьезные компании тихо выстраивали совсем другой подход: системный, с ревью, метриками и инфрой. Не vibe coding, а AI-assisted development.

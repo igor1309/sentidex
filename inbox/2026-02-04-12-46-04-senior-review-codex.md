@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 753
-timestamp: "2026-02-04T12:46:04.159Z"
-source_info: "Поляков считает: AI, код и кейсы"
-source_url: "https://t.me/countwithsasha/457"
-forward_date: "2026-02-04T06:10:24.000Z"
+id: ml84uezdyn526yhm9yb
+created_at: '2026-02-04T12:46:04.159Z'
+source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/457'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Обсуждение производительности Claude и подхода senior review с Codex для QA и
+  экономии токенов
+tags:
+  - llm
+  - openai
+  - ai-coding
+  - agents
+processed_at: '2026-02-04T14:38:26.137Z'
 ---
-
 **Один ИИ хорошо, а два — продакшен**
 
 Уже несколько недель во всех профильных ИИ-чатах одна тема: Claude отупел. На GitHub десятки issues — «performance degradation», «it's both slower and dumber», «feels NERFED». Пользователи описывают лотерею: иногда хороший Claude, иногда — стажёр, который забывает инструкции и врёт, что всё сделал.

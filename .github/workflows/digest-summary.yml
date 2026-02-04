@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '0 4 * * 1-5'    # Workdays at 7:00 AM Moscow time
     - cron: '0 4 * * 0,6'    # Weekends at 7:00 AM Moscow time
+    - cron: '0 17 * * *'     # Daily at 8:00 PM Moscow time
   
   workflow_dispatch:
     inputs:
@@ -41,10 +42,10 @@ jobs:
           # Determine digest type based on the trigger
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             export DIGEST_TYPE="${{ inputs.type }}"
-          elif [ "${{ github.event.schedule }}" = "0 4 * * 1-5" ]; then
-            export DIGEST_TYPE="daily"
-          else
+          elif [ "${{ github.event.schedule }}" = "0 4 * * 0,6" ]; then
             export DIGEST_TYPE="weekly"
+          else
+            export DIGEST_TYPE="daily"
           fi
           
           echo "Running $DIGEST_TYPE digest..."

@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 771
-timestamp: "2026-02-08T14:22:20.052Z"
-source_info: "Силиконовый Мешок"
-source_url: "https://t.me/prompt_design/1911"
-forward_date: "2026-02-08T12:10:52.000Z"
+id: mldydt008gvsikofs1w
+created_at: '2026-02-08T14:22:20.052Z'
+source_info: Силиконовый Мешок
+source_url: 'https://t.me/prompt_design/1911'
 has_media: true
-media_type: "document"
-forward_protected: false
+language: mixed
+summary: >-
+  Гайд Google о применении Gemini и других моделей в офисе: обновления, блоки по
+  ролям, наглядные примеры.
+tags:
+  - gemini
+  - prompting
+  - productivity
+  - tutorial
+  - business
+processed_at: '2026-02-08T16:24:10.512Z'
 ---
-
 Кстати, все вопросы новичков о том, как применять Gemini (и другие модели) в офисной работе, закрывает этот гайд от Google. Они ежегодно его перевыпускают, добавляя актуальную информацию и исправляя устаревшую. 
 
 В нём девять основных блоков по должностным ролям: маркетинг, менеджмент, управление, рекрутинг, продажи и т. д., с наглядными примерами и лайфхаками. 

@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 777
-timestamp: "2026-02-09T20:34:12.131Z"
-source_info: "ForgetMe | Нейросети"
-source_url: "https://t.me/forgetmeai/5799"
-forward_date: "2026-02-09T14:34:46.000Z"
+id: mlfqxr9rj78ftkovi8
+created_at: '2026-02-09T20:34:12.131Z'
+source_info: ForgetMe | Нейросети
+source_url: 'https://t.me/forgetmeai/5799'
 has_media: true
-media_type: "video"
-forward_protected: false
+language: mixed
+summary: >-
+  Подключение Claude Hooks к системным звукам для уведомлений о статусе Claude
+  Code
+tags:
+  - claude
+  - ai
+  - ai-coding
+  - audio
+  - workflow
+processed_at: '2026-02-09T22:31:16.815Z'
 ---
-
 ✴️ **Как добавить звуковые Claude Hooks для индикации работы Claude Code**
 
 Идея простая: подключите **Claude hooks** к системным звукам — пусть **пиликает, когда задача закончена**, или **просит разрешение**. Самый кайф - поставить **свои сэмплы**: ностальгические звуки из **Warcraft/StarCraft/Mario/SpongeBob**. Так вы мгновенно понимаете, что происходит, не глядя в окно терминала.

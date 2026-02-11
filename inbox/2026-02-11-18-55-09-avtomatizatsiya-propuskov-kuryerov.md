@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 793
-timestamp: "2026-02-11T18:55:09.897Z"
-source_info: "Поляков считает: AI, код и кейсы"
-source_url: "https://t.me/countwithsasha/481"
-forward_date: "2026-02-11T17:25:24.000Z"
+id: mlihmce0677jsbzg8ha
+created_at: '2026-02-11T18:55:09.897Z'
+source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/481'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Автоматизация пропусков, поиск товаров и бронирование парковки посредством
+  анализа сетевых запросов
+tags:
+  - openclaw
+  - ai
+  - ai-coding
+  - agents
+processed_at: '2026-02-11T20:33:46.296Z'
 ---
-
 **Поляков считает, что он победил управляющую компанию**
 
 Разогнался с навыками для OpenClaw и заметил неэффективность: [чтобы курьер Вкусвилл](https://t.me/countwithsasha/474) попал к нам домой, надо зайти в приложение УК и заказать пропуск. Иначе — пропущеные звонки, недоставленные заказы и нервы.

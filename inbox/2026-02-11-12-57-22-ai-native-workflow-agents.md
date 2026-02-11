@@ -1,15 +1,18 @@
 ---
-raw_message: true
-message_id: 791
-timestamp: "2026-02-11T12:57:22.113Z"
-source_info: "Dealer.AI"
-source_url: "https://t.me/dealerAI/1670"
-forward_date: "2026-02-11T10:16:13.000Z"
+id: mli5b4c8a74g7lrbjuk
+created_at: '2026-02-11T12:57:22.113Z'
+source_info: Dealer.AI
+source_url: 'https://t.me/dealerAI/1670'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: Переход к ai-native workflow и роли агентов в OpenClaw и AgentOps.
+tags:
+  - ai
+  - agents
+  - workflow
+  - productivity
+processed_at: '2026-02-11T14:49:07.255Z'
 ---
-
 **Создатель OpenClaw идёт дальше. AgentOps и смена парадигмы разработки**.
 
 Продолжаем тему изменения рынка разработки с МАС.  В комментариях к посту мы обсуждаем смену парадигмы разработки, и вот я нашёл прекрасный пример как оно изменилось. Это другой взгляд на мой тейк в предыдущем посте. 

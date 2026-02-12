@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 802
-timestamp: "2026-02-12T18:55:40.340Z"
-source_info: "Мия в ИИ"
-source_url: ""
-forward_date: "2026-02-06T10:41:49.000Z"
+id: mljwwzapmutjpdr2rb
+created_at: '2026-02-12T18:55:40.340Z'
+source_info: Мия в ИИ
+source_url: ''
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  практическая инструкция по созданию собственного ИИ-инфлюенсера через
+  референсы, промпты и генерацию образов
+tags:
+  - ai
+  - image-gen
+  - prompting
+  - workflow
+processed_at: '2026-02-12T20:29:42.960Z'
 ---
-
 **Как создать СВОЕГО ИИ-инфлюенсера?
 **
 Переходим к самому интересному этапу нашего контента. Начинаем постепенно обучаться созданию личного инфла.

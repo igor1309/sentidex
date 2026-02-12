@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 801
-timestamp: "2026-02-12T12:55:41.357Z"
-source_info: "Refat Talks: Tech & AI"
-source_url: "https://t.me/nobilix/224"
-forward_date: "2026-02-12T12:37:28.000Z"
+id: mljkjs8ksrr1yex8m3a
+created_at: '2026-02-12T12:55:41.357Z'
+source_info: 'Refat Talks: Tech & AI'
+source_url: 'https://t.me/nobilix/224'
 has_media: true
-media_type: "document"
-forward_protected: false
+language: mixed
+summary: >-
+  Markdown-основа презентаций на Slidev с AI-инструментами, гибкой настройкой и
+  удобным экспортом
+tags:
+  - ai
+  - agents
+  - open-source
+  - productivity
+  - education
+processed_at: '2026-02-12T14:43:31.892Z'
 ---
-
 [Slidev](https://sli.dev/) - пожалуй лучший способ создавать презентации в эпоху AI. Markdown-first, с мощным тулингом и экспортом в PDF и PowerPoint. Делюсь своим опытом.
 
 Инструментов для презентаций сейчас вагон - от классических PowerPoint и Google Slides до Figma Slides, Gamma, и в каждом втором туле от NodebookLM до Perplexity. Но для своих выступлений, перепробовав кучу вариантов, я как file-first адепт искал инструмент на базе markdown. Сначала это был [Marp](https://marp.app/) - хорош для минимальных слайдов, но ограничен. В Slidev я нашел все что не хватало.

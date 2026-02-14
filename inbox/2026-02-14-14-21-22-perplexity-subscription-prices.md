@@ -1,15 +1,18 @@
 ---
-raw_message: true
-message_id: 813
-timestamp: "2026-02-14T14:21:22.756Z"
-source_info: "Силиконовый Мешок"
-source_url: "https://t.me/prompt_design/1924"
-forward_date: "2026-02-14T12:56:36.000Z"
+id: mlmizaib23y0cajbaayj
+created_at: '2026-02-14T14:21:22.756Z'
+source_info: Силиконовый Мешок
+source_url: 'https://t.me/prompt_design/1924'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: 'Снижение цен на коды Perplexity и подписка $5 за месяц, риск блокировки'
+tags:
+  - ai
+  - llm
+  - business
+  - perplexity
+processed_at: '2026-02-14T16:22:54.707Z'
 ---
-
 С удивлением обнаружил, что цены на коды для Perplexity снова снизились. Я подумал: неужели «чистки» закончились? 
 
 А потом присмотрелся - теперь продавцы [продают подписку](https://plati.market/itm/perplexity-ai-pro-comet-1-god-legko-mgnovenno/4989208?ai=1361021) за $5 на **один месяц,** а не **на год**, как раньше. Вот хитрые! Видимо, это такой формат «гарантии» у них стал.

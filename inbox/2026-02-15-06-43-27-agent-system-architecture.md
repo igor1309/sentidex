@@ -1,15 +1,21 @@
 ---
-raw_message: true
-message_id: 816
-timestamp: "2026-02-15T06:43:27.468Z"
-source_info: "О чем молчит AI CTO"
-source_url: "https://t.me/silent_ai_cto/34"
-forward_date: "2026-02-11T06:31:08.000Z"
+id: mlnhfknd3yvb8pnk0vn
+created_at: '2026-02-15T06:43:27.468Z'
+source_info: О чем молчит AI CTO
+source_url: 'https://t.me/silent_ai_cto/34'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Обучающий курс по созданию агентных систем, разбор архитектуры агента и
+  базовых инструментов
+tags:
+  - ai
+  - agents
+  - gemini
+  - llm
+  - memory
+processed_at: '2026-02-15T08:27:21.288Z'
 ---
-
 Мы стартовали обучающий курс по созданию агентных систем. Я решил параллельно выкладывать в канал короткие заметки, чтобы можно было постепенно погружаться в методологию и собирать целостную картину.
 
 Начнём с самого базового — разберём, что вообще такое агент в современном представлении и из каких частей он состоит.

@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 828
-timestamp: "2026-02-15T18:28:23.154Z"
-source_info: "ForgetMe | Нейросети"
-source_url: "https://t.me/forgetmeai/5813"
-forward_date: "2026-02-15T17:20:32.000Z"
+id: mlo6w9khpg2jxoixb4
+created_at: '2026-02-15T18:28:23.154Z'
+source_info: ForgetMe | Нейросети
+source_url: 'https://t.me/forgetmeai/5813'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Кими Claw внедряет OpenClaw внутри kimi.com: агент с хранилищем, поиском и
+  навыками через ClawHub.
+tags:
+  - open-claw
+  - agents
+  - memory
+  - workflow
+processed_at: '2026-02-15T20:20:10.481Z'
 ---
-
 📛 **Kimi Claw: OpenClaw встроили прямо в ****kimi.com**m](kimi.com)**
 **
 Moonshot (Kimi) представили **Kimi Claw** — это **OpenClaw**, который теперь **нативно живёт внутри ****kimi.com**m](kimi.com). По сути, вы получаете агента, который постоянно доступен в вкладке браузера, умеет дергать инструменты и цепочки действий

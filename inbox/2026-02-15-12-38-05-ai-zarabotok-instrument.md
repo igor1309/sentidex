@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 824
-timestamp: "2026-02-15T12:38:05.068Z"
-source_info: "ForgetMe | Нейросети"
-source_url: "https://t.me/forgetmeai/5810"
-forward_date: "2026-02-15T12:16:07.000Z"
+id: mlnu4fhup0eu1oh565
+created_at: '2026-02-15T12:38:05.068Z'
+source_info: ForgetMe | Нейросети
+source_url: 'https://t.me/forgetmeai/5810'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  AI — инструмент заработка: одна AI-модель — около 3100$, с несколькими
+  моделями — ещё больше
+tags:
+  - ai
+  - tutorial
+  - workflow
+  - resource
+processed_at: '2026-02-15T14:22:36.402Z'
 ---
-
 **AI — золотая жила 💰
 
 **За январь у Ильяса вышло **примерно 3100$.

@@ -1,15 +1,17 @@
 ---
-raw_message: true
-message_id: 836
-timestamp: "2026-02-16T16:36:43.007Z"
-source_info: "Всеволод Викулин | AI разбор"
-source_url: "https://t.me/vikulin_ai/117"
-forward_date: "2026-02-16T06:20:09.000Z"
+id: mlpimmlna2yhjzs4om7
+created_at: '2026-02-16T16:36:43.007Z'
+source_info: Всеволод Викулин | AI разбор
+source_url: 'https://t.me/vikulin_ai/117'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: Обзор пяти типов оркестратора AI-агентов и инструкций по их применению
+tags:
+  - llm
+  - workflow
+  - agents
+processed_at: '2026-02-16T18:36:22.379Z'
 ---
-
 **Оркестратор AI-агента. 5 типов и инструкция по их применению.**
 
 В [прошлом посте](https://t.me/vikulin_ai/116) мы разобрали, из каких ингредиентов состоят агенты. Сегодня поговорим про оркестратор, который управляет процессом решения задачи и связывает все компоненты воедино.

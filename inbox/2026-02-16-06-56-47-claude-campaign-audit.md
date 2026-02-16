@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 831
-timestamp: "2026-02-16T06:56:47.678Z"
-source_info: "Поляков считает: AI, код и кейсы"
-source_url: "https://t.me/countwithsasha/487"
-forward_date: "2026-02-16T06:05:28.000Z"
+id: mloxcpa97xfgyubfzs8
+created_at: '2026-02-16T06:56:47.678Z'
+source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/487'
 has_media: true
-media_type: "photo"
-forward_protected: false
+language: mixed
+summary: >-
+  Аудит рекламных кампаний Яндекс.Директа через Claude с расширением запросов и
+  анализом дельты
+tags:
+  - claude
+  - ai
+  - workflow
+  - ai-coding
+processed_at: '2026-02-16T08:40:47.361Z'
 ---
-
 **Директологам приготовиться, часть 2: аудит кампаний через Claude**
 
 Скилл Вордстата из [прошлого поста](https://t.me/countwithsasha/423) оказался только началом. Я добавил полноценный аудит рекламных кампаний — выгружаете кампанию из Яндекс Директа в Excel, скармливаете Claude, он находит дыры в семантике.

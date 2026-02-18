@@ -1,15 +1,18 @@
 ---
-raw_message: true
-message_id: 851
-timestamp: "2026-02-18T18:44:43.659Z"
-source_info: "Data Secrets"
-source_url: "https://t.me/data_secrets/8752"
-forward_date: "2026-02-17T18:34:01.000Z"
+id: mlshp2jw4g8jyndhfp5
+created_at: '2026-02-18T18:44:43.659Z'
+source_info: Data Secrets
+source_url: 'https://t.me/data_secrets/8752'
 has_media: true
-media_type: "video"
-forward_protected: false
+language: mixed
+summary: 'Claude Code: генерация дизайнов в Figma и двусторонний обмен кодом через MCP'
+tags:
+  - claude
+  - ai-coding
+  - agents
+  - mcp
+processed_at: '2026-02-18T20:33:35.276Z'
 ---
-
 **Claude Code ****теперь сможет**т](https://www.figma.com/blog/introducing-claude-code-to-figma/)** генерировать полноценные дизайны в Figma **
 
 Обратная интеграция (дизайн в Figma -> код) уже давно реализована в Figma MCP, а вот эта штука, хоть и выглядит, возможно, странной, по сути качественно завершает полный комплект. 

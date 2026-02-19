@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 860
-timestamp: "2026-02-19T18:43:26.108Z"
-source_info: "AI Product | Igor Akimov"
-source_url: "https://t.me/ai_product/1953"
-forward_date: "2026-02-19T13:53:06.000Z"
+id: mltww9pxzgw926sbejs
+created_at: '2026-02-19T18:43:26.108Z'
+source_info: AI Product | Igor Akimov
+source_url: 'https://t.me/ai_product/1953'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Использование multi-agent режима в Codex CLI: создание саб-агентов,
+  оркестрация и консолидация вывода.
+tags:
+  - ai
+  - agents
+  - llm
+  - openai
+processed_at: '2026-02-19T20:26:51.573Z'
 ---
-
 О, в Codex CLI завезли multi-agent режим, можно реально “распараллелить мозги” на одну задачу.
 
 Может создавать несколько специализированных саб-агентов параллельно и потом собирать их вывод в один общий ответ. Особенно полезно для задач, которые легко делятся: explore кодовой базы, ревью, планирование фичи на шаги, поиск багов и т.д.

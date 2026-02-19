@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 859
-timestamp: "2026-02-19T10:37:30.184Z"
-source_info: "Neural Kovalskii"
-source_url: "https://t.me/neuraldeep/1925"
-forward_date: "2026-02-18T12:36:42.000Z"
+id: mltgq844jjs4e58d9z
+created_at: '2026-02-19T10:37:30.184Z'
+source_info: Neural Kovalskii
+source_url: 'https://t.me/neuraldeep/1925'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: >-
+  Переезд на Claude Code CLI и Codex CLI через Cursor, настройка окружения,
+  локальная разработка и CI/CD.
+tags:
+  - local-llm
+  - llm
+  - devops
+  - workflow
+processed_at: '2026-02-19T12:54:15.700Z'
 ---
-
 **Есть ли жизнь после Cursor?**
 
 Пошла 2 неделя моего переезда на Claude Code CLI + Codex CLI (все через [iTerm2](https://iterm2.com/)) 

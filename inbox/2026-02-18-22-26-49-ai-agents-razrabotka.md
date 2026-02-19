@@ -1,15 +1,18 @@
 ---
-raw_message: true
-message_id: 852
-timestamp: "2026-02-18T22:26:49.128Z"
-source_info: "LLM под капотом"
-source_url: "https://t.me/llm_under_hood/755"
-forward_date: "2026-02-18T15:28:18.000Z"
+id: mlsswlrzn14g6v2dza
+created_at: '2026-02-18T22:26:49.128Z'
+source_info: LLM под капотом
+source_url: 'https://t.me/llm_under_hood/755'
 has_media: false
-media_type: "none"
-forward_protected: false
+language: mixed
+summary: 'Опыт внедрения AI-агентов, агентный режим, граф контекстов и чистота проекта'
+tags:
+  - ai
+  - agents
+  - workflow
+  - productivity
+processed_at: '2026-02-19T01:47:22.559Z'
 ---
-
 **Инсайты из разработки продуктов с AI Agents (a la OpenAI Engineering Harness)**
 
 Я сейчас разрабатываю несколько проектов, везде используя максимально AI агентов (важны скорость и качество разработки). 

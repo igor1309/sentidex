@@ -1,11 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-02-20T20:08:46.000Z'
-note_text: 'TEST: OMH 16H!'
+id: mlvbtzlzetsoa5ffbim
+created_at: '2026-02-20T20:08:46.000Z'
+processed_at: '2026-02-20T20:12:45.575Z'
 source_info: Сиолошная
+source_url: 'https://t.me/seeallochnaya/3413'
 has_media: true
-media_type: video
-forward_protected: false
+language: mixed
+summary: >-
+  Обсуждают экспоненту и рост временных горизонтов: от двухчасовых задач к
+  16-часовым
+tags:
+  - video-gen
+  - research
+  - memory
+  - productivity
 debug:
   message_ids:
     - 880
@@ -34,7 +42,7 @@ debug:
       source_info: Сиолошная
       source_url: 'https://t.me/seeallochnaya/3413'
       forward_protected: false
-source_url: 'https://t.me/seeallochnaya/3413'
+note_text: 'TEST: OMH 16H!'
 source_urls:
   - 'https://t.me/seeallochnaya/3413'
 ---

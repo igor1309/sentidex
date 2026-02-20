@@ -39,13 +39,13 @@ function buildProcessedContent({ id, sourceUrl, summary, tags, body }) {
     frontMatter: {
       id,
       created_at: FROZEN_ISO,
+      processed_at: FROZEN_ISO,
       source_info: 'unknown',
       source_url: sourceUrl,
       has_media: false,
       language: 'en',
       summary,
       tags,
-      processed_at: FROZEN_ISO,
     },
     bodyContent: body,
   });

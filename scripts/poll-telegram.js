@@ -328,28 +328,32 @@ function writeBundleToInbox(bundle) {
   const forwardedMessages = Array.isArray(bundle.forwarded_messages) ? bundle.forwarded_messages : [];
   const sourceMetadata = Array.isArray(bundle.source_metadata) ? bundle.source_metadata : [];
   const sourceUrls = extractBundleSourceUrls(bundle);
+  const debugMetadata = createBundleDebugMetadata({
+    bundle,
+    bundleStartAt,
+    forwardedMessages,
+    sourceMetadata,
+  });
+
+  const frontMatter = {
+    raw_message: true,
+    timestamp: bundleStartAt,
+    message_ids: Array.isArray(bundle.message_ids) ? bundle.message_ids : [],
+    note_text: typeof bundle.note_text === "string" ? bundle.note_text : "",
+    source_info: resolveBundleSourceInfo(forwardedMessages),
+    has_media: forwardedMessages.some((message) => Boolean(message.has_media)),
+    media_type: resolveBundleMediaType(forwardedMessages),
+    forward_protected: sourceMetadata.some((metadata) => Boolean(metadata.forward_protected)),
+    debug: debugMetadata,
+  };
+
+  if (sourceUrls.length > 0) {
+    frontMatter.source_url = sourceUrls[0];
+    frontMatter.source_urls = sourceUrls;
+  }
 
   const content = frontMatterCodec.stringify({
-    frontMatter: {
-      raw_message: true,
-      message_bundle: true,
-      message_id: primaryMessageId,
-      message_ids: Array.isArray(bundle.message_ids) ? bundle.message_ids : [],
-      timestamp: bundleStartAt,
-      bundle_start_at: bundleStartAt,
-      bundle_end_at: toIsoString(bundle.bundle_end_at),
-      note_text: typeof bundle.note_text === "string" ? bundle.note_text : "",
-      forwarded_messages: forwardedMessages,
-      source_metadata: sourceMetadata,
-      source_info: "bundle",
-      source_url: sourceUrls[0] || "",
-      source_urls: sourceUrls,
-      has_media: forwardedMessages.some((message) => Boolean(message.has_media)),
-      media_type: resolveBundleMediaType(forwardedMessages),
-      forward_protected: sourceMetadata.some((metadata) => Boolean(metadata.forward_protected)),
-      bundle_status: bundle.status,
-      ambiguity_reason: bundle.ambiguity_reason || "",
-    },
+    frontMatter,
     bodyContent: createBundleBody(bundle),
   });
 
@@ -383,6 +387,40 @@ function addSourceUrls(target, entries) {
   });
 }
 
+function createBundleDebugMetadata({
+  bundle,
+  bundleStartAt,
+  forwardedMessages,
+  sourceMetadata,
+}) {
+  const debugMetadata = {
+    bundle_start_at: bundleStartAt,
+    bundle_end_at: toIsoString(bundle.bundle_end_at),
+    bundle_status: bundle.status,
+    forwarded_messages: forwardedMessages,
+    source_metadata: sourceMetadata,
+  };
+
+  if (bundle.ambiguity_reason) {
+    debugMetadata.ambiguity_reason = bundle.ambiguity_reason;
+  }
+
+  return debugMetadata;
+}
+
+function resolveBundleSourceInfo(forwardedMessages) {
+  if (forwardedMessages.length === 0) {
+    return "direct_message";
+  }
+
+  const sourceInfo = forwardedMessages[0].source_info;
+  if (typeof sourceInfo !== "string" || sourceInfo.trim() === "") {
+    return "forward";
+  }
+
+  return sourceInfo;
+}
+
 function collectBundledMessageIds(bundles) {
   const bundledIds = new Set();
 
@@ -405,13 +443,14 @@ function createBundleBody(bundle) {
   const forwardedMessages = Array.isArray(bundle.forwarded_messages) ? bundle.forwarded_messages : [];
 
   if (noteText !== "") {
+    sections.push("==== NOTE ====");
     sections.push(noteText);
   }
 
   if (forwardedMessages.length > 0) {
-    sections.push("Forwarded Messages");
+    sections.push("==== FORWARDS ====");
     forwardedMessages.forEach((forwardedMessage, index) => {
-      const title = `Forward ${index + 1} (message_id: ${forwardedMessage.message_id})`;
+      const title = `---- Forward ${index + 1} (message_id: ${forwardedMessage.message_id}) ----`;
       const sourceInfo = `Source: ${forwardedMessage.source_info || "Unknown"}`;
       const content = typeof forwardedMessage.content === "string" && forwardedMessage.content.trim() !== ""
         ? forwardedMessage.content

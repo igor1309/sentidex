@@ -259,28 +259,26 @@ describe('process-messages script (Characterization Test)', () => {
       const bundledMessage = frontMatterCodec.stringify({
         frontMatter: {
           raw_message: true,
-          message_bundle: true,
-          message_id: 1001,
           message_ids: [1001, 1002],
           timestamp: '2025-09-21T09:34:07.837Z',
-          bundle_start_at: '2025-09-21T09:34:07.837Z',
-          bundle_end_at: '2025-09-21T09:34:12.837Z',
           note_text: 'Bundled note',
-          forwarded_messages: [
-            {
-              message_id: 1002,
-              source_url: 'http://example.com/bundled-source',
-            },
-          ],
-          source_metadata: [
-            {
-              message_id: 1002,
-              source_url: 'http://example.com/bundled-source',
-            },
-          ],
-          source_url: '',
-          source_urls: [],
-          bundle_status: 'normal',
+          debug: {
+            bundle_start_at: '2025-09-21T09:34:07.837Z',
+            bundle_end_at: '2025-09-21T09:34:12.837Z',
+            bundle_status: 'normal',
+            forwarded_messages: [
+              {
+                message_id: 1002,
+                source_url: 'http://example.com/bundled-source',
+              },
+            ],
+            source_metadata: [
+              {
+                message_id: 1002,
+                source_url: 'http://example.com/bundled-source',
+              },
+            ],
+          },
         },
         bodyContent: 'Bundled note',
       });
@@ -318,30 +316,29 @@ describe('process-messages script (Characterization Test)', () => {
       const bundledMessage = frontMatterCodec.stringify({
         frontMatter: {
           raw_message: true,
-          message_bundle: true,
-          message_id: 2001,
           message_ids: [2001, 2002],
           timestamp: '2025-09-21T09:34:07.837Z',
-          bundle_start_at: '2025-09-21T09:34:07.837Z',
-          bundle_end_at: '2025-09-21T09:34:09.837Z',
           note_text: 'Bundled note',
-          forwarded_messages: [
-            {
-              message_id: 2002,
-              source_url: 'http://example.com/bundle-keep',
-              content: 'Forwarded entry',
-            },
-          ],
-          source_metadata: [
-            {
-              message_id: 2002,
-              source_url: 'http://example.com/bundle-keep',
-            },
-          ],
-          source_url: '',
+          source_info: 'Neural Kovalskii',
           source_urls: ['http://example.com/bundle-keep'],
-          bundle_status: 'normal',
-          ambiguity_reason: '',
+          debug: {
+            bundle_start_at: '2025-09-21T09:34:07.837Z',
+            bundle_end_at: '2025-09-21T09:34:09.837Z',
+            bundle_status: 'normal',
+            forwarded_messages: [
+              {
+                message_id: 2002,
+                source_url: 'http://example.com/bundle-keep',
+                content: 'Forwarded entry',
+              },
+            ],
+            source_metadata: [
+              {
+                message_id: 2002,
+                source_url: 'http://example.com/bundle-keep',
+              },
+            ],
+          },
         },
         bodyContent: 'Bundled note',
       });
@@ -369,19 +366,21 @@ describe('process-messages script (Characterization Test)', () => {
       const { frontMatter } = frontMatterCodec.parse(output);
 
       expect(frontMatter).toMatchObject({
-        message_bundle: true,
         message_ids: [2001, 2002],
-        bundle_start_at: '2025-09-21T09:34:07.837Z',
-        bundle_end_at: '2025-09-21T09:34:09.837Z',
         note_text: 'Bundled note',
-        bundle_status: 'normal',
+        source_info: 'Neural Kovalskii',
         source_url: 'http://example.com/bundle-keep',
         source_urls: ['http://example.com/bundle-keep'],
         summary: 'Bundle summary',
         tags: ['bundle', 'ai'],
       });
-      expect(frontMatter.forwarded_messages).toHaveLength(1);
-      expect(frontMatter.source_metadata).toHaveLength(1);
+      expect(frontMatter.debug).toMatchObject({
+        bundle_start_at: '2025-09-21T09:34:07.837Z',
+        bundle_end_at: '2025-09-21T09:34:09.837Z',
+        bundle_status: 'normal',
+      });
+      expect(frontMatter.debug.forwarded_messages).toHaveLength(1);
+      expect(frontMatter.debug.source_metadata).toHaveLength(1);
     });
   });
 

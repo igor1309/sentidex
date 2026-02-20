@@ -145,6 +145,7 @@ async function processFile(inboxPath) {
     ...enrichedFrontMatter,
     ...preservedMetadata,
   };
+  removeEmptyFields(finalFrontMatter);
   
   // Generate new filename with AI title and timestamp
   const timestamp = new Date(frontMatter.timestamp || Date.now());
@@ -179,16 +180,18 @@ function extractPreservedMetadata(frontMatter, sourceUrls) {
 
   const preservedMetadata = {};
   const bundleKeys = [
-    'message_bundle',
     'message_ids',
+    'note_text',
+    'debug',
+    'source_urls',
+    // legacy compatibility for already-collected records
+    'message_bundle',
     'bundle_start_at',
     'bundle_end_at',
-    'note_text',
     'forwarded_messages',
     'source_metadata',
     'bundle_status',
     'ambiguity_reason',
-    'source_urls',
   ];
 
   bundleKeys.forEach((key) => {
@@ -203,6 +206,16 @@ function extractPreservedMetadata(frontMatter, sourceUrls) {
   }
 
   return preservedMetadata;
+}
+
+function removeEmptyFields(frontMatter) {
+  if (frontMatter.source_url === '') {
+    delete frontMatter.source_url;
+  }
+
+  if (Array.isArray(frontMatter.source_urls) && frontMatter.source_urls.length === 0) {
+    delete frontMatter.source_urls;
+  }
 }
 
 // Run the processing

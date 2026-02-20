@@ -8,8 +8,19 @@ function extractSourceUrls(frontMatter) {
   addArrayUrls(urls, frontMatter.source_urls);
   addNestedUrls(urls, frontMatter.forwarded_messages);
   addNestedUrls(urls, frontMatter.source_metadata);
+  addNestedDebugUrls(urls, frontMatter.debug);
 
   return Array.from(new Set(urls));
+}
+
+function addNestedDebugUrls(target, debug) {
+  if (!debug || typeof debug !== 'object') {
+    return;
+  }
+
+  addArrayUrls(target, debug.source_urls);
+  addNestedUrls(target, debug.forwarded_messages);
+  addNestedUrls(target, debug.source_metadata);
 }
 
 function addArrayUrls(target, values) {

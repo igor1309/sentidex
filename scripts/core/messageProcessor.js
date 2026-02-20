@@ -52,13 +52,13 @@ function enrichMessage(rawMessage, aiResults) {
   return {
     id: frontMatter.id || generateId(),
     created_at: createdAt,
+    processed_at: processedAt,
     source_info: frontMatter.source_info || 'unknown',
     source_url: frontMatter.source_url || '',
     has_media: frontMatter.has_media || false,
     language: detectLanguage(bodyContent),
     summary: aiResults.summary,
     tags: aiResults.tags,
-    processed_at: processedAt,
   };
 }
 

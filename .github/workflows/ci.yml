@@ -43,7 +43,7 @@ jobs:
       # §3.4. Run the full test suite. If this step fails, subsequent steps are skipped,
       # and the 'if: failure()' condition on the notification step will be met.
       - name: Run tests
-        run: npm test
+        run: ./scripts/run_silent.sh "tests" npm test
 
       # §3.5. Send a notification to Telegram ONLY if the 'Run tests' step failed.
       - name: Send Telegram notification on failure
@@ -67,7 +67,4 @@ jobs:
 
           # Send the message using curl and the Telegram Bot API.
           # The '-s' flag makes curl silent (no progress meter).
-          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
-            -d "chat_id=${CHAT_ID}" \
-            -d "text=${ENCODED_MESSAGE_TEXT}" \
-            -d "parse_mode=Markdown"
+          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" -d "chat_id=${CHAT_ID}" -d "text=${ENCODED_MESSAGE_TEXT}" -d "parse_mode=Markdown"

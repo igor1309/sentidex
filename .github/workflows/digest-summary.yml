@@ -32,7 +32,7 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: npm install
+        run: ./scripts/run_silent.sh "npm install" npm install
 
       - name: Generate and Send Digest
         env:
@@ -49,4 +49,4 @@ jobs:
           fi
           
           echo "Running $DIGEST_TYPE digest..."
-          node scripts/send-digest.js
+          ./scripts/run_silent.sh "send digest" node scripts/send-digest.js

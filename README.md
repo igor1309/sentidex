@@ -46,13 +46,15 @@ The project uses Jest to run a suite of characterization tests that validate the
 
 To run the full test suite:
 ```bash
-npm test
+./scripts/run_silent.sh "tests" npm test
 ```
 
 To update test snapshots:
 ```bash
-npm test -- -u
+./scripts/run_silent.sh "tests update snapshots" npm test -- -u
 ```
+
+`scripts/run_silent.sh` is a stable local wrapper that delegates to `vendor/ci-shared/scripts/run_silent.sh`, pinned to a specific `ci-shared` commit.
 
 ### Web Pages
 
@@ -69,7 +71,7 @@ We have an automated CI pipeline defined in `.github/workflows/ci.yml`. This wor
 -   **Trigger:** Runs automatically on every push and pull request to the `trunk` branch.
 -   **Actions:**
     1.  Installs all dependencies from the lockfile (`npm ci`).
-    2.  Runs the complete test suite via the `npm test` command. The CI runner environment defaults to the UTC timezone, ensuring consistent results.
+    2.  Runs the complete test suite via `./scripts/run_silent.sh "tests" npm test`. The CI runner environment defaults to the UTC timezone, ensuring consistent results.
 -   **On Failure:** If any test fails, the build is blocked. A notification is sent to the project's Telegram bot with a direct link to the failed workflow run for immediate debugging.
 
 ## Usage

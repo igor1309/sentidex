@@ -58,7 +58,7 @@ jobs:
         run: |
           set -e
           for attempt in 1 2 3; do
-            if npm ci; then
+            if ./scripts/run_silent.sh "npm ci attempt ${attempt}" npm ci; then
               break
             fi
 
@@ -79,7 +79,7 @@ jobs:
           OPEN_ROUTER_GPT_OSS_20B_API_KEY: ${{ secrets.OPEN_ROUTER_GPT_OSS_20B_API_KEY }}
         run: |
           set -e
-          node scripts/process-messages.js
+          ./scripts/run_silent.sh "process messages" node scripts/process-messages.js
 
       - name: Commit processed files
         run: |

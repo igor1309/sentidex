@@ -28,13 +28,13 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: ./scripts/run_silent.sh "npm ci" npm ci
 
       - name: Run Telegram polling
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: node scripts/poll-telegram.js
+        run: ./scripts/run_silent.sh "poll telegram" node scripts/poll-telegram.js
 
       - name: Commit new files
         run: |

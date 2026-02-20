@@ -5,6 +5,7 @@ const formatTimestamp = require('./adapters/formatTimestamp');
 const frontMatterCodec = require('./adapters/frontMatterCodec');
 const logger = require('./adapters/consoleLogger');
 const messageProcessor = require('./core/messageProcessor');
+const { extractSourceUrls } = require('./core/sourceUrls');
 
 async function processMessages() {
   logger.info('Starting message processing...');
@@ -80,8 +81,8 @@ async function processFile(inboxPath) {
     logger.info(`Body content preview: ${bodyContent.substring(0, 200)}...`);
   }
 
-  const sourceUrl = frontMatter.source_url;
-  if (sourceUrl && sourceUrl !== '') {
+  const sourceUrls = extractSourceUrls(frontMatter);
+  for (const sourceUrl of sourceUrls) {
     const originalFilePath = duplicateDetector.findOriginalBySourceUrl(sourceUrl, {
       fileSystem,
       directory: 'inbox',
@@ -139,6 +140,11 @@ async function processFile(inboxPath) {
     { frontMatter, bodyContent },
     aiResults
   );
+  const preservedMetadata = extractPreservedMetadata(frontMatter, sourceUrls);
+  const finalFrontMatter = {
+    ...enrichedFrontMatter,
+    ...preservedMetadata,
+  };
   
   // Generate new filename with AI title and timestamp
   const timestamp = new Date(frontMatter.timestamp || Date.now());
@@ -147,7 +153,7 @@ async function processFile(inboxPath) {
   
   // Create new content
   const newContent = frontMatterCodec.stringify({
-    frontMatter: enrichedFrontMatter,
+    frontMatter: finalFrontMatter,
     bodyContent,
   });
   
@@ -164,6 +170,39 @@ async function processFile(inboxPath) {
   fileSystem.unlink(inboxPath);
   logger.info(`Deleted original file: ${inboxPath}`);
   return 'processed';
+}
+
+function extractPreservedMetadata(frontMatter, sourceUrls) {
+  if (!frontMatter || typeof frontMatter !== 'object') {
+    return {};
+  }
+
+  const preservedMetadata = {};
+  const bundleKeys = [
+    'message_bundle',
+    'message_ids',
+    'bundle_start_at',
+    'bundle_end_at',
+    'note_text',
+    'forwarded_messages',
+    'source_metadata',
+    'bundle_status',
+    'ambiguity_reason',
+    'source_urls',
+  ];
+
+  bundleKeys.forEach((key) => {
+    if (frontMatter[key] !== undefined) {
+      preservedMetadata[key] = frontMatter[key];
+    }
+  });
+
+  const primarySourceUrl = sourceUrls.length > 0 ? sourceUrls[0] : null;
+  if (primarySourceUrl) {
+    preservedMetadata.source_url = primarySourceUrl;
+  }
+
+  return preservedMetadata;
 }
 
 // Run the processing

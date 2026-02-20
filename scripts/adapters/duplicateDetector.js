@@ -1,4 +1,5 @@
 const frontMatterCodec = require('./frontMatterCodec');
+const { extractSourceUrls } = require('../core/sourceUrls');
 
 // Adapter encapsulating duplicate detection logic against the inbox repository.
 
@@ -22,8 +23,9 @@ function findOriginalBySourceUrl(url, { fileSystem, directory }) {
     const filePath = fileSystem.join(targetDirectory, file);
     const content = fileSystem.readFile(filePath);
     const { frontMatter } = frontMatterCodec.parse(content);
+    const sourceUrls = extractSourceUrls(frontMatter);
 
-    if (frontMatter && frontMatter.source_url === url) {
+    if (sourceUrls.includes(url)) {
       return filePath;
     }
   }

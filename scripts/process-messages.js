@@ -1,11 +1,12 @@
-const { getAIEnrichment } = require('./services/ai.js');
+const logger = require('./adapters/consoleLogger');
 const duplicateDetector = require('./adapters/duplicateDetector');
 const fileSystem = require('./adapters/fileSystem');
 const formatTimestamp = require('./adapters/formatTimestamp');
 const frontMatterCodec = require('./adapters/frontMatterCodec');
-const logger = require('./adapters/consoleLogger');
 const messageProcessor = require('./core/messageProcessor');
 const { extractSourceUrls } = require('./core/sourceUrls');
+const { mapTag } = require('./lib/tags');
+const { getAIEnrichment } = require('./services/ai.js');
 
 async function processMessages() {
   logger.info('Starting message processing...');
@@ -134,11 +135,16 @@ async function processFile(inboxPath) {
     logger.info(`Keeping original file in _inbox for manual retry: ${inboxPath}`);
     return 'failed';
   }
+
+  const enrichedAiResults = {
+    ...aiResults,
+    tags: mergeAiTagsWithNoteTags(aiResults.tags, bodyContent),
+  };
   
   // Create enriched front matter using the pure core logic
   const enrichedFrontMatter = messageProcessor.enrichMessage(
     { frontMatter, bodyContent },
-    aiResults
+    enrichedAiResults
   );
   const preservedMetadata = extractPreservedMetadata(frontMatter, sourceUrls);
   const finalFrontMatter = {
@@ -234,6 +240,89 @@ function removeEmptyFields(frontMatter) {
   if (Array.isArray(frontMatter.source_urls) && frontMatter.source_urls.length <= 1) {
     delete frontMatter.source_urls;
   }
+}
+
+function mergeAiTagsWithNoteTags(aiTags, bodyContent) {
+  if (!Array.isArray(aiTags)) {
+    return [];
+  }
+
+  const noteTags = extractHashtagsFromBundleNote(bodyContent);
+  if (noteTags.length === 0) {
+    return aiTags;
+  }
+
+  const mergedTags = [...aiTags];
+  const knownTags = new Set(
+    aiTags
+      .map((tag) => normalizeTag(tag))
+      .filter((tag) => tag !== null),
+  );
+
+  noteTags.forEach((noteTag) => {
+    if (knownTags.has(noteTag)) {
+      return;
+    }
+
+    knownTags.add(noteTag);
+    mergedTags.push(noteTag);
+  });
+
+  return mergedTags;
+}
+
+function extractHashtagsFromBundleNote(bodyContent) {
+  if (typeof bodyContent !== 'string' || bodyContent.trim() === '') {
+    return [];
+  }
+
+  const noteSectionMatch = bodyContent.match(
+    /==== NOTE ====\r?\n\r?\n([\s\S]*?)(?:\r?\n\r?\n==== FORWARDS ====|$)/,
+  );
+
+  if (!noteSectionMatch || typeof noteSectionMatch[1] !== 'string') {
+    return [];
+  }
+
+  const noteSection = noteSectionMatch[1];
+  const hashtagMatches = noteSection.match(/#([\p{L}\p{N}_-]+)/gu);
+
+  if (!Array.isArray(hashtagMatches)) {
+    return [];
+  }
+
+  const noteTags = [];
+  const seen = new Set();
+
+  hashtagMatches.forEach((hashtag) => {
+    const normalizedTag = normalizeTag(hashtag.slice(1));
+    if (normalizedTag === null || seen.has(normalizedTag)) {
+      return;
+    }
+
+    seen.add(normalizedTag);
+    noteTags.push(normalizedTag);
+  });
+
+  return noteTags;
+}
+
+function normalizeTag(tag) {
+  if (typeof tag !== 'string') {
+    return null;
+  }
+
+  const trimmedTag = tag.trim().replace(/^#/, '');
+  if (trimmedTag === '') {
+    return null;
+  }
+
+  const mappedTag = mapTag(trimmedTag);
+  if (typeof mappedTag !== 'string' || mappedTag.trim() === '') {
+    return null;
+  }
+
+  return mappedTag;
 }
 
 // Run the processing

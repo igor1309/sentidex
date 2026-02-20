@@ -382,6 +382,48 @@ describe('process-messages script (Characterization Test)', () => {
       expect(frontMatter.debug.forwarded_messages).toHaveLength(1);
       expect(frontMatter.debug.source_metadata).toHaveLength(1);
     });
+
+    test('should reuse hashtag from note section in resulting tags', async () => {
+      const bundledMessage = frontMatterCodec.stringify({
+        frontMatter: {
+          raw_message: true,
+          timestamp: '2025-09-21T09:34:07.837Z',
+        },
+        bodyContent: [
+          '==== NOTE ====',
+          '',
+          'check the #CLI out',
+          '',
+          '==== FORWARDS ====',
+          '',
+          '---- Forward 1 (message_id: 2002) ----',
+          'Source: Example Source',
+          '',
+          'Forwarded entry',
+        ].join('\n'),
+      });
+
+      testEnv = createSingleFileEnv({
+        inboxFiles: {
+          'bundle.md': bundledMessage,
+        },
+      });
+      const { fs } = testEnv;
+
+      const aiModule = require('../scripts/services/ai.js');
+      aiModule.getAIEnrichment = mockAISuccess({
+        title: 'Bundle-Tag-Reuse',
+        summary: 'Bundle summary',
+        tags: ['bundle', 'ai'],
+      });
+
+      await runScript();
+
+      const output = fs.readFileSync(path.join('/inbox', buildFilename('Bundle-Tag-Reuse')), 'utf8');
+      const { frontMatter } = frontMatterCodec.parse(output);
+
+      expect(frontMatter.tags).toEqual(['bundle', 'ai', 'cli']);
+    });
   });
 
   describe('Scenario 2: two files', () => {

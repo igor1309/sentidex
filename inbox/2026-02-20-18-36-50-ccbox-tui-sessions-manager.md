@@ -1,15 +1,20 @@
 ---
-raw_message: true
-message_id: 873
-timestamp: "2026-02-20T18:36:50.766Z"
-source_info: "Aleksei"
-source_url: ""
-forward_date: "2026-02-20T16:51:16.000Z"
+id: mlv9dg1yrvo24111oma
+created_at: '2026-02-20T18:36:50.766Z'
+source_info: Aleksei
+source_url: ''
 has_media: false
-media_type: "none"
-forward_protected: true
+language: mixed
+summary: >-
+  TUI-менеджер локальных сессий кодинг-агентов с индексацией, таймлайном и
+  статистикой.
+tags:
+  - local-llm
+  - ai-coding
+  - agents
+  - workflow
+processed_at: '2026-02-20T19:03:54.502Z'
 ---
-
 ccbox -- TUI-менеджер сессий кодинг-агентов
 
   Rust-приложение для терминала, которое индексирует и показывает локальные сессии Codex CLI, Claude Code и Gemini CLI в едином интерфейсе.

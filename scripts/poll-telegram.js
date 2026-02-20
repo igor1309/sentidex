@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
+const frontMatterCodec = require("./adapters/frontMatterCodec");
 const formatTimestamp = require("./adapters/formatTimestamp");
+const { buildMessageBundles } = require("./core/telegramMessageBundler");
 
 async function pollTelegram() {
   console.log("Starting Telegram polling...");
@@ -33,6 +35,7 @@ async function pollTelegram() {
     let processedCount = 0;
     let skippedCount = 0;
     let highestUpdateId = 0;
+    const bundleEntries = [];
 
     for (const update of updates) {
       // Track highest update ID for proper offset handling
@@ -61,24 +64,21 @@ async function pollTelegram() {
         continue;
       }
 
-      if (isForwardedMessage(message)) {
-        if (process.env.DEBUG === "true") {
-          console.log(
-            "Full forwarded message object:",
-            JSON.stringify(message, null, 2),
-          );
-        }
-        await processForwardedMessage(message);
-        processedCount++;
-      } else if (hasContent(message)) {
-        await processRegularMessage(message);
-        processedCount++;
-      } else {
-        console.log(
-          `Skipping message ${message.message_id} - no processable content`,
-        );
-        skippedCount++;
-      }
+      bundleEntries.push(toBundleEntry(message));
+    }
+
+    const bundles = buildMessageBundles(bundleEntries);
+    const bundledMessageIds = collectBundledMessageIds(bundles);
+
+    for (const bundle of bundles) {
+      writeBundleToInbox(bundle);
+      processedCount++;
+    }
+
+    skippedCount += bundleEntries.filter((entry) => !bundledMessageIds.has(entry.messageId)).length;
+
+    if (process.env.DEBUG === "true") {
+      console.log(`Created ${bundles.length} message bundles`);
     }
 
     // Mark all messages as processed at once
@@ -87,7 +87,7 @@ async function pollTelegram() {
     }
 
     console.log(
-      `Processed ${processedCount} messages, skipped ${skippedCount} messages`,
+      `Processed ${processedCount} bundles, skipped ${skippedCount} messages`,
     );
   } catch (error) {
     console.error("Error polling Telegram:", error);
@@ -111,11 +111,92 @@ function isForwardedMessage(message) {
   );
 }
 
-// Check if message has any processable content
-function hasContent(message) {
+function toBundleEntry(message) {
+  const type = classifyMessage(message);
+  const timestampMs = extractMessageTimestampMs(message);
+  const messageId = message && message.message_id !== undefined ? message.message_id : null;
+
+  if (type === "forward") {
+    return {
+      type,
+      timestampMs,
+      messageId,
+      content: extractMessageContent(message),
+      forwardMetadata: {
+        ...extractForwardSourceMetadata(message),
+        forwardDate: message.forward_date ? new Date(message.forward_date * 1000).toISOString() : "",
+        hasMedia: hasMedia(message),
+        mediaType: getMediaType(message),
+      },
+    };
+  }
+
+  if (type === "note") {
+    return {
+      type,
+      timestampMs,
+      messageId,
+      noteText: extractMessageContent(message),
+    };
+  }
+
+  return {
+    type,
+    timestampMs,
+    messageId,
+  };
+}
+
+function classifyMessage(message) {
+  if (!message || typeof message !== "object" || message.message_id === undefined) {
+    return "ambiguous";
+  }
+
+  if (isForwardedMessage(message)) {
+    return "forward";
+  }
+
+  if (isNoteMessage(message)) {
+    return "note";
+  }
+
+  return "other";
+}
+
+function isNoteMessage(message) {
+  if (!message || typeof message.text !== "string" || message.text.trim() === "") {
+    return false;
+  }
+
+  if (!message.from || typeof message.from !== "object") {
+    return false;
+  }
+
+  if (message.caption) {
+    return false;
+  }
+
+  if (message.from.is_bot === true) {
+    return false;
+  }
+
+  if (message.sender_chat) {
+    return false;
+  }
+
+  if (message.chat && message.chat.type === "channel") {
+    return false;
+  }
+
+  if (isServiceMessage(message) || hasNonTextPayload(message)) {
+    return false;
+  }
+
+  return true;
+}
+
+function hasNonTextPayload(message) {
   return !!(
-    message.text ||
-    message.caption ||
     message.photo ||
     message.video ||
     message.document ||
@@ -133,22 +214,44 @@ function hasContent(message) {
   );
 }
 
-async function processForwardedMessage(message) {
-  const timestamp = new Date();
-  const filename = formatTimestamp(timestamp) + ".md";
-  const filepath = path.join("_inbox", filename);
+function isServiceMessage(message) {
+  return !!(
+    message.new_chat_members ||
+    message.left_chat_member ||
+    message.new_chat_title ||
+    message.new_chat_photo ||
+    message.delete_chat_photo ||
+    message.group_chat_created ||
+    message.supergroup_chat_created ||
+    message.channel_chat_created ||
+    message.message_auto_delete_timer_changed ||
+    message.migrate_to_chat_id ||
+    message.migrate_from_chat_id ||
+    message.pinned_message ||
+    message.invoice ||
+    message.successful_payment ||
+    message.user_shared ||
+    message.chat_shared ||
+    message.forum_topic_created ||
+    message.forum_topic_closed ||
+    message.forum_topic_reopened ||
+    message.giveaway ||
+    message.giveaway_created ||
+    message.giveaway_completed
+  );
+}
 
-  if (!fs.existsSync("_inbox")) {
-    fs.mkdirSync("_inbox", { recursive: true });
-  }
+function extractMessageTimestampMs(message) {
+  const unixSeconds = Number(message && message.date);
+  return Number.isFinite(unixSeconds) ? unixSeconds * 1000 : null;
+}
 
+function extractForwardSourceMetadata(message) {
   let sourceInfo = "Unknown";
   let sourceUrl = "";
-  let isForwardProtected = false;
+  let forwardProtected = false;
 
-  // Enhanced source info extraction - handles all forward types
   if (message.forward_origin) {
-    // New API structure - more reliable
     switch (message.forward_origin.type) {
       case "user":
         const user = message.forward_origin.sender_user;
@@ -171,81 +274,173 @@ async function processForwardedMessage(message) {
         break;
       case "hidden_user":
         sourceInfo = message.forward_origin.sender_user_name || "Hidden User";
-        isForwardProtected = true;
+        forwardProtected = true;
         break;
     }
-  } else {
-    // Fallback to legacy fields
-    if (message.forward_from) {
-      const user = message.forward_from;
-      sourceInfo = user.username
-        ? `@${user.username}`
-        : `${user.first_name || "Unknown"} ${user.last_name || ""}`.trim();
-    } else if (message.forward_from_chat) {
-      const chat = message.forward_from_chat;
-      sourceInfo = chat.title || `@${chat.username}` || "Unknown Chat";
-
-      // Try to build URL for public channels
-      if (chat.username && message.forward_from_message_id) {
-        sourceUrl = `https://t.me/${chat.username}/${message.forward_from_message_id}`;
-      }
-    } else if (message.forward_sender_name) {
-      sourceInfo = message.forward_sender_name;
-      isForwardProtected = true;
+  } else if (message.forward_from) {
+    const user = message.forward_from;
+    sourceInfo = user.username
+      ? `@${user.username}`
+      : `${user.first_name || "Unknown"} ${user.last_name || ""}`.trim();
+  } else if (message.forward_from_chat) {
+    const chat = message.forward_from_chat;
+    sourceInfo = chat.title || `@${chat.username}` || "Unknown Chat";
+    if (chat.username && message.forward_from_message_id) {
+      sourceUrl = `https://t.me/${chat.username}/${message.forward_from_message_id}`;
     }
+  } else if (message.forward_sender_name) {
+    sourceInfo = message.forward_sender_name;
+    forwardProtected = true;
   }
 
-  // Extract comprehensive message content
-  const content = extractMessageContent(message);
-
-  const frontMatter = `---
-raw_message: true
-message_id: ${message.message_id}
-timestamp: "${timestamp.toISOString()}"
-source_info: "${sourceInfo.replace(/"/g, '\\"')}"
-source_url: "${sourceUrl}"
-forward_date: "${message.forward_date ? new Date(message.forward_date * 1000).toISOString() : ""}"
-has_media: ${hasMedia(message)}
-media_type: "${getMediaType(message)}"
-forward_protected: ${isForwardProtected}
----`;
-
-  const fullContent = `${frontMatter}\n\n${content}`;
-
-  fs.writeFileSync(filepath, fullContent, "utf8");
-  console.log(`Created forwarded message file: ${filepath}`);
-
-  if (process.env.DEBUG === "true") {
-    console.log("File content preview:", fullContent.substring(0, 500) + "...");
-  }
+  return {
+    sourceInfo,
+    sourceUrl,
+    forwardProtected,
+  };
 }
 
-async function processRegularMessage(message) {
-  const timestamp = new Date();
-  const filename = formatTimestamp(timestamp) + "_regular.md";
-  const filepath = path.join("_inbox", filename);
-
+function writeBundleToInbox(bundle) {
   if (!fs.existsSync("_inbox")) {
     fs.mkdirSync("_inbox", { recursive: true });
   }
 
-  const content = extractMessageContent(message);
+  const bundleStartAt = toIsoString(bundle.bundle_start_at);
+  const primaryMessageId = Array.isArray(bundle.message_ids) && bundle.message_ids.length > 0
+    ? bundle.message_ids[0]
+    : Date.now().toString(36);
+  const bundleTypeSuffix = bundle.status === "ambiguous" ? "ambiguous" : "bundle";
+  const filename = `${formatTimestamp(bundleStartAt)}-${primaryMessageId}-${bundleTypeSuffix}.md`;
+  const filepath = path.join("_inbox", filename);
+  const forwardedMessages = Array.isArray(bundle.forwarded_messages) ? bundle.forwarded_messages : [];
+  const sourceMetadata = Array.isArray(bundle.source_metadata) ? bundle.source_metadata : [];
+  const sourceUrls = extractBundleSourceUrls(bundle);
 
-  const frontMatter = `---
-raw_message: true
-message_id: ${message.message_id}
-timestamp: "${timestamp.toISOString()}"
-source_info: "direct_message"
-source_url: ""
-has_media: ${hasMedia(message)}
-media_type: "${getMediaType(message)}"
-forward_protected: false
----`;
+  const content = frontMatterCodec.stringify({
+    frontMatter: {
+      raw_message: true,
+      message_bundle: true,
+      message_id: primaryMessageId,
+      message_ids: Array.isArray(bundle.message_ids) ? bundle.message_ids : [],
+      timestamp: bundleStartAt,
+      bundle_start_at: bundleStartAt,
+      bundle_end_at: toIsoString(bundle.bundle_end_at),
+      note_text: typeof bundle.note_text === "string" ? bundle.note_text : "",
+      forwarded_messages: forwardedMessages,
+      source_metadata: sourceMetadata,
+      source_info: "bundle",
+      source_url: sourceUrls[0] || "",
+      source_urls: sourceUrls,
+      has_media: forwardedMessages.some((message) => Boolean(message.has_media)),
+      media_type: resolveBundleMediaType(forwardedMessages),
+      forward_protected: sourceMetadata.some((metadata) => Boolean(metadata.forward_protected)),
+      bundle_status: bundle.status,
+      ambiguity_reason: bundle.ambiguity_reason || "",
+    },
+    bodyContent: createBundleBody(bundle),
+  });
 
-  const fullContent = `${frontMatter}\n\n${content}`;
+  fs.writeFileSync(filepath, content, "utf8");
+  console.log(`Created bundle file: ${filepath}`);
+}
 
-  fs.writeFileSync(filepath, fullContent, "utf8");
-  console.log(`Created regular message file: ${filepath}`);
+function extractBundleSourceUrls(bundle) {
+  const urls = [];
+  const forwardedMessages = Array.isArray(bundle.forwarded_messages) ? bundle.forwarded_messages : [];
+  const sourceMetadata = Array.isArray(bundle.source_metadata) ? bundle.source_metadata : [];
+
+  addSourceUrls(urls, forwardedMessages);
+  addSourceUrls(urls, sourceMetadata);
+
+  return Array.from(new Set(urls));
+}
+
+function addSourceUrls(target, entries) {
+  entries.forEach((entry) => {
+    if (!entry || typeof entry !== "object") {
+      return;
+    }
+
+    const sourceUrl = typeof entry.source_url === "string" ? entry.source_url.trim() : "";
+    if (sourceUrl === "") {
+      return;
+    }
+
+    target.push(sourceUrl);
+  });
+}
+
+function collectBundledMessageIds(bundles) {
+  const bundledIds = new Set();
+
+  bundles.forEach((bundle) => {
+    if (!Array.isArray(bundle.message_ids)) {
+      return;
+    }
+
+    bundle.message_ids.forEach((messageId) => {
+      bundledIds.add(messageId);
+    });
+  });
+
+  return bundledIds;
+}
+
+function createBundleBody(bundle) {
+  const sections = [];
+  const noteText = typeof bundle.note_text === "string" ? bundle.note_text.trim() : "";
+  const forwardedMessages = Array.isArray(bundle.forwarded_messages) ? bundle.forwarded_messages : [];
+
+  if (noteText !== "") {
+    sections.push(noteText);
+  }
+
+  if (forwardedMessages.length > 0) {
+    sections.push("Forwarded Messages");
+    forwardedMessages.forEach((forwardedMessage, index) => {
+      const title = `Forward ${index + 1} (message_id: ${forwardedMessage.message_id})`;
+      const sourceInfo = `Source: ${forwardedMessage.source_info || "Unknown"}`;
+      const content = typeof forwardedMessage.content === "string" && forwardedMessage.content.trim() !== ""
+        ? forwardedMessage.content
+        : "[No extractable content]";
+      sections.push(`${title}\n${sourceInfo}\n\n${content}`);
+    });
+  }
+
+  if (sections.length === 0) {
+    return "[Empty bundle]";
+  }
+
+  return sections.join("\n\n");
+}
+
+function resolveBundleMediaType(forwardedMessages) {
+  const mediaTypes = Array.from(
+    new Set(
+      forwardedMessages
+        .map((forwardedMessage) => forwardedMessage.media_type)
+        .filter((mediaType) => mediaType && mediaType !== "none"),
+    ),
+  );
+
+  if (mediaTypes.length === 0) {
+    return "none";
+  }
+
+  if (mediaTypes.length === 1) {
+    return mediaTypes[0];
+  }
+
+  return "mixed";
+}
+
+function toIsoString(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.valueOf())) {
+    return new Date().toISOString();
+  }
+
+  return date.toISOString();
 }
 
 // Enhanced content extraction - handles all message types

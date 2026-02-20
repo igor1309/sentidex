@@ -254,6 +254,135 @@ describe('process-messages script (Characterization Test)', () => {
       });
       expect(duplicateTicket.bodyContent).toContain('Дубликат, см. оригинал');
     });
+
+    test('should detect duplicate from bundled forwarded source_url metadata', async () => {
+      const bundledMessage = frontMatterCodec.stringify({
+        frontMatter: {
+          raw_message: true,
+          message_bundle: true,
+          message_id: 1001,
+          message_ids: [1001, 1002],
+          timestamp: '2025-09-21T09:34:07.837Z',
+          bundle_start_at: '2025-09-21T09:34:07.837Z',
+          bundle_end_at: '2025-09-21T09:34:12.837Z',
+          note_text: 'Bundled note',
+          forwarded_messages: [
+            {
+              message_id: 1002,
+              source_url: 'http://example.com/bundled-source',
+            },
+          ],
+          source_metadata: [
+            {
+              message_id: 1002,
+              source_url: 'http://example.com/bundled-source',
+            },
+          ],
+          source_url: '',
+          source_urls: [],
+          bundle_status: 'normal',
+        },
+        bodyContent: 'Bundled note',
+      });
+
+      testEnv = createSingleFileEnv({
+        inboxFiles: {
+          'bundle.md': bundledMessage,
+        },
+      });
+      const { fs } = testEnv;
+
+      const originalFilename = 'original.md';
+      fs.writeFileSync(`/inbox/${originalFilename}`, [
+        '---',
+        'source_url: "http://example.com/bundled-source"',
+        '---',
+        '',
+        'Existing processed bundle',
+      ].join('\n'), 'utf8');
+
+      const aiModule = require('../scripts/services/ai.js');
+      aiModule.getAIEnrichment = mockAISuccess({ title: 'Unused', summary: 'Unused', tags: [] });
+
+      const scriptResult = await runScript();
+
+      expect(scriptResult.logs.join('\n')).toContain(
+        'Duplicate found for http://example.com/bundled-source. Original: inbox/original.md'
+      );
+      expect(aiModule.getAIEnrichment).not.toHaveBeenCalled();
+      expect(fs.readdirSync('/inbox').sort()).toEqual([DUPLICATE_TICKET_NAME, originalFilename]);
+      expect(fs.existsSync('/_inbox/bundle.md')).toBe(false);
+    });
+
+    test('should preserve bundle metadata fields after AI enrichment', async () => {
+      const bundledMessage = frontMatterCodec.stringify({
+        frontMatter: {
+          raw_message: true,
+          message_bundle: true,
+          message_id: 2001,
+          message_ids: [2001, 2002],
+          timestamp: '2025-09-21T09:34:07.837Z',
+          bundle_start_at: '2025-09-21T09:34:07.837Z',
+          bundle_end_at: '2025-09-21T09:34:09.837Z',
+          note_text: 'Bundled note',
+          forwarded_messages: [
+            {
+              message_id: 2002,
+              source_url: 'http://example.com/bundle-keep',
+              content: 'Forwarded entry',
+            },
+          ],
+          source_metadata: [
+            {
+              message_id: 2002,
+              source_url: 'http://example.com/bundle-keep',
+            },
+          ],
+          source_url: '',
+          source_urls: ['http://example.com/bundle-keep'],
+          bundle_status: 'normal',
+          ambiguity_reason: '',
+        },
+        bodyContent: 'Bundled note',
+      });
+
+      testEnv = createSingleFileEnv({
+        inboxFiles: {
+          'bundle.md': bundledMessage,
+        },
+      });
+      const { fs } = testEnv;
+
+      const aiModule = require('../scripts/services/ai.js');
+      aiModule.getAIEnrichment = mockAISuccess({
+        title: 'Bundle-AI-Title',
+        summary: 'Bundle summary',
+        tags: ['bundle', 'ai'],
+      });
+
+      const scriptResult = await runScript();
+
+      expect(scriptResult.errors).toHaveLength(0);
+      expect(fs.readdirSync('/inbox')).toEqual([buildFilename('Bundle-AI-Title')]);
+
+      const output = fs.readFileSync(path.join('/inbox', buildFilename('Bundle-AI-Title')), 'utf8');
+      const { frontMatter } = frontMatterCodec.parse(output);
+
+      expect(frontMatter).toMatchObject({
+        message_bundle: true,
+        message_ids: [2001, 2002],
+        bundle_start_at: '2025-09-21T09:34:07.837Z',
+        bundle_end_at: '2025-09-21T09:34:09.837Z',
+        note_text: 'Bundled note',
+        bundle_status: 'normal',
+        source_url: 'http://example.com/bundle-keep',
+        source_urls: ['http://example.com/bundle-keep'],
+        summary: 'Bundle summary',
+        tags: ['bundle', 'ai'],
+      });
+      expect(frontMatter.forwarded_messages).toHaveLength(1);
+      expect(frontMatter.source_metadata).toHaveLength(1);
+    });
   });
 
   describe('Scenario 2: two files', () => {

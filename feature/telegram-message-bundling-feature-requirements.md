@@ -92,9 +92,10 @@ No silent reassignment is permitted.
 Ambiguity conditions include:
 
 - A **Forward** message is observed with no active bundle and the most recent message is not a **Note** within the bundling rules.
-- A **Note** is observed while another bundle is active and at least one **Forward** has already been assigned to the active bundle, but the new **Note** arrives within the 10-second window.
 - Messages have identical timestamps or timestamp order conflicts such that more than one valid bundle interpretation is possible.
 - A message cannot be deterministically classified into **Note**, **Forward**, or **Other** based on available metadata.
+
+Receiving a new **Note** always terminates the current bundle normally and never makes it ambiguous.
 
 ---
 

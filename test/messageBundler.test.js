@@ -1,6 +1,8 @@
 const {
   classifyMessage,
   bundleMessages,
+  classifyFile,
+  bundleFiles,
   BUNDLE_WINDOW_SECONDS,
 } = require('../scripts/core/messageBundler');
 
@@ -749,5 +751,259 @@ describe('bundleMessages', () => {
     it('is 10 seconds as specified', () => {
       expect(BUNDLE_WINDOW_SECONDS).toBe(10);
     });
+  });
+});
+
+// ============================================================
+// File-based classification and bundling
+// ============================================================
+
+// --- Helpers to build parsed file fixtures ---
+
+function makeFileParsed(filename, frontMatter, bodyContent) {
+  return {
+    filename,
+    path: `_inbox/${filename}`,
+    frontMatter,
+    bodyContent: bodyContent || 'Some content',
+  };
+}
+
+function makeNoteFile(filename, timestamp) {
+  return makeFileParsed(filename, {
+    raw_message: true,
+    message_id: parseInt(filename),
+    timestamp: new Date(timestamp * 1000).toISOString(),
+    source_info: 'direct_message',
+    source_url: '',
+    has_media: false,
+    media_type: 'none',
+    forward_protected: false,
+  }, 'User note text');
+}
+
+function makeForwardFile(filename, timestamp, sourceInfo) {
+  return makeFileParsed(filename, {
+    raw_message: true,
+    message_id: parseInt(filename),
+    timestamp: new Date(timestamp * 1000).toISOString(),
+    source_info: sourceInfo || '@somechannel',
+    source_url: 'https://t.me/somechannel/123',
+    forward_date: new Date((timestamp - 100) * 1000).toISOString(),
+    has_media: false,
+    media_type: 'none',
+    forward_protected: false,
+  }, 'Forwarded content');
+}
+
+function makeOtherFile(filename, timestamp) {
+  return makeFileParsed(filename, {
+    raw_message: true,
+    message_id: parseInt(filename),
+    timestamp: new Date(timestamp * 1000).toISOString(),
+    source_info: 'direct_message',
+    source_url: '',
+    has_media: true,
+    media_type: 'photo',
+    forward_protected: false,
+  }, 'Photo content');
+}
+
+describe('classifyFile', () => {
+  it('returns "forward" when forward_date is present', () => {
+    expect(classifyFile({ forward_date: '2025-01-01T00:00:00Z' })).toBe('forward');
+  });
+
+  it('returns "forward" even with source_info direct_message if forward_date is set', () => {
+    expect(classifyFile({
+      source_info: 'direct_message',
+      forward_date: '2025-01-01T00:00:00Z',
+      has_media: false,
+    })).toBe('forward');
+  });
+
+  it('returns "note" for direct_message without media and no forward_date', () => {
+    expect(classifyFile({
+      source_info: 'direct_message',
+      has_media: false,
+    })).toBe('note');
+  });
+
+  it('returns "other" for direct_message with media', () => {
+    expect(classifyFile({
+      source_info: 'direct_message',
+      has_media: true,
+    })).toBe('other');
+  });
+
+  it('returns "other" when source_info is not direct_message and no forward_date', () => {
+    expect(classifyFile({
+      source_info: '@somechannel',
+      has_media: false,
+    })).toBe('other');
+  });
+
+  it('returns "other" for empty front matter', () => {
+    expect(classifyFile({})).toBe('other');
+  });
+
+  it('returns "other" for null', () => {
+    expect(classifyFile(null)).toBe('other');
+  });
+
+  it('returns "other" for undefined', () => {
+    expect(classifyFile(undefined)).toBe('other');
+  });
+
+  it('returns "other" when forward_date is empty string', () => {
+    expect(classifyFile({ forward_date: '' })).toBe('other');
+  });
+});
+
+describe('bundleFiles', () => {
+  it('returns empty array for empty input', () => {
+    expect(bundleFiles([])).toEqual([]);
+  });
+
+  it('returns empty array for null', () => {
+    expect(bundleFiles(null)).toEqual([]);
+  });
+
+  it('single note file → one normal bundle', () => {
+    const note = makeNoteFile('1.md', 1000);
+    const result = bundleFiles([note]);
+
+    expect(result).toHaveLength(1);
+    expect(result[0].type).toBe('bundle');
+    expect(result[0].note).toBe(note);
+    expect(result[0].forwards).toEqual([]);
+    expect(result[0].status).toBe('normal');
+  });
+
+  it('single forward file → one ambiguous bundle', () => {
+    const fwd = makeForwardFile('1.md', 1000);
+    const result = bundleFiles([fwd]);
+
+    expect(result).toHaveLength(1);
+    expect(result[0].type).toBe('bundle');
+    expect(result[0].note).toBeNull();
+    expect(result[0].forwards).toHaveLength(1);
+    expect(result[0].status).toBe('ambiguous');
+  });
+
+  it('single other file → one other item', () => {
+    const other = makeOtherFile('1.md', 1000);
+    const result = bundleFiles([other]);
+
+    expect(result).toHaveLength(1);
+    expect(result[0].type).toBe('other');
+    expect(result[0].file).toBe(other);
+  });
+
+  it('note + forward within window → single bundle', () => {
+    const note = makeNoteFile('1.md', 1000);
+    const fwd = makeForwardFile('2.md', 1005);
+    const result = bundleFiles([note, fwd]);
+
+    expect(result).toHaveLength(1);
+    expect(result[0].note).toBe(note);
+    expect(result[0].forwards).toEqual([fwd]);
+    expect(result[0].status).toBe('normal');
+  });
+
+  it('note + forward outside window → note bundle + ambiguous bundle', () => {
+    const note = makeNoteFile('1.md', 1000);
+    const fwd = makeForwardFile('2.md', 1011);
+    const result = bundleFiles([note, fwd]);
+
+    expect(result).toHaveLength(2);
+    expect(result[0].note).toBe(note);
+    expect(result[0].forwards).toEqual([]);
+    expect(result[0].status).toBe('normal');
+    expect(result[1].note).toBeNull();
+    expect(result[1].forwards).toEqual([fwd]);
+    expect(result[1].status).toBe('ambiguous');
+  });
+
+  it('note + multiple forwards within window → single bundle', () => {
+    const note = makeNoteFile('1.md', 1000);
+    const fwd1 = makeForwardFile('2.md', 1003);
+    const fwd2 = makeForwardFile('3.md', 1007);
+    const fwd3 = makeForwardFile('4.md', 1010);
+    const result = bundleFiles([note, fwd1, fwd2, fwd3]);
+
+    expect(result).toHaveLength(1);
+    expect(result[0].forwards).toHaveLength(3);
+    expect(result[0].status).toBe('normal');
+  });
+
+  it('sorts files by timestamp before bundling', () => {
+    // Insert out of order — fwd first, then note
+    const note = makeNoteFile('1.md', 1000);
+    const fwd = makeForwardFile('2.md', 1005);
+    const result = bundleFiles([fwd, note]); // fwd has later timestamp
+
+    // After sorting: note(1000) then fwd(1005) → bundled together
+    expect(result).toHaveLength(1);
+    expect(result[0].note).toBe(note);
+    expect(result[0].forwards).toEqual([fwd]);
+    expect(result[0].status).toBe('normal');
+  });
+
+  it('files without timestamp get timestamp 0 and preserve order', () => {
+    const file1 = makeFileParsed('a.md', { source_url: 'http://a.com' }, 'body a');
+    const file2 = makeFileParsed('b.md', { source_url: 'http://b.com' }, 'body b');
+    const result = bundleFiles([file1, file2]);
+
+    // Both classified as 'other' (no source_info/forward_date)
+    expect(result).toHaveLength(2);
+    expect(result[0].type).toBe('other');
+    expect(result[1].type).toBe('other');
+  });
+
+  it('note terminated by another note', () => {
+    const note1 = makeNoteFile('1.md', 1000);
+    const note2 = makeNoteFile('2.md', 1015);
+    const result = bundleFiles([note1, note2]);
+
+    expect(result).toHaveLength(2);
+    expect(result[0].status).toBe('normal');
+    expect(result[1].status).toBe('normal');
+  });
+
+  it('note terminated by other message', () => {
+    const note = makeNoteFile('1.md', 1000);
+    const other = makeOtherFile('2.md', 1005);
+    const result = bundleFiles([note, other]);
+
+    expect(result).toHaveLength(2);
+    expect(result[0].type).toBe('bundle');
+    expect(result[0].forwards).toEqual([]);
+    expect(result[1].type).toBe('other');
+  });
+
+  it('realistic scenario: note, forwards, other, note, forward', () => {
+    const files = [
+      makeNoteFile('1.md', 1000),
+      makeForwardFile('2.md', 1003),
+      makeForwardFile('3.md', 1007),
+      makeOtherFile('4.md', 1012),
+      makeNoteFile('5.md', 1020),
+      makeForwardFile('6.md', 1025),
+    ];
+
+    const result = bundleFiles(files);
+
+    expect(result).toHaveLength(3);
+    // Bundle 1: note + 2 forwards
+    expect(result[0].type).toBe('bundle');
+    expect(result[0].forwards).toHaveLength(2);
+    expect(result[0].status).toBe('normal');
+    // Other
+    expect(result[1].type).toBe('other');
+    // Bundle 2: note + 1 forward
+    expect(result[2].type).toBe('bundle');
+    expect(result[2].forwards).toHaveLength(1);
+    expect(result[2].status).toBe('normal');
   });
 });

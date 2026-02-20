@@ -186,8 +186,143 @@ function bundleMessages(messages) {
   return results;
 }
 
+// ============================================================
+// File-based bundling (works on parsed _inbox/ markdown files)
+// ============================================================
+
+/**
+ * Classify a parsed _inbox/ file based on its front matter.
+ *
+ * - Forward: has a non-empty forward_date
+ * - Note:    source_info is "direct_message" and has_media is false
+ * - Other:   everything else
+ */
+function classifyFile(frontMatter) {
+  if (!frontMatter || typeof frontMatter !== 'object') {
+    return 'other';
+  }
+
+  if (frontMatter.forward_date && frontMatter.forward_date !== '') {
+    return 'forward';
+  }
+
+  if (frontMatter.source_info === 'direct_message' && !frontMatter.has_media) {
+    return 'note';
+  }
+
+  return 'other';
+}
+
+/**
+ * Extract a Unix timestamp (seconds) from a file's front matter timestamp field.
+ */
+function getFileTimestamp(frontMatter) {
+  if (!frontMatter || !frontMatter.timestamp) return 0;
+  const date = new Date(frontMatter.timestamp);
+  if (Number.isNaN(date.getTime())) return 0;
+  return Math.floor(date.getTime() / 1000);
+}
+
+/**
+ * Bundle parsed _inbox/ files into logical groups.
+ *
+ * Each element of parsedFiles must have: { filename, path, frontMatter, bodyContent }
+ *
+ * Returns an array of items:
+ * - { type: 'bundle', note, forwards, startTimestamp, endTimestamp, status }
+ *   where note/forwards are the parsed file objects (or null for ambiguous bundles)
+ * - { type: 'other', file }
+ *
+ * Files are sorted by timestamp before bundling.
+ */
+function bundleFiles(parsedFiles) {
+  if (!Array.isArray(parsedFiles) || parsedFiles.length === 0) {
+    return [];
+  }
+
+  const sorted = [...parsedFiles].sort(
+    (a, b) => getFileTimestamp(a.frontMatter) - getFileTimestamp(b.frontMatter)
+  );
+
+  const results = [];
+  let currentBundle = null;
+  let prevTimestamp = -1;
+
+  for (const file of sorted) {
+    const type = classifyFile(file.frontMatter);
+    const timestamp = getFileTimestamp(file.frontMatter);
+    const hasTimestampConflict = prevTimestamp > 0 && timestamp < prevTimestamp;
+
+    if (type === 'note') {
+      if (currentBundle) {
+        results.push(currentBundle);
+      }
+      currentBundle = {
+        type: 'bundle',
+        note: file,
+        forwards: [],
+        startTimestamp: timestamp,
+        endTimestamp: timestamp,
+        status: hasTimestampConflict ? 'ambiguous' : 'normal',
+      };
+
+    } else if (type === 'forward') {
+      if (hasTimestampConflict && currentBundle) {
+        currentBundle.status = 'ambiguous';
+        results.push(currentBundle);
+        currentBundle = {
+          type: 'bundle',
+          note: null,
+          forwards: [file],
+          startTimestamp: timestamp,
+          endTimestamp: timestamp,
+          status: 'ambiguous',
+        };
+      } else if (
+        currentBundle && currentBundle.note &&
+        (timestamp - getFileTimestamp(currentBundle.note.frontMatter)) <= BUNDLE_WINDOW_SECONDS
+      ) {
+        currentBundle.forwards.push(file);
+        currentBundle.endTimestamp = timestamp;
+      } else if (currentBundle && !currentBundle.note) {
+        currentBundle.forwards.push(file);
+        currentBundle.endTimestamp = timestamp;
+      } else {
+        if (currentBundle) {
+          results.push(currentBundle);
+        }
+        currentBundle = {
+          type: 'bundle',
+          note: null,
+          forwards: [file],
+          startTimestamp: timestamp,
+          endTimestamp: timestamp,
+          status: 'ambiguous',
+        };
+      }
+
+    } else {
+      if (currentBundle) {
+        results.push(currentBundle);
+        currentBundle = null;
+      }
+      results.push({ type: 'other', file });
+    }
+
+    prevTimestamp = timestamp;
+  }
+
+  if (currentBundle) {
+    results.push(currentBundle);
+  }
+
+  return results;
+}
+
 module.exports = {
   classifyMessage,
   bundleMessages,
+  classifyFile,
+  bundleFiles,
   BUNDLE_WINDOW_SECONDS,
 };

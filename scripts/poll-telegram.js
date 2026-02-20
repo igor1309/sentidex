@@ -338,7 +338,6 @@ function writeBundleToInbox(bundle) {
   const frontMatter = {
     raw_message: true,
     timestamp: bundleStartAt,
-    note_text: typeof bundle.note_text === "string" ? bundle.note_text : "",
     source_info: resolveBundleSourceInfo(forwardedMessages),
     has_media: forwardedMessages.some((message) => Boolean(message.has_media)),
     media_type: resolveBundleMediaType(forwardedMessages),
@@ -348,6 +347,9 @@ function writeBundleToInbox(bundle) {
 
   if (sourceUrls.length > 0) {
     frontMatter.source_url = sourceUrls[0];
+  }
+
+  if (sourceUrls.length > 1) {
     frontMatter.source_urls = sourceUrls;
   }
 

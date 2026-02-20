@@ -366,13 +366,13 @@ describe('process-messages script (Characterization Test)', () => {
       const { frontMatter } = frontMatterCodec.parse(output);
 
       expect(frontMatter).toMatchObject({
-        note_text: 'Bundled note',
         source_info: 'Neural Kovalskii',
         source_url: 'http://example.com/bundle-keep',
-        source_urls: ['http://example.com/bundle-keep'],
         summary: 'Bundle summary',
         tags: ['bundle', 'ai'],
       });
+      expect(frontMatter.note_text).toBeUndefined();
+      expect(frontMatter.source_urls).toBeUndefined();
       expect(frontMatter.debug).toMatchObject({
         message_ids: [2001, 2002],
         bundle_start_at: '2025-09-21T09:34:07.837Z',

@@ -185,7 +185,6 @@ function extractPreservedMetadata(frontMatter, sourceUrls) {
   }
 
   const bundleKeys = [
-    'note_text',
     'source_urls',
     // legacy compatibility for already-collected records
     'message_bundle',
@@ -224,11 +223,15 @@ function normalizeDebugMetadata(frontMatter) {
 }
 
 function removeEmptyFields(frontMatter) {
+  if (typeof frontMatter.note_text === 'string') {
+    delete frontMatter.note_text;
+  }
+
   if (frontMatter.source_url === '') {
     delete frontMatter.source_url;
   }
 
-  if (Array.isArray(frontMatter.source_urls) && frontMatter.source_urls.length === 0) {
+  if (Array.isArray(frontMatter.source_urls) && frontMatter.source_urls.length <= 1) {
     delete frontMatter.source_urls;
   }
 }

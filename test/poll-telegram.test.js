@@ -43,7 +43,6 @@ describe('poll-telegram script', () => {
 
     expect(bundles).toHaveLength(1);
     expect(bundles[0].frontMatter).toMatchObject({
-      note_text: 'Bundled note text',
       source_info: 'Channel source-a',
       source_url: 'https://t.me/source-a/321',
       source_urls: ['https://t.me/source-a/321', 'https://t.me/source-b/654'],
@@ -52,6 +51,7 @@ describe('poll-telegram script', () => {
       message_ids: [1001, 1002, 1003],
       bundle_status: 'normal',
     });
+    expect(bundles[0].frontMatter.note_text).toBeUndefined();
     expect(bundles[0].frontMatter.debug.forwarded_messages).toHaveLength(2);
     expect(bundles[0].bodyContent).toContain('==== NOTE ====');
     expect(bundles[0].bodyContent).toContain('==== FORWARDS ====');
@@ -77,7 +77,6 @@ describe('poll-telegram script', () => {
 
     expect(bundles).toHaveLength(1);
     expect(bundles[0].frontMatter).toMatchObject({
-      note_text: 'Note that should close on other',
       source_info: 'direct_message',
     });
     expect(bundles[0].frontMatter.debug).toMatchObject({
@@ -85,6 +84,7 @@ describe('poll-telegram script', () => {
       bundle_status: 'normal',
       bundle_end_at: '2023-11-14T22:15:07.000Z',
     });
+    expect(bundles[0].frontMatter.note_text).toBeUndefined();
     expect(bundles[0].frontMatter.debug.forwarded_messages).toEqual([]);
     expect(bundles[0].frontMatter.source_url).toBeUndefined();
     expect(bundles[0].frontMatter.source_urls).toBeUndefined();
@@ -110,7 +110,6 @@ describe('poll-telegram script', () => {
     const ambiguousBundle = bundles.find((bundle) => bundle.frontMatter.debug.bundle_status === 'ambiguous');
 
     expect(normalBundle.frontMatter).toMatchObject({
-      note_text: 'Timed note',
     });
     expect(normalBundle.frontMatter.debug).toMatchObject({
       message_ids: [3001],
@@ -118,8 +117,8 @@ describe('poll-telegram script', () => {
     });
     expect(ambiguousBundle.frontMatter).toMatchObject({
       source_url: 'https://t.me/late-source/999',
-      source_urls: ['https://t.me/late-source/999'],
     });
+    expect(ambiguousBundle.frontMatter.source_urls).toBeUndefined();
     expect(ambiguousBundle.frontMatter.debug).toMatchObject({
       message_ids: [3002],
       bundle_status: 'ambiguous',
@@ -258,10 +257,9 @@ describe('poll-telegram script', () => {
 
     expect(bundles).toHaveLength(1);
     expect(bundles[0].frontMatter).toMatchObject({
-      note_text: 'same-second note',
       source_url: 'https://t.me/equal-ts/77',
-      source_urls: ['https://t.me/equal-ts/77'],
     });
+    expect(bundles[0].frontMatter.source_urls).toBeUndefined();
     expect(bundles[0].frontMatter.debug).toMatchObject({
       message_ids: [8101, 8102],
       bundle_status: 'normal',

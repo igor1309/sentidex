@@ -1,10 +1,22 @@
 ---
-raw_message: true
+id: mlvao30f0lgn9xrciikn
+created_at: '2026-02-20T19:12:45.000Z'
+source_info: bundle
+source_url: 'https://t.me/cryptoEssay/2855'
+has_media: true
+language: mixed
+summary: >-
+  Ультрабыстрый сервис LLM для общения, 15 тыс токенов в секунду, генерация
+  Next.js/React приложений за секунду, трёхбитная квантизация.
+tags:
+  - ai
+  - llm
+  - ai-coding
+  - workflow
+processed_at: '2026-02-20T19:40:10.431Z'
 message_bundle: true
-message_id: 876
 message_ids:
   - 876
-timestamp: '2026-02-20T19:12:45.000Z'
 bundle_start_at: '2026-02-20T19:12:45.000Z'
 bundle_end_at: '2026-02-20T19:12:45.000Z'
 note_text: ''
@@ -24,15 +36,10 @@ source_metadata:
     source_info: e/acc
     source_url: 'https://t.me/cryptoEssay/2855'
     forward_protected: false
-source_info: bundle
-source_url: 'https://t.me/cryptoEssay/2855'
-source_urls:
-  - 'https://t.me/cryptoEssay/2855'
-has_media: true
-media_type: photo
-forward_protected: false
 bundle_status: ambiguous
 ambiguity_reason: timestamp_conflict
+source_urls:
+  - 'https://t.me/cryptoEssay/2855'
 ---
 Forwarded Messages
 

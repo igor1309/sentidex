@@ -203,8 +203,8 @@ describe('poll-telegram script', () => {
   test('marks both bundles ambiguous on timestamp conflict for forward ordering', async () => {
     const updates = [
       makeUpdate(1, makeNoteMessage(8001, 1700000700, 'note')),
-      makeUpdate(2, makeForwardMessage(8002, 1700000705, 'forward one', 'conflict-a', 1)),
-      makeUpdate(3, makeForwardMessage(8003, 1700000705, 'forward two', 'conflict-b', 2)),
+      makeUpdate(3, makeForwardMessage(8002, 1700000705, 'forward one', 'conflict-a', 1)),
+      makeUpdate(2, makeForwardMessage(8003, 1700000705, 'forward two', 'conflict-b', 2)),
     ];
     mockTelegramFetch(updates);
 
@@ -225,6 +225,29 @@ describe('poll-telegram script', () => {
     expect(secondBundle.frontMatter).toMatchObject({
       bundle_status: 'ambiguous',
       ambiguity_reason: 'timestamp_conflict',
+    });
+  });
+
+  test('uses update_id ordering for note and forward with equal timestamps', async () => {
+    const updates = [
+      makeUpdate(10, makeNoteMessage(8101, 1700000800, 'same-second note')),
+      makeUpdate(11, makeForwardMessage(8102, 1700000800, 'same-second forward', 'equal-ts', 77)),
+    ];
+    mockTelegramFetch(updates);
+
+    const { pollTelegram } = require('../scripts/poll-telegram');
+    await pollTelegram();
+
+    const { fs } = testEnv;
+    const bundles = readInboxBundles(fs);
+
+    expect(bundles).toHaveLength(1);
+    expect(bundles[0].frontMatter).toMatchObject({
+      bundle_status: 'normal',
+      note_text: 'same-second note',
+      message_ids: [8101, 8102],
+      source_url: 'https://t.me/equal-ts/77',
+      source_urls: ['https://t.me/equal-ts/77'],
     });
   });
 });

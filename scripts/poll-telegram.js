@@ -64,7 +64,7 @@ async function pollTelegram() {
         continue;
       }
 
-      bundleEntries.push(toBundleEntry(message));
+      bundleEntries.push(toBundleEntry(message, update.update_id, bundleEntries.length));
     }
 
     const bundles = buildMessageBundles(bundleEntries);
@@ -111,16 +111,18 @@ function isForwardedMessage(message) {
   );
 }
 
-function toBundleEntry(message) {
+function toBundleEntry(message, updateId, fallbackIndex) {
   const type = classifyMessage(message);
   const timestampMs = extractMessageTimestampMs(message);
   const messageId = message && message.message_id !== undefined ? message.message_id : null;
+  const sequence = normalizeEntrySequence(updateId, fallbackIndex);
 
   if (type === "forward") {
     return {
       type,
       timestampMs,
       messageId,
+      sequence,
       content: extractMessageContent(message),
       forwardMetadata: {
         ...extractForwardSourceMetadata(message),
@@ -136,6 +138,7 @@ function toBundleEntry(message) {
       type,
       timestampMs,
       messageId,
+      sequence,
       noteText: extractMessageContent(message),
     };
   }
@@ -144,7 +147,17 @@ function toBundleEntry(message) {
     type,
     timestampMs,
     messageId,
+    sequence,
   };
+}
+
+function normalizeEntrySequence(updateId, fallbackIndex) {
+  const primarySequence = Number(updateId);
+  if (Number.isFinite(primarySequence)) {
+    return primarySequence;
+  }
+
+  return Number.isFinite(fallbackIndex) ? fallbackIndex : 0;
 }
 
 function classifyMessage(message) {

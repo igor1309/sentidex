@@ -83,10 +83,27 @@ describe('telegramMessageBundler.buildMessageBundles', () => {
     });
   });
 
-  test('marks both bundles ambiguous on timestamp conflict', () => {
+  test('uses stream sequence as tie-breaker for equal timestamps', () => {
     const bundles = buildMessageBundles([
-      makeNote(101, 1000, 'Conflicting note'),
-      makeForward(201, 1000, 'Conflicting forward'),
+      makeNote(101, 1000, 'Ordered note', 10),
+      makeForward(201, 1000, 'Ordered forward', 11),
+    ]);
+
+    expect(bundles).toHaveLength(1);
+    expect(bundles[0]).toMatchObject({
+      note_text: 'Ordered note',
+      status: 'normal',
+      message_ids: [101, 201],
+      forwarded_messages: [
+        expect.objectContaining({ message_id: 201, content: 'Ordered forward' }),
+      ],
+    });
+  });
+
+  test('marks both bundles ambiguous on equal timestamp with non-increasing sequence', () => {
+    const bundles = buildMessageBundles([
+      makeNote(101, 1000, 'Conflicting note', 11),
+      makeForward(201, 1000, 'Conflicting forward', 10),
     ]);
 
     expect(bundles).toHaveLength(2);
@@ -116,11 +133,12 @@ describe('telegramMessageBundler.buildMessageBundles', () => {
   });
 });
 
-function makeForward(messageId, timestampMs, content) {
+function makeForward(messageId, timestampMs, content, sequence = 0) {
   return {
     type: 'forward',
     messageId,
     timestampMs,
+    sequence,
     content,
     forwardMetadata: {
       sourceInfo: '@source',
@@ -133,11 +151,12 @@ function makeForward(messageId, timestampMs, content) {
   };
 }
 
-function makeNote(messageId, timestampMs, noteText) {
+function makeNote(messageId, timestampMs, noteText, sequence = 0) {
   return {
     type: 'note',
     messageId,
     timestampMs,
+    sequence,
     noteText,
   };
 }

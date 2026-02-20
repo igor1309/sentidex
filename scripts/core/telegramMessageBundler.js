@@ -8,6 +8,7 @@ function buildMessageBundles(
   const bundles = [];
   let activeBundle = null;
   let previousTimestampMs = null;
+  let previousSequence = null;
 
   normalizedEntries.forEach((entry) => {
     if (!isEntry(entry)) {
@@ -21,9 +22,19 @@ function buildMessageBundles(
 
     const entryType = normalizeEntryType(entry.type);
     const entryTimestampMs = toTimestampMs(entry.timestampMs);
+    const entrySequence = toSequence(entry.sequence);
     const hasTimestamp = entryTimestampMs !== null;
 
-    if (entryType !== 'note' && hasTimestamp && previousTimestampMs !== null && entryTimestampMs <= previousTimestampMs) {
+    if (
+      entryType !== 'note' &&
+      hasTimestamp &&
+      hasOrderingConflict({
+        previousTimestampMs,
+        previousSequence,
+        nextTimestampMs: entryTimestampMs,
+        nextSequence: entrySequence,
+      })
+    ) {
       if (activeBundle) {
         bundles.push(finalizeBundle(activeBundle, 'ambiguous', entryTimestampMs, bundleWindowMs, nowMs));
         activeBundle = null;
@@ -46,7 +57,15 @@ function buildMessageBundles(
         bundles.push(finalizeBundle(activeBundle, 'note', entryTimestampMs, bundleWindowMs, nowMs));
       }
       activeBundle = createNoteBundle(entry, entryTimestampMs, nowMs);
-      previousTimestampMs = updatePreviousTimestamp(previousTimestampMs, entryTimestampMs);
+      ({
+        nextTimestampMs: previousTimestampMs,
+        nextSequence: previousSequence,
+      } = updatePreviousOrdering({
+        previousTimestampMs,
+        previousSequence,
+        nextTimestampMs: entryTimestampMs,
+        nextSequence: entrySequence,
+      }));
       return;
     }
 
@@ -55,7 +74,15 @@ function buildMessageBundles(
 
       if (activeBundle && isWithinWindow(activeBundle.noteTimestampMs, forwardTimestampMs, bundleWindowMs)) {
         appendForwardToBundle(activeBundle, entry, forwardTimestampMs);
-        previousTimestampMs = updatePreviousTimestamp(previousTimestampMs, forwardTimestampMs);
+        ({
+          nextTimestampMs: previousTimestampMs,
+          nextSequence: previousSequence,
+        } = updatePreviousOrdering({
+          previousTimestampMs,
+          previousSequence,
+          nextTimestampMs: forwardTimestampMs,
+          nextSequence: entrySequence,
+        }));
         return;
       }
 
@@ -65,7 +92,15 @@ function buildMessageBundles(
       }
 
       bundles.push(createAmbiguousBundle(entry, 'orphan_forward', nowMs));
-      previousTimestampMs = updatePreviousTimestamp(previousTimestampMs, forwardTimestampMs);
+      ({
+        nextTimestampMs: previousTimestampMs,
+        nextSequence: previousSequence,
+      } = updatePreviousOrdering({
+        previousTimestampMs,
+        previousSequence,
+        nextTimestampMs: forwardTimestampMs,
+        nextSequence: entrySequence,
+      }));
       return;
     }
 
@@ -74,7 +109,15 @@ function buildMessageBundles(
         bundles.push(finalizeBundle(activeBundle, 'other', entryTimestampMs, bundleWindowMs, nowMs));
         activeBundle = null;
       }
-      previousTimestampMs = updatePreviousTimestamp(previousTimestampMs, entryTimestampMs);
+      ({
+        nextTimestampMs: previousTimestampMs,
+        nextSequence: previousSequence,
+      } = updatePreviousOrdering({
+        previousTimestampMs,
+        previousSequence,
+        nextTimestampMs: entryTimestampMs,
+        nextSequence: entrySequence,
+      }));
     }
   });
 
@@ -264,16 +307,87 @@ function toTimestampMs(value) {
   return Number.isFinite(value) ? value : null;
 }
 
-function updatePreviousTimestamp(previousTimestampMs, nextTimestampMs) {
+function toSequence(value) {
+  return Number.isFinite(value) ? value : null;
+}
+
+function hasOrderingConflict({
+  previousTimestampMs,
+  previousSequence,
+  nextTimestampMs,
+  nextSequence,
+}) {
+  if (toTimestampMs(previousTimestampMs) === null || toTimestampMs(nextTimestampMs) === null) {
+    return false;
+  }
+
+  if (nextTimestampMs < previousTimestampMs) {
+    return true;
+  }
+
+  if (nextTimestampMs > previousTimestampMs) {
+    return false;
+  }
+
+  if (toSequence(previousSequence) === null || toSequence(nextSequence) === null) {
+    return false;
+  }
+
+  return nextSequence <= previousSequence;
+}
+
+function updatePreviousOrdering({
+  previousTimestampMs,
+  previousSequence,
+  nextTimestampMs,
+  nextSequence,
+}) {
   if (toTimestampMs(nextTimestampMs) === null) {
-    return previousTimestampMs;
+    return {
+      nextTimestampMs: previousTimestampMs,
+      nextSequence: previousSequence,
+    };
   }
 
   if (toTimestampMs(previousTimestampMs) === null) {
-    return nextTimestampMs;
+    return {
+      nextTimestampMs,
+      nextSequence,
+    };
   }
 
-  return Math.max(previousTimestampMs, nextTimestampMs);
+  if (nextTimestampMs > previousTimestampMs) {
+    return {
+      nextTimestampMs,
+      nextSequence,
+    };
+  }
+
+  if (nextTimestampMs < previousTimestampMs) {
+    return {
+      nextTimestampMs: previousTimestampMs,
+      nextSequence: previousSequence,
+    };
+  }
+
+  if (toSequence(previousSequence) === null || toSequence(nextSequence) === null) {
+    return {
+      nextTimestampMs: previousTimestampMs,
+      nextSequence: previousSequence,
+    };
+  }
+
+  if (nextSequence > previousSequence) {
+    return {
+      nextTimestampMs,
+      nextSequence,
+    };
+  }
+
+  return {
+    nextTimestampMs: previousTimestampMs,
+    nextSequence: previousSequence,
+  };
 }
 
 module.exports = {

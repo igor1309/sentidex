@@ -259,10 +259,10 @@ describe('process-messages script (Characterization Test)', () => {
       const bundledMessage = frontMatterCodec.stringify({
         frontMatter: {
           raw_message: true,
-          message_ids: [1001, 1002],
           timestamp: '2025-09-21T09:34:07.837Z',
           note_text: 'Bundled note',
           debug: {
+            message_ids: [1001, 1002],
             bundle_start_at: '2025-09-21T09:34:07.837Z',
             bundle_end_at: '2025-09-21T09:34:12.837Z',
             bundle_status: 'normal',
@@ -316,12 +316,12 @@ describe('process-messages script (Characterization Test)', () => {
       const bundledMessage = frontMatterCodec.stringify({
         frontMatter: {
           raw_message: true,
-          message_ids: [2001, 2002],
           timestamp: '2025-09-21T09:34:07.837Z',
           note_text: 'Bundled note',
           source_info: 'Neural Kovalskii',
           source_urls: ['http://example.com/bundle-keep'],
           debug: {
+            message_ids: [2001, 2002],
             bundle_start_at: '2025-09-21T09:34:07.837Z',
             bundle_end_at: '2025-09-21T09:34:09.837Z',
             bundle_status: 'normal',
@@ -366,7 +366,6 @@ describe('process-messages script (Characterization Test)', () => {
       const { frontMatter } = frontMatterCodec.parse(output);
 
       expect(frontMatter).toMatchObject({
-        message_ids: [2001, 2002],
         note_text: 'Bundled note',
         source_info: 'Neural Kovalskii',
         source_url: 'http://example.com/bundle-keep',
@@ -375,6 +374,7 @@ describe('process-messages script (Characterization Test)', () => {
         tags: ['bundle', 'ai'],
       });
       expect(frontMatter.debug).toMatchObject({
+        message_ids: [2001, 2002],
         bundle_start_at: '2025-09-21T09:34:07.837Z',
         bundle_end_at: '2025-09-21T09:34:09.837Z',
         bundle_status: 'normal',

@@ -338,7 +338,6 @@ function writeBundleToInbox(bundle) {
   const frontMatter = {
     raw_message: true,
     timestamp: bundleStartAt,
-    message_ids: Array.isArray(bundle.message_ids) ? bundle.message_ids : [],
     note_text: typeof bundle.note_text === "string" ? bundle.note_text : "",
     source_info: resolveBundleSourceInfo(forwardedMessages),
     has_media: forwardedMessages.some((message) => Boolean(message.has_media)),
@@ -394,6 +393,7 @@ function createBundleDebugMetadata({
   sourceMetadata,
 }) {
   const debugMetadata = {
+    message_ids: Array.isArray(bundle.message_ids) ? bundle.message_ids : [],
     bundle_start_at: bundleStartAt,
     bundle_end_at: toIsoString(bundle.bundle_end_at),
     bundle_status: bundle.status,

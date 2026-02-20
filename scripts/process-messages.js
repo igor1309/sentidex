@@ -179,10 +179,13 @@ function extractPreservedMetadata(frontMatter, sourceUrls) {
   }
 
   const preservedMetadata = {};
+  const debugMetadata = normalizeDebugMetadata(frontMatter);
+  if (Object.keys(debugMetadata).length > 0) {
+    preservedMetadata.debug = debugMetadata;
+  }
+
   const bundleKeys = [
-    'message_ids',
     'note_text',
-    'debug',
     'source_urls',
     // legacy compatibility for already-collected records
     'message_bundle',
@@ -206,6 +209,18 @@ function extractPreservedMetadata(frontMatter, sourceUrls) {
   }
 
   return preservedMetadata;
+}
+
+function normalizeDebugMetadata(frontMatter) {
+  const debugMetadata = frontMatter.debug && typeof frontMatter.debug === 'object'
+    ? { ...frontMatter.debug }
+    : {};
+
+  if (!Array.isArray(debugMetadata.message_ids) && Array.isArray(frontMatter.message_ids)) {
+    debugMetadata.message_ids = frontMatter.message_ids;
+  }
+
+  return debugMetadata;
 }
 
 function removeEmptyFields(frontMatter) {

@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-02-21T04:49:30.000Z'
+id: mlvv0sczkt6k7xsjhcm
+created_at: '2026-02-21T04:49:30.000Z'
+processed_at: '2026-02-21T05:09:55.475Z'
 source_info: AI Product | Igor Akimov
+source_url: 'https://t.me/ai_product/1956'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: 'Gemini 3.1 Pro уже в AI Studio; цены те же, параметры поднялись, ждем анонса'
+tags:
+  - gemini
+  - ai
+  - studio
+  - pro
+  - g-gemini
 debug:
   message_ids:
     - 886
@@ -33,7 +41,6 @@ debug:
       source_info: AI Product | Igor Akimov
       source_url: 'https://t.me/ai_product/1956'
       forward_protected: false
-source_url: 'https://t.me/ai_product/1956'
 ---
 ==== NOTE ====
 

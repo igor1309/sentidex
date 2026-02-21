@@ -1,0 +1,97 @@
+---
+id: mlvn4dz5wdr5l165npd
+created_at: '2026-02-20T20:43:14.000Z'
+processed_at: '2026-02-21T01:28:46.529Z'
+source_info: AI Product | Igor Akimov
+source_url: 'https://t.me/ai_product/1960'
+has_media: false
+language: mixed
+summary: >-
+  Claude Code Security - масштабируемый AI-аудит кода с патчами, подтверждаемыми
+  разработчиком.
+tags:
+  - ai
+  - ai-coding
+  - open-source
+  - devops
+debug:
+  message_ids:
+    - 882
+  bundle_start_at: '2026-02-20T20:43:14.000Z'
+  bundle_end_at: '2026-02-20T20:43:14.000Z'
+  bundle_status: ambiguous
+  forwarded_messages:
+    - message_id: 882
+      timestamp: '2026-02-20T20:43:14.000Z'
+      content: >-
+        Anthropic выкатили Claude Code Security — по сути AI-аудитор
+        безопасности кода.
+
+
+        [https://youtu.be/sDpkV_iEnck](https://youtu.be/sDpkV_iEnck)
+
+
+        Мы постепенно приходим к моменту, когда модели уже не просто пишут код,
+        а читают его как security-исследователь. Claude теперь может прогонять
+        репозиторий, находить не только типовые баги, а именно логические
+        уязвимости, объяснять проблему и предлагать патч. При этом он не
+        коммитит автоматически - разработчик подтверждает изменения.
+
+
+        Главное отличие от классических SAST и линтеров - это не поиск по
+        шаблонам. Модель проходит по потокам данных и взаимодействию
+        компонентов, фактически делает manual security review, только
+        масштабируемо.
+
+
+        Во внутренних тестах Opus 4.6 нашёл больше 500 реальных уязвимостей в
+        open-source проектах, причём часть существовала много лет.
+
+
+        Что это меняет: раньше безопасность была дорогой экспертизой, теперь
+        любой репозиторий сможет постоянно проверяться ИИ. Фактически
+        AI-security становится обязательным слоем, потому что одновременно
+        растёт и скорость разработки, и скорость атак.
+
+
+        DevOps без AI-проверок скоро будет выглядеть как сервер без HTTPS.
+
+        Круто, молодцы.
+
+
+        [https://www.anthropic.com/news/claude-code-security](https://www.anthropic.com/news/claude-code-security)
+      source_info: AI Product | Igor Akimov
+      source_url: 'https://t.me/ai_product/1960'
+      forward_date: '2026-02-20T20:22:05.000Z'
+      has_media: false
+      media_type: none
+      forward_protected: false
+  source_metadata:
+    - message_id: 882
+      message_type: forward
+      source_info: AI Product | Igor Akimov
+      source_url: 'https://t.me/ai_product/1960'
+      forward_protected: false
+  ambiguity_reason: orphan_forward
+---
+==== FORWARDS ====
+
+---- Forward 1 (message_id: 882) ----
+Source: AI Product | Igor Akimov
+
+Anthropic выкатили Claude Code Security — по сути AI-аудитор безопасности кода.
+
+[https://youtu.be/sDpkV_iEnck](https://youtu.be/sDpkV_iEnck)
+
+Мы постепенно приходим к моменту, когда модели уже не просто пишут код, а читают его как security-исследователь. Claude теперь может прогонять репозиторий, находить не только типовые баги, а именно логические уязвимости, объяснять проблему и предлагать патч. При этом он не коммитит автоматически - разработчик подтверждает изменения.
+
+Главное отличие от классических SAST и линтеров - это не поиск по шаблонам. Модель проходит по потокам данных и взаимодействию компонентов, фактически делает manual security review, только масштабируемо.
+
+Во внутренних тестах Opus 4.6 нашёл больше 500 реальных уязвимостей в open-source проектах, причём часть существовала много лет.
+
+Что это меняет: раньше безопасность была дорогой экспертизой, теперь любой репозиторий сможет постоянно проверяться ИИ. Фактически AI-security становится обязательным слоем, потому что одновременно растёт и скорость разработки, и скорость атак.
+
+DevOps без AI-проверок скоро будет выглядеть как сервер без HTTPS.
+Круто, молодцы.
+
+[https://www.anthropic.com/news/claude-code-security](https://www.anthropic.com/news/claude-code-security)

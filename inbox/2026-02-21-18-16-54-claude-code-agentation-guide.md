@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-02-21T18:16:54.000Z'
+id: mlwrhmthx51q5cmdjm
+created_at: '2026-02-21T18:16:54.000Z'
+processed_at: '2026-02-21T20:18:49.156Z'
 source_info: Хабр / ML & AI
+source_url: 'https://t.me/habr_ai/8457'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор ускорения работы с Claude Code через Agentation и MCP, настройку и
+  использование в реальных проектах
+tags:
+  - ai
+  - agents
+  - llm
+  - workflow
 debug:
   message_ids:
     - 895
@@ -56,7 +65,6 @@ debug:
       source_url: 'https://t.me/habr_ai/8457'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/habr_ai/8457'
 ---
 ==== FORWARDS ====
 

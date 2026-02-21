@@ -1,10 +1,20 @@
 ---
-raw_message: true
-timestamp: '2026-02-21T10:04:02.000Z'
+id: mlwayu8j9ohec9k1exs
+created_at: '2026-02-21T10:04:02.000Z'
+processed_at: '2026-02-21T12:36:18.451Z'
 source_info: ElKornacio
+source_url: 'https://t.me/elkornacio/536'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  OpenAI впервые пишут код через агентов; обзор практик ai-only dev, репо как
+  источник правды, observability, QA.
+tags:
+  - ai
+  - agents
+  - openai
+  - devops
+  - workflow
 debug:
   message_ids:
     - 891
@@ -92,7 +102,6 @@ debug:
       source_url: 'https://t.me/elkornacio/536'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/elkornacio/536'
 ---
 ==== FORWARDS ====
 

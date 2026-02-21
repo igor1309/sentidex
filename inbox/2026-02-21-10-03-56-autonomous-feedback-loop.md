@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-02-21T10:03:56.000Z'
+id: mlwayksig5efntalmqr
+created_at: '2026-02-21T10:03:56.000Z'
+processed_at: '2026-02-21T12:36:06.210Z'
 source_info: ElKornacio
+source_url: 'https://t.me/elkornacio/505'
 has_media: true
-media_type: document
-forward_protected: false
+language: mixed
+summary: >-
+  неделя безумная, сравнение Claude Code, Opus и GPT-5.2; рост автономного
+  фидбек-лупа; размышления об AGI/ASI и прогресс
+tags:
+  - ai
+  - llm
+  - agents
+  - ai-coding
 debug:
   message_ids:
     - 890
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/elkornacio/505'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/elkornacio/505'
 ---
 ==== FORWARDS ====
 

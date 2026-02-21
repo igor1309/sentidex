@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-02-20T20:43:14.000Z'
+id: mlvn4dz5wdr5l165npd
+created_at: '2026-02-20T20:43:14.000Z'
+processed_at: '2026-02-21T01:28:46.529Z'
 source_info: AI Product | Igor Akimov
+source_url: 'https://t.me/ai_product/1960'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Claude Code Security - масштабируемый AI-аудит кода с патчами, подтверждаемыми
+  разработчиком.
+tags:
+  - ai
+  - ai-coding
+  - open-source
+  - devops
 debug:
   message_ids:
     - 882
@@ -64,7 +73,6 @@ debug:
       source_url: 'https://t.me/ai_product/1960'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/ai_product/1960'
 ---
 ==== FORWARDS ====
 

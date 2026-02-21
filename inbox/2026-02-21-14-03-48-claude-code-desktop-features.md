@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-02-21T14:03:48.000Z'
+id: mlwj24jtfar8447zd4
+created_at: '2026-02-21T14:03:48.000Z'
+processed_at: '2026-02-21T16:22:48.713Z'
 source_info: ForgetMe | Нейросети
+source_url: 'https://t.me/forgetmeai/5834'
 has_media: true
-media_type: video
-forward_protected: false
+language: mixed
+summary: >-
+  Claude Code для десктопа: превью приложений, локальный ревью, фоном PR/CI и
+  перенос сессий.
+tags:
+  - local-llm
+  - ai-coding
+  - workflow
+  - devops
 debug:
   message_ids:
     - 893
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/forgetmeai/5834'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/forgetmeai/5834'
 ---
 ==== FORWARDS ====
 

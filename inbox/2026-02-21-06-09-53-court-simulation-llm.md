@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-02-21T06:09:53.000Z'
+id: mlw1ytznqq3pysc239
+created_at: '2026-02-21T06:09:53.000Z'
+processed_at: '2026-02-21T08:24:21.586Z'
 source_info: Хабр / ML & AI
+source_url: 'https://t.me/habr_ai/8446'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: состязательная симуляция и мультиагентная система в юриспруденции
+tags:
+  - ai
+  - agents
+  - llm
+  - open-source
+  - research
 debug:
   message_ids:
     - 889
@@ -28,7 +36,6 @@ debug:
       source_url: 'https://t.me/habr_ai/8446'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/habr_ai/8446'
 ---
 ==== FORWARDS ====
 

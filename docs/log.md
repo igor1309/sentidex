@@ -1,5 +1,16 @@
 # Log
 
+## 2026-02-20
+
+Deliver message bundling in the processing pipeline to keep related updates together and reduce digest noise.
+Refine bundle payloads: reuse bundled note hashtag tags, move `message_ids` under debug, and remove redundant metadata fields.
+Stabilize bundle ordering with update-order timestamp tie-breakers and clarify handling for new-note edge cases.
+Harden automation by reusing shared CI `run-silent`, installing dependencies in Telegram polling workflow, and refreshing web pages.
+
+## 2026-02-01
+
+Improve workflow rebase conflict resolution and capture follow-up TODO for remaining cases.
+
 ## 2026-01-31
 
 Fix empty summaries by skipping media group followers without caption.

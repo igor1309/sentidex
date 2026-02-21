@@ -1,10 +1,16 @@
 ---
-raw_message: true
-timestamp: '2026-02-21T04:12:57.000Z'
+id: mlvtc65a7o1g5hlo4is
+created_at: '2026-02-21T04:12:57.000Z'
+processed_at: '2026-02-21T04:22:47.326Z'
 source_info: Хабр / ML & AI
+source_url: 'https://t.me/habr_ai/8444'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: Рейтинг 15 бесплатных сервисов генерации изображений на 2026 год
+tags:
+  - image-gen
+  - ai
+  - resource
 debug:
   message_ids:
     - 884
@@ -63,7 +69,6 @@ debug:
       source_info: Хабр / ML & AI
       source_url: 'https://t.me/habr_ai/8444'
       forward_protected: false
-source_url: 'https://t.me/habr_ai/8444'
 ---
 ==== NOTE ====
 

@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-02-22T07:48:43.000Z'
+id: mlxqgruedyq0xda4ykg
+created_at: '2026-02-22T07:48:43.000Z'
+processed_at: '2026-02-22T12:37:55.574Z'
 source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/492'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Тест опенсорсной AI на реальной задаче: ValeDesk, сравнение моделей,
+  конфиденциальность и готовность команды.
+tags:
+  - open-source
+  - local-llm
+  - ai
+  - business
 debug:
   message_ids:
     - 898
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/countwithsasha/492'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/countwithsasha/492'
 ---
 ==== FORWARDS ====
 

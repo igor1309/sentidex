@@ -1,10 +1,20 @@
 ---
-raw_message: true
-timestamp: '2026-02-22T07:50:52.000Z'
+id: mlxqh6ekx1ys6qi2jae
+created_at: '2026-02-22T07:50:52.000Z'
+processed_at: '2026-02-22T12:38:14.444Z'
 source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/495'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Обновлённый скилл для Claude: парсинг выдачи Яндекса через API v2,
+  конкурентный анализ и ценообразование
+tags:
+  - claude
+  - ai
+  - ai-coding
+  - research
+  - workflow
 debug:
   message_ids:
     - 901
@@ -28,7 +38,6 @@ debug:
       source_url: 'https://t.me/countwithsasha/495'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/countwithsasha/495'
 ---
 ==== FORWARDS ====
 

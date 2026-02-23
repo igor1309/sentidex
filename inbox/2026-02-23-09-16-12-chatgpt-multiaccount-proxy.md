@@ -1,10 +1,21 @@
 ---
-raw_message: true
-timestamp: '2026-02-23T09:16:12.000Z'
+id: mlz6gg251sdgt9jvcow
+created_at: '2026-02-23T09:16:12.000Z'
+processed_at: '2026-02-23T12:53:20.333Z'
 source_info: Хабр / ML & AI
+source_url: 'https://t.me/habr_ai/8477'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Описание использования трёх аккаунтов ChatGPT и прокси для обхода лимитов и
+  балансировки запросов
+tags:
+  - openai
+  - ai
+  - ai-coding
+  - docker
+  - api
+  - manage
 debug:
   message_ids:
     - 910
@@ -50,7 +61,6 @@ debug:
       source_info: Хабр / ML & AI
       source_url: 'https://t.me/habr_ai/8477'
       forward_protected: false
-source_url: 'https://t.me/habr_ai/8477'
 ---
 ==== NOTE ====
 

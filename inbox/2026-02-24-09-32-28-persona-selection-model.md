@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-02-24T09:32:28.000Z'
+id: mm0ly92kzqr5i1ie0wj
+created_at: '2026-02-24T09:32:28.000Z'
+processed_at: '2026-02-24T12:54:51.500Z'
 source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/499'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Обсуждается Persona Selection Model Anthropic: роли LLM, системные промпты и
+  влияние на ответы.
+tags:
+  - llm
+  - prompting
+  - research
+  - ai
 debug:
   message_ids:
     - 919
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/countwithsasha/499'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/countwithsasha/499'
 ---
 ==== FORWARDS ====
 

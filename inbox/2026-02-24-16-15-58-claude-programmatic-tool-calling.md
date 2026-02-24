@@ -1,10 +1,20 @@
 ---
-raw_message: true
-timestamp: '2026-02-24T16:15:58.000Z'
+id: mm0yt9c4kvnfp2oqzn
+created_at: '2026-02-24T16:15:58.000Z'
+processed_at: '2026-02-24T18:54:53.572Z'
 source_info: AI Product | Igor Akimov
+source_url: 'https://t.me/ai_product/1968'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Запуск Programmatic Tool Calling в GA от Anthropic; Claude пишет код и
+  вызывает инструменты внутри sandbox, экономя токены
+tags:
+  - claude
+  - ai-coding
+  - agents
+  - workflow
+  - api
 debug:
   message_ids:
     - 923
@@ -84,7 +94,6 @@ debug:
       source_url: 'https://t.me/ai_product/1968'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/ai_product/1968'
 ---
 ==== FORWARDS ====
 

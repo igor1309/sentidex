@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-02-24T19:42:45.000Z'
+id: mm16g678cl2m2yufi4w
+created_at: '2026-02-24T19:42:45.000Z'
+processed_at: '2026-02-24T22:28:39.908Z'
 source_info: e/acc
+source_url: 'https://t.me/cryptoEssay/2861'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор агентов Notion, читающих мессенджеры и почту, автоматизирующих задачи и
+  планы
+tags:
+  - ai
+  - agents
+  - workflow
+  - productivity
 debug:
   message_ids:
     - 926
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/cryptoEssay/2861'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/cryptoEssay/2861'
 ---
 ==== FORWARDS ====
 

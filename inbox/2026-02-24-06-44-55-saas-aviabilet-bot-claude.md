@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-02-24T06:44:55.000Z'
+id: mm0cuqs4gek6mzabl0p
+created_at: '2026-02-24T06:44:55.000Z'
+processed_at: '2026-02-24T08:40:11.284Z'
 source_info: Хабр / ML & AI
+source_url: 'https://t.me/habr_ai/8498'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Кейс о создании SaaS: телеграм-бот для авиабилетов, использование Claude и
+  бизнес-метрики
+tags:
+  - claude
+  - ai
+  - ai-coding
+  - api
 debug:
   message_ids:
     - 916
@@ -63,7 +72,6 @@ debug:
       source_url: 'https://t.me/habr_ai/8498'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/habr_ai/8498'
 ---
 ==== FORWARDS ====
 

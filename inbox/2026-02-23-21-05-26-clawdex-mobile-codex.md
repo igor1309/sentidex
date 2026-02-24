@@ -1,10 +1,20 @@
 ---
-raw_message: true
-timestamp: '2026-02-23T21:05:26.000Z'
+id: mlzy06j28zrku5lwpua
+created_at: '2026-02-23T21:05:26.000Z'
+processed_at: '2026-02-24T01:44:30.734Z'
 source_info: ForgetMe | Нейросети
+source_url: 'https://t.me/forgetmeai/5839'
 has_media: true
-media_type: video
-forward_protected: false
+language: mixed
+summary: >-
+  Clawdex Mobile: мобильный open-source клиент для Codex CLI, управление чатами,
+  терминал и гит-воркфлоу через смартфон
+tags:
+  - ai
+  - local-llm
+  - app
+  - productivity
+  - workflow
 debug:
   message_ids:
     - 914
@@ -28,7 +38,6 @@ debug:
       source_url: 'https://t.me/forgetmeai/5839'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/forgetmeai/5839'
 ---
 ==== FORWARDS ====
 

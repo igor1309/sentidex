@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-02-25T19:19:35.000Z'
+id: mm2lunpk1ilimi9kcy9
+created_at: '2026-02-25T19:19:35.000Z'
+processed_at: '2026-02-25T22:27:36.199Z'
 source_info: 'Refat Talks: Tech & AI'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  не работало из-за глобальных флагов; через managed-settings.json нашел причину
+  CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1, телеметрия и ошибки отключены
+tags:
+  - claude
+  - ai
+  - ai-coding
+  - workflow
 debug:
   message_ids:
     - 934

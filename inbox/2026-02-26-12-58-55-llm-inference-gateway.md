@@ -1,10 +1,17 @@
 ---
-raw_message: true
-timestamp: '2026-02-26T12:58:55.000Z'
+id: mm3pbx7jrmbovrkmen
+created_at: '2026-02-26T12:58:55.000Z'
+processed_at: '2026-02-26T16:52:46.687Z'
 source_info: Всеволод Викулин | AI разбор
+source_url: 'https://t.me/vikulin_ai/122'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: 'Разбор трёх законов успешного LLM-инференса: шлюз, KPI инференса и потребление'
+tags:
+  - llm
+  - ai
+  - agents
+  - workflow
 debug:
   message_ids:
     - 938
@@ -28,7 +35,6 @@ debug:
       source_url: 'https://t.me/vikulin_ai/122'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/vikulin_ai/122'
 ---
 ==== FORWARDS ====
 

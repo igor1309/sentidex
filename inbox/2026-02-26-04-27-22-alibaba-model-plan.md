@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-02-26T04:27:22.000Z'
+id: mm37qmk8p0brbsdakv
+created_at: '2026-02-26T04:27:22.000Z'
+processed_at: '2026-02-26T08:40:19.640Z'
 source_info: DEKSDEN notes
+source_url: 'https://t.me/deksden_notes/511'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Улучшенный кодинговый план Alibaba: доступ ко всем моделям за $5 первый месяц,
+  $10 далее, огромные лимиты
+tags:
+  - ai-coding
+  - llm
+  - ai
+  - business
 debug:
   message_ids:
     - 935
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/deksden_notes/511'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/deksden_notes/511'
 ---
 ==== FORWARDS ====
 

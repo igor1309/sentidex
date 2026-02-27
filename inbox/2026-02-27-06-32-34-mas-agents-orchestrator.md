@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-02-27T06:32:34.000Z'
+id: mm4mzyyemrm6mdopmn8
+created_at: '2026-02-27T06:32:34.000Z'
+processed_at: '2026-02-27T08:35:16.021Z'
 source_info: О чем молчит AI CTO
+source_url: 'https://t.me/silent_ai_cto/40'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Обсуждение MAS общего назначения, координации агентов через оркестратора и
+  самооценки агентов в исследованиях.
+tags:
+  - agents
+  - ai
+  - research
 debug:
   message_ids:
     - 941
@@ -33,7 +41,6 @@ debug:
       source_info: О чем молчит AI CTO
       source_url: 'https://t.me/silent_ai_cto/40'
       forward_protected: false
-source_url: 'https://t.me/silent_ai_cto/40'
 ---
 ==== NOTE ====
 

@@ -1,10 +1,17 @@
 ---
-raw_message: true
-timestamp: '2026-02-27T06:33:31.000Z'
+id: mm4n0gec2b0f1f8u23y
+created_at: '2026-02-27T06:33:31.000Z'
+processed_at: '2026-02-27T08:35:38.628Z'
 source_info: Мысли Рвачева
+source_url: 'https://t.me/rvnikita_blog/1620'
 has_media: true
-media_type: video
-forward_protected: false
+language: mixed
+summary: 'Авто-память Claude Code: контекст проекта между сессиями'
+tags:
+  - ai
+  - claude
+  - ai-coding
+  - memory
 debug:
   message_ids:
     - 947
@@ -28,7 +35,6 @@ debug:
       source_url: 'https://t.me/rvnikita_blog/1620'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/rvnikita_blog/1620'
 ---
 ==== FORWARDS ====
 

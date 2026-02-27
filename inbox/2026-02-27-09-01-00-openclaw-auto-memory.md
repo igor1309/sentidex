@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-02-27T09:01:00.000Z'
+id: mm4vyr2yvdt0zlerzc
+created_at: '2026-02-27T09:01:00.000Z'
+processed_at: '2026-02-27T12:46:15.706Z'
 source_info: Tips AI | IT & AI
+source_url: 'https://t.me/tips_ai/4603'
 has_media: true
-media_type: video
-forward_protected: false
+language: mixed
+summary: >-
+  OpenClaw Claude Code добавлен Auto Memory, записывает данные проекта и
+  архитектурные решения, индекс загружается сессиями
+tags:
+  - memory
+  - openclaw
+  - ai
+  - api
 debug:
   message_ids:
     - 950
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/tips_ai/4603'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/tips_ai/4603'
 ---
 ==== FORWARDS ====
 

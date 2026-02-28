@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-02-28T19:08:31.000Z'
+id: mm6vtotkcwac3734rgo
+created_at: '2026-02-28T19:08:31.000Z'
+processed_at: '2026-02-28T22:17:51.848Z'
 source_info: Valeriy Khalikov
 has_media: false
-media_type: none
-forward_protected: true
+language: mixed
+summary: >-
+  Обсуждение риска блокировки аккаунта антропиками и возврата без поступления
+  средств на карты
+tags:
+  - claude
+  - ai
+  - agents
+  - workflow
 debug:
   message_ids:
     - 957

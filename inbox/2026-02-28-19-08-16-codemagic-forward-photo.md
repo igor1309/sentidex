@@ -1,10 +1,17 @@
 ---
-raw_message: true
-timestamp: '2026-02-28T19:08:16.000Z'
+id: mm6vth81ellt60jc05
+created_at: '2026-02-28T19:08:16.000Z'
+processed_at: '2026-02-28T22:17:42.000Z'
 source_info: '@codemagic'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: 'Пересылка с фото от codemagic, чтобы не искать долго'
+tags:
+  - codemagic
+  - forward
+  - photo
+  - message_id
+  - sizes
 debug:
   message_ids:
     - 956

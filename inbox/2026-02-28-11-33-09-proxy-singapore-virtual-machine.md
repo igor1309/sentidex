@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-02-28T11:33:09.000Z'
+id: mm6eon2a0ls7sjm7de5a
+created_at: '2026-02-28T11:33:09.000Z'
+processed_at: '2026-02-28T14:18:02.817Z'
 source_info: Даниил Бердюгин
 has_media: false
-media_type: none
-forward_protected: true
+language: mixed
+summary: >-
+  запрос на прокси из Сингапура, создание виртуальной машины с бин и оформление
+  месячной подписки
+tags:
+  - прокси
+  - сингапура
+  - бин
+  - подписки
 debug:
   message_ids:
     - 954

@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-02-28T05:48:28.000Z'
+id: mm61zwx6wru2athfa9k
+created_at: '2026-02-28T05:48:28.000Z'
+processed_at: '2026-02-28T08:22:53.802Z'
 source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/506'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Codex доступ к запросам пользователя во время выполнения через
+  functions.request_user_input
+tags:
+  - ai
+  - ai-coding
+  - llm
+  - openai
 debug:
   message_ids:
     - 953
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/countwithsasha/506'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/countwithsasha/506'
 ---
 ==== FORWARDS ====
 

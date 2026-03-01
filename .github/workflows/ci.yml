@@ -55,16 +55,4 @@ jobs:
           CHAT_ID: ${{ secrets.CHAT_ID }}
           GH_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          # Use a heredoc to safely create the multiline string.
-          # Now, it references the simple shell variables defined in the 'env' block.
-          MESSAGE_TEXT=$(cat <<-EOF
-          🚨 *Build Failed:* [View Workflow Run](${GH_RUN_URL})
-          EOF
-          )
-
-          # URL-encode the message text to handle newlines and special characters correctly.
-          ENCODED_MESSAGE_TEXT=$(echo "$MESSAGE_TEXT" | awk -v ORS='%0A' '{ gsub(/&/, "\\&"); print }' | sed 's/ /%20/g')
-
-          # Send the message using curl and the Telegram Bot API.
-          # The '-s' flag makes curl silent (no progress meter).
-          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" -d "chat_id=${CHAT_ID}" -d "text=${ENCODED_MESSAGE_TEXT}" -d "parse_mode=Markdown"
+          TELEGRAM_PARSE_MODE=Markdown ./scripts/ci/notify_telegram.sh "$BOT_TOKEN" "$CHAT_ID" "🚨 *Build Failed:* [View Workflow Run](${GH_RUN_URL})"

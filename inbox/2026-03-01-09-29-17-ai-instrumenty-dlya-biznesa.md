@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-01T09:29:17.000Z'
+id: mm7qiw2i5l7dftc07fo
+created_at: '2026-03-01T09:29:17.000Z'
+processed_at: '2026-03-01T12:37:16.122Z'
 source_info: 'Бизнес-архитектор: Финансы, Путешествия и Роботы'
+source_url: 'https://t.me/archfinance/532'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Ультимативный список ИИ-инструментов как карта управленческих контуров для
+  ускорения решений и снижения рисков
+tags:
+  - ai
+  - workflow
+  - productivity
+  - business
 debug:
   message_ids:
     - 959
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/archfinance/532'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/archfinance/532'
 ---
 ==== FORWARDS ====
 

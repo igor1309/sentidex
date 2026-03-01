@@ -1,3 +1,4 @@
+const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -273,63 +274,34 @@ function getFileMetadata(file, cache) {
   }
 }
 
-async function sendTelegram(botToken, chatId, message) {
+function sendTelegram(botToken, chatId, message) {
   console.log('Sending message to Telegram...');
   console.log('Message preview:', message.substring(0, 200) + '...');
-  
-  const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-  
-  const params = new URLSearchParams({
-    chat_id: chatId,
-    text: message,
-    parse_mode: 'Markdown'
-  });
-  
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      body: params,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      }
-    });
-    
-    const result = await response.json();
-    
-    if (!response.ok || !result.ok) {
-      console.error('Telegram API error:', result);
-      
-      // Try without Markdown
-      console.log('Retrying without Markdown...');
-      const plainMessage = message
-        .replace(/\*/g, '')
-        .replace(/\\([_\[\]\(\)])/g, '$1');
 
-      const paramsNoMarkdown = new URLSearchParams({
-        chat_id: chatId,
-        text: plainMessage
+  const wrapper = path.join(__dirname, 'ci', 'notify_telegram.sh');
+
+  try {
+    execFileSync(wrapper, [botToken, chatId, message], {
+      env: { ...process.env, TELEGRAM_PARSE_MODE: 'Markdown' },
+      stdio: ['ignore', 'inherit', 'inherit'],
+    });
+  } catch (err) {
+    console.error('Telegram send failed:', err.message);
+    console.log('Retrying without Markdown...');
+    const plainMessage = message
+      .replace(/\*/g, '')
+      .replace(/\\([_\[\]\(\)])/g, '$1');
+
+    try {
+      execFileSync(wrapper, [botToken, chatId, plainMessage], {
+        stdio: ['ignore', 'inherit', 'inherit'],
       });
-      
-      const response2 = await fetch(url, {
-        method: 'POST',
-        body: paramsNoMarkdown,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        }
-      });
-      
-      const result2 = await response2.json();
-      if (!result2.ok) {
-        throw new Error(`Telegram API failed: ${JSON.stringify(result2)}`);
-      }
+    } catch (retryErr) {
+      throw new Error(`Telegram send failed (retry without Markdown): ${retryErr.message}`);
     }
-    
-    console.log('Message sent successfully');
-    
-  } catch (error) {
-    console.error('Error sending to Telegram:', error);
-    throw error;
   }
+
+  console.log('Message sent successfully');
 }
 
 function getWeekNumber(date) {

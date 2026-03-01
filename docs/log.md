@@ -1,5 +1,9 @@
 # Log
 
+## 2026-03-01
+
+- Migrate Telegram sends to ci-shared `notify_telegram.sh` transport. Replace fetch-based HTTP in `send-digest.js` with `execFileSync` to vendored wrapper. Replace inline curl in CI workflow with wrapper call.
+
 ## 2026-02-20
 
 Deliver message bundling in the processing pipeline to keep related updates together and reduce digest noise.

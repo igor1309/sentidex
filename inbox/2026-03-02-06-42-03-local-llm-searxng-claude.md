@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-02T06:42:03.000Z'
+id: mm8xh4by8ix2nd13g7c
+created_at: '2026-03-02T06:42:03.000Z'
+processed_at: '2026-03-02T08:39:37.006Z'
 source_info: Хабр / ML & AI
+source_url: 'https://t.me/habr_ai/8650'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Локальное решение: бесплатный веб-поиск через SearXNG с MCP для Claude Code,
+  обход лимитов.
+tags:
+  - claude
+  - mcp
+  - docker
+  - local-llm
 debug:
   message_ids:
     - 968
@@ -42,7 +51,6 @@ debug:
       source_url: 'https://t.me/habr_ai/8650'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/habr_ai/8650'
 ---
 ==== FORWARDS ====
 

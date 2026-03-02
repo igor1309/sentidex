@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-02T05:21:13.000Z'
+id: mm8xfnsfu34d3p36jys
+created_at: '2026-03-02T05:21:13.000Z'
+processed_at: '2026-03-02T08:38:28.911Z'
 source_info: Точки над ИИ
+source_url: 'https://t.me/TochkiNadAI/2168'
 has_media: true
-media_type: video
-forward_protected: false
+language: mixed
+summary: >-
+  Телеграм разделение чатov по темам и потоковая генерация, но не подтянуты
+  puregram и gramio.
+tags:
+  - ai
+  - agents
+  - workflow
+  - video-gen
 debug:
   message_ids:
     - 965
@@ -33,7 +42,6 @@ debug:
       source_info: Точки над ИИ
       source_url: 'https://t.me/TochkiNadAI/2168'
       forward_protected: false
-source_url: 'https://t.me/TochkiNadAI/2168'
 ---
 ==== NOTE ====
 

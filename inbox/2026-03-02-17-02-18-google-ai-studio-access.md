@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-03-02T17:02:18.000Z'
+id: mm9mwog2v3i8s20n70c
+created_at: '2026-03-02T17:02:18.000Z'
+processed_at: '2026-03-02T20:31:33.314Z'
 source_info: NGI | Влад Корнышев про AI и создание AI-продуктов
+source_url: 'https://t.me/NGI_ru/477'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  описание методов обхода ограничений google ai studio в рф: vpn, белый список,
+  профиль платежей и верификация
+tags:
+  - ai
+  - workflow
+  - resource
 debug:
   message_ids:
     - 972
@@ -28,7 +36,6 @@ debug:
       source_url: 'https://t.me/NGI_ru/477'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/NGI_ru/477'
 ---
 ==== FORWARDS ====
 

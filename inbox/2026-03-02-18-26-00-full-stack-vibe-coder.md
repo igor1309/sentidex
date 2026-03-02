@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-02T18:26:00.000Z'
+id: mm9mx77da2lp4wwoat9
+created_at: '2026-03-02T18:26:00.000Z'
+processed_at: '2026-03-02T20:31:57.625Z'
 source_info: эйай ньюз
+source_url: 'https://t.me/ai_newz/4456'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Набор в финтех на AI-first enterprise-grade платформе, Full-Stack Vibe-Coder и
+  Data Analyst, удаленка
+tags:
+  - ai
+  - claude
+  - llm
+  - ai-coding
 debug:
   message_ids:
     - 975
@@ -137,7 +146,6 @@ debug:
       source_url: 'https://t.me/ai_newz/4456'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/ai_newz/4456'
 ---
 ==== FORWARDS ====
 

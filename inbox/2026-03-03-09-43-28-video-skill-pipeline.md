@@ -1,10 +1,20 @@
 ---
-raw_message: true
-timestamp: '2026-03-03T09:43:28.000Z'
+id: mmalm5tiper49kppft
+created_at: '2026-03-03T09:43:28.000Z'
+processed_at: '2026-03-03T12:43:09.174Z'
 source_info: НейроProfit | Соня Pro AI
+source_url: 'https://t.me/NeuralProfit/2194'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Преобразование YouTube-уроков в структурированные знания для Claude, Gemini и
+  OpenAI с видеопайплайном
+tags:
+  - ai
+  - llm
+  - claude
+  - gemini
+  - openai
 debug:
   message_ids:
     - 989
@@ -28,7 +38,6 @@ debug:
       source_url: 'https://t.me/NeuralProfit/2194'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/NeuralProfit/2194'
 ---
 ==== FORWARDS ====
 

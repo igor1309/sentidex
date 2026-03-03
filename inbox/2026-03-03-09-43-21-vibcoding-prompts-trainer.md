@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-03T09:43:21.000Z'
+id: mmallsltx02att8368
+created_at: '2026-03-03T09:43:21.000Z'
+processed_at: '2026-03-03T12:42:52.049Z'
 source_info: НейроProfit | Соня Pro AI
+source_url: 'https://t.me/NeuralProfit/2193'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор тренажера промптинга для вайбкодинга с Claude, LeetCode-подобным
+  тестированием и YC-перспективами.
+tags:
+  - claude
+  - prompting
+  - llm
+  - ai
 debug:
   message_ids:
     - 987
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/NeuralProfit/2193'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/NeuralProfit/2193'
 ---
 ==== FORWARDS ====
 

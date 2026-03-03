@@ -1,10 +1,17 @@
 ---
-raw_message: true
-timestamp: '2026-03-03T16:51:06.000Z'
+id: mmb27ijdzczhcigr65
+created_at: '2026-03-03T16:51:06.000Z'
+processed_at: '2026-03-03T20:27:39.289Z'
 source_info: Мысли Рвачева
+source_url: 'https://t.me/rvnikita_blog/1631'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: Обсуждение импорта памяти Claude и выгрузки знаний о пользователе из других ИИ
+tags:
+  - claude
+  - memory
+  - prompting
+  - openai
 debug:
   message_ids:
     - 993
@@ -28,7 +35,6 @@ debug:
       source_url: 'https://t.me/rvnikita_blog/1631'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/rvnikita_blog/1631'
 ---
 ==== FORWARDS ====
 

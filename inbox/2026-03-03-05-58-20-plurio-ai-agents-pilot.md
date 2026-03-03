@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-03T05:58:20.000Z'
+id: mmacqn658p9idkwig2s
+created_at: '2026-03-03T05:58:20.000Z'
+processed_at: '2026-03-03T08:34:41.741Z'
 source_info: Всеволод Устинов (канал про ai и стартапы)
+source_url: 'https://t.me/vsevolodustinovchannel/2850'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Переименование Elly Analytics в Plurio AI, запуск агентов для
+  перформанс-маркетинга и кейсы
+tags:
+  - ai
+  - agents
+  - workflow
+  - ai-coding
 debug:
   message_ids:
     - 978
@@ -33,7 +42,6 @@ debug:
       source_info: Всеволод Устинов (канал про ai и стартапы)
       source_url: 'https://t.me/vsevolodustinovchannel/2850'
       forward_protected: false
-source_url: 'https://t.me/vsevolodustinovchannel/2850'
 ---
 ==== NOTE ====
 

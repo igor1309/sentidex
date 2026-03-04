@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-04T05:26:33.000Z'
+id: mmbs4p9vcbjzicaly9
+created_at: '2026-03-04T05:26:33.000Z'
+processed_at: '2026-03-04T08:33:18.067Z'
 source_info: Aimasters.Me ◽️
+source_url: 'https://t.me/aimastersme/536'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор концепции скиллов для агентов ИИ, их создания, тестирования и
+  использования Skill Conductor.
+tags:
+  - agents
+  - ai
+  - claude
+  - open-source
 debug:
   message_ids:
     - 997
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/aimastersme/536'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/aimastersme/536'
 ---
 ==== FORWARDS ====
 

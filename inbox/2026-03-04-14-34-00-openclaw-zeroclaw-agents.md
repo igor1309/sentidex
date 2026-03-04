@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-04T14:34:00.000Z'
+id: mmc9eu1ko7g00r1k36
+created_at: '2026-03-04T14:34:00.000Z'
+processed_at: '2026-03-04T16:37:04.280Z'
 source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/521'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Как собрать из навыков агента, сравнение OpenClaw и ZeroClaw, изоляция сессий
+  и безопасность.
+tags:
+  - ai
+  - openclaw
+  - agents
+  - open-source
 debug:
   message_ids:
     - 1012
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/countwithsasha/521'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/countwithsasha/521'
 ---
 ==== FORWARDS ====
 

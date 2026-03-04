@@ -1,10 +1,17 @@
 ---
-raw_message: true
-timestamp: '2026-03-04T08:42:55.000Z'
+id: mmc12vhai0qnukwx5id
+created_at: '2026-03-04T08:42:55.000Z'
+processed_at: '2026-03-04T12:43:49.342Z'
 source_info: 'Refat Talks: Tech & AI'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  кажется это одно из лучших предложений на рынке сейчас; ссылка на кампанию
+  Alibaba Cloud AI.
+tags:
+  - ai
+  - ai-coding
+  - business
 debug:
   message_ids:
     - 1002

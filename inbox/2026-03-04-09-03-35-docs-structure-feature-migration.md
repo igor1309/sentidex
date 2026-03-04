@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-04T09:03:35.000Z'
+id: mmc13a543xs7m8q612u
+created_at: '2026-03-04T09:03:35.000Z'
+processed_at: '2026-03-04T12:44:08.344Z'
 source_info: LLM под капотом
+source_url: 'https://t.me/llm_under_hood/763'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор структурирования документации проектов, переноса фич между проектами и
+  использования RFCs и Codex/Claude для автоматизации.
+tags:
+  - claude
+  - agents
+  - devops
+  - memory
 debug:
   message_ids:
     - 1004
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/llm_under_hood/763'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/llm_under_hood/763'
 ---
 ==== FORWARDS ====
 

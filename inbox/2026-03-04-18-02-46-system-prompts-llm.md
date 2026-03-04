@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-04T18:02:46.000Z'
+id: mmchn08ubzfnt55xxxn
+created_at: '2026-03-04T18:02:46.000Z'
+processed_at: '2026-03-04T20:27:22.493Z'
 source_info: Точки над ИИ
+source_url: 'https://t.me/TochkiNadAI/2177'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Сборник системных промптов из популярных моделей для изучения принципов
+  промпт-инжиниринга и архитектуры поведения LLM
+tags:
+  - llm
+  - prompting
+  - openai
+  - gemini
 debug:
   message_ids:
     - 1017
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/TochkiNadAI/2177'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/TochkiNadAI/2177'
 ---
 ==== FORWARDS ====
 

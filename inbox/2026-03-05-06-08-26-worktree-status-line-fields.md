@@ -1,10 +1,17 @@
 ---
-raw_message: true
-timestamp: '2026-03-05T06:08:26.000Z'
+id: mmd7nk952m5c9c3sdlb
+created_at: '2026-03-05T06:08:26.000Z'
+processed_at: '2026-03-05T08:35:38.441Z'
 source_info: direct_message
 has_media: false
-media_type: none
-forward_protected: false
+language: en
+summary: >-
+  Added worktree field to status line hook commands for name, path, branch, and
+  repo directory in --worktree mode
+tags:
+  - workflow
+  - devops
+  - open-source
 debug:
   message_ids:
     - 1025

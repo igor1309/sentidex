@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-03-05T05:31:06.000Z'
+id: mmd7n4820rpp1bvhf0g
+created_at: '2026-03-05T05:31:06.000Z'
+processed_at: '2026-03-05T08:35:17.666Z'
 source_info: Valeriy Khalikov
 has_media: false
-media_type: none
-forward_protected: true
+language: mixed
+summary: >-
+  инструкция по получению бесплатной подписки chatgpt plus через vpn/прокси и
+  подмены данных
+tags:
+  - ai
+  - openai
+  - agents
+  - tutorial
 debug:
   message_ids:
     - 1024

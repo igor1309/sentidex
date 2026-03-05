@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-05T05:29:17.000Z'
+id: mmd7mocr56kdmj2qe1
+created_at: '2026-03-05T05:29:17.000Z'
+processed_at: '2026-03-05T08:34:57.099Z'
 source_info: Aimasters.Me ◽️
+source_url: 'https://t.me/aimastersme/537'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Обновления Anthropic skill-creator синхронны с релизом skill-conductor;
+  архитектура, TDD и 5 осей скоринга
+tags:
+  - ai
+  - agents
+  - workflow
+  - ai-coding
 debug:
   message_ids:
     - 1023
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/aimastersme/537'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/aimastersme/537'
 ---
 ==== FORWARDS ====
 

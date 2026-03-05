@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-05T12:44:24.000Z'
+id: mmdkqqs3tgix8x94hx
+created_at: '2026-03-05T12:44:24.000Z'
+processed_at: '2026-03-05T14:42:01.875Z'
 source_info: Vibecoder
+source_url: 'https://t.me/vibecodings/224'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Open-source инструмент Skill Seekers превращает видеоуроки в навыки для Claude
+  и других ИИ, экспорт на 16 платформ.
+tags:
+  - open-source
+  - ai
+  - ai-coding
+  - workflow
 debug:
   message_ids:
     - 1026
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/vibecodings/224'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/vibecodings/224'
 ---
 ==== FORWARDS ====
 

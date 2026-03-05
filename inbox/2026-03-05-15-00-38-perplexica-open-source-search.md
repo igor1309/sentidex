@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-05T15:00:38.000Z'
+id: mmdumd6iacjwep8972b
+created_at: '2026-03-05T15:00:38.000Z'
+processed_at: '2026-03-05T19:18:33.786Z'
 source_info: 'Бизнес-архитектор: Финансы, Путешествия и Роботы'
+source_url: 'https://t.me/archfinance/544'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор опенсорсного Perplexica для локального самостоятельного поиска с
+  цитированиями и источниками.
+tags:
+  - local-llm
+  - open-source
+  - ai
+  - llm
 debug:
   message_ids:
     - 1027
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/archfinance/544'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/archfinance/544'
 ---
 ==== FORWARDS ====
 

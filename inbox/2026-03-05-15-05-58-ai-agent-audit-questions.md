@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-05T15:05:58.000Z'
+id: mmdumnft7ow1fev20iq
+created_at: '2026-03-05T15:05:58.000Z'
+processed_at: '2026-03-05T19:18:47.081Z'
 source_info: НейроProfit | Соня Pro AI
+source_url: 'https://t.me/NeuralProfit/2197'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Практический аудит AI-агента через вопросы для выявления проб в контексте,
+  инструкциях и автоматизациях
+tags:
+  - ai
+  - agents
+  - prompting
+  - workflow
 debug:
   message_ids:
     - 1028
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/NeuralProfit/2197'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/NeuralProfit/2197'
 ---
 ==== FORWARDS ====
 

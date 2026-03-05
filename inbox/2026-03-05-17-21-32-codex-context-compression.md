@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-05T17:21:32.000Z'
+id: mmduqo8kwsk9xfiz9e
+created_at: '2026-03-05T17:21:32.000Z'
+processed_at: '2026-03-05T19:21:54.740Z'
 source_info: Глеб Кудрявцев про AI кодинг
+source_url: 'https://t.me/gleb_pro_ai/446'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Статья для разработчиков о сжатии контекста в codex и утечке системного
+  промпта, для агентов
+tags:
+  - ai-coding
+  - prompting
+  - openai
+  - agents
 debug:
   message_ids:
     - 1036
@@ -39,7 +48,6 @@ debug:
       source_url: 'https://t.me/gleb_pro_ai/446'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/gleb_pro_ai/446'
 ---
 ==== FORWARDS ====
 

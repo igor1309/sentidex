@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-05T15:11:10.000Z'
+id: mmdund2s3t3fqqkmjpd
+created_at: '2026-03-05T15:11:10.000Z'
+processed_at: '2026-03-05T19:19:20.308Z'
 source_info: vlad kooklev — ai & agents
+source_url: 'https://t.me/prod1337/160'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  создал собственного агента для глубокого исследования, обходя GPT Pro,
+  применяю пайплайн claude-pipe и открытый код
+tags:
+  - ai
+  - agents
+  - research
+  - open-source
 debug:
   message_ids:
     - 1030
@@ -79,7 +88,6 @@ debug:
       source_url: 'https://t.me/prod1337/160'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/prod1337/160'
 ---
 ==== FORWARDS ====
 

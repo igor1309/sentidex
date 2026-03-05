@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-05T15:07:02.000Z'
+id: mmdun1p1l8f4k2d9dt
+created_at: '2026-03-05T15:07:02.000Z'
+processed_at: '2026-03-05T19:19:05.557Z'
 source_info: asisakov
+source_url: 'https://t.me/asisakov_channel/1146'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Обсуждается корпоративный LLM-agent RAG на основе внутренней Wiki для быстрого
+  доступа к знаниям
+tags:
+  - ai
+  - llm
+  - agents
+  - workflow
 debug:
   message_ids:
     - 1029
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/asisakov_channel/1146'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/asisakov_channel/1146'
 ---
 ==== FORWARDS ====
 

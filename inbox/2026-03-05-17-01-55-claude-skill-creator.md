@@ -1,10 +1,20 @@
 ---
-raw_message: true
-timestamp: '2026-03-05T17:01:55.000Z'
+id: mmduqbtviotd931lra9
+created_at: '2026-03-05T17:01:55.000Z'
+processed_at: '2026-03-05T19:21:38.659Z'
 source_info: Силиконовый Мешок
+source_url: 'https://t.me/prompt_design/1978'
 has_media: true
-media_type: document
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор обновления Claude Skill Creator: мета-навык для создания и тестирования
+  навыков с бенчмарками
+tags:
+  - claude
+  - ai
+  - llm
+  - prompting
+  - workflow
 debug:
   message_ids:
     - 1035
@@ -28,7 +38,6 @@ debug:
       source_url: 'https://t.me/prompt_design/1978'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/prompt_design/1978'
 ---
 ==== FORWARDS ====
 

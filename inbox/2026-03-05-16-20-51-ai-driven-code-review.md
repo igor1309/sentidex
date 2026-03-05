@@ -1,10 +1,20 @@
 ---
-raw_message: true
-timestamp: '2026-03-05T16:20:51.000Z'
+id: mmdupuvb836xmpfm3e
+created_at: '2026-03-05T16:20:51.000Z'
+processed_at: '2026-03-05T19:21:16.679Z'
 source_info: partially unsupervised
+source_url: 'https://t.me/partially_unsupervised/286'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  AI-ревью кода с Gemini и Claude: opencode, проблемы памяти, Not Invented Here,
+  лаконичный опыт.
+tags:
+  - gemini
+  - claude
+  - ai-coding
+  - github
+  - memory
 debug:
   message_ids:
     - 1034
@@ -50,7 +60,6 @@ debug:
       source_url: 'https://t.me/partially_unsupervised/286'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/partially_unsupervised/286'
 ---
 ==== FORWARDS ====
 

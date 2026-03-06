@@ -1,10 +1,17 @@
 ---
-raw_message: true
-timestamp: '2026-03-06T16:05:22.000Z'
+id: mmf8ktm9tuhnhn1pqgd
+created_at: '2026-03-06T16:05:22.000Z'
+processed_at: '2026-03-06T18:37:02.577Z'
 source_info: '@matvey_gol2004'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  оплачиваю сервисы через platipomiru.com, мгновенная виртуальная Mastercard,
+  всё работает.
+tags:
+  - business
+  - resource
+  - workflow
 debug:
   message_ids:
     - 1049

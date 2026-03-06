@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-06T05:28:11.000Z'
+id: mmemznwp3razkckwlj7
+created_at: '2026-03-06T05:28:11.000Z'
+processed_at: '2026-03-06T08:32:43.465Z'
 source_info: AI да парень! / Sergei Notevskii
+source_url: 'https://t.me/sergeinotevskii/598'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор vLLM Semantic Router SR как промежуточного слоя для маршрутизации
+  запросов между быстрой 8B/малыми моделями и агентами
+tags:
+  - llm
+  - local-llm
+  - ai
+  - agents
 debug:
   message_ids:
     - 1042
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/sergeinotevskii/598'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/sergeinotevskii/598'
 ---
 ==== FORWARDS ====
 

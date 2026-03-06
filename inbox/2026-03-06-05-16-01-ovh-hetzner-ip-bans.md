@@ -1,10 +1,15 @@
 ---
-raw_message: true
-timestamp: '2026-03-06T05:16:01.000Z'
+id: mmemz9gkjbnghkh51t
+created_at: '2026-03-06T05:16:01.000Z'
+processed_at: '2026-03-06T08:32:24.740Z'
 source_info: '@glebkudr1'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: рекомендация OVH и Hetzner по IP-адресам без блокировок LLM-провайдеров
+tags:
+  - llm
+  - ai
+  - openai
 debug:
   message_ids:
     - 1041

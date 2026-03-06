@@ -1,10 +1,15 @@
 ---
-raw_message: true
-timestamp: '2026-03-06T08:32:23.000Z'
+id: mmevxf239mv407bgqqm
+created_at: '2026-03-06T08:32:23.000Z'
+processed_at: '2026-03-06T12:42:55.227Z'
 source_info: DEKSDEN (chat)
 has_media: true
-media_type: document
-forward_protected: false
+language: mixed
+summary: Презентация во вложенном документе dd-flow presentation.pdf
+tags:
+  - resource
+  - education
+  - tutorial
 debug:
   message_ids:
     - 1046

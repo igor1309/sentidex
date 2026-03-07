@@ -1,10 +1,17 @@
 ---
-raw_message: true
-timestamp: '2026-03-07T18:30:22.000Z'
+id: mmgvx8feg1sza1ajjq
+created_at: '2026-03-07T18:30:22.000Z'
+processed_at: '2026-03-07T22:18:18.986Z'
 source_info: '@danivolkov'
 has_media: false
-media_type: none
-forward_protected: true
+language: mixed
+summary: >-
+  Предложение: инвайты на ChatGPT Business на 1 месяц и личные аккаунты с
+  подпиской, до 8 участников.
+tags:
+  - openai
+  - ai
+  - business
 debug:
   message_ids:
     - 1055

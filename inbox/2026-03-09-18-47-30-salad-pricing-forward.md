@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-03-09T18:47:30.000Z'
+id: mmjr0apwi0d8x2nq00q
+created_at: '2026-03-09T18:47:30.000Z'
+processed_at: '2026-03-09T22:24:02.372Z'
 source_info: '@Unistorus'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Еще дешевле; переадресовано сообщение с ссылкой на страницу ценообразования
+  salad.com.
+tags:
+  - pricing
+  - salad
+  - forward
+  - source
 debug:
   message_ids:
     - 1063

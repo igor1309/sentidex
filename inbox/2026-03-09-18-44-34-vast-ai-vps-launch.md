@@ -1,10 +1,15 @@
 ---
-raw_message: true
-timestamp: '2026-03-09T18:44:34.000Z'
+id: mmjqztfv6tf4zcoeoe
+created_at: '2026-03-09T18:44:34.000Z'
+processed_at: '2026-03-09T22:23:39.978Z'
 source_info: '@glebkudr1'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: инструкция по запуску VPS моделей на vast.ai
+tags:
+  - devops
+  - workflow
+  - llm
 debug:
   message_ids:
     - 1061

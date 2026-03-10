@@ -1,10 +1,17 @@
 ---
-raw_message: true
-timestamp: '2026-03-10T05:08:02.000Z'
+id: mmkctzdem1t3pxx2v1q
+created_at: '2026-03-10T05:08:02.000Z'
+processed_at: '2026-03-10T08:34:59.282Z'
 source_info: Мысли Рвачева
+source_url: 'https://t.me/rvnikita_blog/1648'
 has_media: true
-media_type: video
-forward_protected: false
+language: mixed
+summary: Мультиагентная проверка PR в Claude Code с рейтингами и комментариями
+tags:
+  - ai
+  - claude
+  - ai-coding
+  - agents
 debug:
   message_ids:
     - 1065
@@ -28,7 +35,6 @@ debug:
       source_url: 'https://t.me/rvnikita_blog/1648'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/rvnikita_blog/1648'
 ---
 ==== FORWARDS ====
 

@@ -1,10 +1,15 @@
 ---
-raw_message: true
-timestamp: '2026-03-12T06:44:55.000Z'
+id: mmn7sigswfudkfemvi
+created_at: '2026-03-12T06:44:55.000Z'
+processed_at: '2026-03-12T08:37:11.164Z'
 source_info: '@artur_viktorovich'
 has_media: false
-media_type: none
-forward_protected: false
+language: en
+summary: Forwarded from @artur_viktorovich with link to roguetokens.ai
+tags:
+  - ai
+  - resource
+  - workflow
 debug:
   message_ids:
     - 1071

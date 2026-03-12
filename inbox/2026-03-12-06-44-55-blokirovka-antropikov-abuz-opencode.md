@@ -1,10 +1,15 @@
 ---
-raw_message: true
-timestamp: '2026-03-12T06:44:55.000Z'
+id: mmn7s4mchs3m8u7nfqh
+created_at: '2026-03-12T06:44:55.000Z'
+processed_at: '2026-03-12T08:36:53.220Z'
 source_info: Max Garmash
 has_media: false
-media_type: none
-forward_protected: true
+language: mixed
+summary: Действия после блокировки антропиков и обнаружения абьюза через OpenCode
+tags:
+  - ai
+  - workflow
+  - resource
 debug:
   message_ids:
     - 1070

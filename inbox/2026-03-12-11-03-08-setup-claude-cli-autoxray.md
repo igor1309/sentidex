@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-03-12T11:03:08.000Z'
+id: mmnkw3zih46tlrv1aps
+created_at: '2026-03-12T11:03:08.000Z'
+processed_at: '2026-03-12T14:43:54.029Z'
 source_info: Alexander Bochkarev
 has_media: false
-media_type: none
-forward_protected: true
+language: mixed
+summary: >-
+  поиск статей на хабре об установке autoxray и интеграции claude-cli с
+  настройками
+tags:
+  - ai
+  - claude
+  - gemini
+  - tutorial
 debug:
   message_ids:
     - 1072

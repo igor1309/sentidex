@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-13T15:26:06.000Z'
+id: mmp8ksg0xu0wkmvwg5k
+created_at: '2026-03-13T15:26:06.000Z'
+processed_at: '2026-03-13T18:34:42.815Z'
 source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/533'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Настройка агентной машины на Mac Mini с OpenClaw, прокси-API и каруселью
+  аккаунтов
+tags:
+  - openclaw
+  - ai
+  - agents
+  - api
 debug:
   message_ids:
     - 1075
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/countwithsasha/533'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/countwithsasha/533'
 ---
 ==== FORWARDS ====
 

@@ -1,10 +1,17 @@
 ---
-raw_message: true
-timestamp: '2026-03-15T11:55:39.000Z'
+id: mmrukrbnijtl77rt53
+created_at: '2026-03-15T11:55:39.000Z'
+processed_at: '2026-03-15T14:26:05.267Z'
 source_info: '@Asgard_82'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Возможно, кому пригодится: обновляю подписки на GPT у этого продавца,
+  мгновенное пополнение.
+tags:
+  - ai
+  - openai
+  - business
 debug:
   message_ids:
     - 1083

@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-16T08:36:38.000Z'
+id: mmt2adp4z2yafcswss
+created_at: '2026-03-16T08:36:38.000Z'
+processed_at: '2026-03-16T10:49:44.152Z'
 source_info: Хабр / ML & AI
+source_url: 'https://t.me/habr_ai/8989'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор мультимодального RAG на основе Gemini Embedding 2: векторизация видео,
+  изображений, аудио и PDF
+tags:
+  - gemini
+  - ai
+  - rag
+  - llm
 debug:
   message_ids:
     - 1094
@@ -61,7 +70,6 @@ debug:
       source_url: 'https://t.me/habr_ai/8989'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/habr_ai/8989'
 ---
 ==== FORWARDS ====
 

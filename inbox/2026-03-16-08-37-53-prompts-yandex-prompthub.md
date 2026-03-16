@@ -1,10 +1,17 @@
 ---
-raw_message: true
-timestamp: '2026-03-16T08:37:53.000Z'
+id: mmt2b6q9tem7arogb0e
+created_at: '2026-03-16T08:37:53.000Z'
+processed_at: '2026-03-16T10:50:21.777Z'
 source_info: 'ТЕХНО: Яндекс про технологии'
+source_url: 'https://t.me/techno_yandex/4992'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: Проверенные промпты Яндекса на Промптхабе для любых задач.
+tags:
+  - prompting
+  - ai
+  - resource
+  - workflow
 debug:
   message_ids:
     - 1095
@@ -28,7 +35,6 @@ debug:
       source_url: 'https://t.me/techno_yandex/4992'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/techno_yandex/4992'
 ---
 ==== FORWARDS ====
 

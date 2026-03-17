@@ -1,10 +1,17 @@
 ---
-raw_message: true
-timestamp: '2026-03-17T12:13:22.000Z'
+id: mmuqcwq3kxpgxkbcwvk
+created_at: '2026-03-17T12:13:22.000Z'
+processed_at: '2026-03-17T14:51:19.082Z'
 source_info: Vibecoder
+source_url: 'https://t.me/vibecodings/256'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: 'Гэри Тан: Claude Code с шестью ИИ-агентами на GitHub.'
+tags:
+  - ai
+  - agents
+  - ai-coding
+  - open-source
 debug:
   message_ids:
     - 1099
@@ -28,7 +35,6 @@ debug:
       source_url: 'https://t.me/vibecodings/256'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/vibecodings/256'
 ---
 ==== FORWARDS ====
 

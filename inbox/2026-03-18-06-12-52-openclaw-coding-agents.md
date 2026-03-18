@@ -1,10 +1,20 @@
 ---
-raw_message: true
-timestamp: '2026-03-18T06:12:52.000Z'
+id: mmvsl5wtajhd6feaeb6
+created_at: '2026-03-18T06:12:52.000Z'
+processed_at: '2026-03-18T08:41:29.644Z'
 source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/542'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Обновленный подход к делегированию кодинга через OpenClaw: оркестрация
+  Codex-сессий и cron-поддержка.
+tags:
+  - openclaw
+  - ai
+  - ai-coding
+  - agents
+  - workflow
 debug:
   message_ids:
     - 1102
@@ -28,7 +38,6 @@ debug:
       source_url: 'https://t.me/countwithsasha/542'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/countwithsasha/542'
 ---
 ==== FORWARDS ====
 

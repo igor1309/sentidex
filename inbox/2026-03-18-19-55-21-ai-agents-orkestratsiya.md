@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-18T19:55:21.000Z'
+id: mmwm3vr4nk3i85k1pe
+created_at: '2026-03-18T19:55:21.000Z'
+processed_at: '2026-03-18T22:27:51.808Z'
 source_info: NGI | Влад Корнышев про AI и создание AI-продуктов
+source_url: 'https://t.me/NGI_ru/595'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Обсуждение агентов ИИ, трансформации процессов, RAG и оркестрации, с акцентом
+  на насмотренность
+tags:
+  - ai
+  - agents
+  - prompting
+  - workflow
 debug:
   message_ids:
     - 1104
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/NGI_ru/595'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/NGI_ru/595'
 ---
 ==== FORWARDS ====
 

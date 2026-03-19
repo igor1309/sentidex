@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-03-19T10:13:53.000Z'
+id: mmxh1av7k5z9ygq7lil
+created_at: '2026-03-19T10:13:53.000Z'
+processed_at: '2026-03-19T12:53:39.523Z'
 source_info: '@etheac'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  выбор локального ИИ: Mac Mini M4 Pro 64 ГБ RAM, варианты, высокая пропускная
+  способность памяти
+tags:
+  - local-llm
+  - llm
+  - memory
+  - workflow
 debug:
   message_ids:
     - 1107

@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-20T11:27:03.000Z'
+id: mmz09rp32vd8sx8pkqv
+created_at: '2026-03-20T11:27:03.000Z'
+processed_at: '2026-03-20T14:39:53.463Z'
 source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/550'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор архитектуры Claude Code и Channels: удалённое управление, каналы и
+  агентов в дежурстве.
+tags:
+  - ai
+  - agents
+  - llm
+  - workflow
 debug:
   message_ids:
     - 1110
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/countwithsasha/550'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/countwithsasha/550'
 ---
 ==== FORWARDS ====
 

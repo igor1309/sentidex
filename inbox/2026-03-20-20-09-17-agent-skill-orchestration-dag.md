@@ -1,10 +1,20 @@
 ---
-raw_message: true
-timestamp: '2026-03-20T20:09:17.000Z'
+id: mmzgtkb3dqiwxi61koa
+created_at: '2026-03-20T20:09:17.000Z'
+processed_at: '2026-03-20T22:23:10.862Z'
 source_info: Константин Доронин
+source_url: 'https://t.me/kdoronin_blog/1223'
 has_media: true
-media_type: video
-forward_protected: false
+language: mixed
+summary: >-
+  Инструмент для оркестрации сотен тысяч скиллов через DAG с бенчмарком против
+  Claude Code.
+tags:
+  - ai
+  - agents
+  - workflow
+  - llm
+  - research
 debug:
   message_ids:
     - 1112
@@ -28,7 +38,6 @@ debug:
       source_url: 'https://t.me/kdoronin_blog/1223'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/kdoronin_blog/1223'
 ---
 ==== FORWARDS ====
 

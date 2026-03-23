@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-22T20:43:53.000Z'
+id: mn2j40nuxfh0id30hm
+created_at: '2026-03-22T20:43:53.000Z'
+processed_at: '2026-03-23T01:50:36.378Z'
 source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/551'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор руководства OpenAI по дизайну фронтенда: промпты, мудборды, ограничения
+  и минимализм
+tags:
+  - openai
+  - ai
+  - prompting
+  - workflow
 debug:
   message_ids:
     - 1121
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/countwithsasha/551'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/countwithsasha/551'
 ---
 ==== FORWARDS ====
 

@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-24T17:43:43.000Z'
+id: mn52r0vfy5wa4h7cq5
+created_at: '2026-03-24T17:43:43.000Z'
+processed_at: '2026-03-24T20:35:54.795Z'
 source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/554'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Кратко о проблемах конфигурации OpenClaw: рассуждение, прокси, таймауты и
+  управление инструментами.
+tags:
+  - ai
+  - agents
+  - prompting
+  - workflow
 debug:
   message_ids:
     - 1126
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/countwithsasha/554'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/countwithsasha/554'
 ---
 ==== FORWARDS ====
 

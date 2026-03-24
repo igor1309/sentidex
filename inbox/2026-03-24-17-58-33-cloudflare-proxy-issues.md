@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-24T17:58:33.000Z'
+id: mn52ryoaq6tuzrxxnks
+created_at: '2026-03-24T17:58:33.000Z'
+processed_at: '2026-03-24T20:36:38.602Z'
 source_info: Андрей
 has_media: false
-media_type: none
-forward_protected: true
+language: mixed
+summary: >-
+  Проблемы проксирования через Cloudflare из России, недоступность сайтов,
+  пропуск настройки
+tags:
+  - cloudflare
+  - проксирование
+  - россии
+  - сайты
+  - недоступны
 debug:
   message_ids:
     - 1129

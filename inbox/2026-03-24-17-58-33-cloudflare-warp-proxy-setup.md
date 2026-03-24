@@ -1,10 +1,15 @@
 ---
-raw_message: true
-timestamp: '2026-03-24T17:58:33.000Z'
+id: mn52sdj2igrvvn5r9ue
+created_at: '2026-03-24T17:58:33.000Z'
+processed_at: '2026-03-24T20:36:57.854Z'
 source_info: Поляков считает и болтает
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: Настройка Cloudflare Warp как прокси через локальный SOCKS5
+tags:
+  - devops
+  - tutorial
+  - workflow
 debug:
   message_ids:
     - 1130

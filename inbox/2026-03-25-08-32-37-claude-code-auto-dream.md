@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-03-25T08:32:37.000Z'
+id: mn5x0si22obqy32nqyv
+created_at: '2026-03-25T08:32:37.000Z'
+processed_at: '2026-03-25T10:43:18.986Z'
 source_info: Мысли Рвачева
+source_url: 'https://t.me/rvnikita_blog/1682'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Обсуждение фичи Auto Dream в Claude Code: сбор памяти, фазы очистки и сомнения
+  в эффективности.
+tags:
+  - ai
+  - claude
+  - memory
 debug:
   message_ids:
     - 1132
@@ -28,7 +36,6 @@ debug:
       source_url: 'https://t.me/rvnikita_blog/1682'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/rvnikita_blog/1682'
 ---
 ==== FORWARDS ====
 

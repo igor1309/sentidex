@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-27T07:38:01.000Z'
+id: mn8rvatufego23vaxq9
+created_at: '2026-03-27T07:38:01.000Z'
+processed_at: '2026-03-27T10:42:23.250Z'
 source_info: 'Поляков считает: AI, код и кейсы'
+source_url: 'https://t.me/countwithsasha/556'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Описание вайбкодинга дашбордов с использованием Claude Code, обновлениям init
+  и чат-уровня интеграций с Telegram.
+tags:
+  - ai
+  - claude
+  - llm
+  - ai-coding
 debug:
   message_ids:
     - 1137
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/countwithsasha/556'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/countwithsasha/556'
 ---
 ==== FORWARDS ====
 

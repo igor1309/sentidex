@@ -1,10 +1,20 @@
 ---
-raw_message: true
-timestamp: '2026-03-28T05:21:49.000Z'
+id: mna2pdiwxv1r0l9ht8i
+created_at: '2026-03-28T05:21:49.000Z'
+processed_at: '2026-03-28T08:33:28.760Z'
 source_info: Machinelearning
+source_url: 'https://t.me/ai_machinelearning_big_data/9764'
 has_media: true
-media_type: video
-forward_protected: false
+language: mixed
+summary: >-
+  CapCut запустила Video Studio на базе Seedance 2.0 для автоматизации сценариев
+  и монтажа
+tags:
+  - video-gen
+  - ai
+  - agents
+  - image-gen
+  - news
 debug:
   message_ids:
     - 1143
@@ -28,7 +38,6 @@ debug:
       source_url: 'https://t.me/ai_machinelearning_big_data/9764'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/ai_machinelearning_big_data/9764'
 ---
 ==== FORWARDS ====
 

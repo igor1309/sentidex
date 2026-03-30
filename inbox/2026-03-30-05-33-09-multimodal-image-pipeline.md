@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-03-30T05:33:09.000Z'
+id: mncyqvgovd8oaha6chb
+created_at: '2026-03-30T05:33:09.000Z'
+processed_at: '2026-03-30T09:05:58.728Z'
 source_info: Пух
 has_media: false
-media_type: none
-forward_protected: true
+language: mixed
+summary: >-
+  Создать механизм приема изображений, их промпты и JSON-вывод с фильтрацией по
+  базе данных.
+tags:
+  - image-gen
+  - ai
+  - workflow
+  - prompting
 debug:
   message_ids:
     - 1147

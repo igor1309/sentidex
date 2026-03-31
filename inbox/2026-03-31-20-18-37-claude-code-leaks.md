@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-03-31T20:18:37.000Z'
+id: mnf6wefm2grkz5avbdr
+created_at: '2026-03-31T20:18:37.000Z'
+processed_at: '2026-03-31T22:29:45.874Z'
 source_info: AI Product | Igor Akimov
+source_url: 'https://t.me/ai_product/2073'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Обзор уязвимостей Claude Code: инъекции инструментов, усечение контекста,
+  промпты и скрытые режимы
+tags:
+  - ai
+  - agents
+  - open-source
+  - research
 debug:
   message_ids:
     - 1154
@@ -110,7 +119,6 @@ debug:
       source_url: 'https://t.me/ai_product/2073'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/ai_product/2073'
 ---
 ==== FORWARDS ====
 

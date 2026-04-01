@@ -1,10 +1,18 @@
 ---
-raw_message: true
-timestamp: '2026-04-01T08:42:21.000Z'
+id: mnfxcjej88t5xef2bff
+created_at: '2026-04-01T08:42:21.000Z'
+processed_at: '2026-04-01T10:50:08.827Z'
 source_info: '@macTwoPosBot'
 has_media: false
-media_type: none
-forward_protected: false
+language: en
+summary: >-
+  Overview of a multi-tier tweet extraction and platform-research pipeline using
+  FxTwitter, without API keys.
+tags:
+  - ai
+  - llm
+  - workflow
+  - research
 debug:
   message_ids:
     - 1156

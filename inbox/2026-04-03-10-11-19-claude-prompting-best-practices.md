@@ -1,10 +1,15 @@
 ---
-raw_message: true
-timestamp: '2026-04-03T10:11:19.000Z'
+id: mniwn3s4kjhpnv9b73h
+created_at: '2026-04-03T10:11:19.000Z'
+processed_at: '2026-04-03T12:53:40.708Z'
 source_info: direct_message
 has_media: false
-media_type: none
-forward_protected: false
+language: en
+summary: link to Claude prompt engineering best practices documentation.
+tags:
+  - claude
+  - prompting
+  - resource
 debug:
   message_ids:
     - 1161

@@ -1,10 +1,20 @@
 ---
-raw_message: true
-timestamp: '2026-04-04T04:55:14.000Z'
+id: mnk2viybi394ltwi84b
+created_at: '2026-04-04T04:55:14.000Z'
+processed_at: '2026-04-04T08:35:57.491Z'
 source_info: Силиконовый Мешок
+source_url: 'https://t.me/prompt_design/2054'
 has_media: true
-media_type: document
-forward_protected: false
+language: mixed
+summary: >-
+  Подборка навыков Claude: grill-me, seo-audit, humanizer, page-cro,
+  fact-checker, mcp-builder.
+tags:
+  - claude
+  - ai
+  - ai-coding
+  - agents
+  - mcp
 debug:
   message_ids:
     - 1163
@@ -28,7 +38,6 @@ debug:
       source_url: 'https://t.me/prompt_design/2054'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/prompt_design/2054'
 ---
 ==== FORWARDS ====
 

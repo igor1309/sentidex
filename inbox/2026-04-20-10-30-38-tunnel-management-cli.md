@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-04-20T10:30:38.000Z'
+id: mo781z7zd2sd82anej
+created_at: '2026-04-20T10:30:38.000Z'
+processed_at: '2026-04-20T13:19:38.639Z'
 source_info: Тимур Хахалев про AI Coding
+source_url: 'https://t.me/the_ai_architect/281'
 has_media: false
-media_type: none
-forward_protected: false
+language: mixed
+summary: >-
+  Описание проекта замены cloudflare tunnels: CLI, централизованное хранение
+  конфигураций и управление туннелями
+tags:
+  - devops
+  - workflow
+  - agents
+  - ai-coding
 debug:
   message_ids:
     - 1198
@@ -112,7 +121,6 @@ debug:
       source_url: 'https://t.me/the_ai_architect/281'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/the_ai_architect/281'
 ---
 ==== FORWARDS ====
 

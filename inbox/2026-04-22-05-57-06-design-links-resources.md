@@ -1,10 +1,19 @@
 ---
-raw_message: true
-timestamp: '2026-04-22T05:57:06.000Z'
+id: mo9u6mmaropoyd5865j
+created_at: '2026-04-22T05:57:06.000Z'
+processed_at: '2026-04-22T09:14:39.490Z'
 source_info: DEKSDEN notes
+source_url: 'https://t.me/deksden_notes/692'
 has_media: true
-media_type: photo
-forward_protected: false
+language: mixed
+summary: >-
+  Поиск каталогов дизайна и бесплатных загрузок Design.md, ссылок на
+  designdotmd.directory и neuform.ai
+tags:
+  - ai
+  - resource
+  - workflow
+  - ''
 debug:
   message_ids:
     - 1202
@@ -28,7 +37,6 @@ debug:
       source_url: 'https://t.me/deksden_notes/692'
       forward_protected: false
   ambiguity_reason: orphan_forward
-source_url: 'https://t.me/deksden_notes/692'
 ---
 ==== FORWARDS ====
 

@@ -2,8 +2,8 @@ name: Sentidex Intake
 
 on:
   schedule:
-    # Run every 2 hours
-    - cron: "0 */2 * * *"
+    # Daily at 8:00 PM Moscow time (UTC+3)
+    - cron: "0 17 * * *"
 
   workflow_dispatch:
 
@@ -12,17 +12,109 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  poll:
-    uses: ./.github/workflows/telegram-polling.yml
-    secrets:
-      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-      CHAT_ID: ${{ secrets.CHAT_ID }}
+  poll-and-process:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
-  process:
-    needs: poll
-    uses: ./.github/workflows/process-messages.yml
-    with:
-      ai_provider: 'openai'
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      OPEN_ROUTER_GPT_OSS_20B_API_KEY: ${{ secrets.OPEN_ROUTER_GPT_OSS_20B_API_KEY }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js with npm cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        env:
+          NPM_CONFIG_AUDIT: "false"
+          NPM_CONFIG_FUND: "false"
+          NPM_CONFIG_PROGRESS: "false"
+        run: ./scripts/run_silent.sh "npm ci" npm ci
+
+      - name: Run Telegram polling
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: ./scripts/run_silent.sh "poll telegram" node scripts/poll-telegram.js
+
+      - name: Run message processing
+        env:
+          DEBUG: "true"
+          AI_PROVIDER: "openai"
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPEN_ROUTER_GPT_OSS_20B_API_KEY: ${{ secrets.OPEN_ROUTER_GPT_OSS_20B_API_KEY }}
+        run: ./scripts/run_silent.sh "process messages" node scripts/process-messages.js
+
+      - name: Commit and push changes
+        run: |
+          set -e
+          git config --local user.email "bot@sentidex.local"
+          git config --local user.name "Sentidex Bot"
+
+          if [ -d "inbox" ]; then
+            git add inbox/
+          fi
+          if [ -d "_inbox" ]; then
+            git add _inbox/
+          fi
+
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Intake: poll telegram + process messages"
+
+          if git push; then
+            echo "Pushed without rebasing"
+          else
+            echo "Initial push failed; attempting to rebase onto origin/trunk"
+            git fetch origin trunk
+
+            if git rebase origin/trunk; then
+              git push
+            else
+              echo "Rebase hit conflicts; attempting automated resolution for inbox files"
+              conflict_files=$(git diff --name-only --diff-filter=U)
+
+              if [ -z "$conflict_files" ]; then
+                echo "No conflicted files detected; aborting rebase"
+                git rebase --abort
+                exit 1
+              fi
+
+              unresolved=0
+
+              for file in $conflict_files; do
+                if [[ "$file" == inbox/* ]]; then
+                  git restore --theirs "$file"
+                  git add "$file"
+                elif [[ "$file" == _inbox/* ]]; then
+                  git restore --ours "$file"
+                  git add "$file"
+                else
+                  echo "Conflict in unexpected file: $file"
+                  unresolved=1
+                fi
+              done
+
+              if [ "$unresolved" -ne 0 ]; then
+                echo "Aborting rebase due to unresolved conflicts"
+                git rebase --abort
+                exit 1
+              fi
+
+              if git diff --staged --quiet; then
+                echo "No staged changes after conflict resolution; skipping empty commit"
+                git rebase --skip
+              else
+                GIT_EDITOR=true git rebase --continue
+              fi
+              git push
+            fi
+          fi

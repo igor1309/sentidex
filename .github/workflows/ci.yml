@@ -18,6 +18,8 @@ jobs:
   test-and-notify:
     name: Test and Notify
     runs-on: ubuntu-latest
+    # §2.0. Skip draft pull requests to avoid burning CI on WIP changes.
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
 
     # §2.1. Permissions: Adheres to the principle of least privilege.
     permissions:

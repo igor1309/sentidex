@@ -1,5 +1,9 @@
 # Log
 
+## 2026-04-26
+
+Cut CI runner costs: merge intake poll+process into one daily 8pm Moscow run (was 12×/day across 2 runners), reduce digest to weekly Sunday only with npm cache, drop `ls -R` debug step, skip CI on draft PRs.
+
 ## 2026-03-01
 
 - Migrate Telegram sends to ci-shared `notify_telegram.sh` transport. Replace fetch-based HTTP in `send-digest.js` with `execFileSync` to vendored wrapper. Replace inline curl in CI workflow with wrapper call.

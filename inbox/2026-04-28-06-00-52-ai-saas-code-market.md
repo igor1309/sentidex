@@ -13,6 +13,7 @@ tags:
   - ai
   - ai-coding
   - business
+  - product
   - workflow
 debug:
   message_ids:
